@@ -1,0 +1,18 @@
+# SO / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+
+# Segredos e ambiente local — nunca versionar
+.env
+.env.*
+*.local
+*.pem
+*.key
+
+# Node (se algum script de apoio for adicionado no futuro)
+node_modules/
+dist/
