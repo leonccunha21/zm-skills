@@ -26,6 +26,28 @@ The longer version — field notes from the real workflow that produced this kit
 
 ## What's inside
 
+**The 13 guides, in plain language** — what your agent actually learns:
+
+| Guide | What the agent learns to do |
+|---|---|
+| 01 — Code rules | write code that survives: smallest safe change, no shortcuts, gates that block bad deliveries |
+| 02 — Project standards | the skeleton every serious project has: README, docs, commits, versioning, changelog |
+| 03 — Layout & UI | mobile-first screens, ≥44px touch targets, accessible, locale-correct (`R$ 1.234,56`, `dd/mm/aaaa`) |
+| 04 — Multi-agent | several agents without stepping on each other: one coordinator, one task at a time |
+| 05 — Memory | the project remembers: facts in git, sessions short-lived — plus memory models (procedural / semantic / episodic) |
+| 06 — Privacy (LGPD) | map personal data, legal basis, data-subject rights, incidents — engineering drafts, not legal advice |
+| 07 — Security | no secrets in code, authN/authZ that denies by default, OWASP essentials, incidents |
+| 08 — Testing | pyramid testing, real acceptance criteria, quality gates |
+| 09 — Delivery | honest commits, small PRs, tested rollback, fail-closed deploys |
+| 10 — Operations | logs, alerts, runbooks, tested backups, blameless post-mortems |
+| 11 — Architecture | cohesive deep modules, dependency direction, decisions as ADRs |
+| 12 — Performance | measure first: Core Web Vitals, N+1, indexes, perf budgets |
+| 13 — Token economy | spend context like money: read only what's needed, terse outputs, narrow subagent scopes |
+
+New here? The full walkthrough lives in [docs/for-humans.md](docs/for-humans.md) (plain language, EN) and [docs/para-leigos.md](docs/para-leigos.md) (pt-BR).
+
+The repository layout:
+
 ```
 zm-pro/                        # the skill — copy this folder into your project/harness
 ├── SKILL.md                   # router: when to use, the cycle, the index
