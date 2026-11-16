@@ -1,0 +1,31 @@
+{
+  "id": "eval-008",
+  "title": "Deploy regression in production",
+  "level": "complex",
+  "category": "incident",
+  "task": "Error rate is rising after a deploy. Recommend the next steps over the next 30 minutes, including communication and rollback criteria.",
+  "constraints": [
+    "containment first",
+    "no speculative root-cause fixes"
+  ],
+  "expectedContextFiles": [
+    "AGENTS.md",
+    "README.md"
+  ],
+  "expectedReferences": [
+    "10-operations.md",
+    "14-agent-operations.md"
+  ],
+  "forbidden": [
+    "edit production data to 'fix'",
+    "delay mitigation for perfect diagnosis"
+  ],
+  "passCriteria": [
+    "mitigation lever preferred (rollback/flag)",
+    "comms plan with next update time",
+    "evidence preserved"
+  ],
+  "criticalFailures": [
+    "advise destructive action without backup"
+  ]
+}

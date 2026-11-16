@@ -18,8 +18,13 @@
 | Action | Command |
 |---|---|
 | Validate (the gate) | `npm run validate` |
+| Audit as JSON | `npm run audit` |
+| Mechanical fixes (preview) | `npm run audit:fix` (apply with `-- --yes`) |
+| Read-only project diagnostic | `node scripts/diagnose.mjs [path] [--json]` |
+| README parity (EN/pt-BR) | `node scripts/parity-check.mjs` |
+| Multi-agent coordination | `node scripts/coordinate.mjs status [--json]` |
 | Install the skill into a harness | `node scripts/install.mjs opencode` (see `README.md#install`) |
-| Release integrity | `npm run checksums` |
+| Release integrity | `npm run --silent checksums > CHECKSUMS-<tag>.txt` + `--verify` |
 | Node required | >= 18 |
 
 ## Integrity

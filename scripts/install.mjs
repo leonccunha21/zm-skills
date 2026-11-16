@@ -3,7 +3,15 @@
 // Copies this repository's `zm-pro/` skill into a harness skills directory.
 //
 // Usage:
-//   node scripts/install.mjs <harness> [--global] [--force] [--dir <path>]
+//   node scripts/install.mjs <harness> [--global] [--force] [--dry-run] [--dir <path>] [--with-tools]
+//   npm run install-skill -- <harness> [flags]     (npm needs the `--` separator)
+//
+//   --dir <path> is the project root, not the final destination:
+//   the skill lands in <path>/.agents/skills/zm-pro (opencode) or
+//   <path>/.claude/skills/zm-pro (claude). Default: the current directory.
+//   --dry-run prints the upgrade plan (existing → incoming, files that change) and writes nothing.
+//   --force updates an existing install; the previous folder is kept as `zm-pro.backup-<timestamp>`.
+//   --with-tools also copies scripts/coordinate.mjs to <projectRoot>/scripts/coordinate.mjs.
 //
 // Harnesses:
 //   opencode  → project: <cwd>/.agents/skills/zm-pro  ·  global: $XDG_CONFIG_HOME/opencode/skills/zm-pro
@@ -11,8 +19,8 @@
 //   codex | cursor | gemini  → no copy; prints the manual route (paths are not standardized)
 //
 // Exit codes: 0 = installed or instructions printed · 1 = error (with message on stderr)
-import { existsSync, mkdirSync, cpSync, rmSync, readFileSync } from "node:fs"
-import { join, resolve } from "node:path"
+import { existsSync, mkdirSync, rmSync, readFileSync, readdirSync, copyFileSync, statSync, renameSync } from "node:fs"
+import { join, resolve, relative } from "node:path"
 import { fileURLToPath } from "node:url"
 import { homedir } from "node:os"
 
@@ -21,20 +29,30 @@ const src = join(repoRoot, "zm-pro")
 const srcSkill = join(src, "SKILL.md")
 
 const args = process.argv.slice(2)
-const harness = args.find((a) => !a.startsWith("--"))?.toLowerCase()
 const flag = (name) => args.includes(name)
 const option = (name) => {
   const i = args.indexOf(name)
   return i >= 0 ? args[i + 1] : undefined
 }
+const valueFlags = new Set(["--dir"])
+const positionals = []
+for (let i = 0; i < args.length; i += 1) {
+  if (valueFlags.has(args[i])) { i += 1; continue }
+  if (args[i].startsWith("--")) continue
+  positionals.push(args[i])
+}
+const harness = positionals[0]?.toLowerCase()
 
 const fail = (msg) => {
   console.error(`install.mjs: ${msg}`)
   process.exit(1)
 }
 
-if (!harness || !["opencode", "claude", "codex", "cursor", "gemini"].includes(harness)) {
-  fail(`unknown harness "${harness ?? ""}". Expected: opencode | claude | codex | cursor | gemini`)
+if (!harness) {
+  fail("harness required. Usage: node scripts/install.mjs <opencode|claude|codex|cursor|gemini> (via npm: npm run install-skill -- opencode)")
+}
+if (!["opencode", "claude", "codex", "cursor", "gemini"].includes(harness)) {
+  fail(`unknown harness "${harness}". Expected: opencode | claude | codex | cursor | gemini`)
 }
 
 if (!existsSync(srcSkill)) fail(`source not found: ${srcSkill} — run from the repository checkout`)
@@ -61,16 +79,174 @@ const baseDir = flag("--global") ? globalDir
   : join(projectRoot, harness === "opencode" ? join(".agents", "skills") : join(".claude", "skills"))
 const dest = join(baseDir, "zm-pro")
 
-if (existsSync(dest)) {
-  if (!flag("--force")) {
-    fail(`already exists: ${dest}\n  re-run with --force to overwrite, or remove it manually first`)
+const readVersion = (file) => {
+  try {
+    return readFileSync(file, "utf8").match(/zm-pro v(\d+\.\d+\.\d+)/)?.[1]
+  } catch {
+    return undefined
   }
-  rmSync(dest, { recursive: true, force: true })
+}
+const incomingVersion = readVersion(srcSkill)
+const previousVersion = readVersion(join(dest, "SKILL.md"))
+const compareVersions = (a, b) => {
+  const pa = a.split(".").map(Number)
+  const pb = b.split(".").map(Number)
+  for (let i = 0; i < 3; i += 1) {
+    if (pa[i] !== pb[i]) return pa[i] < pb[i] ? -1 : 1
+  }
+  return 0
 }
 
-mkdirSync(baseDir, { recursive: true })
-cpSync(src, dest, { recursive: true })
+const filesUnder = (dir, base = dir, acc = []) => {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const p = join(dir, entry.name)
+    if (entry.isSymbolicLink()) {
+      fail(`symbolic link inside the install tree is not followed: ${p}\n  resolve or remove it manually; nothing was changed`)
+    }
+    if (entry.isDirectory()) filesUnder(p, base, acc)
+    else acc.push(relative(base, p).replaceAll("\\", "/"))
+  }
+  return acc
+}
 
-console.log(`Installed zm-pro → ${dest} (${flag("--global") ? "global" : "project"})`)
+const copyTree = (src, dst) => {
+  // fs.cpSync mis-encodes unicode paths on Windows Node 22 (UTF-8 bytes read as CP1252);
+  // copying manually avoids the platform bug and keeps behavior deterministic.
+  mkdirSync(dst, { recursive: true })
+  for (const entry of readdirSync(src, { withFileTypes: true })) {
+    const s = join(src, entry.name)
+    const d = join(dst, entry.name)
+    if (entry.isDirectory()) copyTree(s, d)
+    else if (entry.isFile()) copyFileSync(s, d)
+    else if (entry.isSymbolicLink()) fail(`source contains a symbolic link: ${s}\n  resolve or remove it manually; nothing was installed`)
+  }
+}
+
+// A run killed mid-copy leaves `zm-pro.tmp-<stamp>`. Only folders old enough to
+// not belong to a concurrent install are removed; the tmp folder of this run never is.
+const STALE_MS = 60 * 60 * 1000
+const cleanStaleTemps = () => {
+  let removed = 0
+  for (const entry of readdirSync(baseDir, { withFileTypes: true })) {
+    if (!entry.isDirectory() || !entry.name.startsWith("zm-pro.tmp-")) continue
+    const p = join(baseDir, entry.name)
+    try {
+      if (Date.now() - statSync(p).mtimeMs > STALE_MS) {
+        rmSync(p, { recursive: true, force: true })
+        removed += 1
+        console.log(`Removed stale temp folder from an interrupted install: ${p}`)
+      }
+    } catch {
+      // raced with another process or unreadable: leave it alone
+    }
+  }
+  return removed
+}
+const plan = (from, to) => {
+  const source = filesUnder(from).sort()
+  const existing = new Set(filesUnder(to))
+  const sourceSet = new Set(source)
+  let unchanged = 0
+  const changed = []
+  const added = []
+  for (const file of source) {
+    if (!existing.has(file)) added.push(file)
+    else if (readFileSync(join(from, file)).equals(readFileSync(join(to, file)))) unchanged += 1
+    else changed.push(file)
+  }
+  const localOnly = [...existing].filter((f) => !sourceSet.has(f)).sort()
+  return { unchanged, changed, added, localOnly }
+}
+
+const stamp = new Date().toISOString().replace(/[:.]/g, "-")
+let backup
+
+if (existsSync(dest)) {
+  if (!statSync(dest).isDirectory()) {
+    fail(`destination exists and is not a directory: ${dest}\n  move it away manually; nothing was changed`)
+  }
+  const diff = plan(src, dest)
+  console.log(`Existing install: v${previousVersion ?? "desconhecida"} → incoming v${incomingVersion ?? "desconhecida"}`)
+  console.log(`Plan for ${dest}: ${diff.unchanged} unchanged, ${diff.changed.length} changed, ${diff.added.length} new, ${diff.localOnly.length} local-only`)
+  if (diff.localOnly.length > 0) {
+    const shown = diff.localOnly.slice(0, 5).join(", ")
+    console.log(`  local-only files stay in the backup: ${shown}${diff.localOnly.length > 5 ? ", …" : ""}`)
+  }
+  if (previousVersion && incomingVersion && compareVersions(incomingVersion, previousVersion) < 0) {
+    console.warn(`warning: downgrade — ${incomingVersion} is older than ${previousVersion}; the backup is the safe way back`)
+  }
+  if (flag("--dry-run")) {
+    if (flag("--with-tools")) {
+      console.log(`Dry run — would also copy scripts/coordinate.mjs → ${join(projectRoot, "scripts", "coordinate.mjs")}`)
+    }
+    console.log("Dry run — nothing written.")
+    process.exit(0)
+  }
+  if (!flag("--force")) {
+    fail(`already exists: ${dest}\n  re-run with --force to update (the previous folder is kept as a backup), or remove it manually first`)
+  }
+  backup = `${dest}.backup-${stamp}`
+  renameSync(dest, backup)
+  console.log(`Previous install kept at: ${backup}`)
+} else if (flag("--dry-run")) {
+  console.log(`Dry run — would install v${incomingVersion ?? "desconhecida"} → ${dest}`)
+  if (flag("--with-tools")) {
+    console.log(`Dry run — would also copy scripts/coordinate.mjs → ${join(projectRoot, "scripts", "coordinate.mjs")}`)
+  }
+  process.exit(0)
+}
+
+const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms)
+
+mkdirSync(baseDir, { recursive: true })
+cleanStaleTemps()
+const tmp = `${dest}.tmp-${stamp}`
+try {
+  copyTree(src, tmp)
+  // Windows occasionally refuses an immediate rename after a recursive copy
+  // (AV/indexer still holding handles); retry, then fall back to copy+delete.
+  let placed = false
+  let lastError
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    try {
+      renameSync(tmp, dest)
+      placed = true
+      break
+    } catch (err) {
+      lastError = err
+      if (err.code !== "ENOENT" && err.code !== "EPERM" && err.code !== "EACCES" && err.code !== "EBUSY") throw err
+      // Some Windows runners report ENOENT yet complete the rename; a dest that exists means we are done.
+      if (existsSync(join(dest, "SKILL.md"))) {
+        placed = true
+        break
+      }
+      sleep(25 * (attempt + 1))
+    }
+  }
+  if (!placed) {
+    if (lastError?.code === "ENOENT") {
+      copyTree(tmp, dest)
+      rmSync(tmp, { recursive: true, force: true })
+    } else throw lastError
+  }
+} catch (err) {
+  rmSync(tmp, { recursive: true, force: true })
+  fail(`install failed: ${err.message}${backup ? `\n  previous install kept at: ${backup}` : ""}`)
+}
+
+console.log(`Installed zm-pro v${incomingVersion ?? "?"} → ${dest} (${flag("--global") ? "global" : "project"})`)
+if (flag("--with-tools")) {
+  const coordSrc = join(repoRoot, "scripts", "coordinate.mjs")
+  const targetScripts = join(projectRoot, "scripts")
+  const targetCoord = join(targetScripts, "coordinate.mjs")
+  if (existsSync(targetCoord) && !flag("--force")) {
+    console.log(`Tool coordinate.mjs already exists at ${targetCoord} (kept as-is; use --force to overwrite)`)
+  } else {
+    mkdirSync(targetScripts, { recursive: true })
+    copyFileSync(coordSrc, targetCoord)
+    console.log(`Installed tool: ${targetCoord}`)
+  }
+}
+if (backup) console.log(`Rollback: delete ${dest} and rename ${backup} back to zm-pro.`)
 console.log("Verify: the harness auto-discovers it; in a session, ask: \"use the zm-pro skill\".")
 console.log("Change your mind: delete the folder (git/zip copy — nothing else is installed).")

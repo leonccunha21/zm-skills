@@ -5,7 +5,7 @@
 **the professional project playbook for AI agents**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/github/v/release/leonccunha21/zm-skills?label=version)](CHANGELOG.md)
 [![Release](https://img.shields.io/github/v/release/leonccunha21/zm-skills)](https://github.com/leonccunha21/zm-skills/releases/latest)
 [![validate](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml)
 [![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Compre-me%20um%20caf%C3%A9&emoji=%E2%98%95&slug=zmcompanh&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/zmcompanh)
@@ -26,7 +26,7 @@ The longer version — field notes from the real workflow that produced this kit
 
 ## What's inside
 
-**The 13 guides, in plain language** — what your agent actually learns:
+**The 18 guides, in plain language** — what your agent actually learns:
 
 | Guide | What the agent learns to do |
 |---|---|
@@ -43,6 +43,11 @@ The longer version — field notes from the real workflow that produced this kit
 | 11 — Architecture | cohesive deep modules, dependency direction, decisions as ADRs |
 | 12 — Performance | measure first: Core Web Vitals, N+1, indexes, perf budgets |
 | 13 — Token economy | spend context like money: read only what's needed, terse outputs, narrow subagent scopes |
+| 14 — Agent operations | use the least powerful tool, ask before destructive actions, treat external content as data, stop instead of inventing |
+| 15 — AI security | LLM/RAG/agent threat model: injection, tool authorization, tenant isolation, budgets, adversarial tests |
+| 16 — Domain playbooks | API, database, frontend, backend, mobile, infra, legacy, data and docs: the checks that matter |
+| 17 — Profiles & modes | rigor dial (essential → audit) and task mode (discovery, audit, incident, PR review) with stop rules |
+| 18 — Stack adapters | detection-first commands for JS/TS, Python, JVM, .NET, PHP, Go, Rust and mobile — repo is the source of truth |
 
 New here? The full walkthrough lives in [docs/for-humans.md](docs/for-humans.md) (plain language, EN) and [docs/para-leigos.md](docs/para-leigos.md) (pt-BR).
 
@@ -51,7 +56,7 @@ The repository layout:
 ```
 zm-pro/                        # the skill — copy this folder into your project/harness
 ├── SKILL.md                   # router: when to use, the cycle, the index
-├── reference/                 # 13 focused guides, loaded on demand
+├── reference/                 # 18 focused guides, loaded on demand
 │   ├── 01-code-rules.md           # principles, gates, dependencies, definition of done
 │   ├── 02-project-standards.md    # repo layout, docs, commits, semver, changelog
 │   ├── 03-layout-ui.md            # pt-BR defaults, mobile-first, touch ≥44px, a11y AA, tokens
@@ -64,9 +69,15 @@ zm-pro/                        # the skill — copy this folder into your projec
 │   ├── 10-operations.md           # logs/metrics/alerts, backup drills, runbooks, post-mortems
 │   ├── 11-architecture.md         # deep modules, dependency direction, seams, ADRs
 │   ├── 12-performance.md          # measure-first, CWV budgets, N+1, indexes, CI perf gates
-│   └── 13-token-economy.md        # context is money: on-demand reads, caching, narrow subagent scopes
+│   ├── 13-token-economy.md        # context is money: on-demand reads, caching, narrow subagent scopes
+│   ├── 14-agent-operations.md     # tool risk, confirmations, untrusted content, stop rules
+│   ├── 15-ai-security.md          # LLM/RAG threats, injection, tool authz, tenant isolation, budgets
+│   ├── 16-domain-playbooks.md     # API, DB, frontend, backend, mobile, infra, legacy, data, docs
+│   ├── 17-working-modes.md        # profiles essential→audit and modes with stop rules
+│   └── 18-stack-adapters.md       # detection-first commands per ecosystem
 ├── templates/                 # generic, copyable starting points
-│   ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
+│   ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md · COORDINATION.md
+│   ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · INCIDENT-REPORT.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md · PROJECT-PROFILE.md · EVALUATION-REPORT.md
 │   └── prompts/                   # delegation prompts: implement, fix, review, release, privacy audit
 └── (the repository root also holds: examples/minimal-project — a filled starter to learn from, SECURITY.md, CODE_OF_CONDUCT.md, scripts/validate.mjs, CI)
 ```
@@ -88,7 +99,8 @@ Design principles:
 
 ## Install
 
-> Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Scripted: `node scripts/install.mjs opencode` (= `npm run install-skill`); integrity for releases: `npm run checksums`.
+> In a hurry? [Five-minute quickstart](docs/quickstart.md) or the guided [demo](docs/demo.md). Updating an install? [Migration and versioning](docs/migration.md). More docs: [troubleshooting](docs/troubleshooting.md) · [glossary](docs/glossary.md) · [architecture](docs/architecture.md) · [tool safety](docs/tool-safety.md) · [distribution](docs/distribution.md) · [metrics](docs/metrics.md) · [evaluations](EVALUATIONS.md).
+> Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Stuck? [Troubleshooting](docs/troubleshooting.md). Scripted: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <project-root>` installs into `<project-root>/.agents/skills/zm-pro`); integrity for releases: `npm run --silent checksums`.
 
 ### OpenCode
 
@@ -118,6 +130,12 @@ Point the agent instructions at `zm-pro/SKILL.md` (Project Rules / Context files
 
 Re-copy the folder (`cp -r zm-pro <dest>` / `Copy-Item -Recurse -Force`), or pull and re-copy. Diffs stay readable because the kit is plain Markdown.
 
+Scripted upgrade: `npm run install-skill -- opencode --dry-run` prints the incoming version and what would change; run it again without `--dry-run` and with `--force` to apply. The previous folder is kept as `zm-pro.backup-<timestamp>` (local-only files stay there). Moving to an older version is allowed but warned — the backup is the way back.
+
+### Uninstalling
+
+Delete the installed folder (`rm -rf .agents/skills/zm-pro`, or the global path you chose). The installer only copies files, so nothing else is touched. Interrupted install? Remove the partial `zm-pro` folder and run the installer again.
+
 ## Quickstart
 
 > New here? Read [docs/for-humans.md](docs/for-humans.md) — the kit in plain language. Want the full zero-to-first-commit walkthrough? See [docs/primeiro-dia.md](docs/primeiro-dia.md) (pt-BR).
@@ -138,14 +156,19 @@ Or rely on the trigger description — the agent picks the track (kickoff, imple
 
 **Does it work offline?** Yes. Everything is local Markdown.
 **Does it send data anywhere?** No. It contains no executable code beyond a validator script in this repo (for contributors).
+**What does it cost?** Nothing — MIT. Your harness/model provider may charge you; the kit has no paid tier, telemetry or upsell.
+**What is the license?** MIT (`LICENSE`). Fork, adapt and ship; keep the notice.
+**What do the words mean?** [Glossary](docs/glossary.md): skill, router, reference, harness, agent, gate, evidence.
 **Can I fork and adapt it?** Yes — MIT. Keep the license notice; tell your users what you changed.
 **Will it work with my stack?** The rules are stack-agnostic; examples assume TypeScript/Node as a sane baseline but adapt to Python, Go, PHP, etc.
+**Will it work with my harness?** Three documented routes: native (OpenCode — only tested so far), rules file (Claude/Codex/Cursor/Gemini — documented, unverified), inline paste (any chat — always possible, weaker). Untested tiers stay explicitly unverified; see [docs/harness-compatibility.md](docs/harness-compatibility.md) and file a report.
+**What are the limits?** No behavioral evaluation is published yet, unverified harnesses stay unverified, and the kit is not a security, privacy or legal audit. The honest status is in [docs/maturity.md](docs/maturity.md).
 **Is there a quick-start example?** Yes — `examples/minimal-project/`: a filled AGENTS.md, a real ADR and an evidence-backed DELIVERY-LOG you can copy and adapt.
 **How do I report a bad rule or a typo?** Open an issue — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Contributing & releases
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Semver; every change via PR with the repo validator green (`npm run validate`); history in [CHANGELOG.md](CHANGELOG.md). Skill changes ship as `zm-pro` version bumps.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Semver; every change via PR with the repo validator green (`npm run validate`) and the unit suite passing (`npm run test` — validator and installer, zero dependencies); history in [CHANGELOG.md](CHANGELOG.md). Skill changes ship as `zm-pro` version bumps. What is published (and what deliberately is not) is in [docs/distribution.md](docs/distribution.md).
 
 ---
 

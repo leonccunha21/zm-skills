@@ -11,14 +11,21 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 22
 
+      - name: Gate — the tag only ships when the repository is green
+        run: |
+          npm run validate
+          npm test
+
       - name: Build checksum manifest
         run: node scripts/checksums.mjs > "CHECKSUMS-${GITHUB_REF_NAME}.txt"
+
+      - name: Verify the manifest before publishing
+        run: node scripts/checksums.mjs --verify "CHECKSUMS-${GITHUB_REF_NAME}.txt"
 
       - name: Create or update GitHub release
         env:

@@ -20,13 +20,16 @@ Thanks for helping make this the reference skill for professional project work. 
 
 1. Fork or branch `main`.
 2. Edit inside `zm-pro/` (the skill) or repo meta files (README, this file, CI…).
-3. Run the validator:
+3. Run the validator and the unit suite:
 
    ```bash
    npm run validate
+   npm test
    ```
 
-   It checks: frontmatter shape, required files, reference integrity, and forbidden project-specific residue. **It must pass.**
+   The validator checks: frontmatter shape, required files, index coverage, relative links/images/anchors, forbidden project-specific residue and version sync. `npm test` covers the validator and installer behavior. **Both must pass.**
+
+   The same command is the audit: every finding has severity (`error` / `warning` / `suggestion`), `file:line` when it exists, evidence and a suggested fix. `npm run audit` prints the same report as stable JSON; `--fail-on=warning` makes warnings blocking; `node scripts/validate.mjs --fix` previews the mechanical fixes (trailing whitespace, final newline) and writes only with `--fix --yes`. The audit is read-only by default.
 4. Update `CHANGELOG.md` under a new version heading (semver: breaking = MAJOR, new = MINOR, fixes = PATCH).
 5. Update the README badges/version if you bump versions.
 6. Fill the PR template. A maintainer reviews with the same discipline the kit teaches — because we review with the kit.
@@ -49,7 +52,9 @@ Thanks for helping make this the reference skill for professional project work. 
 
 ## Releases
 
-Maintainers cut releases: bump `version` in `package.json`, finalize `CHANGELOG.md` (move `[Unreleased]` → `[X.Y.Z] — date`), bump the `SKILL.md` version marker (the validator checks it matches `package.json`), tag `vX.Y.Z`, run `npm run checksums > CHECKSUMS.txt` and attach it to the GitHub release with the changelog section. Consumers update with a plain folder copy — no package manager involved.
+Maintainers cut releases: bump `version` in `package.json`, finalize `CHANGELOG.md` (move `[Unreleased]` → `[X.Y.Z] — date`), bump the `SKILL.md` version marker (the validator checks it matches `package.json`), tag `vX.Y.Z`, run `npm run --silent checksums > CHECKSUMS-<tag>.txt` (the `--silent` keeps npm's banner out of the manifest), verify it with `node scripts/checksums.mjs --verify CHECKSUMS-<tag>.txt`, and attach it to the GitHub release with the changelog section. Consumers update with a plain folder copy — no package manager involved.
+
+Decisions that change the kit's contract (validator rules, installer behavior, release flow) are recorded as short ADRs in `docs/decisions/`; support and deprecation promises live in `docs/maintenance-policy.md`; version semantics, upgrade/downgrade steps and the per-version migration table live in `docs/migration.md`.
 
 ## Code of conduct
 

@@ -38,7 +38,7 @@ One source of truth per fact: each fact lives in exactly one place; everywhere e
 
 ## Versioning (semver)
 
-MAJOR = contract break · MINOR = compatible addition · PATCH = fix. "Contract" means the external API, the data schema, the CLI, the file format, the sync/licensing behavior. In doubt → PATCH + a CHANGELOG note.
+MAJOR = contract break · MINOR = compatible addition · PATCH = fix. "Contract" means the external API, the data schema, the CLI, the file format, the sync/licensing behavior. In doubt → PATCH + a CHANGELOG note. CHANGELOG entries carry the action for consumers (see `docs/migration.md` in the kit — actionable, not title-only); a breaking release always names the migration, examples before/after, and the rollback path.
 
 ## Done means documented
 

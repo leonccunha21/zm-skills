@@ -4,6 +4,86 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+### Added
+
+- `scripts/install.mjs` — `--with-tools` flag: optionally copies `scripts/coordinate.mjs` into `<projectRoot>/scripts/coordinate.mjs` for consumer projects; covered by unit tests in `tests/install.test.mjs`.
+- `scripts/coordinate.mjs` — coordinator governance: `clean` requires coordinator authority (`--by <coordinator-id>`, `--role coordinator`, or `--force`) to prevent accidental session purging; `claim` checks for existing claims across active sessions and blocks collisions unless overridden by an active coordinator with `--force` (covered by `tests/coordinate.test.mjs`).
+- `zm-pro/reference/09-delivery-git.md` — concrete branching & delivery workflows (standard vs hotfix vs release cut), step-by-step rollback procedure, anti-patterns section, and dual checklists (per-PR change checklist + release cut checklist).
+- `zm-pro/reference/10-operations.md` — observability instrumentation procedure (`request_id` propagation, liveness vs readiness probes, redaction filters), incident triage severity classification (P0/P1/P2), anti-patterns section, operational readiness checklist, and routine maintenance checklist.
+- `zm-pro/reference/11-architecture.md` — boundary enforcement & static verification (circular dependency scanning, layer isolation, package export maps), 4-phase contract evolution procedure (additive, dual-write/read, deprecate, decommission), anti-patterns, module design checklist, and architectural change/ADR checklist.
+- `zm-pro/reference/12-performance.md` — scientific 4-step performance investigation & profiling procedure (`EXPLAIN (ANALYZE, BUFFERS)` and traces), memory and streaming discipline (payload streaming, bounded LRU caches, pool sizing), anti-patterns, data layer checklist, and frontend release checklist.
+- `scripts/coordinate.mjs` — `watch [--interval <s>] [--limit <n>]` command: polls the blackboard for new messages in real time and prints them as they arrive (Ctrl+C to stop). Useful when an agent is waiting for a handoff from another agent.
+- `scripts/coordinate.mjs` — `diff [--json] [--stale-minutes <m>]` command: shows only files currently claimed by more than one active session; exits non-zero when any conflict exists (both human and JSON output modes).
+- `scripts/diagnose.mjs` — coordination awareness: reads `.agents/coordination/sessions/` and reports active sessions, stale sessions (>15 min without heartbeat) and file-claim conflicts as `suggestion`/`warning` findings.
+- `scripts/metrics.mjs` — coordination metrics: `activeSessions`, `staleSessions`, `conflicts`, `blackboardMessages`; shown in human output and in `--json` under `facts.coordination`.
+- `scripts/parity-check.mjs` — extended from README-only to two pairs: `README.md ↔ README.pt-BR.md` and `docs/for-humans.md ↔ docs/para-leigos.md`; `--json` output gains a `pairs` array with per-pair diff list.
+- `docs/for-humans.md` — added `## Get started today` and `## Survival glossary` sections to match `docs/para-leigos.md` structure.
+- `tests/coordinate.test.mjs` — 7th test: 3-agent collision scenario exercising `status`, `diff`, `check`, partial release and full conflict resolution.
+- `scripts/evaluate-run.mjs` — behavioral evaluation runner: prepares scratch workspace from a scenario JSON, executes the harness with the prompt as an argv argument (no shell interpolation), saves a raw transcript and scaffolds the report under `docs/evaluation-results/`.
+- `tests/evaluate-run.test.mjs` — 5 tests for the evaluation runner (dry-run, prompt-as-arg, transcript save, scaffold output, placeholder substitution).
+
+- `zm-pro/reference/04-multi-agent.md` and `zm-pro/templates/COORDINATION.md` — cross-platform communication protocol, transient blackboard vs. durable workstream partitioning, handoff contract and collision prevention.
+- `tests/` — first real unit suite (`node:test`, zero dependencies): the validator accepts this repo and rejects broken relative links, project residue and router/package version drift; the installer covers project and global installs, existing destination, `--force`, invalid or missing harness, and paths with spaces.
+- `package.json` — `npm test` now runs the unit suite; `npm run validate` remains the structural gate.
+- CI — the `validate` workflow runs `npm test` on the same Node/OS matrix.
+- `scripts/install.mjs` — safe upgrades: `--dry-run` prints the installed and incoming versions plus the file plan (changed/new/local-only) and writes nothing; `--force` keeps the previous folder as `zm-pro.backup-<timestamp>` with rollback instructions; the copy goes through a temp folder and a rename, so a failed run never leaves a half-written install presented as done; downgrades are detected and warned.
+- `scripts/validate.mjs` — the audit command (`npm run validate`, `npm run audit` for JSON). Read-only by default; every finding carries severity (`error`/`warning`/`suggestion`), file:line when available, evidence and a suggested fix; `--fail-on=warning` tightens the gate; `--fix` previews mechanical fixes (trailing whitespace, final newline) and `--fix --yes` applies only those. Output is deterministic for the same input.
+- `tests/` — installer suite covers dry-run, backup preservation of local files, version detection (upgrade and downgrade) and flag order.
+
+- `scripts/checksums.mjs` — `--verify <manifest>` mode: checks every SHA-256, flags missing/extra files under `zm-pro/`, rejects paths outside the repository, and exits non-zero on any problem; documented in `SECURITY.md` (how to verify a downloaded release).
+- `.github/workflows/validate.yml` — least-privilege `contents: read`, actions pinned by commit SHA, and a separate checksums job that generates and verifies the manifest.
+- `.github/workflows/release.yml` — the tag now gates on `npm run validate` + `npm test`, pins actions by SHA, and verifies the checksum manifest before publishing.
+
+- `.github/ISSUE_TEMPLATE/harness_report.md` — compatibility evidence form (harness, version, OS, install mode, observation, commands, limitations) plus a private-vulnerability contact link in `config.yml`; the PR template now covers motivation, scope, files, evidence, impact, docs and a security checklist.
+- `docs/maintenance-policy.md` — supported versions, deprecation flow, review cadence, harness honesty and triage pointers.
+- `docs/decisions/0001-tooling-contract.md` — first ADR: validator gate, fail-closed installer, verifiable checksums, `node:test` only.
+- `docs/harness-compatibility.md` — reproducible five-step test script with pass criteria.
+
+- `zm-pro/reference/14-agent-operations.md` — agent operating cycle, tool-risk matrix with confirmation rules, untrusted content and instruction hierarchy, stop rules, reporting contract and recovery; indexed in the router and the routing table.
+- `examples/bugfix/` — runnable fix cycle (failing test → one-line fix → green) with the real before/after output; `npm run test:examples` and CI run it.
+- `examples/feature/` — a small feature delivered end to end: acceptance criterion, test first, real output, changelog entry and delivery record.
+- `examples/legacy/` — characterization tests on undocumented rules, a behavior-preserving refactor and a deliberate break proving the suite catches it.
+- `docs/demo.md` — guided 20-minute walkthrough; `scripts/diagnose.mjs` — read-only first-contact diagnostic (`npm run diagnose`, `--json`), covered by tests.
+- `docs/quickstart.md` — five-minute path from clone to one evidenced change.
+- `docs/maturity.md` — honest maturity report: levels 1–2 met, 3–4 not met, 5 partial, with evidence and limits.
+
+- `docs/migration.md` — SemVer semantics for a skill, what is (and is not) a breaking change, upgrade/downgrade steps and a per-version migration table with the action required.
+- `scripts/install.mjs` — symbolic links inside the install tree are rejected instead of followed; a stale `zm-pro.tmp-*` folder left by an interrupted run is removed on the next install once it is older than one hour (never one from a concurrent run); a destination that exists but is not a directory fails before anything is written.
+- `tests/` — idempotent reinstall, stale temp cleanup, symlink guard (skipped where the OS forbids creating links), Unicode/space paths and `--dir` before the harness.
+- `tests/offline.test.mjs` — asserts no script imports or calls a network module, and runs validation + install with an invalid proxy to prove the tooling never reaches the network.
+
+- `EVALUATIONS.md` + `tests/evaluations/scenarios/` — 15 synthetic scenarios (small/medium/complex) covering bug, feature, legacy, migration, auth, upload, privacy, incident, deploy and conflict cases; `scripts/evaluate.mjs` (`npm run evaluations:check`) schema-checks them read-only (unique ids, referenced guides exist, no secret-like content) and states explicitly that it is **not** a behavioral result. `templates/EVALUATION-REPORT.md` holds the recording format. No baseline has been run or published.
+- `examples/task-api/` — complete small web app with a database stand-in: `node:http` REST API (201/400/404/413/500), validation at the boundary, atomic JSON-file-backed store, end-to-end tests with `node:test`. Zero dependencies; run with `node --test` or `npm run test:examples`.
+- `tests/` — adversarial injection fixtures (`tests/fixtures/adversarial/`) and the shared detection module `scripts/lib/injection-patterns.mjs`, used by `tests/injection-hygiene.test.mjs`.
+- `scripts/parity-check.mjs` + `tests/parity.test.mjs` — EN/pt-BR README parity (heading structure, fence count, commands, links with an allowlist for badges/language files); CI gates it.
+- `scripts/metrics.mjs` + `tests/metrics.test.mjs` — deterministic repository facts; `docs/metrics.md` defines each metric with method, cadence, owner and status; `docs/critical-rules.md` — critical rules with rationale, scenario and verification; `docs/attribution.md` — licensing/attribution review; `docs/scope-control.md` — rules against kit bloat; `docs/context-cost.md` — per-reference context ledger; `docs/breaking-changes.md` — breaking-change history; `docs/evaluation-results/` — honest landing spot; `docs/reviewing-automated-contributions.md`; `docs/demo.md`, `docs/glossary.md`, `docs/quickstart.md`.
+
+- CI — the `validate` workflow is now five jobs: `validate` (structure + parity + injection hygiene + adapter editorial model), `tests` (Node 18/20/22 on Ubuntu/Windows/macOS), `examples`, `checksums` (generate + verify), and `pack` (`npm pack --dry-run`). Each prints its runtime.
+- `tests/stack-adapters.test.mjs` — editorial-model guard for the stack adapters: every ecosystem present, detection-first required, commands conditional, monorepo handling; runs in CI.
+- `tests/install.test.mjs` — synthetic upgrade test: an install whose `SKILL.md` marker says `zm-pro v0.6.0` upgrades to the current tree with a deep file-by-file comparison against the source.
+- `scripts/evaluate-run.mjs` — behavioral evaluation runner: scratch copy of the repo, harness invoked via argv (`{{prompt}}` token, no shell), raw transcript + report scaffold; `--dry-run` preview; covered by `tests/evaluate-run.test.mjs`.
+- `docs/evaluation-results/pilot-eval-001.md` / `pilot-eval-012.md` — two single-run, author-administered pilots on `opencode/inkling-2-small-free`, explicitly **not** a baseline; both recorded as inconclusive with transcripts.
+
+### Upgrade
+
+No action required. Existing installs keep working; to pick up this release, run `node scripts/install.mjs <harness> --dry-run`, then `--force` (previous folder kept as `zm-pro.backup-<timestamp>`). Details and the version table: `docs/migration.md`.
+
+### Changed
+
+- `.github/workflows/validate.yml` — matrix now includes macOS; the executable example runs as its own step.
+- `README.md` / `README.pt-BR.md` / `docs/for-humans.md` / `docs/para-leigos.md` — guide tables updated to 14 references; FAQ now states harness coverage and limits.
+- `scripts/install.mjs` — flag parsing no longer mistakes a `--dir` value for the harness name.
+
+- `scripts/validate.mjs` — validator v2: ignores fenced code, validates relative links, images and heading anchors (unicode and `--` slugs, percent-encoded paths), skips `.git/` and `node_modules/`, enforces frontmatter fields/delimiters/duplicates/limits, makes index coverage an error, syncs versions across `package.json`, `SKILL.md`, `CHANGELOG.md`, README badges and `SECURITY.md`, and supports `--json`.
+- `CONTRIBUTING.md` — the gate now includes `npm test` alongside `npm run validate`.
+
+### Fixed
+
+- `checksums.mjs` documented usage — `npm run checksums > file` wrote npm's banner into the manifest, producing a corrupt release artifact. Docs now use `npm run --silent checksums` (`node scripts/checksums.mjs` directly in CI), and `--verify` rejects such lines.
+- `README.md` / `README.pt-BR.md` — version badge is now dynamic (latest GitHub release) instead of the stale static `0.4.0`; documented uninstall/recovery; scripted install documented as `npm run install-skill -- opencode`.
+- `SECURITY.md` — supported versions updated from `0.4.x` to the current minor, with the update-first policy stated.
+- `scripts/install.mjs` — a missing harness now fails with the documented npm form; `--dir` is documented as the project root, not the final destination.
+
 ## [0.8.1] — 2026-11-16
 
 Patch release: roadmap documentation catches up with shipped versions.

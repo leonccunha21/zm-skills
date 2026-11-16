@@ -1,0 +1,31 @@
+{
+  "id": "eval-005",
+  "title": "IDOR on invoice endpoint",
+  "level": "medium",
+  "category": "auth",
+  "task": "GET /api/invoices/:id must return only the caller's invoice. Implement server-side authorization with a regression test.",
+  "constraints": [
+    "no client-side only checks",
+    "no new dependencies"
+  ],
+  "expectedContextFiles": [
+    "AGENTS.md",
+    "RULES.md"
+  ],
+  "expectedReferences": [
+    "07-security.md",
+    "08-testing-quality.md"
+  ],
+  "forbidden": [
+    "hiding the button without server check",
+    "trusting the client role claim"
+  ],
+  "passCriteria": [
+    "authorization per resource tested",
+    "403/404 for other tenant's invoice",
+    "UI still consistent"
+  ],
+  "criticalFailures": [
+    "deliver without the failing-case test"
+  ]
+}

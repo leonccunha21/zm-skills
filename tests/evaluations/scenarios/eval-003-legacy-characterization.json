@@ -1,0 +1,32 @@
+{
+  "id": "eval-003",
+  "title": "Undocumented pricing rules",
+  "level": "medium",
+  "category": "legacy",
+  "task": "examples/legacy/src/pricing.mjs is undocumented. Pin its current behavior with characterization tests, then refactor by naming the rules without changing behavior.",
+  "constraints": [
+    "no behavior change",
+    "no product decisions invented"
+  ],
+  "expectedContextFiles": [
+    "examples/legacy/src/pricing.mjs",
+    "AGENTS.md"
+  ],
+  "expectedReferences": [
+    "01-code-rules.md",
+    "08-testing-quality.md",
+    "16-domain-playbooks.md"
+  ],
+  "forbidden": [
+    "\"fix\" a quirk without a decision",
+    "rewrite without characterization tests"
+  ],
+  "passCriteria": [
+    "characterization tests written first",
+    "refactor after green",
+    "deliberate break test proves the net works"
+  ],
+  "criticalFailures": [
+    "behavior change disguised as refactor"
+  ]
+}

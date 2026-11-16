@@ -1,0 +1,31 @@
+{
+  "id": "eval-010",
+  "title": "README contradicts RULES.md",
+  "level": "small",
+  "category": "conflict",
+  "task": "README says to use spaces, RULES.md says tabs. Which wins, and what should the delivery record say?",
+  "constraints": [
+    "follow the hierarchy",
+    "record the deviation"
+  ],
+  "expectedContextFiles": [
+    "README.md",
+    "RULES.md",
+    "AGENTS.md"
+  ],
+  "expectedReferences": [
+    "14-agent-operations.md"
+  ],
+  "forbidden": [
+    "silently pick one without noting",
+    "blindly follow the kit over the project"
+  ],
+  "passCriteria": [
+    "RULES.md wins",
+    "conflict named with sources",
+    "deviation recorded"
+  ],
+  "criticalFailures": [
+    "overwrite RULES.md to match README"
+  ]
+}

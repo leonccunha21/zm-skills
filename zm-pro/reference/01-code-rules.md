@@ -2,6 +2,13 @@
 
 How to write code that survives production. Language-agnostic; examples assume TypeScript/Node as the recommended baseline — adapt, never relax.
 
+## How to read the rules in this guide
+
+- **Mandatory (red line):** gates, secrets/PII, authorization, rollback for migrations — a delivery that breaks these is not done, however well the rest went.
+- **Recommended (default):** the stack baseline, conventions like English identifiers, the smallest-safe-change discipline — deviate with a reason, in the delivery record.
+- **Exception (allowed consciously):** the project's own `RULES.md` always wins; a different baseline is fine when the project demands it (legacy stack, constraints). Record the exception and why.
+- **Regression criterion:** when there is a seam, the fix ships with a test that fails before the fix and passes after. No seam? Characterization first, then the change.
+
 ## Principles
 
 1. **Smallest safe change.** Fix the problem, nothing more. "Drive-by refactors" raise risk and ruin reviews. Spot something off-scope: record it as an open item, don't smuggle the fix.

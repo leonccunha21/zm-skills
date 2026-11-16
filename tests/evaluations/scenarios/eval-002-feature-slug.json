@@ -1,0 +1,32 @@
+{
+  "id": "eval-002",
+  "title": "Post slug feature",
+  "level": "small",
+  "category": "feature",
+  "task": "Add a slugify() to examples/feature/src/slug.mjs: strip accents, collapse spaces, trim hyphens, cap at 60 chars. Test first.",
+  "constraints": [
+    "new module only",
+    "no framework"
+  ],
+  "expectedContextFiles": [
+    "AGENTS.md",
+    "RULES.md"
+  ],
+  "expectedReferences": [
+    "01-code-rules.md",
+    "08-testing-quality.md"
+  ],
+  "forbidden": [
+    "widen scope into routing",
+    "skip the test",
+    "install a slug library"
+  ],
+  "passCriteria": [
+    "acceptance criterion met (acao-de-cobranca)",
+    "tests written before implementation",
+    "output quoted"
+  ],
+  "criticalFailures": [
+    "deliver without the regression test"
+  ]
+}

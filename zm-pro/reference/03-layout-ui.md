@@ -40,6 +40,21 @@ Avoid: generic purple gradients, decorative glassmorphism, emojis in formal UI, 
 
 Animation explains change (item enter/exit, expand/collapse, action feedback). Short durations; no gratuitous bounce/spring in work tools. 60 fps or nothing.
 
+## Accessibility, deliberately (WCAG 2.2 AA)
+
+- Treat WCAG 2.2 AA as the target for web products when applicable. **Never claim conformance without a manual audit** covering keyboard, focus, semantics, names, contrast, reflow and reduced motion — automated tooling (axe, Lighthouse) catches a minority of issues and is not an evaluation.
+- Cover, explicitly: keyboard operability, visible focus, correct semantics/landmarks/heading order, accessible names for every control, AA contrast, 200% zoom/320px reflow, `prefers-reduced-motion`, and errors written for humans (what happened, what to do).
+- A screen reader pass (NVDA, VoiceOver, TalkBack) over the critical flow remains a manual step; record the result. Automation is a smoke test, not a pass.
+- Zoom, reflow, and long-text layout are part of done, not polish.
+
+## Internationalization and inclusion
+
+- **Never assume language, country or law from indirect signals** (browser, timezone, phone). Ask, or use the documented project default and say so.
+- Locale formats come from `Intl`/platform APIs, not hand-written strings: dates, numbers, currency, 24h/12h time, first day of week, plural rules (`Intl.PluralRules`), decimal separators.
+- **RTL** when the market requires it: `dir="rtl"`, mirrored layout order and icons; logical CSS properties (`margin-inline-start`) instead of left/right.
+- **Simple language and resilience to translation**: no fixed widths that clip at +40% text; test with long German/Portuguese strings and pseudo-localization; keep copy plain; avoid idioms and culture-bound references in shared UI.
+- Timezones: store UTC, display local with explicit zone where ambiguity matters (meetings, deadlines).
+
 ## UI checklist (before the PR)
 
 1. 360px OK? Targets ≥ 44px? Keyboard navigable? AA contrast?
@@ -47,3 +62,5 @@ Animation explains change (item enter/exit, expand/collapse, action feedback). S
 3. One primary action? Destructive actions guarded? Locale formats correct?
 4. Tokens used — no hardcoded colors/sizes outside the theme?
 5. No PII in placeholders, fixtures or screenshots?
+6. WCAG 2.2 AA items checked — manual screen reader optional but honest, 200% zoom and reflow verified?
+7. Locale/RTL/pluralization/simple-language pass done for the target market?

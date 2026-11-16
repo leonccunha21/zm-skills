@@ -15,10 +15,14 @@ Not a pentest at the end; discipline in every delivery. References: OWASP Cheat 
 2. **Broken access control / IDOR (BOLA)** — authorization **server-side, per resource**, on every read/write (`WHERE account_id = ?` from the authenticated identity, never from the client); database-level RLS as the second lock. Fail closed: doubt = deny.
 3. **Auth & sessions** — strong password hashing (argon2/bcrypt), rate limiting, short-lived sessions + refresh, server-side revocation on logout/reset. Never roll your own crypto — use vetted libraries.
 4. **SSRF** — allowlist hosts for server-side fetch; never fetch user-supplied URLs raw.
-5. **Insecure configuration** — security headers (CSP, `X-Content-Type-Options`, `Referrer-Policy`, HSTS), restrictive CORS, no debug in production, TLS everywhere.
-6. **Vulnerable dependencies** — audit on the gate when deps move; lockfile committed; abandoned dep (>12 months stale + known CVE) is scheduled debt.
-7. **Sensitive logging** — never log passwords, tokens, cards, cookies, personal IDs; structured logs with a request-id for tracing.
-8. **Uploads** — validate type/size by magic bytes, store outside the web root, random names, no execution.
+5. **CSRF** — state-changing routes require same-site origin checks (cookie `SameSite`, custom header or CSRF token; never rely on a secret cookie alone); render forms defense-in-depth where applicable.
+6. **XSS** — escape by default (framework auto-escaping); `innerHTML`/`dangerouslySetInnerHTML` only on sanitized allowlisted markup; CSP with `script-src` nonce/hash — defense in depth, not a substitute for output encoding.
+7. **Insecure configuration** — security headers (CSP, `X-Content-Type-Options`, `Referrer-Policy`, HSTS), restrictive CORS, no debug in production, TLS everywhere.
+8. **Vulnerable dependencies** — audit on the gate when deps move; lockfile committed; abandoned dep (>12 months stale + known CVE) is scheduled debt.
+9. **Sensitive logging** — never log passwords, tokens, cards, cookies, personal IDs; structured logs with a request-id for tracing.
+10. **Uploads** — validate type/size by magic bytes, store outside the web root, random names, no execution.
+
+**By stack (apply the same list, translated):** SPA → client-side secrets are exposed by definition + XSS surface; mobile → secure storage and certificate pinning where threat-justified; RLS/Postgres → policies tested like code; serverless → per-invocation credentials and log access are the boundary; AI features → see `15-ai-security.md`.
 
 ## Authorization and data
 

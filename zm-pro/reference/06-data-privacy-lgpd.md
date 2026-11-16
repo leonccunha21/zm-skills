@@ -1,4 +1,6 @@
-# 06 — Personal data & LGPD
+> Scope: engineering guidance for personal-data work, as of 2026-11-16. LGPD (Lei 13.709/2018) and GDPR positions evolve; figures, art. references and companion-pack availability are examples, verified when written and re-reviewed quarterly (`docs/maintenance-policy.md`). This is not legal advice — DPO/counsel sign off.
+
+# 06 - Personal data & LGPD
 
 The kit does not rewrite privacy law, and this chapter is not legal advice. It tells an agent **when privacy obligations attach**, which engineering controls keep them manageable, and — for Brazil — when to reach for the companion LGPD Skills pack. In the EU/UK, map the same checklist onto GDPR (lawful basis, DPIA, DSAR, retention, transfers, art. 30 records); the engineering steps are identical.
 
@@ -13,6 +15,13 @@ Any feature touching **personal data** — directly (name, CPF/CNPJ, email, phon
 - Signup/authentication, profiles, billing, OCR of documents, public scheduling, analytics, backups/exports, third-party integrations (WhatsApp, payments, transactional email)
 - Any new collection, use, sharing or retention
 - Incident, leak, deletion request (DSAR), policy/ROPA/RIPD review
+
+## Operators and international transfers
+
+- Every third party touching personal data is an **operator/processor**: sign a DPA naming purpose, retention, sub-processors, audit rights, breach notification (keys/SLA) and deletion at termination — before production data flows (`templates/VENDOR-INVENTORY.md`).
+- **International transfers:** map origin → destination per field; document the mechanism (LGPD art. 33: adequacy, standard clauses, consent, vital interest, public interest). "It is in the US" is not an analysis; with SaaS LLMs, treat prompts as transfers.
+- **From the start (privacy by design):** minimize at collection, tokenize/pseudonymize at rest and in logs, encrypt transport, segregate tenants, retention clock with automatic erasure (tombstone), and a deletion path that covers backups on a defined schedule.
+- **Retention/deallocation that exists on paper only is a defect:** implement the clock, test it, and record the verification.
 
 ## What to do
 

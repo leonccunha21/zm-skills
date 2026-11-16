@@ -11,7 +11,7 @@ Context is money: every file read costs tokens now **and** degrades every decisi
 ## Budget checklist (per task)
 
 - [ ] Task states what it needs to know, what done looks like, what files are in scope — before any file is read
-- [ ] Router read; track identified; **only that track's references** loaded (never all 13)
+- [ ] Router read; track identified; **only that track's references** loaded (never all 18)
 - [ ] Files located via `rg`/`grep`/glob first; you opened the ones whose paths you saw, not the ones that looked plausible
 - [ ] Expected size of each read is known (a schema beats a 400-line file; a signature beats a module)
 - [ ] Session plan: one task, one track, one pass; restart/split if scope drifts (see `04-multi-agent.md`)
@@ -40,6 +40,10 @@ Context is money: every file read costs tokens now **and** degrades every decisi
 ## When to spend more
 
 Security and privacy tracks are allowed to read more: a missed auth path costs more than tokens. Evidence rules still apply — read precisely, just more broadly.
+
+## Protecting context from loss (compaction)
+
+When a long session risks being summarized mid-task, do not rely on vibes: write the state to disk before the summary happens. Symptoms of loss: re-asking settled questions, rereading files already read, restating constraints mis-remembered. Protocol: (1) at natural boundaries, write a ≤40-line handoff to `*.local.md` or the coordination doc — objective, state, files, commands with output, open items; (2) pin non-negotiables in the first lines of any fresh session; (3) after compaction, re-read `RULES.md`/`AGENTS.md` and the handoff before acting; (4) verify nothing was dropped by re-checking the active task's constraints. If compaction is imminent, split the task instead of summarizing it.
 
 ## Diagnostics
 

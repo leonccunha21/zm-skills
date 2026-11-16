@@ -10,7 +10,14 @@
   },
   "scripts": {
     "validate": "node scripts/validate.mjs",
-    "test": "node scripts/validate.mjs",
+    "audit": "node scripts/validate.mjs --json",
+    "audit:fix": "node scripts/validate.mjs --fix",
+    "test": "node --test tests/validate.test.mjs tests/install.test.mjs tests/checksums.test.mjs tests/offline.test.mjs tests/diagnose.test.mjs tests/evaluate.test.mjs tests/metrics.test.mjs tests/coordinate.test.mjs",
+    "metrics": "node scripts/metrics.mjs",
+    "evaluations:check": "node scripts/evaluate.mjs",
+    "diagnose": "node scripts/diagnose.mjs",
+    "coordinate": "node scripts/coordinate.mjs",
+    "test:examples": "node --test examples/bugfix/src/total.test.mjs examples/feature/src/slug.test.mjs examples/legacy/src/pricing.test.mjs examples/security-review/src/query.test.mjs examples/task-api/src/server.test.mjs",
     "checksums": "node scripts/checksums.mjs",
     "install-skill": "node scripts/install.mjs"
   },

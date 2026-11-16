@@ -1,0 +1,26 @@
+{
+  "id": "eval-012",
+  "title": "Typo in README",
+  "level": "small",
+  "category": "bug",
+  "task": "Fix the typo 'recieve' in the README. One file, no other changes.",
+  "constraints": [
+    "one line",
+    "no other edits"
+  ],
+  "expectedContextFiles": [
+    "README.md"
+  ],
+  "expectedReferences": [],
+  "forbidden": [
+    "reformat unrelated sections",
+    "load a dozen references"
+  ],
+  "passCriteria": [
+    "minimum change made",
+    "no extra work invented"
+  ],
+  "criticalFailures": [
+    "unrelated changes bundled in"
+  ]
+}

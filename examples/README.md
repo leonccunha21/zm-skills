@@ -2,6 +2,26 @@
 
 Copying files blindly teaches little; seeing a filled project teaches the pattern. This folder contains a small but complete example of a project using zm-pro from day one — **not** a template to stamp out, but a reference to derive your own from.
 
+## `bugfix/`
+
+A runnable reproduction of the fix cycle in ~30 lines: a cart total ignores `quantity`, one test fails, one line fixes it, the same test goes green. The README quotes the real before/after output. Run it with `npm run test:examples`.
+
+## `feature/`
+
+A small feature delivered end to end: acceptance criterion → test first → smallest implementation → real output → changelog entry → delivery record, including what was left out. Runs with `npm run test:examples`.
+
+## `legacy/`
+
+Characterization tests on undocumented pricing rules, a behavior-preserving refactor, and a deliberate one-line break proving the suite catches it. Real before/after/failing output in the README.
+
+## `security-review/`
+
+A tiny end-to-end security review: scope, findings (high → low) with evidence and impact, the applied fix, and the tests that keep it fixed. Runs with `npm run test:examples`.
+
+## `task-api/`
+
+A tiny complete web app with a database: an HTTP API over `node:http` and an atomic JSON-file-backed store, with end-to-end tests. Zero dependencies. See the README for commands and its honest limitations.
+
 ## `minimal-project/`
 
 A fresh React+TypeScript-style web app on the day after `git init`, showing:

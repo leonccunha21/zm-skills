@@ -39,6 +39,11 @@ O arquivo guia (`SKILL.md`) funciona como um **router**: o agente lê ele primei
 | 11 — Arquitetura | Módulos coesos, dependência na direção certa, decisões registradas (exceções: registro de decisões — ADR) |
 | 12 — Performance | Medir antes de otimizar: Core Web Vitals, N+1, índices, orçamento de performance |
 | 13 — Economia de tokens | Como não estourar a memória/custo do agente: carregar só o necessário, respostas curtas, subagentes com escopo estreito |
+| 14 — Operação do agente | Ferramenta menos poderosa primeiro, confirmação antes de ação destrutiva, conteúdo externo como dado, regras de parada |
+| 15 — Segurança de IA | Onde funções com LLM são atacadas: injeção por documentos, abuso de ferramentas, vazamento entre tenants — e os controles que seguram |
+| 16 — Playbooks de domínio | As checagens concretas para APIs, bancos, UI, backend, mobile, infra, sistemas legados e dados |
+| 17 — Perfis e modos | Quanto rigor o projeto precisa e se o agente está descobrindo, auditando, corrigindo ou tratando incidente |
+| 18 — Adaptadores de stack | Como o agente descobre os comandos reais em JS, Python, Java, .NET, PHP, Go, Rust e mobile em vez de adivinhar |
 
 ## O que vem nas outras pastas
 

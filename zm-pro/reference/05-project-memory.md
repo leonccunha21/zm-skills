@@ -51,6 +51,46 @@ Working rules:
 4. **Procedural memory is re-read, not recalled.** Rules are consulted at kickoff; they don't live in the agent's context by habit.
 5. **Model discipline saves tokens.** An agent that knows "this is episodic → check the log, this is procedural → read RULES.md" loads the right file and 100 fewer it didn't need (see `13-token-economy.md`).
 
+## Task context model (kickoff block)
+
+Before acting, the working context is explicit and short — it is the difference between an agent that decides and one that improvises:
+
+| Field | What it captures | Source |
+|---|---|---|
+| Objective | the outcome in user-visible terms | the task |
+| Constraints | scope, red lines, approvals needed | `RULES.md`, project files |
+| Relevant architecture | modules, contracts, seams | `README`, ADRs, code |
+| Current state | branch, status, findings, prior evidence | `git status`, delivery log |
+| Decisions in force | ADRs that constrain this task | `docs/adr/` |
+| Evidencias at hand | outputs already run | tests, CI, logs |
+| Open items | what this task does not solve | pending file |
+
+Working rules:
+
+1. **Technical claims about the project cite a source** — `path:line`, a command output or a decision record. "I believe the code does X" is not a claim.
+2. **Separate fact from inference.** Label: *confirmed* (with source) · *inference* (reasoned, verifiable) · *hypothesis* (untested) · *approved decision* (ADR/owner). Never blend them in the same sentence.
+3. **Do not inline whole files.** Path + resummed section is enough; the file is the source of truth. Copying creates staleness and bloats context.
+4. **Prefer the executable.** If the claim can be verified by running the code or tests, run it instead of trusting any document, including memory.
+5. **Freshness wins.** Newer verified evidence outranks older documentation; note the divergence and fix the doc in the same delivery (see Layer 1).
+
+## Keeping memory true
+
+- **Precedence when sources disagree:** project `RULES.md` → code/config as actually running → current docs (with date) → ADRs → delivery logs → old memory. Record the divergence, never silently pick one.
+- **Expire the temporary.** Versions, endpoints, deploy targets, sprint priorities: stamp them with a review date. On expiry they are re-verified or removed, not trusted.
+- **Detect and repair staleness:** before trusting a memory fact in a decision, re-read its source. When code and memory contradict, the memory is stale — open it, verify, update or mark `superseded`.
+- **Update memory on milestones:** after an architectural change, an important decision, and the end of a long task — one entry, with date, SHA and the next owner.
+- **Memory is never a secret store.** No tokens, passwords, personal data or customer content in any memory file — not even marked "temporary". If a secret was committed, treat it as compromised and rotate it (see `07-security.md`).
+- **Handoff between sessions/agents** closes a task boundary. A handoff states: objective, current state, files touched, commands run with real output, open items, next step — and nothing invented. Example:
+
+```markdown
+<!-- handoff: 2026-11-16 · session A → session B -->
+Objective: fix order total bug (#123)
+State: branch fix/order-total @ a1b2c3d, 2 files modified, tests green (quoted)
+Files: src/order/total.ts, src/order/total.spec.ts
+Open items: tax rounding needs owner decision (ask before shipping)
+Next step: review PR; do not merge without finance sign-off
+```
+
 ## Memory hygiene
 
 1. **One source of truth per fact.** Copies point at it; they never duplicate. Duplication drifts; drift confuses agents; confusion destroys trust in the record.

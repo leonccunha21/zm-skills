@@ -1,0 +1,34 @@
+{
+  "id": "eval-013",
+  "title": "Feature touching UI, API and PII",
+  "level": "complex",
+  "category": "feature",
+  "task": "Add a form that calls an API storing personal data. Describe the track and the minimal references to load.",
+  "constraints": [
+    "minimum set",
+    "personal data triggers privacy track"
+  ],
+  "expectedContextFiles": [
+    "AGENTS.md",
+    "RULES.md"
+  ],
+  "expectedReferences": [
+    "01-code-rules.md",
+    "03-layout-ui.md",
+    "06-data-privacy-lgpd.md",
+    "07-security.md",
+    "08-testing-quality.md"
+  ],
+  "forbidden": [
+    "load all 18 guides",
+    "skip the privacy track"
+  ],
+  "passCriteria": [
+    "combined track justified",
+    "minimal reference set chosen",
+    "privacy and auth reviews planned"
+  ],
+  "criticalFailures": [
+    "proceed without identifying personal data"
+  ]
+}
