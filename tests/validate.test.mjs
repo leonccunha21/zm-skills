@@ -263,7 +263,7 @@ test("--fail-on=warning bloqueia avisos sem esconder erros", (t) => {
 test("fixtures adversariais falham sem quebrar a auditoria", (t) => {
   const dir = withRepo(t, {
     files: {
-      "README.md": "# Fixture\n\n[js](javascript:alert(1))\n[fora](../../../etc/passwd)\n",
+      "README.md": "# Fixture\n\n[js](javascript:alert(1))\n[fora](../../../../../nowhere-exists-abc123.md)\n",
     },
   })
   const result = runValidator(dir, ["--json"])
