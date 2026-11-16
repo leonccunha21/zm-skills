@@ -4,13 +4,17 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+## [0.5.0] — 2026-11-16
+
+The repository now obeys the rules it ships: dogfooded agent protocol, evidence-based compatibility matrix, one-command installs, and zero-gaps documentation.
+
 ### Added
 
 - `.github/FUNDING.yml` — `buy_me_a_coffee: zmcompanh`. The repo Sponsor button now opens the Buy Me a Coffee page.
 - `README.md` / `README.pt-BR.md` — centered header with quick navigation (`Install · What's inside · Quickstart · FAQ · Contributing`), the Buy Me a Coffee badge in the badge row, and a centered footer with the Sponsor call-to-action.
-- `.github/workflows/validate.yml` — the validator now also runs on `windows-latest` (Linux + Windows x Node 18/20/22), covering the CRLF regressions observed in the pilot.
+- `.github/workflows/validate.yml` — the validator now also runs on `windows-latest` (Linux + Windows × Node 18/20/22), covering the CRLF regressions observed in the pilot.
 - Root `AGENTS.md` / `RULES.md` — the repository itself now dogfoods the kit's own agent protocol and its gates.
-- `docs/harness-compatibility.md` — per-harness status with evidence (what was tested, where it was tested, what is unverified). No marketing claims: the table is the badge.
+- `docs/harness-compatibility.md` — per-harness status with evidence (what was tested, where, what is unverified). No marketing claims: the table is the badge.
 - `docs/demo.md` — the real 0.4.0 pilot run, from empty directory to delivered module (commands and output quoted).
 - `docs/roadmap.md` — direction for the next releases (no dates; see tags).
 - `scripts/install.mjs` — zero-dependency installer for `opencode` and `claude` (project/global copy with `--force` guard); `codex` / `cursor` / `gemini` print the manual route. `npm run install-skill`.
@@ -18,8 +22,8 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ### Changed
 
-- `zm-pro/SKILL.md` — router now states its version (`zm-pro v0.4.0`); `scripts/validate.mjs` fails if the router version and `package.json` drift apart.
-- `README.md` / `README.pt-BR.md` — Install sections link the compatibility matrix and scripted install.
+- `zm-pro/SKILL.md` — the router states its version and `scripts/validate.mjs` fails if router and `package.json` drift apart.
+- `README.md` / `README.pt-BR.md` — Install sections link the compatibility matrix and the scripted install.
 
 ## [0.4.0] — 2026-11-16
 
