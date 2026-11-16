@@ -83,7 +83,7 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 
 ## Instalação
 
-> Com pressa? [Início rápido em cinco minutos](docs/quickstart.md) (em inglês).
+> Com pressa? [Início rápido em cinco minutos](docs/quickstart.md) (em inglês). Atualizando uma instalação? [Migração e versionamento](docs/migration.md).
 > Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Travou? [Solução de problemas](docs/troubleshooting.md). Automatizado: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <raiz-do-projeto>` instala em `<raiz-do-projeto>/.agents/skills/zm-pro`); integridade para releases: `npm run --silent checksums`.
 
 ### OpenCode

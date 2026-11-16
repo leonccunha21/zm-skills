@@ -26,6 +26,15 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 - `docs/quickstart.md` — five-minute path from clone to one evidenced change.
 - `docs/maturity.md` — honest maturity report: levels 1–2 met, 3–4 not met, 5 partial, with evidence and limits.
 
+- `docs/migration.md` — SemVer semantics for a skill, what is (and is not) a breaking change, upgrade/downgrade steps and a per-version migration table with the action required.
+- `scripts/install.mjs` — symbolic links inside the install tree are rejected instead of followed; a stale `zm-pro.tmp-*` folder left by an interrupted run is removed on the next install once it is older than one hour (never one from a concurrent run); a destination that exists but is not a directory fails before anything is written.
+- `tests/` — idempotent reinstall, stale temp cleanup, symlink guard (skipped where the OS forbids creating links), Unicode/space paths and `--dir` before the harness.
+- `tests/offline.test.mjs` — asserts no script imports or calls a network module, and runs validation + install with an invalid proxy to prove the tooling never reaches the network.
+
+### Upgrade
+
+No action required. Existing installs keep working; to pick up this release, run `node scripts/install.mjs <harness> --dry-run`, then `--force` (previous folder kept as `zm-pro.backup-<timestamp>`). Details and the version table: `docs/migration.md`.
+
 ### Changed
 
 - `.github/workflows/validate.yml` — matrix now includes macOS; the executable example runs as its own step.

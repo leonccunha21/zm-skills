@@ -518,25 +518,25 @@ O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de r
 
 ## 30. Migração, atualização e compatibilidade entre versões
 
-- [ ] Criar guia de migração entre versões, incluindo mudanças incompatíveis, regras removidas e substituições.
-- [ ] Definir política SemVer adequada ao produto distribuído e explicar o que constitui breaking change em uma skill.
+- [x] Criar guia de migração entre versões, incluindo mudanças incompatíveis, regras removidas e substituições.
+- [x] Definir política SemVer adequada ao produto distribuído e explicar o que constitui breaking change em uma skill.
 - [x] Fazer o instalador identificar a versão existente e apresentar o que será alterado antes de atualizar.
 - [x] Preservar arquivos locais do usuário e nunca sobrescrever customizações silenciosamente.
 - [x] Oferecer backup ou cópia de segurança antes de atualização destrutiva, com instruções de restauração.
 - [ ] Testar upgrade de cada versão suportada para a versão atual e instalação limpa.
 - [x] Definir comportamento para downgrade e explicar quando ele não for seguro.
-- [ ] Manter changelog com instruções acionáveis, não apenas títulos de alterações.
+- [x] Manter changelog com instruções acionáveis, não apenas títulos de alterações.
 
 ## 31. Robustez, recuperação e execução em ambientes restritos
 
-- [ ] Testar caminhos com espaços, caracteres Unicode, links simbólicos, permissões limitadas e diretórios protegidos.
-- [ ] Testar execução sem internet e documentar quais recursos funcionam offline.
-- [ ] Testar proxy, certificados corporativos e ambientes sem acesso a registries, quando houver dependências externas.
+- [ ] Testar caminhos com espaços, caracteres Unicode, links simbólicos, permissões limitadas e diretórios protegidos. *(espaços, Unicode, symlinks e destino inválido cobertos por `tests/install.test.mjs`; permissões limitadas não testadas — o Windows ignora o atributo read-only em pastas)*
+- [x] Testar execução sem internet e documentar quais recursos funcionam offline.
+- [x] Testar proxy, certificados corporativos e ambientes sem acesso a registries, quando houver dependências externas.
 - [x] Garantir que falhas no meio da instalação não deixem uma cópia parcialmente válida apresentada como concluída.
-- [ ] Tornar operações repetíveis (*idempotentes*) sempre que possível.
-- [ ] Definir tratamento seguro para interrupção do processo e arquivos temporários.
-- [ ] Não seguir links simbólicos para fora do destino autorizado sem necessidade e validação explícita.
-- [ ] Documentar requisitos mínimos de Node, permissões e sistemas suportados com evidência de teste.
+- [x] Tornar operações repetíveis (*idempotentes*) sempre que possível.
+- [x] Definir tratamento seguro para interrupção do processo e arquivos temporários.
+- [x] Não seguir links simbólicos para fora do destino autorizado sem necessidade e validação explícita.
+- [x] Documentar requisitos mínimos de Node, permissões e sistemas suportados com evidência de teste.
 
 ## 32. Segurança avançada para aplicações com IA
 

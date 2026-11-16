@@ -91,7 +91,7 @@ Design principles:
 
 ## Install
 
-> In a hurry? [Five-minute quickstart](docs/quickstart.md).
+> In a hurry? [Five-minute quickstart](docs/quickstart.md). Updating an install? [Migration and versioning](docs/migration.md).
 > Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Stuck? [Troubleshooting](docs/troubleshooting.md). Scripted: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <project-root>` installs into `<project-root>/.agents/skills/zm-pro`); integrity for releases: `npm run --silent checksums`.
 
 ### OpenCode

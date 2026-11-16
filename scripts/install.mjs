@@ -18,7 +18,7 @@
 //   codex | cursor | gemini  → no copy; prints the manual route (paths are not standardized)
 //
 // Exit codes: 0 = installed or instructions printed · 1 = error (with message on stderr)
-import { existsSync, mkdirSync, cpSync, rmSync, readFileSync, readdirSync, renameSync } from "node:fs"
+import { existsSync, mkdirSync, cpSync, rmSync, readFileSync, readdirSync, renameSync, statSync } from "node:fs"
 import { join, resolve, relative } from "node:path"
 import { fileURLToPath } from "node:url"
 import { homedir } from "node:os"
@@ -99,10 +99,34 @@ const compareVersions = (a, b) => {
 const filesUnder = (dir, base = dir, acc = []) => {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, entry.name)
+    if (entry.isSymbolicLink()) {
+      fail(`symbolic link inside the install tree is not followed: ${p}\n  resolve or remove it manually; nothing was changed`)
+    }
     if (entry.isDirectory()) filesUnder(p, base, acc)
     else acc.push(relative(base, p).replaceAll("\\", "/"))
   }
   return acc
+}
+
+// A run killed mid-copy leaves `zm-pro.tmp-<stamp>`. Only folders old enough to
+// not belong to a concurrent install are removed; the tmp folder of this run never is.
+const STALE_MS = 60 * 60 * 1000
+const cleanStaleTemps = () => {
+  let removed = 0
+  for (const entry of readdirSync(baseDir, { withFileTypes: true })) {
+    if (!entry.isDirectory() || !entry.name.startsWith("zm-pro.tmp-")) continue
+    const p = join(baseDir, entry.name)
+    try {
+      if (Date.now() - statSync(p).mtimeMs > STALE_MS) {
+        rmSync(p, { recursive: true, force: true })
+        removed += 1
+        console.log(`Removed stale temp folder from an interrupted install: ${p}`)
+      }
+    } catch {
+      // raced with another process or unreadable: leave it alone
+    }
+  }
+  return removed
 }
 const plan = (from, to) => {
   const source = filesUnder(from).sort()
@@ -124,6 +148,9 @@ const stamp = new Date().toISOString().replace(/[:.]/g, "-")
 let backup
 
 if (existsSync(dest)) {
+  if (!statSync(dest).isDirectory()) {
+    fail(`destination exists and is not a directory: ${dest}\n  move it away manually; nothing was changed`)
+  }
   const diff = plan(src, dest)
   console.log(`Existing install: v${previousVersion ?? "desconhecida"} → incoming v${incomingVersion ?? "desconhecida"}`)
   console.log(`Plan for ${dest}: ${diff.unchanged} unchanged, ${diff.changed.length} changed, ${diff.added.length} new, ${diff.localOnly.length} local-only`)
@@ -150,6 +177,7 @@ if (existsSync(dest)) {
 }
 
 mkdirSync(baseDir, { recursive: true })
+cleanStaleTemps()
 const tmp = `${dest}.tmp-${stamp}`
 try {
   cpSync(src, tmp, { recursive: true })

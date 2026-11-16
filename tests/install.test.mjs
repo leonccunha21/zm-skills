@@ -3,7 +3,7 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
 import { spawnSync } from "node:child_process"
-import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, symlinkSync, utimesSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -102,6 +102,74 @@ test("detecta upgrade e downgrade pela versão instalada", (t) => {
   const downgrade = runInstall(["opencode", "--dir", project, "--dry-run"])
   assert.match(downgrade.stdout, /Existing install: v9\.9\.9 → incoming v0\.8\.1/)
   assert.match(downgrade.stderr, /downgrade/)
+})
+
+test("recusa destino que existe mas não é diretório", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-install-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  mkdirSync(join(project, ".agents", "skills"), { recursive: true })
+  writeFileSync(join(project, ".agents", "skills", "zm-pro"), "não sou uma pasta\n")
+  const result = runInstall(["opencode", "--dir", project])
+  assert.equal(result.status, 1)
+  assert.match(result.stderr, /not a directory/)
+  assert.equal(readFileSync(join(project, ".agents", "skills", "zm-pro"), "utf8"), "não sou uma pasta\n")
+})
+
+test("instala em caminho com espaços e Unicode", (t) => {
+  const base = mkdtempSync(join(tmpdir(), "zm-install-"))
+  const project = join(base, "projeto ação ção")
+  mkdirSync(project)
+  t.after(() => rmSync(base, { recursive: true, force: true }))
+  const result = runInstall(["opencode", "--dir", project])
+  assert.equal(result.status, 0, result.stderr)
+  assert.ok(existsSync(join(project, ".agents", "skills", "zm-pro", "SKILL.md")))
+})
+
+test("reinstalar o mesmo conteúdo é idempotente", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-install-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  assert.equal(runInstall(["opencode", "--dir", project]).status, 0)
+  const dest = join(project, ".agents", "skills", "zm-pro")
+  const snapshot = () =>
+    Object.fromEntries(filesUnder(dest).map((f) => [f, readFileSync(f, "utf8")]))
+  const before = snapshot()
+  const second = runInstall(["opencode", "--dir", project, "--force"])
+  assert.equal(second.status, 0, second.stderr)
+  assert.match(second.stdout, /0 changed, 0 new, 0 local-only/)
+  assert.deepEqual(snapshot(), before)
+})
+
+test("remove pasta temporária antiga de instalação interrompida", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-install-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  const skillsDir = join(project, ".agents", "skills")
+  const stale = join(skillsDir, "zm-pro.tmp-2020-01-01T00-00-00-000Z")
+  mkdirSync(stale, { recursive: true })
+  writeFileSync(join(stale, "SKILL.md"), "meia cópia\n")
+  utimesSync(stale, new Date("2020-01-01"), new Date("2020-01-01"))
+  const result = runInstall(["opencode", "--dir", project])
+  assert.equal(result.status, 0, result.stderr)
+  assert.match(result.stdout, /Removed stale temp folder/)
+  assert.ok(!existsSync(stale))
+  assert.ok(existsSync(join(project, ".agents", "skills", "zm-pro", "SKILL.md")))
+})
+
+test("não segue link simbólico dentro do destino", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-install-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  assert.equal(runInstall(["opencode", "--dir", project]).status, 0)
+  const outside = join(project, "segredo.txt")
+  writeFileSync(outside, "conteúdo fora do destino\n")
+  const link = join(project, ".agents", "skills", "zm-pro", "LINK.md")
+  try {
+    symlinkSync(outside, link, "file")
+  } catch {
+    t.skip("criação de link simbólico não permitida neste sistema")
+    return
+  }
+  const result = runInstall(["opencode", "--dir", project, "--dry-run"])
+  assert.equal(result.status, 1)
+  assert.match(result.stderr, /symbolic link/)
 })
 
 test("aceita --dir antes do harness", (t) => {
