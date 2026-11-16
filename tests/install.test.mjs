@@ -5,7 +5,7 @@ import assert from "node:assert/strict"
 import { spawnSync } from "node:child_process"
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, symlinkSync, utimesSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
-import { dirname, join } from "node:path"
+import { dirname, join, relative } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const repoRoot = dirname(dirname(fileURLToPath(import.meta.url)))
@@ -170,6 +170,34 @@ test("não segue link simbólico dentro do destino", (t) => {
   const result = runInstall(["opencode", "--dir", project, "--dry-run"])
   assert.equal(result.status, 1)
   assert.match(result.stderr, /symbolic link/)
+})
+
+test("upgrade a partir de instalação sintética antiga restaura o estado exato do repositório", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-install-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  assert.equal(runInstall(["opencode", "--dir", project]).status, 0)
+  const dest = join(project, ".agents", "skills", "zm-pro")
+  // synthetic old install: version marker 0.6.0 (this exact release line does not exist in history)
+  const skillFile = join(dest, "SKILL.md")
+  writeFileSync(skillFile, readFileSync(skillFile, "utf8").replace("zm-pro v0.8.1", "zm-pro v0.6.0"))
+  const plan = runInstall(["opencode", "--dir", project, "--dry-run"])
+  assert.equal(plan.status, 0, plan.stderr)
+  assert.match(plan.stdout, /Existing install: v0\.6\.0 → incoming v0\.8\.1/)
+
+  const upgrade = runInstall(["opencode", "--dir", project, "--force"])
+  assert.equal(upgrade.status, 0, upgrade.stderr)
+  const rel = (base, file) => relative(base, file).replaceAll("\\", "/")
+  const source = join(repoRoot, "zm-pro")
+  const sourceFiles = filesUnder(source).map((f) => rel(source, f)).sort()
+  const destFiles = filesUnder(dest).map((f) => rel(dest, f)).sort()
+  assert.deepEqual(destFiles, sourceFiles)
+  for (const file of sourceFiles) {
+    assert.equal(
+      readFileSync(join(dest, file)).equals(readFileSync(join(source, file))),
+      true,
+      `${file} não corresponde à fonte`,
+    )
+  }
 })
 
 test("aceita --dir antes do harness", (t) => {

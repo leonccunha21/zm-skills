@@ -491,7 +491,7 @@ O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de r
 - [x] Incluir orientação específica para monorepos, workspaces, pacotes compartilhados e dependências internas.
 - [x] Documentar integração com bancos, provedores cloud e frameworks sem favorecer fornecedor sem justificativa.
 - [x] Manter os guias de stack independentes do núcleo; não carregar todos em tarefas que não precisam deles.
-- [ ] Definir um modelo editorial comum e testes para exemplos de comandos de cada adaptador.
+- [x] Definir um modelo editorial comum e testes para exemplos de comandos de cada adaptador. *(testes editoriais em `tests/stack-adapters.test.mjs` + step no CI)*
 
 ## 28. Modos de trabalho especializados
 
@@ -523,7 +523,7 @@ O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de r
 - [x] Fazer o instalador identificar a versão existente e apresentar o que será alterado antes de atualizar.
 - [x] Preservar arquivos locais do usuário e nunca sobrescrever customizações silenciosamente.
 - [x] Oferecer backup ou cópia de segurança antes de atualização destrutiva, com instruções de restauração.
-- [ ] Testar upgrade de cada versão suportada para a versão atual e instalação limpa.
+- [x] Testar upgrade de cada versão suportada para a versão atual e instalação limpa. *(0.8.x é a única minor suportada; upgrade testado de marcador sintético 0.6.0 → atual com comparação profunda do estado do repositório — `tests/install.test.mjs`)*
 - [x] Definir comportamento para downgrade e explicar quando ele não for seguro.
 - [x] Manter changelog com instruções acionáveis, não apenas títulos de alterações.
 
