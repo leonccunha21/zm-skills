@@ -161,7 +161,7 @@ Or rely on the trigger description — the agent picks the track (kickoff, imple
 **What do the words mean?** [Glossary](docs/glossary.md): skill, router, reference, harness, agent, gate, evidence.
 **Can I fork and adapt it?** Yes — MIT. Keep the license notice; tell your users what you changed.
 **Will it work with my stack?** The rules are stack-agnostic; examples assume TypeScript/Node as a sane baseline but adapt to Python, Go, PHP, etc.
-**Will it work with my harness?** Only OpenCode 2.3.0 is tested end to end; Claude Code, Codex, Cursor and Gemini are explicitly unverified — see [docs/harness-compatibility.md](docs/harness-compatibility.md) and file a report.
+**Will it work with my harness?** Three documented routes: native (OpenCode — only tested so far), rules file (Claude/Codex/Cursor/Gemini — documented, unverified), inline paste (any chat — always possible, weaker). Untested tiers stay explicitly unverified; see [docs/harness-compatibility.md](docs/harness-compatibility.md) and file a report.
 **What are the limits?** No behavioral evaluation is published yet, unverified harnesses stay unverified, and the kit is not a security, privacy or legal audit. The honest status is in [docs/maturity.md](docs/maturity.md).
 **Is there a quick-start example?** Yes — `examples/minimal-project/`: a filled AGENTS.md, a real ADR and an evidence-backed DELIVERY-LOG you can copy and adapt.
 **How do I report a bad rule or a typo?** Open an issue — see [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -26,16 +26,6 @@ A harness is a matrix of capabilities, not a yes/no. Status per capability (✅ 
 
 Only cells with ✅ carry evidence; every ❓ stays a promise to test, never a claim.
 
-## Agent Skills format vs project rules vs plain context
-
-| Mechanism | Where it lives | What the harness does | What this kit uses it for |
-|---|---|---|---|
-| **Agent Skills format** (native) | `.agents/skills/<name>/` (project) or global skills dir | Discovers by frontmatter; loads on demand by trigger | Primary, documented route for OpenCode |
-| **Project rules** (harness-specific) | `CLAUDE.md` / Cursor Project Rules / `GEMINI.md` | Always loaded in that harness; higher or equal authority to a skill | Alternative route where no skills dir exists (`codex`/`cursor`/`gemini` instructions printed by the installer) |
-| **Plain file inclusion** | any path added to context | Excerpt loaded verbatim; no discovery | Fallback: paste the router; lowest fidelity, but explicit |
-
-Rule of thumb: prefer native discovery; use rule files when the harness has no skills mechanism; inline the router only as a last resort — and say which route you used in the harness report.
-
 ## Behavioral evaluation pilots (uncontrolled, 2026-11-16)
 
 Two single-run pilots were executed with `scripts/evaluate-run.mjs` on **opencode/inkling-2-small-free** — the weakest configuration available; both were recorded in `docs/evaluation-results/` and neither counts as a baseline:
@@ -56,6 +46,18 @@ Run this in a scratch project — never in a production repository:
 5. **Report** — open a [harness compatibility report](https://github.com/leonccunha21/zm-skills/issues/new?template=harness_report.md) with version, OS, install path, observation and output. Remove secrets, customer data and private paths first.
 
 A pass means all five observables happened; a partial pass is still useful — say which one failed.
+
+## Three routes to universal coverage (and what each is proven to do)
+
+No skill copies itself into every harness with the same effect. There are three delivery routes; each is documented and has different evidence status:
+
+| Route | Harnesses | Mechanism | Status |
+|---|---|---|---|
+| **Native skills folder** | OpenCode | `.agents/skills/zm-pro/` auto-discovery | ✅ tested end to end here (docs/evaluation-results/, harness 2.3.0) |
+| **Rules / project instructions file** | Claude Code (`CLAUDE.md`), Codex CLI (AGENTS.md), Cursor (Project Rules), Gemini CLI (context file) | router pasted or referenced; loads every session | ⚠️ documented route; unverified per-vendor here |
+| **Plain context inclusion** | any chat/CLI | paste `zm-pro/SKILL.md` inline | ✅ universally possible; loses on-demand routing (guides don't auto-load) |
+
+**"Works for everyone" means:** a documented route exists for every harness, the router is readable by all three routes, and each tier's evidence is stated — not that every combination was executed. Tier 1 = tested end to end; Tier 2 = documented route, unverified; Tier 3 = unknown (report required).
 
 ## How to contribute evidence
 

@@ -149,7 +149,7 @@ Prompt para uma tarefa real:
 **O que significam os termos?** [Glossário](docs/glossary.md) (em inglês): skill, router, referência, harness, agente, gate, evidência.
 **Posso forkar e adaptar?** Sim — MIT. Mantenha o aviso de licença e diga aos usuários o que mudou.
 **Funciona com minha stack?** As regras são agnósticas; os exemplos assumem TypeScript/Node, mas adaptam-se a Python, Go, PHP etc.
-**Funciona com meu harness?** Só o OpenCode 2.3.0 foi testado de ponta a ponta; Claude Code, Codex, Cursor e Gemini estão explicitamente não verificados — veja [docs/harness-compatibility.md](docs/harness-compatibility.md) e envie um relato.
+**Funciona com meu harness?** Três rotas documentadas: nativa (OpenCode — só ele testado aqui), arquivo de regras (Claude/Codex/Cursor/Gemini — documentadas, não verificadas), cola do router (qualquer chat — sempre possível, com perda de roteamento sob demanda). O tiers não testados ficam explicitamente não verificados; veja [docs/harness-compatibility.md](docs/harness-compatibility.md) e envie um relato.
 **Quais são os limites?** Ainda não há avaliação comportamental publicada, harness não testado continua não verificado, e o kit não é auditoria de segurança, privacidade ou jurídica. O status honesto está em [docs/maturity.md](docs/maturity.md).
 **Tem um exemplo de início rápido?** Sim — `examples/minimal-project/`: AGENTS.md preenchido, um ADR real e um DELIVERY-LOG com evidências para copiar e adaptar.
 
