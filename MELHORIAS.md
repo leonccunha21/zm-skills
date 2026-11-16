@@ -520,11 +520,11 @@ O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de r
 
 - [ ] Criar guia de migração entre versões, incluindo mudanças incompatíveis, regras removidas e substituições.
 - [ ] Definir política SemVer adequada ao produto distribuído e explicar o que constitui breaking change em uma skill.
-- [ ] Fazer o instalador identificar a versão existente e apresentar o que será alterado antes de atualizar.
-- [ ] Preservar arquivos locais do usuário e nunca sobrescrever customizações silenciosamente.
-- [ ] Oferecer backup ou cópia de segurança antes de atualização destrutiva, com instruções de restauração.
+- [x] Fazer o instalador identificar a versão existente e apresentar o que será alterado antes de atualizar.
+- [x] Preservar arquivos locais do usuário e nunca sobrescrever customizações silenciosamente.
+- [x] Oferecer backup ou cópia de segurança antes de atualização destrutiva, com instruções de restauração.
 - [ ] Testar upgrade de cada versão suportada para a versão atual e instalação limpa.
-- [ ] Definir comportamento para downgrade e explicar quando ele não for seguro.
+- [x] Definir comportamento para downgrade e explicar quando ele não for seguro.
 - [ ] Manter changelog com instruções acionáveis, não apenas títulos de alterações.
 
 ## 31. Robustez, recuperação e execução em ambientes restritos
@@ -532,7 +532,7 @@ O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de r
 - [ ] Testar caminhos com espaços, caracteres Unicode, links simbólicos, permissões limitadas e diretórios protegidos.
 - [ ] Testar execução sem internet e documentar quais recursos funcionam offline.
 - [ ] Testar proxy, certificados corporativos e ambientes sem acesso a registries, quando houver dependências externas.
-- [ ] Garantir que falhas no meio da instalação não deixem uma cópia parcialmente válida apresentada como concluída.
+- [x] Garantir que falhas no meio da instalação não deixem uma cópia parcialmente válida apresentada como concluída.
 - [ ] Tornar operações repetíveis (*idempotentes*) sempre que possível.
 - [ ] Definir tratamento seguro para interrupção do processo e arquivos temporários.
 - [ ] Não seguir links simbólicos para fora do destino autorizado sem necessidade e validação explícita.

@@ -3,7 +3,7 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
 import { spawnSync } from "node:child_process"
-import { existsSync, mkdirSync, mkdtempSync, readdirSync, rmSync } from "node:fs"
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -46,12 +46,69 @@ test("recusa sobrescrever destino existente sem --force", (t) => {
   assert.match(second.stderr, /already exists/)
 })
 
-test("sobrescreve com --force", (t) => {
+test("sobrescreve com --force e mantém backup da instalação anterior", (t) => {
   const project = mkdtempSync(join(tmpdir(), "zm-install-"))
   t.after(() => rmSync(project, { recursive: true, force: true }))
   assert.equal(runInstall(["opencode", "--dir", project]).status, 0)
+  const dest = join(project, ".agents", "skills", "zm-pro")
+  writeFileSync(join(dest, "LOCAL.md"), "customização local\n")
   const forced = runInstall(["opencode", "--dir", project, "--force"])
   assert.equal(forced.status, 0, forced.stderr)
+  assert.ok(existsSync(join(dest, "SKILL.md")))
+  assert.ok(!existsSync(join(dest, "LOCAL.md")))
+  const skillsDir = join(project, ".agents", "skills")
+  const backup = readdirSync(skillsDir).find((name) => name.startsWith("zm-pro.backup-"))
+  assert.ok(backup, "backup ausente")
+  assert.equal(readFileSync(join(skillsDir, backup, "LOCAL.md"), "utf8"), "customização local\n")
+  assert.match(forced.stdout, /Previous install kept at/)
+  assert.match(forced.stdout, /local-only/)
+})
+
+test("--dry-run não escreve nada em destino novo", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-install-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  const result = runInstall(["opencode", "--dir", project, "--dry-run"])
+  assert.equal(result.status, 0, result.stderr)
+  assert.match(result.stdout, /Dry run — would install/)
+  assert.ok(!existsSync(join(project, ".agents")))
+})
+
+test("--dry-run mostra o plano sem alterar a instalação existente", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-install-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  assert.equal(runInstall(["opencode", "--dir", project]).status, 0)
+  const marker = join(project, ".agents", "skills", "zm-pro", "SKILL.md")
+  const before = readFileSync(marker, "utf8")
+  const result = runInstall(["opencode", "--dir", project, "--dry-run"])
+  assert.equal(result.status, 0, result.stderr)
+  assert.match(result.stdout, /Existing install: v0\.8\.1 → incoming v0\.8\.1/)
+  assert.match(result.stdout, /0 changed/)
+  assert.match(result.stdout, /nothing written/)
+  assert.equal(readFileSync(marker, "utf8"), before)
+})
+
+test("detecta upgrade e downgrade pela versão instalada", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-install-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  assert.equal(runInstall(["opencode", "--dir", project]).status, 0)
+  const skill = join(project, ".agents", "skills", "zm-pro", "SKILL.md")
+  const original = readFileSync(skill, "utf8")
+
+  writeFileSync(skill, original.replace("zm-pro v0.8.1", "zm-pro v0.7.0"))
+  const upgrade = runInstall(["opencode", "--dir", project, "--dry-run"])
+  assert.match(upgrade.stdout, /Existing install: v0\.7\.0 → incoming v0\.8\.1/)
+
+  writeFileSync(skill, original.replace("zm-pro v0.8.1", "zm-pro v9.9.9"))
+  const downgrade = runInstall(["opencode", "--dir", project, "--dry-run"])
+  assert.match(downgrade.stdout, /Existing install: v9\.9\.9 → incoming v0\.8\.1/)
+  assert.match(downgrade.stderr, /downgrade/)
+})
+
+test("aceita --dir antes do harness", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-install-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  const result = runInstall(["--dir", project, "opencode"])
+  assert.equal(result.status, 0, result.stderr)
   assert.ok(existsSync(join(project, ".agents", "skills", "zm-pro", "SKILL.md")))
 })
 

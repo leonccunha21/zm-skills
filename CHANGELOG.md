@@ -9,8 +9,12 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 - `tests/` — first real unit suite (`node:test`, zero dependencies): the validator accepts this repo and rejects broken relative links, project residue and router/package version drift; the installer covers project and global installs, existing destination, `--force`, invalid or missing harness, and paths with spaces.
 - `package.json` — `npm test` now runs the unit suite; `npm run validate` remains the structural gate.
 - CI — the `validate` workflow runs `npm test` on the same Node/OS matrix.
+- `scripts/install.mjs` — safe upgrades: `--dry-run` prints the installed and incoming versions plus the file plan (changed/new/local-only) and writes nothing; `--force` keeps the previous folder as `zm-pro.backup-<timestamp>` with rollback instructions; the copy goes through a temp folder and a rename, so a failed run never leaves a half-written install presented as done; downgrades are detected and warned.
+- `tests/` — installer suite covers dry-run, backup preservation of local files, version detection (upgrade and downgrade) and flag order.
 
 ### Changed
+
+- `scripts/install.mjs` — flag parsing no longer mistakes a `--dir` value for the harness name.
 
 - `scripts/validate.mjs` — validator v2: ignores fenced code, validates relative links, images and heading anchors (unicode and `--` slugs, percent-encoded paths), skips `.git/` and `node_modules/`, enforces frontmatter fields/delimiters/duplicates/limits, makes index coverage an error, syncs versions across `package.json`, `SKILL.md`, `CHANGELOG.md`, README badges and `SECURITY.md`, and supports `--json`.
 - `CONTRIBUTING.md` — the gate now includes `npm test` alongside `npm run validate`.

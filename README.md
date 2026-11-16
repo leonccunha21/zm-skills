@@ -118,6 +118,8 @@ Point the agent instructions at `zm-pro/SKILL.md` (Project Rules / Context files
 
 Re-copy the folder (`cp -r zm-pro <dest>` / `Copy-Item -Recurse -Force`), or pull and re-copy. Diffs stay readable because the kit is plain Markdown.
 
+Scripted upgrade: `npm run install-skill -- opencode --dry-run` prints the incoming version and what would change; run it again without `--dry-run` and with `--force` to apply. The previous folder is kept as `zm-pro.backup-<timestamp>` (local-only files stay there). Moving to an older version is allowed but warned — the backup is the way back.
+
 ### Uninstalling
 
 Delete the installed folder (`rm -rf .agents/skills/zm-pro`, or the global path you chose). The installer only copies files, so nothing else is touched. Interrupted install? Remove the partial `zm-pro` folder and run the installer again.
