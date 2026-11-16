@@ -16,6 +16,8 @@
 //   --harness <string>       Harness name + version (e.g. "OpenCode 2.3.0")
 //   --os <string>            OS
 //   --label <slug>           Report label (default: timestamp)
+//   --out-dir <dir>          Write transcript + report to <dir> instead of docs/evaluation-results
+//                            (useful for pipelines that must not dirty the tree)
 //   --keep                   Keep the scratch workspace (default: delete it)
 //   --dry-run                Show the plan; run nothing, write nothing
 //
@@ -24,7 +26,7 @@
 // Env: EVAL_SCENARIO is set; the prompt travels as an argument, never as shell text.
 import { copyFileSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
-import { join, relative } from "node:path"
+import { join, relative, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { spawnSync } from "node:child_process"
 
@@ -88,7 +90,7 @@ const prompt = [
 ].join("\n")
 const finalArgv = argv.map((a) => (a === "{{prompt}}" ? prompt : a))
 
-const outDir = join(repoRoot, "docs", "evaluation-results")
+const outDir = option("--out-dir") ? resolve(process.cwd(), option("--out-dir")) : join(repoRoot, "docs", "evaluation-results")
 const transcriptFile = join(outDir, `${label}-${id}.raw.log`)
 const reportFile = join(outDir, `${label}-${id}.md`)
 

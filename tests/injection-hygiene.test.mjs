@@ -36,7 +36,15 @@ test("kit Markdown carries no unquoted injection payloads", () => {
   for (const file of files) {
     const rel = relative(repoRoot, file).replaceAll("\\", "/")
     if (ALLOWED.some((allowed) => rel === allowed || rel.startsWith(`${allowed}/`))) continue
-    const matches = scanText(readFileSync(file, "utf8"))
+    let content
+    try {
+      content = readFileSync(file, "utf8")
+    } catch (err) {
+      // A file may vanish between the walk and the read (parallel test runs); it is not scannable.
+      if (err.code === "ENOENT") continue
+      throw err
+    }
+    const matches = scanText(content)
     if (matches.length > 0) offenders.push(`${rel}: ${matches[0]}`)
   }
   assert.deepEqual(offenders, [])
