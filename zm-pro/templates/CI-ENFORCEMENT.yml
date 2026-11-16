@@ -1,0 +1,54 @@
+# Copy as `.github/workflows/gate.yml` into the consumer project and adapt.
+# This is the *mechanical* half of your RULES.md — the kit supplies behavioral
+# guidance; only a running gate makes a rule impossible to bypass by accident.
+# Keep jobs fail-closed: a red job blocks merge; no manual bypass without a documented exception.
+name: gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+      - name: Secrets scan (blocks the PR on hit)
+        run: |
+          # gitleaks is recommended; example only — tune to your toolchain.
+          # docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:latest detect --source /repo --no-git
+          gitleaks detect --source . --no-git --verbose || exit 1
+
+  lockfile-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Lockfile in sync
+        run: npm ci --ignore-scripts
+
+  rules-scope:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Scope check — no out-of-scope paths on fix branches
+        run: |
+          # Example: fix/ branches may not touch .github, infra or migrations.
+          BRANCH="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+          if case "$BRANCH" in fix/*) true ;; *) false ;; esac; then
+            git diff --name-only origin/main...HEAD | grep -E '^(\.github/|infra/|migrations/)' \
+              && { echo "fix/ branches must not touch CI/infra/migrations — open a chore/ PR"; exit 1; } \
+              || echo "scope ok"
+          fi
+
+  migration-rollback:
+    runs-on: ubuntu-latest
+    # Adapt to your database. Example: apply migration, roll back, verify.
+    # Fails the PR when the down path does not restore a working schema.
+    steps:
+      - run: echo "replace with your migration up/down commands"

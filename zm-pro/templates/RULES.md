@@ -29,6 +29,19 @@
 17. Cost-aware by default; paid services require a written owner decision.
 18. Every material code×doc divergence becomes an ADR — decisions reopen by writing, never by silent override.
 
+## Mechanical enforcement (optional but recommended)
+
+Rules written only in Markdown depend on the agent choosing to respect them. For rules that must never be violated, add a cheap gate to your CI:
+
+- **Secrets/PII** — run a secret scanner (gitleaks) on every PR; block on hit.
+- **Renderer/server boundary** (rule 2/7) — a lint/test (e.g. a custom `eslint` plugin or a grep-style check) failing the PR with a quoted message is stronger than any document.
+- **Migration rollback** (rule 4) — CI runs the migration in up **and** down, on a scratch database, and fails on red; the "rollback tested" claim becomes mechanical.
+- **Single primary action / four states** — UI lint (eslint-plugin-jsx-a11y covers part of this) or an a11y smoke test (axe).
+- **Evidence rule (rule 15)** — PR template checkbox "Attach the real output of the gate commands"; reviewers reject claims without it.
+- **Scope** — a CI check comparing changed paths vs declared scope (`RULES.md` may forbid touching auth while working on billing). Path allowlist per branch name, e.g. `fix/` branches can't commit `.github/`.
+
+Start with one — usually the secrets gate — then add the ones that matter for your domain. If a rule cannot be mechanically enforced, mark it explicitly as *behavioral* in `RULES.md` so nobody mistakes it for a hard gate.
+
 ## Domain specifics (adapt to your product)
 
 19. UI in the product's locale (pt-BR default when Brazil is the market), mobile-first, ≥44px touch targets, `R$ 1.234,56`, `dd/mm/yyyy`.

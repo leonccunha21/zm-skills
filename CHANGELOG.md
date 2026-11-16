@@ -4,6 +4,12 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+### Added
+
+- `templates/RULES.md` — new section "Mechanical enforcement": concrete ways to turn marked rules into CI gates (secrets scan, scope-limited branches, migration up/down verification, evidence checkbox, lockfile-drift check), and the explicit distinction between mechanically enforced vs. behavioral rules.
+- `templates/CI-ENFORCEMENT.yml` — copyable consumer-side workflow embodying that section: fails the PR on secrets, lockfile drift, out-of-scope paths on `fix/` branches, and leaves the migration-rollback job ready to adapt.
+- `docs/harness-compatibility.md` — matrix now includes an "On-demand loading (lazy references)" row: native skills mechanism only for OpenCode; other harnesses load always-on via rules file.
+
 ### Upgrade
 
 Nothing yet — 0.9.0 just shipped; see below.

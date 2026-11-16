@@ -23,6 +23,7 @@ A harness is a matrix of capabilities, not a yes/no. Status per capability (✅ 
 | Task execution (evidence before done) | ✅ pilot — 9/9 tests green | ❓ | ❓ | ❓ | ❓ |
 | Respect for project `RULES.md` over kit | ✅ pilot — local rule respected | ❓ | ❓ | ❓ | ❓ |
 | Uninstall = delete the folder | ✅ verified locally (installer tests) | ❓ | ❓ | ❓ | ❓ |
+| On-demand loading (lazy references) | ✅ native skills mechanism | ❓ (rules-only = always on) | ❓ | ❓ (always on) | ❓ (always on) |
 
 Only cells with ✅ carry evidence; every ❓ stays a promise to test, never a claim.
 

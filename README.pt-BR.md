@@ -76,7 +76,7 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 │   ├── 17-working-modes.md        # perfis essencial→auditoria e modos com regras de parada
 │   └── 18-stack-adapters.md       # comandos por ecossistema, detectando antes de assumir
 └── templates/                 # pontos de partida genéricos e copiáveis
-    ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md · COORDINATION.md
+    ├── AGENTS.md · RULES.md · ADR.md · CI-ENFORCEMENT.yml · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md · COORDINATION.md
     ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · INCIDENT-REPORT.md · RELEASE-NOTES.md · PROJECT-PROFILE.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md · EVALUATION-REPORT.md
     └── prompts/                   # prompts de delegação: implementar, corrigir, revisar, release, auditoria LGPD
 (examples/minimal-project na raiz do repositório: projeto inicial preenchido — AGENTS.md real, ADR real e DELIVERY-LOG com evidência)
