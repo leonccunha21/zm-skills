@@ -23,6 +23,10 @@ This file is the **router**. Read it fully, identify the track of the task, then
 | Architecture, performance, context cost | `11`, `12`, `13` | ADR, budgets, on-demand reads |
 | Long task, several agents | `04`, `05`, `13` | scoped handoff, ownership, memory update |
 | Permissions, destructive tools, conflicting instructions | `14` | explicit approval, stop rules, recorded conflict |
+| LLM, RAG, agents, tool calling, memory | `15` (+`06`, `07`) | threat model, server-side authz, validated tool calls |
+| Domain work: API, DB, frontend, backend, mobile, infra, legacy, data | `16` | domain checks applied to the actual stack |
+| Rigor level, discovery/audit/incident/PR-review task | `17` | declared profile + named mode with its stop rule |
+| Stack-specific commands and monorepos | `18` | commands discovered from the repo, never invented |
 
 **Combined tracks** are normal: a feature that stores personal data loads `01`+`06`+`07`+`08`; a UI change that touches auth loads `03`+`07`. Start from the smallest set that covers the risk.
 
@@ -61,6 +65,10 @@ This file is the **router**. Read it fully, identify the track of the task, then
 | `reference/12-performance.md` | measure-first profiling, Core Web Vitals budgets, N+1, indexes, CI perf gates |
 | `reference/13-token-economy.md` | spending context deliberately: reads on demand, caching, narrow subagent scopes, output caps |
 | `reference/14-agent-operations.md` | tool risk, confirmations, untrusted content, instruction conflicts, stop and reporting rules |
+| `reference/15-ai-security.md` | LLM/RAG/agent threat model, injection, tool authz, tenant isolation, budgets, adversarial tests |
+| `reference/16-domain-playbooks.md` | API, database, frontend, backend, mobile, infra, legacy, data, docs: failure modes and checks |
+| `reference/17-working-modes.md` | profiles (essential → audit) and modes (discovery, audit, incident, review…) |
+| `reference/18-stack-adapters.md` | detection-first commands for JS/TS, Python, JVM, .NET, PHP, Go, Rust, mobile |
 
 ## Universal rules (apply on every track)
 
@@ -79,4 +87,4 @@ Curated external references are cited by **name + link**, never by bare numbers,
 
 ## Templates
 
-`templates/` holds generic, copyable starting points for the target project: `templates/AGENTS.md`, `templates/RULES.md`, `templates/ADR.md`, `templates/DEFINITION-OF-DONE.md`, `templates/DELIVERY-CHECKLIST.md`, `templates/PR-TEMPLATE.md`, `templates/IMPLEMENTATION-PLAN.md`, `templates/AUDIT-REPORT.md`, `templates/TEST-PLAN.md`, `templates/THREAT-MODEL.md`, `templates/RUNBOOK.md`, `templates/INCIDENT-REPORT.md`, `templates/RELEASE-NOTES.md`, `templates/A11Y-REVIEW.md`, `templates/VENDOR-INVENTORY.md`. Delegation prompts for the most common agent tasks (implement, fix, review, release, privacy audit) live in `templates/prompts/` — output is draft material; you review it. Copy and adapt templates — never edit the originals inside this kit from within a project.
+`templates/` holds generic, copyable starting points for the target project: `templates/AGENTS.md`, `templates/RULES.md`, `templates/PROJECT-PROFILE.md`, `templates/ADR.md`, `templates/DEFINITION-OF-DONE.md`, `templates/DELIVERY-CHECKLIST.md`, `templates/PR-TEMPLATE.md`, `templates/IMPLEMENTATION-PLAN.md`, `templates/AUDIT-REPORT.md`, `templates/TEST-PLAN.md`, `templates/THREAT-MODEL.md`, `templates/RUNBOOK.md`, `templates/INCIDENT-REPORT.md`, `templates/RELEASE-NOTES.md`, `templates/A11Y-REVIEW.md`, `templates/VENDOR-INVENTORY.md`. Delegation prompts for the most common agent tasks (implement, fix, review, release, privacy audit) live in `templates/prompts/` — output is draft material; you review it. Copy and adapt templates — never edit the originals inside this kit from within a project.

@@ -7,7 +7,7 @@
 ```
 zm-pro/               the skill — the only thing copied into a harness
 ├── SKILL.md          router: frontmatter + task table + reference index (~80 lines)
-├── reference/        14 focused guides, loaded on demand
+├── reference/        18 focused guides, loaded on demand
 └── templates/        copyable documents + delegation prompts
 scripts/              validate (audit), install, checksums — zero dependencies
 tests/                node:test suites that exercise the scripts

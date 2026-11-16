@@ -372,17 +372,17 @@ Validar Markdown e instalação não prova que um agente entendeu o router, esco
 
 Expandir a cobertura técnica com módulos opcionais, carregados sob demanda, evitando transformar o router em uma enciclopédia.
 
-- [ ] **APIs e integrações:** contratos, versionamento, idempotência, retries com backoff, timeouts, rate limits, paginação, webhooks e validação de payload.
-- [ ] **Banco de dados:** modelagem, índices, transações, concorrência, migrações compatíveis, rollback, backups e restauração.
-- [ ] **Frontend:** arquitetura de estado, hidratação, formulários, navegação, acessibilidade, segurança no cliente e performance percebida.
-- [ ] **Backend:** limites de domínio, filas, jobs, concorrência, cache, consistência, observabilidade e falhas.
-- [ ] **Mobile:** ciclo de vida, permissões, armazenamento seguro, conectividade intermitente, acessibilidade e publicação.
-- [ ] **Infraestrutura/cloud:** IaC, segregação de ambientes, IAM, redes, secrets, custos, escalabilidade e recuperação.
-- [ ] **IA e LLMs:** avaliação de prompts, grounding, alucinação, injeção de prompt, ferramentas, proteção de dados, custo, latência e fallback.
-- [ ] **Sistemas legados:** caracterização de comportamento, compatibilidade, migração incremental e reversão.
-- [ ] **Dados e analytics:** qualidade, linhagem, minimização, retenção, anonimização/pseudonimização e acesso.
-- [ ] **Documentação técnica:** diagramas, ADRs, contratos, exemplos atualizados e rastreabilidade.
-- [ ] Criar referência independente somente quando houver conteúdo suficiente, critérios de roteamento claros e manutenção viável.
+- [x] **APIs e integrações:** contratos, versionamento, idempotência, retries com backoff, timeouts, rate limits, paginação, webhooks e validação de payload.
+- [x] **Banco de dados:** modelagem, índices, transações, concorrência, migrações compatíveis, rollback, backups e restauração.
+- [x] **Frontend:** arquitetura de estado, hidratação, formulários, navegação, acessibilidade, segurança no cliente e performance percebida.
+- [x] **Backend:** limites de domínio, filas, jobs, concorrência, cache, consistência, observabilidade e falhas.
+- [x] **Mobile:** ciclo de vida, permissões, armazenamento seguro, conectividade intermitente, acessibilidade e publicação.
+- [x] **Infraestrutura/cloud:** IaC, segregação de ambientes, IAM, redes, secrets, custos, escalabilidade e recuperação.
+- [x] **IA e LLMs:** avaliação de prompts, grounding, alucinação, injeção de prompt, ferramentas, proteção de dados, custo, latência e fallback.
+- [x] **Sistemas legados:** caracterização de comportamento, compatibilidade, migração incremental e reversão.
+- [x] **Dados e analytics:** qualidade, linhagem, minimização, retenção, anonimização/pseudonimização e acesso.
+- [x] **Documentação técnica:** diagramas, ADRs, contratos, exemplos atualizados e rastreabilidade.
+- [x] Criar referência independente somente quando houver conteúdo suficiente, critérios de roteamento claros e manutenção viável.
 
 ## 20. Acessibilidade, internacionalização e experiência inclusiva
 
@@ -475,35 +475,35 @@ Criar gradualmente, quando houver conteúdo e manutenção definidos:
 
 O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de rigor, cerimônia ou custo a todos eles.
 
-- [ ] Definir perfis configuráveis, por exemplo: essencial, profissional, crítico e auditoria.
-- [ ] Explicar o que muda em cada perfil: profundidade de planejamento, cobertura de testes, revisão de segurança, documentação e evidências.
-- [ ] Permitir que o projeto consumidor declare requisitos próprios em um arquivo de configuração simples, sem exigir um formato proprietário complexo.
-- [ ] Definir precedência entre configuração do projeto, preferências da tarefa e recomendações genéricas, respeitando as instruções superiores.
-- [ ] Oferecer configuração gradual: começar com defaults seguros e permitir personalização explícita.
-- [ ] Evitar que o perfil essencial desative proteções fundamentais de segurança, privacidade ou autorização.
-- [ ] Criar exemplos de configuração para projeto pessoal, SaaS, biblioteca open source e sistema crítico.
+- [x] Definir perfis configuráveis, por exemplo: essencial, profissional, crítico e auditoria.
+- [x] Explicar o que muda em cada perfil: profundidade de planejamento, cobertura de testes, revisão de segurança, documentação e evidências.
+- [x] Permitir que o projeto consumidor declare requisitos próprios em um arquivo de configuração simples, sem exigir um formato proprietário complexo.
+- [x] Definir precedência entre configuração do projeto, preferências da tarefa e recomendações genéricas, respeitando as instruções superiores.
+- [x] Oferecer configuração gradual: começar com defaults seguros e permitir personalização explícita.
+- [x] Evitar que o perfil essencial desative proteções fundamentais de segurança, privacidade ou autorização.
+- [x] Criar exemplos de configuração para projeto pessoal, SaaS, biblioteca open source e sistema crítico.
 
 ## 27. Adaptadores de stack sem acoplamento excessivo
 
-- [ ] Criar guias opcionais por ecossistema somente quando houver procedimentos concretos: JavaScript/TypeScript, Python, Java, .NET, PHP, Go, Rust e mobile.
-- [ ] Em cada adaptador, orientar o agente a detectar versões e ferramentas existentes antes de recomendar instalação ou migração.
-- [ ] Cobrir gerenciadores de pacote, scripts, lint, formatadores, testes, build e comandos de desenvolvimento sem presumir um padrão universal.
-- [ ] Incluir orientação específica para monorepos, workspaces, pacotes compartilhados e dependências internas.
-- [ ] Documentar integração com bancos, provedores cloud e frameworks sem favorecer fornecedor sem justificativa.
-- [ ] Manter os guias de stack independentes do núcleo; não carregar todos em tarefas que não precisam deles.
+- [x] Criar guias opcionais por ecossistema somente quando houver procedimentos concretos: JavaScript/TypeScript, Python, Java, .NET, PHP, Go, Rust e mobile.
+- [x] Em cada adaptador, orientar o agente a detectar versões e ferramentas existentes antes de recomendar instalação ou migração.
+- [x] Cobrir gerenciadores de pacote, scripts, lint, formatadores, testes, build e comandos de desenvolvimento sem presumir um padrão universal.
+- [x] Incluir orientação específica para monorepos, workspaces, pacotes compartilhados e dependências internas.
+- [x] Documentar integração com bancos, provedores cloud e frameworks sem favorecer fornecedor sem justificativa.
+- [x] Manter os guias de stack independentes do núcleo; não carregar todos em tarefas que não precisam deles.
 - [ ] Definir um modelo editorial comum e testes para exemplos de comandos de cada adaptador.
 
 ## 28. Modos de trabalho especializados
 
-- [ ] **Modo descoberta:** mapear o projeto, tecnologias, arquitetura, comandos, riscos e lacunas sem editar arquivos.
-- [ ] **Modo implementação:** executar uma tarefa delimitada, com validação e revisão do diff.
-- [ ] **Modo auditoria:** identificar problemas e apresentar evidências sem corrigir automaticamente.
-- [ ] **Modo correção:** resolver achados aprovados, um grupo de risco por vez, com testes de regressão.
-- [ ] **Modo modernização:** planejar atualizações e migrações em etapas, com compatibilidade e rollback.
-- [ ] **Modo incidente:** priorizar contenção, preservação de evidências, restauração e comunicação segura.
-- [ ] **Modo revisão de PR:** avaliar correção, segurança, testes, manutenção e impacto, sem aprovar automaticamente.
-- [ ] Definir entradas, limites, entregáveis e condições de parada de cada modo.
-- [ ] Não permitir que um modo seja confundido com uma autorização para executar ações externas ou destrutivas.
+- [x] **Modo descoberta:** mapear o projeto, tecnologias, arquitetura, comandos, riscos e lacunas sem editar arquivos.
+- [x] **Modo implementação:** executar uma tarefa delimitada, com validação e revisão do diff.
+- [x] **Modo auditoria:** identificar problemas e apresentar evidências sem corrigir automaticamente.
+- [x] **Modo correção:** resolver achados aprovados, um grupo de risco por vez, com testes de regressão.
+- [x] **Modo modernização:** planejar atualizações e migrações em etapas, com compatibilidade e rollback.
+- [x] **Modo incidente:** priorizar contenção, preservação de evidências, restauração e comunicação segura.
+- [x] **Modo revisão de PR:** avaliar correção, segurança, testes, manutenção e impacto, sem aprovar automaticamente.
+- [x] Definir entradas, limites, entregáveis e condições de parada de cada modo.
+- [x] Não permitir que um modo seja confundido com uma autorização para executar ações externas ou destrutivas.
 
 ## 29. Auditoria de qualidade do próprio zm-pro
 
@@ -540,16 +540,16 @@ O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de r
 
 ## 32. Segurança avançada para aplicações com IA
 
-- [ ] Incluir threat model para aplicações com LLM, RAG, agentes, ferramentas e memória persistente.
-- [ ] Cobrir prompt injection direta e indireta, exfiltração de contexto, abuso de ferramentas, escalada de privilégio e envenenamento de memória.
-- [ ] Orientar isolamento entre conteúdo confiável, instruções e dados externos recuperados.
-- [ ] Definir validação de argumentos de ferramentas, allowlists, limites de execução e autorização no servidor.
-- [ ] Cobrir vazamento entre tenants, autorização por documento, filtragem de retrieval e segregação de índices vetoriais.
-- [ ] Incluir controles de orçamento, rate limit, timeout, limites de tokens e proteção contra loops de agente.
-- [ ] Avaliar saídas estruturadas e chamadas de ferramentas como entradas não confiáveis até serem validadas.
-- [ ] Cobrir revisão humana para decisões de alto impacto e ações irreversíveis.
-- [ ] Incluir testes adversariais com payloads sintéticos e critérios objetivos de aprovação.
-- [ ] Evitar afirmar que filtros de prompt, isoladamente, tornam um sistema seguro.
+- [x] Incluir threat model para aplicações com LLM, RAG, agentes, ferramentas e memória persistente.
+- [x] Cobrir prompt injection direta e indireta, exfiltração de contexto, abuso de ferramentas, escalada de privilégio e envenenamento de memória.
+- [x] Orientar isolamento entre conteúdo confiável, instruções e dados externos recuperados.
+- [x] Definir validação de argumentos de ferramentas, allowlists, limites de execução e autorização no servidor.
+- [x] Cobrir vazamento entre tenants, autorização por documento, filtragem de retrieval e segregação de índices vetoriais.
+- [x] Incluir controles de orçamento, rate limit, timeout, limites de tokens e proteção contra loops de agente.
+- [x] Avaliar saídas estruturadas e chamadas de ferramentas como entradas não confiáveis até serem validadas.
+- [x] Cobrir revisão humana para decisões de alto impacto e ações irreversíveis.
+- [x] Incluir testes adversariais com payloads sintéticos e critérios objetivos de aprovação.
+- [x] Evitar afirmar que filtros de prompt, isoladamente, tornam um sistema seguro.
 
 ## 33. Qualidade dos exemplos e documentação executável
 

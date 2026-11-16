@@ -41,6 +41,10 @@ zm-pro is a **code of conduct for agents**: a set of text files your agent reads
 | 12 — Performance | Measure first: Core Web Vitals, N+1 queries, indexes, performance budgets |
 | 13 — Token economy | How agents avoid blasting context and cost: read only what's needed, short outputs, subagents with narrow scopes |
 | 14 — Agent operations | Least powerful tool first, confirmation before destructive actions, external content as data, stop rules |
+| 15 — AI security | Where LLM features get attacked: injection through documents, tool abuse, tenant leaks — and the controls that hold |
+| 16 — Domain playbooks | The concrete checks for APIs, databases, UI, backend, mobile, infra, legacy systems and data |
+| 17 — Profiles and modes | How much rigor your project needs, and whether the agent is discovering, auditing, fixing or handling an incident |
+| 18 — Stack adapters | How the agent finds the real commands in JS, Python, Java, .NET, PHP, Go, Rust and mobile instead of guessing |
 
 ## What lives in the other folders
 

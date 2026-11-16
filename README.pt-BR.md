@@ -26,7 +26,7 @@ A versão estendida — notas de campo do fluxo real que deu origem ao kit — e
 
 ## O que vem dentro
 
-**Os 14 guias em linguagem simples** — o que seu agente aprende:
+**Os 18 guias em linguagem simples** — o que seu agente aprende:
 
 | Guia | O que o agente aprende a fazer |
 |---|---|
@@ -44,6 +44,10 @@ A versão estendida — notas de campo do fluxo real que deu origem ao kit — e
 | 12 — Performance | medir antes: Core Web Vitals, N+1, índices, budgets de performance |
 | 13 — Economia de tokens | o contexto é dinheiro: ler só o necessário, respostas curtas, subagentes com escopo estreito |
 | 14 — Operação do agente | usar a ferramenta menos poderosa, pedir confirmação antes de ação destrutiva, tratar conteúdo externo como dado, parar em vez de inventar |
+| 15 — Segurança de IA | threat model de LLM/RAG/agentes: injeção, autorização de ferramentas, isolamento entre tenants, budgets, testes adversariais |
+| 16 — Playbooks de domínio | API, banco, frontend, backend, mobile, infra, legado, dados e docs: as checagens que importam |
+| 17 — Perfis e modos | dial de rigor (essencial → auditoria) e modo da tarefa (descoberta, auditoria, incidente, review) com regras de parada |
+| 18 — Adaptadores de stack | comandos que detectam antes de assumir: JS/TS, Python, JVM, .NET, PHP, Go, Rust e mobile — o repositório é a fonte |
 
 Novo aqui? O passo a passo completo está no [docs/para-leigos.md](docs/para-leigos.md) (pt-BR).
 
@@ -52,7 +56,7 @@ A estrutura do repositório:
 ```
 zm-pro/                        # a skill — copie esta pasta para seu projeto/harness
 ├── SKILL.md                   # router: quando usar, o ciclo, o índice
-├── reference/                 # 14 guias focados, carregados sob demanda
+├── reference/                 # 18 guias focados, carregados sob demanda
 │   ├── 01-code-rules.md           # princípios, gates, dependências, definição de pronto
 │   ├── 02-project-standards.md    # layout do repo, docs, commits, semver, changelog
 │   ├── 03-layout-ui.md            # defaults PT-BR, mobile-first, toque ≥44px, a11y AA, tokens
@@ -66,10 +70,14 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 │   ├── 11-architecture.md         # deep modules, direção de dependência, seams, ADRs
 │   ├── 12-performance.md          # medir primeiro, budgets de Core Web Vitals, N+1, CI de performance
 │   ├── 13-token-economy.md        # o contexto é dinheiro: leitura sob demanda, cache, subagentes com escopo estreito
-│   └── 14-agent-operations.md     # risco de ferramenta, confirmações, conteúdo não confiável, regras de parada
+│   ├── 14-agent-operations.md     # risco de ferramenta, confirmações, conteúdo não confiável, regras de parada
+│   ├── 15-ai-security.md          # ameaças de LLM/RAG, injeção, authz de ferramentas, isolamento, budgets
+│   ├── 16-domain-playbooks.md     # API, banco, frontend, backend, mobile, infra, legado, dados, docs
+│   ├── 17-working-modes.md        # perfis essencial→auditoria e modos com regras de parada
+│   └── 18-stack-adapters.md       # comandos por ecossistema, detectando antes de assumir
 └── templates/                 # pontos de partida genéricos e copiáveis
     ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
-    ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · INCIDENT-REPORT.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md
+    ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · INCIDENT-REPORT.md · RELEASE-NOTES.md · PROJECT-PROFILE.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md
     └── prompts/                   # prompts de delegação: implementar, corrigir, revisar, release, auditoria LGPD
 (examples/minimal-project na raiz do repositório: projeto inicial preenchido — AGENTS.md real, ADR real e DELIVERY-LOG com evidência)
 ```

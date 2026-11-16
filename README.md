@@ -26,7 +26,7 @@ The longer version — field notes from the real workflow that produced this kit
 
 ## What's inside
 
-**The 14 guides, in plain language** — what your agent actually learns:
+**The 18 guides, in plain language** — what your agent actually learns:
 
 | Guide | What the agent learns to do |
 |---|---|
@@ -44,6 +44,10 @@ The longer version — field notes from the real workflow that produced this kit
 | 12 — Performance | measure first: Core Web Vitals, N+1, indexes, perf budgets |
 | 13 — Token economy | spend context like money: read only what's needed, terse outputs, narrow subagent scopes |
 | 14 — Agent operations | use the least powerful tool, ask before destructive actions, treat external content as data, stop instead of inventing |
+| 15 — AI security | LLM/RAG/agent threat model: injection, tool authorization, tenant isolation, budgets, adversarial tests |
+| 16 — Domain playbooks | API, database, frontend, backend, mobile, infra, legacy, data and docs: the checks that matter |
+| 17 — Profiles & modes | rigor dial (essential → audit) and task mode (discovery, audit, incident, PR review) with stop rules |
+| 18 — Stack adapters | detection-first commands for JS/TS, Python, JVM, .NET, PHP, Go, Rust and mobile — repo is the source of truth |
 
 New here? The full walkthrough lives in [docs/for-humans.md](docs/for-humans.md) (plain language, EN) and [docs/para-leigos.md](docs/para-leigos.md) (pt-BR).
 
@@ -52,7 +56,7 @@ The repository layout:
 ```
 zm-pro/                        # the skill — copy this folder into your project/harness
 ├── SKILL.md                   # router: when to use, the cycle, the index
-├── reference/                 # 14 focused guides, loaded on demand
+├── reference/                 # 18 focused guides, loaded on demand
 │   ├── 01-code-rules.md           # principles, gates, dependencies, definition of done
 │   ├── 02-project-standards.md    # repo layout, docs, commits, semver, changelog
 │   ├── 03-layout-ui.md            # pt-BR defaults, mobile-first, touch ≥44px, a11y AA, tokens
@@ -66,10 +70,14 @@ zm-pro/                        # the skill — copy this folder into your projec
 │   ├── 11-architecture.md         # deep modules, dependency direction, seams, ADRs
 │   ├── 12-performance.md          # measure-first, CWV budgets, N+1, indexes, CI perf gates
 │   ├── 13-token-economy.md        # context is money: on-demand reads, caching, narrow subagent scopes
-│   └── 14-agent-operations.md     # tool risk, confirmations, untrusted content, stop rules
+│   ├── 14-agent-operations.md     # tool risk, confirmations, untrusted content, stop rules
+│   ├── 15-ai-security.md          # LLM/RAG threats, injection, tool authz, tenant isolation, budgets
+│   ├── 16-domain-playbooks.md     # API, DB, frontend, backend, mobile, infra, legacy, data, docs
+│   ├── 17-working-modes.md        # profiles essential→audit and modes with stop rules
+│   └── 18-stack-adapters.md       # detection-first commands per ecosystem
 ├── templates/                 # generic, copyable starting points
 │   ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
-│   ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · INCIDENT-REPORT.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md
+│   ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · INCIDENT-REPORT.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md · PROJECT-PROFILE.md
 │   └── prompts/                   # delegation prompts: implement, fix, review, release, privacy audit
 └── (the repository root also holds: examples/minimal-project — a filled starter to learn from, SECURITY.md, CODE_OF_CONDUCT.md, scripts/validate.mjs, CI)
 ```

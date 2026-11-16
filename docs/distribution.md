@@ -16,7 +16,7 @@ There is **no prebuilt bundle** and nothing is compiled: the published artifact 
 
 ## What ships
 
-- `zm-pro/` — the skill: router, 14 references, 13 templates, delegation prompts.
+- `zm-pro/` — the skill: router, 18 references, 16 templates, delegation prompts.
 - The rest of the repository (docs, scripts, tests, CI, examples) exists for contributors and for verification; only `zm-pro/` is copied into a harness.
 - The installer copies `zm-pro/` as-is; it never rewrites the skill content.
 
