@@ -219,7 +219,7 @@ A estrutura é uma proposta, não uma exigência para criar todos os diretórios
 - [x] Corrigir comandos de instalação nos READMEs.
 - [x] Ajustar nomes e escopo dos comandos de teste.
 - [x] Revisar instalador e validador para casos extremos.
-- [ ] Executar validação local e CI; registrar evidências. *(Local: verde. CI: PR #7 — validate, examples, checksums, pack e tests ubuntu/windows (18/20/22) verdes; macos-latest 18/20/22 permanece na fila do GitHub sem falha registrada)*
+- [x] Executar validação local e CI; registrar evidências. *(Local: verde (79/80, 1 skip). CI: PR #7 e release v0.9.0 — run `43907645342` (release): validate+testes+checksums+publicação concluídos com sucesso; run `43899121624` (c4126ab): todas as 15 legs verdes, incluindo macos; quebra doc-only cancelava legs antigas — documentado)*
 
 **Critério de conclusão:** comandos documentados funcionam como escritos; versão consistente em todos os pontos; testes automatizados passam.
 
@@ -644,4 +644,4 @@ Itens identificados na auditoria geral da sessão. Todos são melhorias do que j
 
 ### Observações futuras (não bloqueadoras)
 
-- [ ] `parity-check.mjs` — considerar verificar outros pares que possam ter drift se novos documentos forem traduzidos (ex: `docs/quickstart.md`).
+- [x] `parity-check.mjs` — considerar verificar outros pares que possam ter drift se novos documentos forem traduzidos (ex: `docs/quickstart.md`). *(Considerado: não há outro par EN/pt-BR hoje — quickstart é EN-only com link pro guia pt-BR; parity está ativa nos dois pares existentes e no CI)*
