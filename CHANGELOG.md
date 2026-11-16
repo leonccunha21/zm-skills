@@ -1,19 +1,34 @@
 # Changelog
 
-Todas as mudanças relevantes deste kit. Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/); versionamento semântico.
+All notable changes to this project. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [semver](https://semver.org/).
+
+## [0.2.0] — 2026-11-15
+
+Public-readiness release: the kit is now fully English, generic and self-validating, ready to be consumed by any project and published as its own public repository.
+
+### Changed (breaking for consumers of 0.1.0)
+
+- All skill content rewritten in **English**; Brazilian-locale rules are now clearly scoped inside `reference/03-layout-ui.md` as Brazilian defaults
+- Reference files renamed to English: `01-code-rules.md` … `10-operations.md` (was `01-regras-codigo.md` … `10-operacao-observabilidade.md`)
+- Templates renamed to English: `DEFINITION-OF-DONE.md`, `DELIVERY-CHECKLIST.md` (was `DEFINICAO-DE-PRONTO.md`, `CHECKLIST-ENTREGA.md`)
+- Removed every company/project-specific reference; the kit is generic and safe to install in arbitrary projects
+- `README.md` rewritten in English; added `README.pt-BR.md`, `CONTRIBUTING.md`, issue/PR templates and a GitHub Actions validator
+- Repository renamed `zm-skills` → `zm-pro` (the repo hosts the `zm-pro` skill)
+
+### Added
+
+- `scripts/validate.mjs` + `npm run validate` (zero-dependency): frontmatter checks, required-file checks, reference/index integrity, forbidden project-specific residue detection
+- `.github/workflows/validate.yml` — CI validation on push/PR
+- `.github/ISSUE_TEMPLATE/{bug_report,feature_request}.md`, `.github/PULL_REQUEST_TEMPLATE.md`
+- FAQ, quickstart and install matrix for OpenCode / Claude Code / Codex / Cursor / Gemini CLI
 
 ## [0.1.0] — 2026-11-15
 
-### Adicionado
-- Skill `zm-pro` (router `SKILL.md` + 10 referências + 6 templates).
-- Regras de código e gates com evidência (`reference/01-regras-codigo.md`).
-- Padronização de projeto, commits, PR e versionamento (`reference/02-padronizacao-projeto.md`).
-- Layout/UI PT-BR mobile-first com acessibilidade (`reference/03-layout-ui.md`).
-- Coordenação multi-agente: 1 coordenador, 1 tarefa/vez, escopo A/B (`reference/04-multi-agentes.md`).
-- Memória em 3 camadas: institucional, de sessão, estrutural opcional (`reference/05-memoria.md`).
-- Ponte para o LGPD Skills (MIT) sem duplicação (`reference/06-lgpd.md`).
-- Segurança pragmática: segredos, OWASP, RLS, dependências (`reference/07-seguranca.md`).
-- Pirâmide de testes e gates de qualidade (`reference/08-testes-qualidade.md`).
-- Entrega/git: commits, PR, changelog, release, rollback (`reference/09-entrega-git.md`).
-- Operação: logs, métricas, alertas, backup, runbook, pós-mortem (`reference/10-operacao-observabilidade.md`).
-- Templates copiáveis: `AGENTS.md`, `RULES.md`, `ADR.md`, `DEFINICAO-DE-PRONTO.md`, `CHECKLIST-ENTREGA.md`, `PR-TEMPLATE.md`.
+### Added
+
+- Skill `zm-pro`: router `SKILL.md` + 10 references + 6 templates (Brazilian Portuguese)
+- Rules and gates with evidence discipline (`reference/01` … `reference/10`)
+- Multi-agent coordination protocol (one coordinator, one task at a time)
+- Project memory in three layers (institutional / session / structural)
+- LGPD companion pointer to the MIT-licensed lgpd-skills pack
+- Copyable templates: `AGENTS.md`, `RULES.md`, `ADR.md`, `DEFINICAO-DE-PRONTO.md`, `CHECKLIST-ENTREGA.md`, `PR-TEMPLATE.md`

@@ -1,0 +1,24 @@
+{
+  "name": "zm-pro",
+  "version": "0.2.0",
+  "description": "The professional project playbook for AI agents — rules, standards, UI, multi-agent coordination, memory, privacy, security, testing, delivery and operations. Agent Skills format.",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.mjs"
+  },
+  "keywords": [
+    "agent-skills",
+    "ai-agents",
+    "opencode",
+    "claude-code",
+    "cursor",
+    "project-standards",
+    "code-quality",
+    "playbook"
+  ]
+}

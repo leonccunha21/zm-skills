@@ -1,38 +1,38 @@
-# ADR-NNNN: <título da decisão>
+# ADR-NNNN: <decision title>
 
-- **Status:** proposto | aceito | superseded por ADR-MMMM | deprecated
-- **Data:** AAAA-MM-DD
-- **Autores:** <nomes/squad>
-- **Escopo:** <módulos/serviços/produtos afetados>
+- **Status:** proposed | accepted | superseded by ADR-MMMM | deprecated
+- **Date:** YYYY-MM-DD
+- **Authors:** <names/team>
+- **Scope:** <affected modules/services/products>
 
-## Contexto
+## Context
 
-O problema e as forças em jogo: por que precisamos decidir agora, o que restringe a escolha (stack, custo, prazo, compliance, equipe). Inclua apenas fatos relevantes — sem romance.
+The forces at play: why decide now, what constrains the choice (stack, cost, deadline, compliance, team). Only facts that matter — no prose for its own sake.
 
-## Opções consideradas
+## Options considered
 
-### Opção A — <nome>
-- Prós:
-- Contras:
-- Custo/licença/manutenção:
+### Option A — <name>
+- Pros:
+- Cons:
+- Cost / license / maintenance:
 
-### Opção B — <nome>
-- Prós:
-- Contras:
-- Custo/licença/manutenção:
+### Option B — <name>
+- Pros:
+- Cons:
+- Cost / license / maintenance:
 
-## Decisão
+## Decision
 
-Vamos com **<opção>**, porque <razão principal ajustada às forças do contexto>. O que fica explicitamente **fora** desta decisão: <itens adjacentes que ficam para outra decisão>.
+Going with **<option>**, because <the primary reason adjusted to the forces in context>. Explicitly **out of scope** of this decision: <adjacent items deferred to their own decision>.
 
-## Consequências
+## Consequences
 
-- **Positivas:** <o que ganhamos>
-- **Negativas / trade-offs:** <o que aceitamos perder ou adiar>
-- **Riscos e mitigação:** <o que pode dar errado e como vamos perceber cedo>
-- **O que monitorar:** <métricas/sinais que validam ou refutam a decisão>
-- **Critério de reversão:** <em que condição reabrimos esta decisão>
+- **Positive:** <what we gain>
+- **Negative / trade-offs:** <what we accept losing or deferring>
+- **Risks and mitigation:** <what can go wrong and how we detect it early>
+- **What to watch:** <metrics/signals that confirm or refute the decision>
+- **Reversal criteria:** <under which condition we reopen this decision>
 
-## Referências
+## References
 
-- <links (nome + link), docs internas, ADRs relacionadas, issues>
+- <name + link, internal docs, related ADRs, issues>

@@ -1,54 +1,54 @@
-## Resumo
+## Summary
 
-<!-- O que muda e por quê, em 3–5 linhas. Se o contexto for longo, aponte para o ADR/issue. -->
+<!-- What changes and why, in 3–5 lines. For long context, link the ADR/issue. -->
 
-## Tipo de mudança
+## Type of change
 
-- [ ] feat (nova funcionalidade)  - [ ] fix (correção)  - [ ] refactor (sem mudança de comportamento)
-- [ ] chore/docs/build/ci         - [ ] security        - [ ] breaking change (detalhar abaixo)
+- [ ] feat (new capability)  - [ ] fix (bugfix)  - [ ] refactor (no behavior change)
+- [ ] chore/docs/build/ci    - [ ] security      - [ ] breaking change (detail below)
 
-## Como testar
+## How to test
 
 ```
-<!-- passos exatos, com setup mínimo -->
+<!-- exact steps, minimal setup -->
 1.
 2.
 3.
 ```
 
-- [ ] Verifiquei em viewport 360px e desktop
-- [ ] Teclado + leitor de tela (ou axe) sem regressões
+- [ ] Verified at 360px and desktop widths
+- [ ] Keyboard + screen reader (or axe) without regressions
 
-## Verificação executada (saída real)
+## Verification run (real output)
 
-<!-- Cole: typecheck, testes, build(s), e2e, gates. Nada de "OK" mudo. -->
+<!-- typecheck, tests, build(s), e2e, gates — no silent "OK" -->
 
-## Evidência
+## Evidence
 
-<!-- Screenshot/vídeo com dados fictícios, saída de comando, link de CI -->
+<!-- screenshot/video with synthetic data, command output, CI link -->
 
-## Riscos e rollback
+## Risks and rollback
 
-- Risco: <…>
-- Rollback: <tag/branch anterior / migration down / flag>
-- Impacto em dados/migrations: <nenhum | migration NNNN, com down testado>
+- Risk: <…>
+- Rollback: <previous tag/branch / migration down / flag>
+- Data/migration impact: <none | migration NNNN, down tested>
 
-## Pendências
+## Open items
 
-<!-- o que fica para depois, com dono; o que depende de ambiente real -->
+<!-- what stays for later, with owner; what depends on real environments -->
 
-## Checklist do autor
+## Author checklist
 
-- [ ] `RULES.md` e `AGENTS.md` respeitados; RULES tem precedência em caso de conflito
-- [ ] Sem segredo/PII; fixtures sintéticas; scan de segredos limpo
-- [ ] Autorização server-side revisada (recurso de outra conta falha) — se tocou dados
-- [ ] Migration com rollback testado — se tocou schema
-- [ ] Registro de entregas / CHANGELOG / docs atualizados no mesmo PR
-- [ ] `DEFINICAO-DE-PRONTO.md` marcado
-- [ ] Telas com UI: os 4 estados (vazio/carregando/erro/sucesso) implementados
+- [ ] `RULES.md` and `AGENTS.md` respected; RULES wins in conflicts
+- [ ] No secrets/PII; synthetic fixtures; secret scan clean
+- [ ] Server-side per-resource authorization reviewed — if data was touched
+- [ ] Migration with tested rollback — if schema was touched
+- [ ] Delivery log / CHANGELOG / docs updated in the same PR
+- [ ] `DEFINITION-OF-DONE.md` completed
+- [ ] UI changes: the four states (empty/loading/error/success) implemented
 
-## Revisor
+## Reviewer checklist
 
-- [ ] Revisei a diff inteira, não só os arquivos tocados por mim
-- [ ] Gates verdes no CI; evidência bate com a diff
-- [ ] Escopo não expandiu além do objetivo do PR
+- [ ] Whole diff reviewed, not only the "important" files
+- [ ] Gates green in CI; evidence matches the diff
+- [ ] Scope did not expand beyond the PR objective

@@ -1,48 +1,49 @@
-# 03 — Layout e UI (PT-BR, mobile-first, profissional)
+# 03 — Layout & UI
 
-Objetivo: telas que parecem feitas por um time sênior — hierarquia clara, espaçamento consistente, acessível — e não "template de IA genérico". Base de referência: shadcn/ui e família, UI/UX Pro Max, Impeccable, Taste Skill, 60fps.design, Motion Primitives (catálogo). Destile regras; não instale nada sem decisão explícita.
+Screens that look hand-made by a senior team: clear hierarchy, consistent spacing, accessible — not "generic AI template". Reference families (evaluate, don't blindly install): shadcn/ui and siblings, UI/UX Pro Max, Impeccable, Taste Skill, 60fps.design, Motion Primitives, Watermelon UI, Preline. Distill rules; never add a dependency without an explicit decision.
 
-## Idioma e formatos (Brasil)
+## Locales and formats
 
-- UI inteira em **PT-BR**; código, identificadores e commits em inglês.
-- Moeda `R$ 1.234,56`; data `dd/mm/aaaa`; hora 24h; telefones `(61) 99999-9999`; CPF/CNPJ com máscara e validação de dígito (zod/`cpf-cnpj-validator` quando instalado — nunca regex pura).
-- Pluralização, concordância e acentuação revisadas; texto de IA passa por leitura fria humana antes de publicar (Stop Slops / Humanizer como referência de tom).
+Default for pt-BR products (adapt per market, never mix by accident):
 
-## Mobile-first e alvos de toque
+- UI in **Brazilian Portuguese**; code, identifiers and commits in English (unless the project mandates otherwise)
+- Currency `R$ 1.234,56`; date `dd/mm/yyyy`; 24h time; phones `(11) 99999-9999`; CPF/CNPJ masked and validated by checksum (never raw regex)
+- Review pluralization, gender agreement and spelling; AI-drafted microcopy gets a cold human read before shipping (reference families: Stop Slops, Humanizer)
 
-- Desenhe o layout primeiro para 360px; expanda com breakpoints (`sm/md/lg`). Nada de "desktop quebrado no celular".
-- Alvo de toque ≥ **44×44px** (WCAG 2.5.5/2.5.8); espaçamento mínimo de 8px entre alvos.
-- Formulários: um campo por linha no mobile; teclado adequado por tipo de input (`inputmode="numeric"`, `type="email"`); botão de submit fixo no rodapé em fluxos longos.
+## Mobile-first and touch targets
 
-## Sistema visual (tokens)
+- Design at 360px first; expand with breakpoints. "Desktop that breaks on phone" is not acceptance.
+- Touch targets ≥ **44×44px** (WCAG 2.5.8), ≥ 8px apart
+- One field per line on mobile; correct `inputmode`/`type` per field; submit pinned at the bottom on long flows
 
-Defina tokens num único lugar (CSS vars + Tailwind theme): **cores** (bg, surface, ink, primary, success, warning, danger — com variantes hover/focus/disabled e contraste AA), **tipografia** (escala modular: 12/14/16/18/24/32/40; 2 famílias no máximo — uma serifa ou sans de display + sans de texto), **espaçamento** (escala 4/8/12/16/24/32/48/64), **radius**, **shadow** (3 elevações), **motion** (120–220ms, `ease-out`; respeito a `prefers-reduced-motion`).
+## Visual system (tokens)
 
-Evite: gradiente roxo genérico, glassmorphism decorativo, emojis em UI formal, ícone sem texto em ação destrutiva, 3 fontes.
+One source of truth for tokens (CSS custom properties + your Tailwind/theme config): **color** (bg, surface, ink, primary, success, warning, danger, with hover/focus/disabled variants; AA contrast), **type** (modular scale ~12/14/16/18/24/32/40; two families max), **spacing** (4/8/12/16/24/32/48/64), **radius**, **elevation** (3 shadows), **motion** (120–220ms `ease-out`, honor `prefers-reduced-motion`).
 
-## Anatomia da tela (aplica-se a admin/ERP/gestão)
+Avoid: generic purple gradients, decorative glassmorphism, emojis in formal UI, icon-only destructive actions, three or more typefaces.
 
-- **Uma ação primária por tela.** Secundárias como ghost/outline; destrutivas sempre com confirmação dupla ou undo.
-- **Estados completos**: vazio (com orientação e CTA), carregando (skeleton, não spinner no meio da tela), erro (o que aconteceu + o que fazer), sucesso (confirmação + próxima ação). Tela sem os 4 estados está pela metade.
-- **Tabelas**: header congelado, zebra ou hover sutil, ordenação indicada, paginação ou virtualização; nunca scroll horizontal no mobile — transforme em cards.
-- **Formulários longos**: seções colapsáveis + salvamento parcial; erros inline junto ao campo, não só no topo.
-- **Densidade certa para gestão**: dados antes de ornamento; números alinhados à direita, com fonte tabular.
+## Screen anatomy (admin/ERP/management UIs)
 
-## Acessibilidade (não opcional)
+- **One primary action per screen.** Secondary = ghost/outline; destructive = confirm-twice or undo.
+- **Complete states**: empty (with guidance + CTA), loading (skeletons, not spinner soup), error (what happened + what to do), success (confirmation + next action). A screen without the four states is half a screen.
+- **Tables**: sticky header, subtle zebra/hover, indicated sort, pagination or virtualization. No horizontal scroll on mobile — reflow into cards.
+- **Long forms**: collapsible sections + partial save; inline errors next to the field, not only at the top.
+- **Information density**: data before ornament; right-aligned numerals with tabular figures.
 
-- Contraste AA (texto 4.5:1; UI 3:1). Todo elemento interativo com foco visível (`:focus-visible`).
-- Navegação 100% por teclado; `aria-label` em ícone-sem-texto; `alt` descritivo; landmarks (`main`, `nav`, `header`).
-- Modais com foco preso e esc fecha; toasts com `role="status"`; tabelas com `<th scope>`.
-- Verifique com axe-core/axe-playwright + Lighthouse (a11y ≥ 95) e, sendo possível, teste com leitor de tela real.
+## Accessibility (non-optional)
 
-## Motion com propósito
+- AA contrast (text 4.5:1, UI 3:1); visible `:focus-visible` on everything interactive
+- Full keyboard navigation; `aria-label` on icon-only controls; meaningful `alt`; landmarks; modals trap focus and close on Esc; toasts use `role="status"`; tables with `<th scope>`
+- Verify with axe-core/axe-playwright + Lighthouse (a11y ≥ 95) and, ideally, a real screen reader
 
-Transições explicam mudança de estado (entrada/saída de item, expandir/recolher, feedback de ação). Duração curta, sem mola/bounce gratuito em ferramenta de trabalho. Menos é mais: 60fps ou sem animação.
+## Motion with purpose
 
-## Checklist rápido de UI (antes do PR)
+Animation explains change (item enter/exit, expand/collapse, action feedback). Short durations; no gratuitous bounce/spring in work tools. 60 fps or nothing.
 
-1. 360px OK? Alvo ≥ 44px? Teclado navega? Contraste AA?
-2. Vazio / carregando / erro / sucesso — os quatro estados existem?
-3. Uma ação primária? Ações destrutivas protegidas? Formatação PT-BR?
-4. Tokens usados (nenhuma cor/size hardcoded fora do tema)?
-5. Sem PII em placeholder, screenshot ou fixture?
+## UI checklist (before the PR)
+
+1. 360px OK? Targets ≥ 44px? Keyboard navigable? AA contrast?
+2. Empty / loading / error / success — all four present?
+3. One primary action? Destructive actions guarded? Locale formats correct?
+4. Tokens used — no hardcoded colors/sizes outside the theme?
+5. No PII in placeholders, fixtures or screenshots?

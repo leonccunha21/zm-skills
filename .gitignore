@@ -1,4 +1,4 @@
-# SO / editor
+# OS / editor
 .DS_Store
 Thumbs.db
 desktop.ini
@@ -6,13 +6,15 @@ desktop.ini
 .idea/
 .vscode/
 
-# Segredos e ambiente local — nunca versionar
+# Secrets and local env — never commit
 .env
 .env.*
 *.local
 *.pem
 *.key
 
-# Node (se algum script de apoio for adicionado no futuro)
+# Node tooling (validator is zero-dep, but keep hygiene)
 node_modules/
+coverage/
+*.log
 dist/

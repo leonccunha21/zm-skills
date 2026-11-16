@@ -1,89 +1,105 @@
-# zm-skills — Kit de projeto profissional para agentes de IA
+# zm-pro — the professional project playbook for AI agents
 
-Kit de skills **próprio e completo** para elevar qualquer projeto de software ao nível profissional: regras de código, padronização, layout/UI em PT-BR, coordenação multi-agente, memória de projeto, segurança, testes, entrega e operação. Feito para funcionar no **OpenCode** (e em qualquer harness que leia o formato aberto de skills `SKILL.md`, como Claude Code, Codex, Cursor e Gemini CLI).
+**A portable, self-contained skill that turns any coding agent into a disciplined project professional** — rules, standards, layout & UI, multi-agent coordination, project memory, privacy (LGPD/GDPR), security, testing, delivery and operations. Built on the open [Agent Skills](https://github.com/agentskills/agentskills) format; works in OpenCode, Claude Code, Codex, Cursor, Gemini CLI and any harness that loads `SKILL.md` packs.
 
-**Filosofia (não negociável):**
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](CHANGELOG.md)
 
-1. **Referência ≠ dependência ≠ instalação.** O kit ensina *como trabalhar*; ele nunca autoriza adicionar biblioteca, serviço pago ou runtime ao produto.
-2. **Divulgação progressiva.** O `SKILL.md` é um router curto; cada área detalhada vive em `reference/` e só carrega quando a tarefa pede. Contexto enxuto, atenção preservada.
-3. **Evidência antes de "pronto".** Nenhuma entrega sem comandos executados de fato e saída registrada. Nunca "PASSOU" sem prova.
-4. **Custo-zero por padrão.** Nada pago sem decisão explícita do dono do projeto; licença verificada antes de incorporar qualquer código.
-5. **PT-BR na interface; inglês no código e nos identificadores.**
+Read this in Portuguese: [README.pt-BR.md](README.pt-BR.md).
 
-## O que vem no pacote
+## Why
+
+Agents already write code. What's missing in most projects is the **professional operating system around the code**: gates that actually block, deliveries with evidence, memory that survives the session, privacy by default, and layout that doesn't look templated. zm-pro is that operating system, packaged as an on-demand skill so it costs nothing in context until it's needed.
+
+## What's inside
 
 ```
-zm-skills/
-├── README.md                  ← você está aqui
-├── LICENSE                    ← MIT
-├── CHANGELOG.md
-└── zm-pro/                    ← a skill (copie esta pasta inteira)
-    ├── SKILL.md               ← router: quando usar + índice + regras universais
-    ├── reference/             ← 10 guias detalhados, carregados sob demanda
-    │   ├── 01-regras-codigo.md
-    │   ├── 02-padronizacao-projeto.md
-    │   ├── 03-layout-ui.md
-    │   ├── 04-multi-agentes.md
-    │   ├── 05-memoria.md
-    │   ├── 06-lgpd.md
-    │   ├── 07-seguranca.md
-    │   ├── 08-testes-qualidade.md
-    │   ├── 09-entrega-git.md
-    │   └── 10-operacao-observabilidade.md
-    └── templates/             ← copiáveis para o projeto de destino
-        ├── AGENTS.md          ← protocolo de início e integridade do agente
-        ├── RULES.md           ← regras de arquitetura e segurança
-        ├── ADR.md             ← registro de decisão arquitetural
-        ├── DEFINICAO-DE-PRONTO.md
-        ├── CHECKLIST-ENTREGA.md
-        └── PR-TEMPLATE.md
+zm-pro/                        # the skill — copy this folder into your project/harness
+├── SKILL.md                   # router: when to use, the cycle, the index
+├── reference/                 # 10 focused guides, loaded on demand
+│   ├── 01-code-rules.md           # principles, gates, dependencies, definition of done
+│   ├── 02-project-standards.md    # repo layout, docs, commits, semver, changelog
+│   ├── 03-layout-ui.md            # pt-BR defaults, mobile-first, touch ≥44px, a11y AA, tokens
+│   ├── 04-multi-agent.md          # one coordinator, one task at a time, A/B scopes, handoff
+│   ├── 05-project-memory.md       # institutional / session / structural memory
+│   ├── 06-data-privacy-lgpd.md    # personal data triggers, controls, LGPD companion pack
+│   ├── 07-security.md             # secrets, OWASP essentials, auth/RLS, backups, incidents
+│   ├── 08-testing-quality.md      # pyramid, MSW/emulators/Playwright, regression, gates
+│   ├── 09-delivery-git.md         # commits, PR, release, fail-closed deploy, rollback
+│   └── 10-operations.md           # logs/metrics/alerts, backup drills, runbooks, post-mortems
+└── templates/                 # generic, copyable starting points
+    ├── AGENTS.md                  # agent protocol template
+    ├── RULES.md                   # architecture/security invariants
+    ├── ADR.md                     # architecture decision record
+    ├── DEFINITION-OF-DONE.md
+    ├── DELIVERY-CHECKLIST.md
+    └── PR-TEMPLATE.md
 ```
 
-## Instalação
+Design principles:
 
-### OpenCode — global (todos os projetos do usuário)
+1. **Reference ≠ dependency ≠ installation** — the kit teaches discipline; it never authorizes adding libraries to your product.
+2. **Progressive disclosure** — `SKILL.md` stays short; detail lives in `reference/` and loads only when the task calls for it.
+3. **Evidence before claims** — no "done" without commands run, output quoted, gaps stated.
+4. **Your project wins** — its `AGENTS.md`/`RULES.md` override this kit; the kit is the default for projects without their own.
+5. **Cost-aware and license-clean** — nothing paid without owner decision; every embedded reference is evaluated, never blindly installed.
 
-```powershell
-Copy-Item -Recurse ".\zm-pro" "$env:USERPROFILE\.config\opencode\skills\zm-pro"
+## Install
+
+### OpenCode
+
+**Per project (recommended to start):**
+```bash
+mkdir -p .agents/skills
+cp -r zm-pro .agents/skills/zm-pro   # path to this repo's inner folder
 ```
 
-### OpenCode — por projeto (recomendado para piloto)
-
-```powershell
-Copy-Item -Recurse ".\zm-pro" "<seu-projeto>\.agents\skills\zm-pro"
+**Global (all your projects):**
+```bash
+mkdir -p ~/.config/opencode/skills
+cp -r zm-pro ~/.config/opencode/skills/zm-pro
 ```
 
-A skill é descoberta automaticamente; o corpo só carrega quando o agente invoca a tool `skill`. Nenhuma configuração força o carregamento sem necessidade.
+The skill is auto-discovered. Its body loads only when an agent invokes it — no token tax on unrelated sessions.
 
-### Outros harnesses (Claude Code, Codex, Cursor, Gemini CLI)
+### Claude Code / Codex CLI
 
-O formato `SKILL.md` (frontmatter `name` + `description`) é o padrão aberto [Agent Skills](https://github.com/agentskills/agentskills). Copie `zm-pro/` para a pasta de skills do harness, ou aponte o `AGENTS.md`/`CLAUDE.md` do projeto para `zm-pro/SKILL.md` como referência de procedimento.
+Copy `zm-pro/` into the harness skills directory (e.g., `~/.claude/skills/zm-pro`), or reference it from your project's `CLAUDE.md`/`AGENTS.md` as the procedure doc. The format is the open Agent Skills spec.
 
-### Atualizar
+### Cursor / Gemini CLI / others
 
-```powershell
-# sobrescreva a pasta copiada com a versão nova
-Copy-Item -Recurse -Force ".\zm-pro" "<destino>\zm-pro"
-```
+Point the agent instructions at `zm-pro/SKILL.md` (Project Rules / Context files). The router is self-describing — no harness-specific magic required.
 
-## Como usar
+### Updating
 
-1. Numa tarefa real, peça ao agente: *"use a skill zm-pro"* — ou deixe a descrição disparar sozinha (a skill é model-invoked).
-2. O agente lê o `SKILL.md`, identifica a trilha da tarefa (kickoff, implementação, revisão, entrega, LGPD) e carrega **só** as `reference/` relevantes.
-3. Ao final, a entrega segue `templates/CHECKLIST-ENTREGA.md`: arquivos alterados, comandos executados + saída, riscos, pendências, evidência.
+Re-copy the folder (`cp -r zm-pro <dest>` / `Copy-Item -Recurse -Force`), or pull and re-copy. Diffs stay readable because the kit is plain Markdown.
 
-**Quer que a skill só dispare quando você digitar o nome?** Adicione `disable-model-invocation: true` ao frontmatter do `SKILL.md` — ela vira user-invoked (custo de contexto zero).
+## Quickstart
 
-## Relação com o LGPD Skills
+Give your agent this prompt on a real task:
 
-O kit **não duplica** o [lgpd-skills](https://github.com/goul4rt/lgpd-skills) (MIT): `reference/06-lgpd.md` ensina *quando* e *como* invocar as 19 skills `lgpd-*` e trata o limite do que é rascunho de engenharia vs. conformidade jurídica. Instale as skills LGPD no projeto como feito no `mei-pro-web` (`.agents/skills/lgpd-*`).
+> Use the zm-pro skill. Read RULES.md and AGENTS.md first. Objective: <X>. In-scope files: <…>. Acceptance criteria: <…>. Run the verification commands and quote the real output. Don't declare success without evidence.
 
-## Versionamento e contribuição
+Or rely on the trigger description — the agent picks the track (kickoff, implement, review, deliver, privacy) and loads only what it needs.
 
-- Versionamento semântico; mudanças em `SKILL.md`/`reference/` entram via PR com checklist próprio (`templates/CHECKLIST-ENTREGA.md`).
-- Uma regra por lugar (fonte única de verdade); `SKILL.md` nunca repete o que está em `reference/`.
-- Referência nova entra primeiro no catálogo de referências do time; só vira regra no kit se provar valor num projeto real.
+## What zm-pro is not
 
-## Licença
+- **Not a framework, not a library, not a CLI** — it's documentation-as-skill. No runtime, no network calls, no telemetry, no dependencies.
+- **Not legal advice** — the privacy track produces engineering drafts and controls; legal conclusions belong to your DPO/counsel.
+- **Not a substitute for your project's rules** — it defers to them by design.
 
-MIT — veja [LICENSE](LICENSE). Reutilize, copie e adapte em projetos comerciais mantendo o aviso de copyright.
+## FAQ
+
+**Does it work offline?** Yes. Everything is local Markdown.
+**Does it send data anywhere?** No. It contains no executable code beyond a validator script in this repo (for contributors).
+**Can I fork and adapt it?** Yes — MIT. Keep the license notice; tell your users what you changed.
+**Will it work with my stack?** The rules are stack-agnostic; examples assume TypeScript/Node as a sane baseline but adapt to Python, Go, PHP, etc.
+**How do I report a bad rule or a typo?** Open an issue — see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Contributing & releases
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Semver; every change via PR with the repo validator green (`npm run validate`); history in [CHANGELOG.md](CHANGELOG.md). Skill changes ship as `zm-pro` version bumps.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Made by ZM and contributors.
