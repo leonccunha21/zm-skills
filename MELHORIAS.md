@@ -458,3 +458,135 @@ Criar gradualmente, quando houver conteúdo e manutenção definidos:
 10. Publicar relatório de maturidade baseado em evidências.
 
 **Regra de priorização:** reduzir risco de comportamento incorreto, perda de dados, exposição de informações ou falsa alegação de compatibilidade tem prioridade sobre simplesmente adicionar guias ou aumentar o tamanho do repositório.
+
+
+## 26. Perfis de uso e configuração
+
+O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de rigor, cerimônia ou custo a todos eles.
+
+- [ ] Definir perfis configuráveis, por exemplo: essencial, profissional, crítico e auditoria.
+- [ ] Explicar o que muda em cada perfil: profundidade de planejamento, cobertura de testes, revisão de segurança, documentação e evidências.
+- [ ] Permitir que o projeto consumidor declare requisitos próprios em um arquivo de configuração simples, sem exigir um formato proprietário complexo.
+- [ ] Definir precedência entre configuração do projeto, preferências da tarefa e recomendações genéricas, respeitando as instruções superiores.
+- [ ] Oferecer configuração gradual: começar com defaults seguros e permitir personalização explícita.
+- [ ] Evitar que o perfil essencial desative proteções fundamentais de segurança, privacidade ou autorização.
+- [ ] Criar exemplos de configuração para projeto pessoal, SaaS, biblioteca open source e sistema crítico.
+
+## 27. Adaptadores de stack sem acoplamento excessivo
+
+- [ ] Criar guias opcionais por ecossistema somente quando houver procedimentos concretos: JavaScript/TypeScript, Python, Java, .NET, PHP, Go, Rust e mobile.
+- [ ] Em cada adaptador, orientar o agente a detectar versões e ferramentas existentes antes de recomendar instalação ou migração.
+- [ ] Cobrir gerenciadores de pacote, scripts, lint, formatadores, testes, build e comandos de desenvolvimento sem presumir um padrão universal.
+- [ ] Incluir orientação específica para monorepos, workspaces, pacotes compartilhados e dependências internas.
+- [ ] Documentar integração com bancos, provedores cloud e frameworks sem favorecer fornecedor sem justificativa.
+- [ ] Manter os guias de stack independentes do núcleo; não carregar todos em tarefas que não precisam deles.
+- [ ] Definir um modelo editorial comum e testes para exemplos de comandos de cada adaptador.
+
+## 28. Modos de trabalho especializados
+
+- [ ] **Modo descoberta:** mapear o projeto, tecnologias, arquitetura, comandos, riscos e lacunas sem editar arquivos.
+- [ ] **Modo implementação:** executar uma tarefa delimitada, com validação e revisão do diff.
+- [ ] **Modo auditoria:** identificar problemas e apresentar evidências sem corrigir automaticamente.
+- [ ] **Modo correção:** resolver achados aprovados, um grupo de risco por vez, com testes de regressão.
+- [ ] **Modo modernização:** planejar atualizações e migrações em etapas, com compatibilidade e rollback.
+- [ ] **Modo incidente:** priorizar contenção, preservação de evidências, restauração e comunicação segura.
+- [ ] **Modo revisão de PR:** avaliar correção, segurança, testes, manutenção e impacto, sem aprovar automaticamente.
+- [ ] Definir entradas, limites, entregáveis e condições de parada de cada modo.
+- [ ] Não permitir que um modo seja confundido com uma autorização para executar ações externas ou destrutivas.
+
+## 29. Auditoria de qualidade do próprio zm-pro
+
+- [ ] Criar um comando de auditoria que verifique estrutura, metadados, links, referências, templates, versões e consistência documental.
+- [ ] Produzir saída legível por humanos e, opcionalmente, JSON estável para integração com outras ferramentas.
+- [ ] Atribuir severidade, arquivo, linha ou seção, evidência, explicação e correção sugerida a cada achado.
+- [ ] Diferenciar erro bloqueador, aviso e sugestão; permitir configuração de regras sem esconder falhas críticas.
+- [ ] Garantir que a auditoria seja somente leitura por padrão.
+- [ ] Oferecer modo de correção automática apenas para mudanças mecânicas, com preview/diff e consentimento explícito.
+- [ ] Testar o auditor contra fixtures válidas, inválidas, incompletas e adversariais.
+- [ ] Garantir saída determinística para as mesmas entradas e versão.
+
+## 30. Migração, atualização e compatibilidade entre versões
+
+- [ ] Criar guia de migração entre versões, incluindo mudanças incompatíveis, regras removidas e substituições.
+- [ ] Definir política SemVer adequada ao produto distribuído e explicar o que constitui breaking change em uma skill.
+- [ ] Fazer o instalador identificar a versão existente e apresentar o que será alterado antes de atualizar.
+- [ ] Preservar arquivos locais do usuário e nunca sobrescrever customizações silenciosamente.
+- [ ] Oferecer backup ou cópia de segurança antes de atualização destrutiva, com instruções de restauração.
+- [ ] Testar upgrade de cada versão suportada para a versão atual e instalação limpa.
+- [ ] Definir comportamento para downgrade e explicar quando ele não for seguro.
+- [ ] Manter changelog com instruções acionáveis, não apenas títulos de alterações.
+
+## 31. Robustez, recuperação e execução em ambientes restritos
+
+- [ ] Testar caminhos com espaços, caracteres Unicode, links simbólicos, permissões limitadas e diretórios protegidos.
+- [ ] Testar execução sem internet e documentar quais recursos funcionam offline.
+- [ ] Testar proxy, certificados corporativos e ambientes sem acesso a registries, quando houver dependências externas.
+- [ ] Garantir que falhas no meio da instalação não deixem uma cópia parcialmente válida apresentada como concluída.
+- [ ] Tornar operações repetíveis (*idempotentes*) sempre que possível.
+- [ ] Definir tratamento seguro para interrupção do processo e arquivos temporários.
+- [ ] Não seguir links simbólicos para fora do destino autorizado sem necessidade e validação explícita.
+- [ ] Documentar requisitos mínimos de Node, permissões e sistemas suportados com evidência de teste.
+
+## 32. Segurança avançada para aplicações com IA
+
+- [ ] Incluir threat model para aplicações com LLM, RAG, agentes, ferramentas e memória persistente.
+- [ ] Cobrir prompt injection direta e indireta, exfiltração de contexto, abuso de ferramentas, escalada de privilégio e envenenamento de memória.
+- [ ] Orientar isolamento entre conteúdo confiável, instruções e dados externos recuperados.
+- [ ] Definir validação de argumentos de ferramentas, allowlists, limites de execução e autorização no servidor.
+- [ ] Cobrir vazamento entre tenants, autorização por documento, filtragem de retrieval e segregação de índices vetoriais.
+- [ ] Incluir controles de orçamento, rate limit, timeout, limites de tokens e proteção contra loops de agente.
+- [ ] Avaliar saídas estruturadas e chamadas de ferramentas como entradas não confiáveis até serem validadas.
+- [ ] Cobrir revisão humana para decisões de alto impacto e ações irreversíveis.
+- [ ] Incluir testes adversariais com payloads sintéticos e critérios objetivos de aprovação.
+- [ ] Evitar afirmar que filtros de prompt, isoladamente, tornam um sistema seguro.
+
+## 33. Qualidade dos exemplos e documentação executável
+
+- [ ] Garantir que exemplos de código sejam completos o suficiente para executar ou sejam claramente identificados como pseudocódigo.
+- [ ] Informar versões, pré-requisitos, comandos, resultado esperado e limitações em cada exemplo executável.
+- [ ] Executar exemplos automaticamente quando viável e detectar snippets desatualizados.
+- [ ] Usar somente dados fictícios, credenciais de exemplo inválidas e serviços locais/simulados.
+- [ ] Evitar comandos destrutivos em exemplos; quando inevitáveis, explicar impacto e ambiente seguro.
+- [ ] Manter exemplos pequenos e independentes, evitando projetos demonstrativos gigantes difíceis de atualizar.
+- [ ] Incluir exemplo de aplicação completa e exemplo de repositório legado para demonstrar descoberta e adaptação.
+- [ ] Criar glossário de termos e convenções consistentes entre português e inglês.
+
+## 34. Estratégia de adoção e experiência do desenvolvedor
+
+- [ ] Criar uma demonstração guiada que mostre a skill identificando contexto, escolhendo referências e validando uma pequena mudança.
+- [ ] Oferecer um diagnóstico inicial do projeto consumidor com achados priorizados, sem editar nada automaticamente.
+- [ ] Criar um caminho rápido para usuários experientes e um caminho didático para iniciantes.
+- [ ] Documentar claramente o que o zm-pro faz, o que não faz e o que depende do harness ou das ferramentas conectadas.
+- [ ] Criar exemplos de prompts de uso como ponto de partida, sem exigir frases mágicas.
+- [ ] Medir sucesso do onboarding por tarefa concluída e validada, não por quantidade de páginas lidas.
+- [ ] Manter documentação acessível no próprio repositório; um site separado só deve existir se houver benefício claro e manutenção possível.
+
+## 35. Regras para impedir expansão sem controle
+
+- [ ] Antes de criar um novo guia, demonstrar que o conteúdo não cabe de forma mais clara em uma referência existente.
+- [ ] Cada guia novo deve ter gatilho de roteamento, responsável pela manutenção, critérios de qualidade e ao menos um cenário de avaliação.
+- [ ] Remover conteúdo duplicado e obsoleto em vez de apenas acrescentar novas seções.
+- [ ] Revisar o custo de contexto de cada referência: tamanho, frequência de carregamento e benefício real.
+- [ ] Manter o núcleo pequeno e estável; funcionalidades experimentais devem ficar isoladas até serem avaliadas.
+- [ ] Marcar recomendações dependentes de stack, fornecedor ou legislação com escopo e data de revisão.
+- [ ] Não adicionar dependências, telemetria, serviços pagos ou integrações que criem custo ou coleta de dados sem decisão explícita.
+- [ ] Exigir uma justificativa de valor, risco e manutenção para toda expansão relevante.
+
+## 36. Critérios de aceite para considerar o zm-pro completo
+
+O projeto não deve ser considerado completo por quantidade de arquivos ou número de guias. A conclusão deve depender de evidências.
+
+- [ ] Instalação limpa, atualização e remoção testadas sem sobrescrita silenciosa.
+- [ ] Validador e auditoria com testes automatizados cobrindo os caminhos críticos.
+- [ ] Router conciso, com roteamento correto e carregamento progressivo demonstrados em avaliações.
+- [ ] Guias revisados quanto a contradições, escopo, segurança e precisão técnica.
+- [ ] Suíte comportamental com baseline e relatório reproduzível.
+- [ ] Compatibilidade declarada somente para combinações efetivamente testadas.
+- [ ] Exemplos essenciais executados e atualizados.
+- [ ] Documentação de instalação, configuração, troubleshooting, migração e contribuição coerente com o código.
+- [ ] Política de segurança, privacidade, suporte e releases atualizada.
+- [ ] Processo de manutenção viável, com responsável e critérios de depreciação.
+- [ ] Nenhuma falha crítica conhecida sem plano de correção ou limitação claramente documentada.
+- [ ] Relatório de maturidade publicado com evidências, limitações e riscos remanescentes.
+
+**Definição de completo:** o zm-pro será considerado pronto para uso profissional quando uma pessoa independente conseguir instalá-lo, configurá-lo, utilizá-lo em um projeto real, avaliar seus resultados, atualizá-lo e removê-lo com segurança, seguindo a documentação e sem depender de conhecimento informal do mantenedor.
