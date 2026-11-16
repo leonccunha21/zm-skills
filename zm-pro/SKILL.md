@@ -5,7 +5,7 @@ description: Complete playbook for professional software projects. Use when a ta
 
 # zm-pro — the professional project playbook
 
-**zm-pro v0.10.0** — the router; from here, load only what the task needs.
+**zm-pro v0.10.1** — the router; from here, load only what the task needs.
 
 This file is the **router**. Read it fully, identify the track of the task, then load only the references in `reference/` you actually need. Copyable templates live in `templates/`.
 
