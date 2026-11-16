@@ -2,6 +2,14 @@
 
 All notable changes to this project. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [semver](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+
+- `.github/FUNDING.yml` — `buy_me_a_coffee: zmcompanh`. The repo Sponsor button now opens the Buy Me a Coffee page.
+- `README.md` / `README.pt-BR.md` — centered header with quick navigation (`Install · What's inside · Quickstart · FAQ · Contributing`), the Buy Me a Coffee badge in the badge row, and a centered footer with the Sponsor call-to-action.
+- `.github/workflows/validate.yml` — the validator now also runs on `windows-latest` (Linux + Windows x Node 18/20/22), covering the CRLF regressions observed in the pilot.
+
 ## [0.4.0] — 2026-11-16
 
 Pilot-feedback release: validated by a real end-to-end pilot project (`pilot-zm-pro`) that consumed the skill from scratch — 9/9 tests green, evidence-backed delivery log.
