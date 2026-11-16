@@ -38,6 +38,10 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 - `tests/offline.test.mjs` — asserts no script imports or calls a network module, and runs validation + install with an invalid proxy to prove the tooling never reaches the network.
 
 - `EVALUATIONS.md` + `tests/evaluations/scenarios/` — 15 synthetic scenarios (small/medium/complex) covering bug, feature, legacy, migration, auth, upload, privacy, incident, deploy and conflict cases; `scripts/evaluate.mjs` (`npm run evaluations:check`) schema-checks them read-only (unique ids, referenced guides exist, no secret-like content) and states explicitly that it is **not** a behavioral result. `templates/EVALUATION-REPORT.md` holds the recording format. No baseline has been run or published.
+- `examples/task-api/` — complete small web app with a database stand-in: `node:http` REST API (201/400/404/413/500), validation at the boundary, atomic JSON-file-backed store, end-to-end tests with `node:test`. Zero dependencies; run with `node --test` or `npm run test:examples`.
+- `tests/` — adversarial injection fixtures (`tests/fixtures/adversarial/`) and the shared detection module `scripts/lib/injection-patterns.mjs`, used by `tests/injection-hygiene.test.mjs`.
+- `scripts/parity-check.mjs` + `tests/parity.test.mjs` — EN/pt-BR README parity (heading structure, fence count, commands, links with an allowlist for badges/language files); CI gates it.
+- `scripts/metrics.mjs` + `tests/metrics.test.mjs` — deterministic repository facts; `docs/metrics.md` defines each metric with method, cadence, owner and status; `docs/critical-rules.md` — critical rules with rationale, scenario and verification; `docs/attribution.md` — licensing/attribution review; `docs/scope-control.md` — rules against kit bloat; `docs/context-cost.md` — per-reference context ledger; `docs/breaking-changes.md` — breaking-change history; `docs/evaluation-results/` — honest landing spot; `docs/reviewing-automated-contributions.md`; `docs/demo.md`, `docs/glossary.md`, `docs/quickstart.md`.
 
 ### Upgrade
 

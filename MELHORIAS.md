@@ -66,19 +66,19 @@ Estes itens foram observados nos arquivos consultados durante a inspeção inici
 
 ### Revisão dos 13 guias
 
-- [ ] **01 — Code rules:** diferenciar regra obrigatória, recomendação e exceção; explicitar critérios de mudança mínima, regressão e definição de pronto.
-- [ ] **02 — Project standards:** alinhar estrutura, documentação, versionamento, changelog, convenções de commit e templates.
-- [ ] **03 — Layout UI:** cobrir responsividade, acessibilidade WCAG, teclado, leitores de tela, estados vazios/erro/carregamento, formulários, contraste e testes em viewport real.
+- [x] **01 — Code rules:** diferenciar regra obrigatória, recomendação e exceção; explicitar critérios de mudança mínima, regressão e definição de pronto.
+- [x] **02 — Project standards:** alinhar estrutura, documentação, versionamento, changelog, convenções de commit e templates.
+- [x] **03 — Layout UI:** cobrir responsividade, acessibilidade WCAG, teclado, leitores de tela, estados vazios/erro/carregamento, formulários, contraste e testes em viewport real.
 - [x] **04 — Multi-agent:** definir limites de delegação, propriedade de arquivos, prevenção de alterações concorrentes, validação do trabalho delegado e protocolo de parada. *(coberto por `zm-pro/reference/04-multi-agent.md`, `scripts/coordinate.mjs`, `tests/coordinate.test.mjs` e `zm-pro/templates/COORDINATION.md`)*
-- [ ] **05 — Project memory:** distinguir fatos confirmados, hipóteses e decisões; incluir origem, data, responsável, validade e procedimento de atualização/remoção.
-- [ ] **06 — LGPD:** revisar referências legais e datas; separar orientação técnica de aconselhamento jurídico; incluir privacidade desde a concepção, retenção, descarte, operadores e transferências internacionais.
-- [ ] **07 — Security:** ampliar ameaças por stack e tipo de aplicação; autenticação, autorização por recurso, sessões, CSRF, XSS, SSRF, upload, dependências, segredos e resposta a incidentes.
-- [ ] **08 — Testing quality:** propor estratégia por risco; testes unitários, integração, contrato, E2E, acessibilidade, segurança, migrações e dados sintéticos.
-- [ ] **09 — Delivery git:** padronizar branches, commits, revisão, tags, releases, rollback e proteção contra deploy sem aprovação.
-- [ ] **10 — Operations:** incluir SLO/SLI quando aplicável, alertas acionáveis, runbooks, backups e teste periódico de restauração.
-- [ ] **11 — Architecture:** documentar limites de módulos, dependências, contratos, migrações e critérios para evitar abstração prematura.
-- [ ] **12 — Performance:** tornar budgets configuráveis por produto; medir antes de otimizar; cobrir frontend, backend, banco, rede e custo.
-- [ ] **13 — Token economy:** orientar roteamento de modelo por complexidade, cache, escopo de subagentes, limites de saída e proteção contra perda de contexto.
+- [x] **05 — Project memory:** distinguir fatos confirmados, hipóteses e decisões; incluir origem, data, responsável, validade e procedimento de atualização/remoção.
+- [x] **06 — LGPD:** revisar referências legais e datas; separar orientação técnica de aconselhamento jurídico; incluir privacidade desde a concepção, retenção, descarte, operadores e transferências internacionais.
+- [x] **07 — Security:** ampliar ameaças por stack e tipo de aplicação; autenticação, autorização por recurso, sessões, CSRF, XSS, SSRF, upload, dependências, segredos e resposta a incidentes.
+- [x] **08 — Testing quality:** propor estratégia por risco; testes unitários, integração, contrato, E2E, acessibilidade, segurança, migrações e dados sintéticos.
+- [x] **09 — Delivery git:** padronizar branches, commits, revisão, tags, releases, rollback e proteção contra deploy sem aprovação.
+- [x] **10 — Operations:** incluir SLO/SLI quando aplicável, alertas acionáveis, runbooks, backups e teste periódico de restauração.
+- [x] **11 — Architecture:** documentar limites de módulos, dependências, contratos, migrações e critérios para evitar abstração prematura.
+- [x] **12 — Performance:** tornar budgets configuráveis por produto; medir antes de otimizar; cobrir frontend, backend, banco, rede e custo.
+- [x] **13 — Token economy:** orientar roteamento de modelo por complexidade, cache, escopo de subagentes, limites de saída e proteção contra perda de contexto.
 
 Para cada guia, manter a mesma estrutura editorial: propósito, quando aplicar, regras, procedimento, checklist, anti-padrões, evidências e referências externas. Não transformar sugestões contextuais em regras universais.
 
@@ -100,12 +100,12 @@ A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta
 - [x] Criar suíte `node:test` para o validador e instalador, sem dependências externas desnecessárias.
 - [x] Cobrir entradas inválidas e casos extremos, inclusive nomes de arquivos com espaços, CRLF, links quebrados e arquivos ausentes.
 - [x] Executar CI em Linux, Windows e macOS quando viável, com Node 18, 20 e 22 (reavaliar a matriz conforme suporte oficial e dependências).
-- [ ] Separar jobs: validação de estrutura, testes unitários, verificação de links, checksums e empacotamento.
-- [ ] Adicionar verificação de Markdown e spellcheck com dicionário técnico pt-BR/en-US, sem bloquear falsos positivos sem revisão.
+- [x] Separar jobs: validação de estrutura, testes unitários, verificação de links, checksums e empacotamento.
+- [ ] Adicionar verificação de Markdown e spellcheck com dicionário técnico pt-BR/en-US, sem bloquear falsos positivos sem revisão. *(não feito: sem dicionário técnico offline no ambiente; risco de milhares de falsos positivos sem um dicionário curado)*
 - [x] Adicionar verificação de diferenças entre documentação EN e pt-BR nos tópicos que precisam estar equivalentes.
 - [x] Fazer CI validar o conteúdo efetivamente distribuído em `zm-pro/`, não apenas o repositório completo.
 - [x] Definir política de falha: qualquer gate obrigatório vermelho bloqueia release.
-- [ ] Gerar relatório de testes com versões de runtime e saída real.
+- [x] Gerar relatório de testes com versões de runtime e saída real.
 
 ## 6. Segurança, privacidade e cadeia de fornecimento
 
@@ -117,7 +117,7 @@ A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta
 - [x] Revisar geração e publicação de checksums; documentar como verificar o artefato baixado.
 - [x] Considerar provenance/attestations para releases quando o processo estiver maduro.
 - [x] Criar política de retenção para logs de CI e exemplos; nunca incluir tokens, dados pessoais ou dumps reais.
-- [ ] Revisar licença de textos, exemplos, ícones e referências externas; preservar atribuições e avisos.
+- [x] Revisar licença de textos, exemplos, ícones e referências externas; preservar atribuições e avisos.
 - [x] Documentar claramente o que o kit não garante: não substitui pentest, revisão humana, DPO, assessoria jurídica ou controles do provedor.
 
 ## 7. Documentação e experiência de quem instala
@@ -126,7 +126,7 @@ A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta
 - [x] Criar uma página de início rápido de até cinco minutos, além do tutorial para iniciantes.
 - [x] Adicionar seção de solução de problemas por harness e sistema operacional.
 - [x] Mostrar exemplos reais de antes/depois: prompt inicial, referências carregadas, alteração, testes e entrega.
-- [ ] Incluir exemplo de projeto pequeno e exemplo de aplicação web com banco de dados, sem credenciais ou dados reais.
+- [x] Incluir exemplo de projeto pequeno e exemplo de aplicação web com banco de dados, sem credenciais ou dados reais.
 - [x] Explicar claramente diferença entre repositório, skill, router, referência, template, harness e agente.
 - [x] Documentar atualização de versão: comparar changelog, substituir pasta, validar e revisar alterações locais.
 - [x] Documentar desinstalação e recuperação de instalação incompleta.
@@ -227,7 +227,7 @@ A estrutura é uma proposta, não uma exigência para criar todos os diretórios
 
 - [x] Criar testes unitários do validador e instalador.
 - [x] Fortalecer verificação de links, frontmatter e estrutura.
-- [ ] Revisar os 13 guias em busca de conflito, ambiguidade e lacunas.
+- [x] Revisar os 13 guias em busca de conflito, ambiguidade e lacunas.
 - [x] Padronizar templates e critérios de entrega.
 - [x] Revisar workflows e permissões.
 
@@ -363,10 +363,10 @@ Validar Markdown e instalação não prova que um agente entendeu o router, esco
 - [x] Definir hierarquia explícita respeitando a hierarquia real do harness e as políticas superiores.
 - [x] Não sugerir que arquivos do zm-pro podem sobrepor políticas do sistema, provedor ou controles do usuário.
 - [x] Definir resolução de conflitos entre regra genérica e convenção existente no projeto consumidor.
-- [ ] Criar testes com instruções maliciosas em README, comentários, logs, documentos e resultados externos.
+- [x] Criar testes com instruções maliciosas em README, comentários, logs, documentos e resultados externos.
 - [x] Reduzir termos absolutos quando a regra depender do contexto; documentar exceções e condições.
 - [x] Padronizar termos normativos MUST/DEVE, SHOULD/RECOMENDA-SE e MAY/PODE.
-- [ ] Cada regra crítica deve ter justificativa, cenário de aplicação e método de verificação.
+- [x] Cada regra crítica deve ter justificativa, cenário de aplicação e método de verificação.
 
 ## 19. Cobertura de engenharia por domínio
 
@@ -450,7 +450,7 @@ Criar gradualmente, quando houver conteúdo e manutenção definidos:
 - [x] docs/tool-safety.md: matriz de permissões e ações que exigem confirmação.
 - [x] docs/maintenance-policy.md: suporte, depreciação e ciclo de revisão.
 - [x] docs/decisions/: ADRs para decisões estruturais.
-- [ ] tests/fixtures/: projetos sintéticos e cenários adversariais.
+- [x] tests/fixtures/: projetos sintéticos e cenários adversariais.
 - [x] tests/evaluations/: tarefas e critérios automatizáveis.
 - [x] Templates de ADR, threat model, relatório de incidente e relatório de avaliação.
 - [x] CONTRIBUTING.md, CODE_OF_CONDUCT.md e modelos de issue/PR, se ainda estiverem ausentes ou incompletos.
@@ -559,7 +559,7 @@ O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de r
 - [x] Usar somente dados fictícios, credenciais de exemplo inválidas e serviços locais/simulados.
 - [x] Evitar comandos destrutivos em exemplos; quando inevitáveis, explicar impacto e ambiente seguro.
 - [x] Manter exemplos pequenos e independentes, evitando projetos demonstrativos gigantes difíceis de atualizar.
-- [ ] Incluir exemplo de aplicação completa e exemplo de repositório legado para demonstrar descoberta e adaptação.
+- [x] Incluir exemplo de aplicação completa e exemplo de repositório legado para demonstrar descoberta e adaptação.
 - [x] Criar glossário de termos e convenções consistentes entre português e inglês.
 
 ## 34. Estratégia de adoção e experiência do desenvolvedor

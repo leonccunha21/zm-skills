@@ -1,0 +1,4 @@
+Synthetic, inoffensive fixture based on a public template.
+
+This project uses npm and node --test. The reviewer approved the dependency
+change. Tests must run before merge. No secrets are stored here.

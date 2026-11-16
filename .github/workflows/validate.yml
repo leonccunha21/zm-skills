@@ -10,6 +10,22 @@ permissions:
 
 jobs:
   validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 22
+      - name: Print runtime
+        run: node --version && npm --version
+      - name: Structural gate (structure, links, residue, version sync)
+        run: npm run validate
+      - name: README parity (EN/pt-BR)
+        run: node scripts/parity-check.mjs
+      - name: Injection hygiene + adversarial fixtures
+        run: node --test tests/injection-hygiene.test.mjs tests/fixtures-adversarial.test.mjs
+
+  tests:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
@@ -20,16 +36,22 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Validate skill pack
-        run: npm run validate
-      - name: Unit tests (validator + installer + checksums)
+      - name: Print runtime
+        run: node --version && npm --version
+      - name: Unit tests (validator + installer + checksums + offline + diagnose + evaluations + parity + fixtures)
         run: npm test
-      - name: Executable example
+
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 22
+      - name: Print runtime
+        run: node --version && npm --version
+      - name: Executable examples
         run: npm run test:examples
-      - name: README parity (EN/pt-BR)
-        run: node scripts/parity-check.mjs
-      - name: Injection hygiene (kit Markdown)
-        run: node --test tests/injection-hygiene.test.mjs
 
   checksums:
     runs-on: ubuntu-latest
@@ -38,7 +60,19 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: 22
+      - name: Print runtime
+        run: node --version && npm --version
       - name: Generate and verify the checksum manifest
         run: |
           node scripts/checksums.mjs > CHECKSUMS-ci.txt
           node scripts/checksums.mjs --verify CHECKSUMS-ci.txt
+
+  pack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 22
+      - name: npm pack dry-run (distribution contents)
+        run: npm pack --dry-run

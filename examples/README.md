@@ -18,6 +18,10 @@ Characterization tests on undocumented pricing rules, a behavior-preserving refa
 
 A tiny end-to-end security review: scope, findings (high → low) with evidence and impact, the applied fix, and the tests that keep it fixed. Runs with `npm run test:examples`.
 
+## `task-api/`
+
+A tiny complete web app with a database: an HTTP API over `node:http` and an atomic JSON-file-backed store, with end-to-end tests. Zero dependencies. See the README for commands and its honest limitations.
+
 ## `minimal-project/`
 
 A fresh React+TypeScript-style web app on the day after `git init`, showing:
