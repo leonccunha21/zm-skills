@@ -4,6 +4,12 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+### Upgrade
+
+Nothing yet — 0.9.0 just shipped; see below.
+
+## [0.9.0] - 2026-11-16
+
 ### Added
 
 - `scripts/install.mjs` — `--with-tools` flag: optionally copies `scripts/coordinate.mjs` into `<projectRoot>/scripts/coordinate.mjs` for consumer projects; covered by unit tests in `tests/install.test.mjs`.

@@ -2,7 +2,7 @@
 
 > The router promise: load the map, not the whole territory. This table is the budget ledger — how much each reference costs to load and how often it is expected to be needed. Reviewed at every release (`docs/maintenance-policy.md`).
 
-## Current sizes (2026-11-16, `zm-pro v0.8.1`)
+## Current sizes (2026-11-16, `zm-pro v0.9.0`)
 
 | Reference | Bytes | Lines | Expected load frequency | Benefit |
 |---|---|---|---|---|

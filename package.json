@@ -1,6 +1,6 @@
 {
   "name": "zm-pro",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "The professional project playbook for AI agents — rules, standards, UI, multi-agent coordination, memory, privacy, security, testing, delivery and operations. Agent Skills format.",
   "private": true,
   "license": "MIT",
