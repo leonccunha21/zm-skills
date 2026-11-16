@@ -49,7 +49,7 @@ Thanks for helping make this the reference skill for professional project work. 
 
 ## Releases
 
-Maintainers cut releases: bump `version` in `package.json`, finalize `CHANGELOG.md`, tag `vX.Y.Z`, create the GitHub release with the changelog section. Consumers update with a plain folder copy — no package manager involved.
+Maintainers cut releases: bump `version` in `package.json`, finalize `CHANGELOG.md` (move `[Unreleased]` → `[X.Y.Z] — date`), bump the `SKILL.md` version marker (the validator checks it matches `package.json`), tag `vX.Y.Z`, run `npm run checksums > CHECKSUMS.txt` and attach it to the GitHub release with the changelog section. Consumers update with a plain folder copy — no package manager involved.
 
 ## Code of conduct
 

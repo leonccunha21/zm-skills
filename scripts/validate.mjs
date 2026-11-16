@@ -2,7 +2,8 @@
 // Zero-dependency validator for the zm-pro skill pack and repository.
 // Run: npm run validate   (or: node scripts/validate.mjs)
 // Exits non-zero on failure. Checks: structure, index integrity,
-// relative-link resolution across all Markdown files, and project-specific residue.
+// relative-link resolution across all Markdown files, project-specific residue,
+// and router/package version sync.
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
 import { join, relative, dirname, isAbsolute, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -106,7 +107,21 @@ for (const f of skillMdFiles) {
   }
 }
 
-// --- 6. Basic sanity -----------------------------------------------------------
+// --- 6. Router version matches package.json -----------------------------------
+const pkgPath = join(root, "package.json")
+if (existsSync(pkgPath) && existsSync(skillMd)) {
+  try {
+    const pkg = JSON.parse(readFileSync(pkgPath, "utf8"))
+    const body = readFileSync(skillMd, "utf8")
+    if (pkg.version && !body.includes(`zm-pro v${pkg.version}`)) {
+      fail(`SKILL.md: router não menciona a versão atual — esperado "zm-pro v${pkg.version}" (sincronize no release)`)
+    }
+  } catch {
+    fail("package.json: JSON inválido")
+  }
+}
+
+// --- 7. Basic sanity -----------------------------------------------------------
 for (const f of allMd) {
   const text = readFileSync(f, "utf8")
   if (text.trim().length < 200) warn(`${rel(f)} muito curto (< 200 chars)`)

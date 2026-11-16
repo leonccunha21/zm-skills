@@ -5,6 +5,8 @@ description: Complete playbook for professional software projects. Use when a ta
 
 # zm-pro — the professional project playbook
 
+**zm-pro v0.4.0** — the router; from here, load only what the task needs.
+
 This file is the **router**. Read it fully, identify the track of the task, then load only the references in `reference/` you actually need. Copyable templates live in `templates/`.
 
 **Rule zero:** when the project has its own `AGENTS.md` / `RULES.md`, **those win over this kit**. zm-pro is the professional default for projects that don't define their own — never an override.

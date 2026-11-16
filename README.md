@@ -58,6 +58,8 @@ Design principles:
 
 ## Install
 
+> Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Scripted: `node scripts/install.mjs opencode` (= `npm run install-skill`); integrity for releases: `npm run checksums`.
+
 ### OpenCode
 
 **Per project (recommended to start):**
