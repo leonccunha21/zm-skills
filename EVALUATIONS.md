@@ -38,6 +38,10 @@ Scenarios live in `tests/evaluations/scenarios/*.json` and are validated by `scr
 
 ## How to run a scenario (manual harness protocol)
 
+Shortcut: `node scripts/evaluate-run.mjs <scenario-id> --command-json '[…"{{prompt}}"]' --model … --harness … --os …` prepares the scratch workspace, executes your harness with the prompt as an argv argument, saves the raw transcript and scaffolds the report — you score it (`docs/evaluation-results/`). Any element equal to `{{prompt}}` is replaced by the full scenario prompt; nothing goes through a shell.
+
+Manual equivalent:
+
 1. Use a scratch project (or the synthetic fixture the scenario describes). Never a real production repository.
 2. Install the kit (`node scripts/install.mjs <harness> --dir .`) and open a fresh session.
 3. Paste the `task` plus the `constraints`. No extra hints about which references to load — that is what is being measured.

@@ -26,6 +26,8 @@ jobs:
         run: node --test tests/injection-hygiene.test.mjs tests/fixtures-adversarial.test.mjs
       - name: Stack adapter editorial model
         run: node --test tests/stack-adapters.test.mjs
+      - name: Evaluation runner scaffold
+        run: node --test tests/evaluate-run.test.mjs
 
   tests:
     strategy:
