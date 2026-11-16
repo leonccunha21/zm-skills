@@ -1,6 +1,7 @@
 # zm-pro for non-experts
 
-> An jargon-free walkthrough of what this repository does and how it stops your AI agent from "forgetting the project". Read this first — then head back to the [README](../README.md).
+> A jargon-free walkthrough of what this repository does and how it stops your AI agent from "forgetting the project". Read this first — then head back to the [README](../README.md).
+> **Want the full hands-on first day?** [docs/primeiro-dia.md](primeiro-dia.md) (pt-BR) — zero to first commit.
 
 ## The problem it solves
 

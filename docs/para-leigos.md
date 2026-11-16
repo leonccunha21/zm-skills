@@ -54,6 +54,25 @@ O arquivo guia (`SKILL.md`) funciona como um **router**: o agente lê ele primei
 - Não substitui o time. Se o time tem regras próprias, **as do time ganham** — a skill cede.
 - Não funciona em todos os harnesses da mesma forma: no OpenCode foi testado ponta a ponta; nos outros, está documentado o que não foi verificado (veja [harness-compatibility.md](harness-compatibility.md)).
 
+## Comece hoje
+
+Siga o [primeiro-dia.md](primeiro-dia.md) — do zero ao primeiro commit em ~20 minutos, com troubleshooting incluído.
+
+## Glossário de sobrevivência
+
+| Termo | Significado simples |
+|---|---|
+| Agente | a IA que lê e escreve código sob o seu comando |
+| Harness | o programa onde o agente vive (OpenCode, Claude Code, Cursor…) |
+| Skill | um pacote de instruções que o agente lê sob demanda |
+| Router | o arquivo de navegação do kit (`SKILL.md`) |
+| Gate | verificação que bloqueia entrega ruim |
+| Evidência | saída de comando colada — nunca promessa |
+| ADR | registro de decisão: o porquê de cada decisão |
+| Rollback | desfazer mudança com segurança |
+| Commit | ponto salvo no histórico do projeto |
+| Trilha (track) | o caminho certo para a tarefa (implementar, corrigir, entregar…) |
+
 ## Por que confiar
 
 - Nasceu de um codebase comercial em produção, foi testado num piloto real (módulo entregue, 9/9 testes, evidência colada).
