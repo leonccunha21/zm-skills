@@ -14,8 +14,8 @@ Only the latest minor receives fixes. Updating is a folder copy (see the README)
 Every release attaches `CHECKSUMS-<tag>.txt` (SHA-256, one line per file under `zm-pro/`). From a checkout of the same tag:
 
 ```bash
-gh release download v0.10.0 -p 'CHECKSUMS-*'
-node scripts/checksums.mjs --verify CHECKSUMS-v0.10.0.txt
+gh release download v0.10.1 -p 'CHECKSUMS-*'
+node scripts/checksums.mjs --verify CHECKSUMS-v0.10.1.txt
 ```
 
 A release publishes the repository tree at the tag plus that manifest — there is no build step, so the artifact is the source. The verifier exits non-zero on a changed, missing or extra file, and rejects manifest paths outside the repository. The release workflow runs the same check before publishing.

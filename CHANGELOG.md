@@ -4,12 +4,19 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+### Upgrade
+
+Nothing yet — 0.10.1 just shipped; see below.
+
+## [0.10.1] - 2026-11-16
+
 ### Fixed
 
 - Branch protection for `main`: required status checks now reference real CI jobs (`validate`, `tests (ubuntu-latest, 22)`, `tests (windows-latest, 18)`, `tests (macos-latest, 22)`) — the previous contexts `validate (18|20|22)` never existed in any workflow, which made the gate unreachable and every merge effectively unguarded. Codified as ADR `docs/decisions/0002-required-status-checks.md`. PR #11 merged under the new gate.
 
 ### Changed
 
+- `SKILL.md` — router header now says `zm-pro v0.10.1`.
 - `docs/distribution.md` — community catalog statuses recorded with date and link (verified 2026-11-16, unauthenticated GitHub API read): Prat011/awesome-llm-skills #337 open; sickn33/agentic-awesome-skills #2351 closed without merge, with the maintainer's request for a self-contained bundle (router plus referenced guides with their license) and a test of the exact submitted bundle. No catalog listing exists today. `docs/roadmap.md` points to `distribution.md` for submission statuses; `MELHORIAS.md` item checked off.
 - `docs/distribution.md` — adoption-signals baseline (2026-11-16): reproducible unauthenticated-API method plus dated numbers (1 star, 0 forks, 1 watcher / 0 subscribers, 0 issues real, ~1-day-old repository). Marked as baseline, not traction; no telemetry is added to the skill; refresh at each release. Issues review (2026-11-16): no real issues exist — all `issues?state=all` items are PRs; MELHORIAS item remains open until real issues land.
 - `docs/evaluation-results/pilot-inkling-eval-001.md` — new pilot (OpenCode 2.3.0, free-tier model, Windows, scratch copy of the repo): harness exited 0 after a single text turn with zero tool calls; verdict inconclusive; transcript saved locally (gitignored `*.log`, same as other pilots); not a baseline and it must not be read as one. `EVALUATIONS.md` status lists the five pilot runs; `docs/evaluation-results/README.md` and `EVALUATIONS.md` document the Windows argv pitfall (`spawnSync opencode ENOENT` on npm shims — call the direct `.exe`). `docs/harness-compatibility.md` records the 2026-11-16 series: three runs of `eval-001`, identical early-stop outcome (deterministic), zero tool calls, exit 0; r3 documents the pseudo-tool-call-in-text failure mode. Still zero behavioral-baseline claims; level 3 unchanged.
@@ -20,7 +27,7 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ### Upgrade
 
-Nothing yet — 0.10.0 just shipped; see below.
+Nothing required — the consumer-facing skill package is byte-identical to 0.10.0 (repository tooling, docs, CI governance only; no file under `zm-pro/` changed). Existing installs keep working; no action.
 
 ## [0.10.0] - 2026-11-16
 

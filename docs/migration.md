@@ -49,6 +49,7 @@ Allowed, but warned: `install.mjs` compares versions and prints `warning: downgr
 
 | Version | Action required | Notes |
 |---|---|---|
+| 0.10.1 | none | Repository-only patch: branch protection required checks aligned to real CI jobs (ADR 0002), full unit gate wired into `npm test`, `evaluate-run.mjs` exits 1 on harness failure, catalog/adoption evidence recorded; the `zm-pro/` skill package is byte-identical to 0.10.0. |
 | 0.10.0 | none | Consumer-side mechanical enforcement: `templates/CI-ENFORCEMENT.yml` + `templates/RULES.md` gains "Mechanical enforcement" (CI gates for secrets, scope, migration rollback, evidence); `docs/harness-compatibility.md` matrix gains on-demand loading row; no behavior change in `SKILL.md` router. |
 | 0.9.0 | none | 18 references (adds `15-ai-security.md`, `16-domain-playbooks.md`, `17-working-modes.md`, `18-stack-adapters.md`); 17 templates; validator gains severity/file:line/fix preview + `--json`; installer hardened (Unicode Windows via manual copyTree, dry-run, backup, atomic rename, `--with-tools`); CI split into jobs, actions SHA-pinned; evaluation infrastructure (no behavioral baseline published — see `EVALUATIONS.md`); two inconclusive author pilots in `docs/evaluation-results/`. |
 | 0.8.1 | none | 14 references (adds `14-agent-operations.md`); 13 templates; validator checks index coverage and version sync; installer with dry-run/backup. |
