@@ -26,6 +26,28 @@ A versão estendida — notas de campo do fluxo real que deu origem ao kit — e
 
 ## O que vem dentro
 
+**Os 13 guias em linguagem simples** — o que seu agente aprende:
+
+| Guia | O que o agente aprende a fazer |
+|---|---|
+| 01 — Code rules | escrever código que sobrevive: mudança mínima segura, sem atalho, portões que bloqueiam entrega ruim |
+| 02 — Project standards | o esqueleto de todo projeto sério: README, docs, commits, versionamento, changelog |
+| 03 — Layout e UI | telas mobile-first, toque ≥ 44px, acessíveis, no padrão da localidade (`R$ 1.234,56`, `dd/mm/aaaa`) |
+| 04 — Multi-agent | vários agentes sem atropelar: 1 coordenador, 1 tarefa por vez |
+| 05 — Memory | o projeto lembra: fatos no git, sessões curtas — com modelos de memória (procedimento / semântica / episódica) |
+| 06 — Privacidade (LGPD) | mapear dados pessoais, base legal, resposta a titulares, incidentes — rascunho de engenharia, não parecer jurídico |
+| 07 — Segurança | segredos fora do código, authN/authZ que nega por padrão, OWASP essencial, incidentes |
+| 08 — Testes | pirâmide de testes, critérios de aceite reais, gates de qualidade |
+| 09 — Entrega com git | commits honestos, PRs pequenos, rollback testado, deploy fail-closed |
+| 10 — Operação | logs, alertas, runbooks, backups testados, pós-mortems sem culpados |
+| 11 — Arquitetura | módulos coesos, dependência na direção certa, decisões como ADRs |
+| 12 — Performance | medir antes: Core Web Vitals, N+1, índices, budgets de performance |
+| 13 — Economia de tokens | o contexto é dinheiro: ler só o necessário, respostas curtas, subagentes com escopo estreito |
+
+Novo aqui? O passo a passo completo está no [docs/para-leigos.md](docs/para-leigos.md) (pt-BR).
+
+A estrutura do repositório:
+
 ```
 zm-pro/                        # a skill — copie esta pasta para seu projeto/harness
 ├── SKILL.md                   # router: quando usar, o ciclo, o índice
