@@ -4,6 +4,10 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+## [0.8.1] — 2026-11-16
+
+Patch release: roadmap documentation catches up with shipped versions.
+
 ### Changed
 
 - `docs/roadmap.md` — rewritten to reflect shipped releases 0.5.0–0.8.0 and the community-intake state.
