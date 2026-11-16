@@ -2,25 +2,20 @@
 
 Direction, not promises. Dates live on released versions — see [`CHANGELOG.md`](../CHANGELOG.md).
 
-## 0.4.x — Hardening (current cycle)
+## Shipped
 
-The kit teaches "your project wins over the kit" — so this cycle starts by making the repository itself obey that rule:
+- **0.5.0 — Hardening**: repo dogfoods its own kit (root `AGENTS.md`/`RULES.md`), evidence-based harness matrix, real pilot walkthrough (`docs/demo.md`), zero-dep installer, checksums script, router/package version enforced by the validator.
+- **0.6.0 — Budget update**: `13-token-economy.md` (spend context deliberately), `for-humans.md` in English, auto-release workflow on tags (checksums + release).
+- **0.6.1**: both READMEs carry the 13 guides in plain language.
+- **0.7.0 — Beginner update**: `docs/primeiro-dia.md` (zero to first commit), "Before you start" sections, survival glossary.
+- **0.8.0 — Catalog release**: `zm-pro/LICENSE` ships inside the skill; PRs against community catalogs ([Prat011/awesome-llm-skills #337](https://github.com/Prat011/awesome-llm-skills/pull/337), [sickn33/agentic-awesome-skills #2351](https://github.com/sickn33/agentic-awesome-skills/pull/2351)); OpenCode remains the only end-to-end verified harness.
 
-- [x] Root `AGENTS.md` / `RULES.md` for this repo (it was the one project not following its own template)
-- [x] `docs/harness-compatibility.md` — tested/unverified matrix with evidence, never a marketing claim
-- [x] `docs/demo.md` — the real 0.4.0 pilot, walkthrough with commands and output
-- [x] `scripts/install.mjs` — zero-dependency installer (`opencode` / `claude` copy; `codex` / `cursor` / `gemini` print the manual route)
-- [x] `scripts/checksums.mjs` — `CHECKSUMS.txt` for releases, via `npm run checksums`
-- [x] Router version sync enforced by the validator (`SKILL.md` ↔ `package.json`)
-
-## 0.5.0 — Candidates (in discussion)
-
-No order implied; contributions welcome:
+## Candidates (in discussion)
 
 - Publish the pilot as a public example repository (pending its author's decision)
 - Fill the harness matrix from real community reports (Claude Code / Cursor first)
 - Native Cursor rule generation (`.cursor/rules/`) alongside the manual "point at SKILL.md" route
-- `checksums` attached to GitHub releases via CI on tags
+- VoltAgent/awesome-agent-skills submission (blocked until the skill has real community adoption)
 
 ## Not on the roadmap — by design
 
