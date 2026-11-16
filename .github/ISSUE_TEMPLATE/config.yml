@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/leonccunha21/zm-skills/discussions
+    about: Ask how to use zm-pro, propose workflows, share what worked. Issues are for bugs and concrete proposals.
+  - name: Support guide
+    url: https://github.com/leonccunha21/zm-skills/blob/main/SUPPORT.md
+    about: How to get help fast — what to include in a question.
