@@ -88,7 +88,7 @@ Design principles:
 
 ## Install
 
-> Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Scripted: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <project-root>` installs into `<project-root>/.agents/skills/zm-pro`); integrity for releases: `npm run checksums`.
+> Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Scripted: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <project-root>` installs into `<project-root>/.agents/skills/zm-pro`); integrity for releases: `npm run --silent checksums`.
 
 ### OpenCode
 

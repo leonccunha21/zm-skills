@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   validate:
     strategy:
@@ -13,11 +16,23 @@ jobs:
         node-version: [18, 20, 22]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
         with:
           node-version: ${{ matrix.node-version }}
       - name: Validate skill pack
         run: npm run validate
-      - name: Unit tests (validator + installer)
+      - name: Unit tests (validator + installer + checksums)
         run: npm test
+
+  checksums:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 22
+      - name: Generate and verify the checksum manifest
+        run: |
+          node scripts/checksums.mjs > CHECKSUMS-ci.txt
+          node scripts/checksums.mjs --verify CHECKSUMS-ci.txt

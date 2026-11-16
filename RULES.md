@@ -15,7 +15,7 @@
 6. `npm run validate` green before merge; CI runs the same command on Node 18/20/22 × ubuntu-latest/windows-latest. \
    Windows is not optional: CRLF regressions shipped in 0.4.0 because CI was Linux-only.
 7. Every PR quotes real output (validator, commands). Claims without evidence are rejected.
-8. Releases: semver; `CHANGELOG.md` finalized (move `[Unreleased]` → version + date); `git tag vX.Y.Z`; `npm run checksums` and attach the file to the GitHub release; `SKILL.md` version stays in sync (validator enforces it).
+8. Releases: semver; `CHANGELOG.md` finalized (move `[Unreleased]` → version + date); `git tag vX.Y.Z`; `npm run --silent checksums > CHECKSUMS-<tag>.txt` and attach the file to the GitHub release; `SKILL.md` version stays in sync (validator enforces it).
 9. `main` protected (3 required status checks). Bypass is manual, documented and auditable.
 10. Secrets/PII never in: source, commits, fixtures, logs, prompts. Sponsor links are fine; private payment credentials never in the repo.
 11. Divergence between code and doc becomes an ADR under `docs/adr/` — decisions reopen by writing, never by silent override.

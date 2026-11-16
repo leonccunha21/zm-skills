@@ -80,7 +80,7 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 
 ## Instalação
 
-> Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Automatizado: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <raiz-do-projeto>` instala em `<raiz-do-projeto>/.agents/skills/zm-pro`); integridade para releases: `npm run checksums`.
+> Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Automatizado: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <raiz-do-projeto>` instala em `<raiz-do-projeto>/.agents/skills/zm-pro`); integridade para releases: `npm run --silent checksums`.
 
 ### OpenCode
 

@@ -12,6 +12,10 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 - `scripts/install.mjs` — safe upgrades: `--dry-run` prints the installed and incoming versions plus the file plan (changed/new/local-only) and writes nothing; `--force` keeps the previous folder as `zm-pro.backup-<timestamp>` with rollback instructions; the copy goes through a temp folder and a rename, so a failed run never leaves a half-written install presented as done; downgrades are detected and warned.
 - `tests/` — installer suite covers dry-run, backup preservation of local files, version detection (upgrade and downgrade) and flag order.
 
+- `scripts/checksums.mjs` — `--verify <manifest>` mode: checks every SHA-256, flags missing/extra files under `zm-pro/`, rejects paths outside the repository, and exits non-zero on any problem; documented in `SECURITY.md` (how to verify a downloaded release).
+- `.github/workflows/validate.yml` — least-privilege `contents: read`, actions pinned by commit SHA, and a separate checksums job that generates and verifies the manifest.
+- `.github/workflows/release.yml` — the tag now gates on `npm run validate` + `npm test`, pins actions by SHA, and verifies the checksum manifest before publishing.
+
 ### Changed
 
 - `scripts/install.mjs` — flag parsing no longer mistakes a `--dir` value for the harness name.
@@ -21,6 +25,7 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ### Fixed
 
+- `checksums.mjs` documented usage — `npm run checksums > file` wrote npm's banner into the manifest, producing a corrupt release artifact. Docs now use `npm run --silent checksums` (`node scripts/checksums.mjs` directly in CI), and `--verify` rejects such lines.
 - `README.md` / `README.pt-BR.md` — version badge is now dynamic (latest GitHub release) instead of the stale static `0.4.0`; documented uninstall/recovery; scripted install documented as `npm run install-skill -- opencode`.
 - `SECURITY.md` — supported versions updated from `0.4.x` to the current minor, with the update-first policy stated.
 - `scripts/install.mjs` — a missing harness now fails with the documented npm form; `--dir` is documented as the project root, not the final destination.

@@ -111,10 +111,10 @@ A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta
 
 - [ ] Revisar todos os arquivos Markdown contra prompt injection, instruções maliciosas copiadas de fontes externas e recomendações inseguras.
 - [ ] Tratar conteúdo de issues, PRs, sites e documentos externos como dados não confiáveis, nunca como instruções que substituem as regras do projeto.
-- [ ] Revisar permissões mínimas de GitHub Actions e fixar actions por SHA quando adequado.
-- [ ] Adicionar verificação de dependências e licença se dependências forem introduzidas; manter baseline sem dependências sempre que possível.
-- [ ] Garantir que workflows não imprimam segredos nem executem código não confiável com permissões de escrita.
-- [ ] Revisar geração e publicação de checksums; documentar como verificar o artefato baixado.
+- [x] Revisar permissões mínimas de GitHub Actions e fixar actions por SHA quando adequado.
+- [x] Adicionar verificação de dependências e licença se dependências forem introduzidas; manter baseline sem dependências sempre que possível.
+- [x] Garantir que workflows não imprimam segredos nem executem código não confiável com permissões de escrita.
+- [x] Revisar geração e publicação de checksums; documentar como verificar o artefato baixado.
 - [ ] Considerar provenance/attestations para releases quando o processo estiver maduro.
 - [ ] Criar política de retenção para logs de CI e exemplos; nunca incluir tokens, dados pessoais ou dumps reais.
 - [ ] Revisar licença de textos, exemplos, ícones e referências externas; preservar atribuições e avisos.
@@ -155,9 +155,9 @@ Cada template deve ser genérico, curto, copiável e acompanhado de orientação
 ## 9. Distribuição, releases e adoção
 
 - [ ] Definir o canal oficial de distribuição: GitHub Release, instalação por cópia e, se fizer sentido, catálogo Agent Skills.
-- [ ] Documentar o que é publicado em cada release e manter os artefatos reproduzíveis.
+- [x] Documentar o que é publicado em cada release e manter os artefatos reproduzíveis.
 - [ ] Conferir se `package.json` com `private: true` é intencional; não publicar no npm sem decisão explícita e plano de pacote.
-- [ ] Padronizar tags SemVer, changelog, checksums e notas de release.
+- [x] Padronizar tags SemVer, changelog, checksums e notas de release.
 - [ ] Validar os arquivos incluídos no pacote para não distribuir arquivos de desenvolvimento desnecessários.
 - [ ] Manter PRs de catálogos comunitários atualizados e registrar status real (aberto, aprovado, mesclado ou fechado).
 - [ ] Criar guia de contribuição em pt-BR ou versão resumida equivalente.

@@ -19,7 +19,7 @@
 |---|---|
 | Validate (the gate) | `npm run validate` |
 | Install the skill into a harness | `node scripts/install.mjs opencode` (see `README.md#install`) |
-| Release integrity | `npm run checksums` |
+| Release integrity | `npm run --silent checksums > CHECKSUMS-<tag>.txt` + `--verify` |
 | Node required | >= 18 |
 
 ## Integrity
