@@ -4,6 +4,10 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+### Added
+
+- `zm-pro/LICENSE` — the skill folder itself now carries the MIT license (travels with vendored installs; satisfies catalog intake rules such as sickn33's).
+
 ## [0.7.0] — 2026-11-16
 
 The beginner update: the kit now meets absolute newcomers where they are.
