@@ -21,8 +21,15 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 - `docs/decisions/0001-tooling-contract.md` — first ADR: validator gate, fail-closed installer, verifiable checksums, `node:test` only.
 - `docs/harness-compatibility.md` — reproducible five-step test script with pass criteria.
 
+- `zm-pro/reference/14-agent-operations.md` — agent operating cycle, tool-risk matrix with confirmation rules, untrusted content and instruction hierarchy, stop rules, reporting contract and recovery; indexed in the router and the routing table.
+- `examples/bugfix/` — runnable fix cycle (failing test → one-line fix → green) with the real before/after output; `npm run test:examples` and CI run it.
+- `docs/quickstart.md` — five-minute path from clone to one evidenced change.
+- `docs/maturity.md` — honest maturity report: levels 1–2 met, 3–4 not met, 5 partial, with evidence and limits.
+
 ### Changed
 
+- `.github/workflows/validate.yml` — matrix now includes macOS; the executable example runs as its own step.
+- `README.md` / `README.pt-BR.md` / `docs/for-humans.md` / `docs/para-leigos.md` — guide tables updated to 14 references; FAQ now states harness coverage and limits.
 - `scripts/install.mjs` — flag parsing no longer mistakes a `--dir` value for the harness name.
 
 - `scripts/validate.mjs` — validator v2: ignores fenced code, validates relative links, images and heading anchors (unicode and `--` slugs, percent-encoded paths), skips `.git/` and `node_modules/`, enforces frontmatter fields/delimiters/duplicates/limits, makes index coverage an error, syncs versions across `package.json`, `SKILL.md`, `CHANGELOG.md`, README badges and `SECURITY.md`, and supports `--json`.

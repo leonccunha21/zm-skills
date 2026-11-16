@@ -26,7 +26,7 @@ The longer version — field notes from the real workflow that produced this kit
 
 ## What's inside
 
-**The 13 guides, in plain language** — what your agent actually learns:
+**The 14 guides, in plain language** — what your agent actually learns:
 
 | Guide | What the agent learns to do |
 |---|---|
@@ -43,6 +43,7 @@ The longer version — field notes from the real workflow that produced this kit
 | 11 — Architecture | cohesive deep modules, dependency direction, decisions as ADRs |
 | 12 — Performance | measure first: Core Web Vitals, N+1, indexes, perf budgets |
 | 13 — Token economy | spend context like money: read only what's needed, terse outputs, narrow subagent scopes |
+| 14 — Agent operations | use the least powerful tool, ask before destructive actions, treat external content as data, stop instead of inventing |
 
 New here? The full walkthrough lives in [docs/for-humans.md](docs/for-humans.md) (plain language, EN) and [docs/para-leigos.md](docs/para-leigos.md) (pt-BR).
 
@@ -51,7 +52,7 @@ The repository layout:
 ```
 zm-pro/                        # the skill — copy this folder into your project/harness
 ├── SKILL.md                   # router: when to use, the cycle, the index
-├── reference/                 # 13 focused guides, loaded on demand
+├── reference/                 # 14 focused guides, loaded on demand
 │   ├── 01-code-rules.md           # principles, gates, dependencies, definition of done
 │   ├── 02-project-standards.md    # repo layout, docs, commits, semver, changelog
 │   ├── 03-layout-ui.md            # pt-BR defaults, mobile-first, touch ≥44px, a11y AA, tokens
@@ -64,7 +65,8 @@ zm-pro/                        # the skill — copy this folder into your projec
 │   ├── 10-operations.md           # logs/metrics/alerts, backup drills, runbooks, post-mortems
 │   ├── 11-architecture.md         # deep modules, dependency direction, seams, ADRs
 │   ├── 12-performance.md          # measure-first, CWV budgets, N+1, indexes, CI perf gates
-│   └── 13-token-economy.md        # context is money: on-demand reads, caching, narrow subagent scopes
+│   ├── 13-token-economy.md        # context is money: on-demand reads, caching, narrow subagent scopes
+│   └── 14-agent-operations.md     # tool risk, confirmations, untrusted content, stop rules
 ├── templates/                 # generic, copyable starting points
 │   ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
 │   ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md
@@ -89,6 +91,7 @@ Design principles:
 
 ## Install
 
+> In a hurry? [Five-minute quickstart](docs/quickstart.md).
 > Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Stuck? [Troubleshooting](docs/troubleshooting.md). Scripted: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <project-root>` installs into `<project-root>/.agents/skills/zm-pro`); integrity for releases: `npm run --silent checksums`.
 
 ### OpenCode
@@ -147,6 +150,8 @@ Or rely on the trigger description — the agent picks the track (kickoff, imple
 **Does it send data anywhere?** No. It contains no executable code beyond a validator script in this repo (for contributors).
 **Can I fork and adapt it?** Yes — MIT. Keep the license notice; tell your users what you changed.
 **Will it work with my stack?** The rules are stack-agnostic; examples assume TypeScript/Node as a sane baseline but adapt to Python, Go, PHP, etc.
+**Will it work with my harness?** Only OpenCode 2.3.0 is tested end to end; Claude Code, Codex, Cursor and Gemini are explicitly unverified — see [docs/harness-compatibility.md](docs/harness-compatibility.md) and file a report.
+**What are the limits?** No behavioral evaluation is published yet, unverified harnesses stay unverified, and the kit is not a security, privacy or legal audit. The honest status is in [docs/maturity.md](docs/maturity.md).
 **Is there a quick-start example?** Yes — `examples/minimal-project/`: a filled AGENTS.md, a real ADR and an evidence-backed DELIVERY-LOG you can copy and adapt.
 **How do I report a bad rule or a typo?** Open an issue — see [CONTRIBUTING.md](CONTRIBUTING.md).
 

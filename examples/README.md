@@ -2,6 +2,10 @@
 
 Copying files blindly teaches little; seeing a filled project teaches the pattern. This folder contains a small but complete example of a project using zm-pro from day one — **not** a template to stamp out, but a reference to derive your own from.
 
+## `bugfix/`
+
+A runnable reproduction of the fix cycle in ~30 lines: a cart total ignores `quantity`, one test fails, one line fixes it, the same test goes green. The README quotes the real before/after output. Run it with `npm run test:examples`.
+
 ## `minimal-project/`
 
 A fresh React+TypeScript-style web app on the day after `git init`, showing:

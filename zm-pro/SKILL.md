@@ -22,6 +22,7 @@ This file is the **router**. Read it fully, identify the track of the task, then
 | Personal data, privacy review | `06` (+`07`) | data map and controls; legal sign-off is not ours |
 | Architecture, performance, context cost | `11`, `12`, `13` | ADR, budgets, on-demand reads |
 | Long task, several agents | `04`, `05`, `13` | scoped handoff, ownership, memory update |
+| Permissions, destructive tools, conflicting instructions | `14` | explicit approval, stop rules, recorded conflict |
 
 **Combined tracks** are normal: a feature that stores personal data loads `01`+`06`+`07`+`08`; a UI change that touches auth loads `03`+`07`. Start from the smallest set that covers the risk.
 
@@ -59,6 +60,7 @@ This file is the **router**. Read it fully, identify the track of the task, then
 | `reference/11-architecture.md` | module boundaries, deep modules, dependency direction, seams, ADRs |
 | `reference/12-performance.md` | measure-first profiling, Core Web Vitals budgets, N+1, indexes, CI perf gates |
 | `reference/13-token-economy.md` | spending context deliberately: reads on demand, caching, narrow subagent scopes, output caps |
+| `reference/14-agent-operations.md` | tool risk, confirmations, untrusted content, instruction conflicts, stop and reporting rules |
 
 ## Universal rules (apply on every track)
 

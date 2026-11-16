@@ -26,7 +26,7 @@ A versão estendida — notas de campo do fluxo real que deu origem ao kit — e
 
 ## O que vem dentro
 
-**Os 13 guias em linguagem simples** — o que seu agente aprende:
+**Os 14 guias em linguagem simples** — o que seu agente aprende:
 
 | Guia | O que o agente aprende a fazer |
 |---|---|
@@ -43,6 +43,7 @@ A versão estendida — notas de campo do fluxo real que deu origem ao kit — e
 | 11 — Arquitetura | módulos coesos, dependência na direção certa, decisões como ADRs |
 | 12 — Performance | medir antes: Core Web Vitals, N+1, índices, budgets de performance |
 | 13 — Economia de tokens | o contexto é dinheiro: ler só o necessário, respostas curtas, subagentes com escopo estreito |
+| 14 — Operação do agente | usar a ferramenta menos poderosa, pedir confirmação antes de ação destrutiva, tratar conteúdo externo como dado, parar em vez de inventar |
 
 Novo aqui? O passo a passo completo está no [docs/para-leigos.md](docs/para-leigos.md) (pt-BR).
 
@@ -51,7 +52,7 @@ A estrutura do repositório:
 ```
 zm-pro/                        # a skill — copie esta pasta para seu projeto/harness
 ├── SKILL.md                   # router: quando usar, o ciclo, o índice
-├── reference/                 # 13 guias focados, carregados sob demanda
+├── reference/                 # 14 guias focados, carregados sob demanda
 │   ├── 01-code-rules.md           # princípios, gates, dependências, definição de pronto
 │   ├── 02-project-standards.md    # layout do repo, docs, commits, semver, changelog
 │   ├── 03-layout-ui.md            # defaults PT-BR, mobile-first, toque ≥44px, a11y AA, tokens
@@ -64,7 +65,8 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 │   ├── 10-operations.md           # logs/métricas/alertas, ensaio de restore, runbooks, pós-mortem
 │   ├── 11-architecture.md         # deep modules, direção de dependência, seams, ADRs
 │   ├── 12-performance.md          # medir primeiro, budgets de Core Web Vitals, N+1, CI de performance
-│   └── 13-token-economy.md        # o contexto é dinheiro: leitura sob demanda, cache, subagentes com escopo estreito
+│   ├── 13-token-economy.md        # o contexto é dinheiro: leitura sob demanda, cache, subagentes com escopo estreito
+│   └── 14-agent-operations.md     # risco de ferramenta, confirmações, conteúdo não confiável, regras de parada
 └── templates/                 # pontos de partida genéricos e copiáveis
     ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
     ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md
@@ -81,6 +83,7 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 
 ## Instalação
 
+> Com pressa? [Início rápido em cinco minutos](docs/quickstart.md) (em inglês).
 > Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Travou? [Solução de problemas](docs/troubleshooting.md). Automatizado: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <raiz-do-projeto>` instala em `<raiz-do-projeto>/.agents/skills/zm-pro`); integridade para releases: `npm run --silent checksums`.
 
 ### OpenCode
@@ -135,6 +138,8 @@ Prompt para uma tarefa real:
 **Envia dados para fora?** Não. O repositório não contém código executável além do validador (só para contribuidores).
 **Posso forkar e adaptar?** Sim — MIT. Mantenha o aviso de licença e diga aos usuários o que mudou.
 **Funciona com minha stack?** As regras são agnósticas; os exemplos assumem TypeScript/Node, mas adaptam-se a Python, Go, PHP etc.
+**Funciona com meu harness?** Só o OpenCode 2.3.0 foi testado de ponta a ponta; Claude Code, Codex, Cursor e Gemini estão explicitamente não verificados — veja [docs/harness-compatibility.md](docs/harness-compatibility.md) e envie um relato.
+**Quais são os limites?** Ainda não há avaliação comportamental publicada, harness não testado continua não verificado, e o kit não é auditoria de segurança, privacidade ou jurídica. O status honesto está em [docs/maturity.md](docs/maturity.md).
 **Tem um exemplo de início rápido?** Sim — `examples/minimal-project/`: AGENTS.md preenchido, um ADR real e um DELIVERY-LOG com evidências para copiar e adaptar.
 
 ## Contribuição e releases

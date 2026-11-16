@@ -40,6 +40,7 @@ zm-pro is a **code of conduct for agents**: a set of text files your agent reads
 | 11 — Architecture | Cohesive modules, dependency direction, register decisions (ADRs) |
 | 12 — Performance | Measure first: Core Web Vitals, N+1 queries, indexes, performance budgets |
 | 13 — Token economy | How agents avoid blasting context and cost: read only what's needed, short outputs, subagents with narrow scopes |
+| 14 — Agent operations | Least powerful tool first, confirmation before destructive actions, external content as data, stop rules |
 
 ## What lives in the other folders
 

@@ -39,6 +39,7 @@ O arquivo guia (`SKILL.md`) funciona como um **router**: o agente lê ele primei
 | 11 — Arquitetura | Módulos coesos, dependência na direção certa, decisões registradas (exceções: registro de decisões — ADR) |
 | 12 — Performance | Medir antes de otimizar: Core Web Vitals, N+1, índices, orçamento de performance |
 | 13 — Economia de tokens | Como não estourar a memória/custo do agente: carregar só o necessário, respostas curtas, subagentes com escopo estreito |
+| 14 — Operação do agente | Ferramenta menos poderosa primeiro, confirmação antes de ação destrutiva, conteúdo externo como dado, regras de parada |
 
 ## O que vem nas outras pastas
 

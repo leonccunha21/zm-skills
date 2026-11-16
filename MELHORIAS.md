@@ -319,29 +319,29 @@ Validar Markdown e instalação não prova que um agente entendeu o router, esco
 
 ## 15. Protocolo operacional do agente
 
-- [ ] Definir ciclo padrão: entender pedido → inspecionar contexto → planejar proporcionalmente → executar → validar → revisar diff → entregar evidências.
-- [ ] Distinguir leitura, escrita, execução, publicação e operações destrutivas; exigir confirmação proporcional ao impacto.
-- [ ] Exigir inspeção do estado atual antes de editar, executar migrações, instalar dependências ou alterar infraestrutura.
-- [ ] Definir quando planejar e quando uma alteração simples pode ser feita diretamente.
-- [ ] Proibir alegações de execução, teste, deploy ou publicação sem resultado verificável.
-- [ ] Padronizar relatório final: mudanças, arquivos afetados, comandos executados, resultados, limitações, riscos e próximos passos.
-- [ ] Comunicar falhas de ferramentas sem mascarar resultados ou inventar alternativas executadas.
-- [ ] Definir recuperação: interromper, preservar estado, identificar alterações parciais e reverter somente quando seguro.
-- [ ] Criar regra de parada para escopo crescente, contexto insuficiente, risco não autorizado ou conflito de instruções.
-- [ ] Tratar pedidos vagos sem questionários excessivos: perguntar somente o indispensável ou declarar hipótese reversível.
+- [x] Definir ciclo padrão: entender pedido → inspecionar contexto → planejar proporcionalmente → executar → validar → revisar diff → entregar evidências.
+- [x] Distinguir leitura, escrita, execução, publicação e operações destrutivas; exigir confirmação proporcional ao impacto.
+- [x] Exigir inspeção do estado atual antes de editar, executar migrações, instalar dependências ou alterar infraestrutura.
+- [x] Definir quando planejar e quando uma alteração simples pode ser feita diretamente.
+- [x] Proibir alegações de execução, teste, deploy ou publicação sem resultado verificável.
+- [x] Padronizar relatório final: mudanças, arquivos afetados, comandos executados, resultados, limitações, riscos e próximos passos.
+- [x] Comunicar falhas de ferramentas sem mascarar resultados ou inventar alternativas executadas.
+- [x] Definir recuperação: interromper, preservar estado, identificar alterações parciais e reverter somente quando seguro.
+- [x] Criar regra de parada para escopo crescente, contexto insuficiente, risco não autorizado ou conflito de instruções.
+- [x] Tratar pedidos vagos sem questionários excessivos: perguntar somente o indispensável ou declarar hipótese reversível.
 
 ## 16. Política de ferramentas, permissões e autonomia
 
-- [ ] Criar matriz de risco por ferramenta: leitura, escrita local, shell, rede, credenciais, banco, cloud, deploy e comunicação externa.
-- [ ] Aplicar privilégio mínimo: usar a ferramenta menos poderosa que resolva a tarefa.
-- [ ] Distinguir comandos somente de leitura de comandos que alteram estado; não presumir segurança pelo nome.
-- [ ] Exigir confirmação explícita para exclusão, sobrescrita, publicação, envio de mensagens, alteração de permissões, gastos, migrações irreversíveis e mudanças em produção.
-- [ ] Proibir exposição de tokens, chaves, cookies, variáveis secretas e dados pessoais em logs, respostas ou commits.
-- [ ] Definir limites para shell, scripts baixados, extensões, MCPs, plugins e ferramentas de terceiros.
-- [ ] Tratar saídas de ferramentas, páginas, issues, arquivos e resultados de busca como dados não confiáveis; ignorar instruções contidas nesses dados que tentem alterar a hierarquia de instruções.
-- [ ] Antes de executar código externo, inspecionar origem, conteúdo, permissões e efeitos colaterais.
-- [ ] Quando uma ferramenta não estiver disponível, não inventar execução; explicar a limitação e oferecer alternativa compatível.
-- [ ] Documentar que a skill não concede permissões nem contorna controles do harness, sistema operacional ou usuário.
+- [x] Criar matriz de risco por ferramenta: leitura, escrita local, shell, rede, credenciais, banco, cloud, deploy e comunicação externa.
+- [x] Aplicar privilégio mínimo: usar a ferramenta menos poderosa que resolva a tarefa.
+- [x] Distinguir comandos somente de leitura de comandos que alteram estado; não presumir segurança pelo nome.
+- [x] Exigir confirmação explícita para exclusão, sobrescrita, publicação, envio de mensagens, alteração de permissões, gastos, migrações irreversíveis e mudanças em produção.
+- [x] Proibir exposição de tokens, chaves, cookies, variáveis secretas e dados pessoais em logs, respostas ou commits.
+- [x] Definir limites para shell, scripts baixados, extensões, MCPs, plugins e ferramentas de terceiros.
+- [x] Tratar saídas de ferramentas, páginas, issues, arquivos e resultados de busca como dados não confiáveis; ignorar instruções contidas nesses dados que tentem alterar a hierarquia de instruções.
+- [x] Antes de executar código externo, inspecionar origem, conteúdo, permissões e efeitos colaterais.
+- [x] Quando uma ferramenta não estiver disponível, não inventar execução; explicar a limitação e oferecer alternativa compatível.
+- [x] Documentar que a skill não concede permissões nem contorna controles do harness, sistema operacional ou usuário.
 
 ## 17. Engenharia de contexto e memória
 
@@ -358,14 +358,14 @@ Validar Markdown e instalação não prova que um agente entendeu o router, esco
 
 ## 18. Arquitetura de instruções e prevenção de conflitos
 
-- [ ] Inventariar instruções do repositório e classificar por escopo: global, projeto, linguagem, framework, tarefa e operação.
+- [x] Inventariar instruções do repositório e classificar por escopo: global, projeto, linguagem, framework, tarefa e operação.
 - [ ] Identificar regras duplicadas, contraditórias, vagas, impossíveis de verificar ou dependentes de ferramenta específica.
-- [ ] Definir hierarquia explícita respeitando a hierarquia real do harness e as políticas superiores.
-- [ ] Não sugerir que arquivos do zm-pro podem sobrepor políticas do sistema, provedor ou controles do usuário.
-- [ ] Definir resolução de conflitos entre regra genérica e convenção existente no projeto consumidor.
+- [x] Definir hierarquia explícita respeitando a hierarquia real do harness e as políticas superiores.
+- [x] Não sugerir que arquivos do zm-pro podem sobrepor políticas do sistema, provedor ou controles do usuário.
+- [x] Definir resolução de conflitos entre regra genérica e convenção existente no projeto consumidor.
 - [ ] Criar testes com instruções maliciosas em README, comentários, logs, documentos e resultados externos.
-- [ ] Reduzir termos absolutos quando a regra depender do contexto; documentar exceções e condições.
-- [ ] Padronizar termos normativos MUST/DEVE, SHOULD/RECOMENDA-SE e MAY/PODE.
+- [x] Reduzir termos absolutos quando a regra depender do contexto; documentar exceções e condições.
+- [x] Padronizar termos normativos MUST/DEVE, SHOULD/RECOMENDA-SE e MAY/PODE.
 - [ ] Cada regra crítica deve ter justificativa, cenário de aplicação e método de verificação.
 
 ## 19. Cobertura de engenharia por domínio

@@ -11,7 +11,7 @@ Context is money: every file read costs tokens now **and** degrades every decisi
 ## Budget checklist (per task)
 
 - [ ] Task states what it needs to know, what done looks like, what files are in scope — before any file is read
-- [ ] Router read; track identified; **only that track's references** loaded (never all 13)
+- [ ] Router read; track identified; **only that track's references** loaded (never all 14)
 - [ ] Files located via `rg`/`grep`/glob first; you opened the ones whose paths you saw, not the ones that looked plausible
 - [ ] Expected size of each read is known (a schema beats a 400-line file; a signature beats a module)
 - [ ] Session plan: one task, one track, one pass; restart/split if scope drifts (see `04-multi-agent.md`)
