@@ -82,6 +82,8 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 (examples/minimal-project na raiz do repositório: projeto inicial preenchido — AGENTS.md real, ADR real e DELIVERY-LOG com evidência)
 ```
 
+**Novo no 0.10.0 — imposição mecânica para projetos consumidores.** Copie `templates/CI-ENFORCEMENT.yml` e a seção `Mechanical enforcement` do `templates/RULES.md` no seu projeto para transformar as regras comportamentais do kit em gates de CI reais (varredura de segredos, drift de lockfile, caminhos fora de escopo em branches `fix/*`, rollback de migrações). As regras do kit continuam comportamentais por padrão; estas tornam as selecionadas mecânicas — a diferença entre "o agente leu a regra" e "o build falha sem a evidência".
+
 ## Antes de começar
 
 - **Git** — o kit mora dentro do seu projeto (`git --version`).
@@ -149,15 +151,15 @@ Prompt para uma tarefa real:
 **O que significam os termos?** [Glossário](docs/glossary.md) (em inglês): skill, router, referência, harness, agente, gate, evidência.
 **Posso forkar e adaptar?** Sim — MIT. Mantenha o aviso de licença e diga aos usuários o que mudou.
 **Funciona com minha stack?** As regras são agnósticas; os exemplos assumem TypeScript/Node, mas adaptam-se a Python, Go, PHP etc.
-**Funciona com meu harness?** Três rotas documentadas: nativa (OpenCode — só ele testado aqui), arquivo de regras (Claude/Codex/Cursor/Gemini — documentadas, não verificadas), cola do router (qualquer chat — sempre possível, com perda de roteamento sob demanda). O tiers não testados ficam explicitamente não verificados; veja [docs/harness-compatibility.md](docs/harness-compatibility.md) e envie um relato.
+**Funciona com meu harness?** Três rotas documentadas: nativa (OpenCode — só ele testado aqui; a skill carrega por demanda), arquivo de regras (Claude/Codex/Cursor/Gemini — documentadas, não verificadas; o kit carrega sempre ligado, não por demanda), cola do router (qualquer chat — sempre possível, com perda de roteamento sob demanda). Os tiers não testados ficam explicitamente não verificados; veja [docs/harness-compatibility.md](docs/harness-compatibility.md) e envie um relato.
 **Quais são os limites?** Ainda não há avaliação comportamental publicada, harness não testado continua não verificado, e o kit não é auditoria de segurança, privacidade ou jurídica. O status honesto está em [docs/maturity.md](docs/maturity.md).
 **Tem um exemplo de início rápido?** Sim — `examples/minimal-project/`: AGENTS.md preenchido, um ADR real e um DELIVERY-LOG com evidências para copiar e adaptar.
 
 ## Contribuição e releases
 
-Veja [CONTRIBUTING.md](CONTRIBUTING.md) (em inglês). Semver; toda mudança via PR com o validador verde (`npm run validate`) e a suíte de testes passando (`npm run test` - validador e instalador, sem dependências); histórico em [CHANGELOG.md](CHANGELOG.md).
+Veja [CONTRIBUTING.md](CONTRIBUTING.md) (em inglês). Semver; toda mudança via PR com o validador verde (`npm run validate`) e a suíte de testes passando (`npm test` — validador, instalador, checksums, exemplos e docs; sem dependências); histórico em [CHANGELOG.md](CHANGELOG.md).
 
-Resumo em português: (1) abra uma issue antes de mudanças grandes; (2) edite `zm-pro/` ou os arquivos do repositório; (3) rode `npm run validate` e `npm run test` e cole a saída real; (4) atualize `CHANGELOG.md` (MAJOR quebra, MINOR adiciona, PATCH corrige); (5) preencha o template de PR. O inglês é canônico no kit; pt-BR aparece onde o idioma é o assunto. Distribuição e o que é publicado: [docs/distribution.md](docs/distribution.md).
+Resumo em português: (1) abra uma issue antes de mudanças grandes; (2) edite `zm-pro/` ou os arquivos do repositório; (3) rode `npm run validate` e `npm test` e cole a saída real; (4) atualize `CHANGELOG.md` (MAJOR quebra, MINOR adiciona, PATCH corrige); (5) preencha o template de PR. O inglês é canônico no kit; pt-BR aparece onde o idioma é o assunto. Distribuição e o que é publicado: [docs/distribution.md](docs/distribution.md).
 
 ---
 
