@@ -8,7 +8,7 @@ Direction, not promises. Dates live on released versions — see [`CHANGELOG.md`
 - **0.6.0 — Budget update**: `13-token-economy.md` (spend context deliberately), `for-humans.md` in English, auto-release workflow on tags (checksums + release).
 - **0.6.1**: both READMEs carry the 13 guides in plain language.
 - **0.7.0 — Beginner update**: `docs/primeiro-dia.md` (zero to first commit), "Before you start" sections, survival glossary.
-- **0.8.0 — Catalog release**: `zm-pro/LICENSE` ships inside the skill; PRs against community catalogs ([Prat011/awesome-llm-skills #337](https://github.com/Prat011/awesome-llm-skills/pull/337), [sickn33/agentic-awesome-skills #2351](https://github.com/sickn33/agentic-awesome-skills/pull/2351)); OpenCode remains the only end-to-end verified harness.
+- **0.8.0 — Catalog release**: `zm-pro/LICENSE` ships inside the skill; PRs against community catalogs ([Prat011/awesome-llm-skills #337](https://github.com/Prat011/awesome-llm-skills/pull/337), [sickn33/agentic-awesome-skills #2351](https://github.com/sickn33/agentic-awesome-skills/pull/2351)); OpenCode remains the only end-to-end verified harness. (Submission statuses live in `distribution.md`.)
 
 ## Candidates (in discussion)
 

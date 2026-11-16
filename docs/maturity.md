@@ -5,7 +5,7 @@
 | Level | Definition | Status | Evidence |
 |---|---|---|---|
 | 1 — Structured | files and docs organized | **met** | router + 18 references + templates; `npm run validate` green |
-| 2 — Validated | install and structure verified | **met** | `tests/install.test.mjs` (12 cases), `tests/validate.test.mjs` (15), `tests/checksums.test.mjs` (8); installer dry-run/backup/atomic copy |
+| 2 — Validated | install and structure verified | **met** | installer/validator/checksums unit suites plus evaluation, coordination, docs-parity, adversarial-fixture and stack-adapter tests; installer dry-run/backup/atomic copy; every committed test file wired into `npm test` (guarded by `tests/test-wiring.test.mjs`) |
 | 3 — Evaluated | agent behavior measured | **not met** | no behavioral suite or baseline report yet (`MELHORIAS.md` §7) |
 | 4 — Compatible | harnesses tested end to end | **not met** | OpenCode 2.3.0 is the only tested harness; Claude/Codex/Cursor/Gemini are explicitly unverified |
 | 5 — Sustainable | governance and maintenance | **partial** | `docs/maintenance-policy.md`, ADR, issue/PR templates, CI gate; no long-term track record |
@@ -13,9 +13,10 @@
 ## What the evidence is
 
 ```
-npm run validate   → ok - zm-pro íntegro
-npm test           → tests 39 · pass 39 · fail 0
-npm run test:examples → tests 3 · pass 3 · fail 0
+npm run validate   → ok - zm-pro íntegro (98 files)
+npm test           → tests 101 · pass 100 · fail 0 · skipped 1 (symlink — Windows)
+npm run test:examples → tests 19 · pass 19 · fail 0
+node scripts/parity-check.mjs → all pairs equivalent
 ```
 
 ## What would move the needle

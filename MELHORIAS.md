@@ -54,8 +54,8 @@ A matriz atual (`docs/harness-compatibility.md`) reconhece OpenCode como o únic
 
 ## 5. Distribuição, releases e adoção
 
-- [ ] Manter PRs de catálogos comunitários atualizados e registrar status real (aberto, aprovado, mesclado ou fechado).
-- [ ] Medir adoção com sinais públicos e voluntários (estrelas, forks, relatos, PRs); não adicionar telemetria à skill.
+- [x] Manter PRs de catálogos comunitários atualizados e registrar status real (aberto, aprovado, mesclado ou fechado). *(registrado em `docs/distribution.md` em 2026-11-16: Prat011/awesome-llm-skills #337 aberto; sickn33/agentic-awesome-skills #2351 fechado sem merge, com pedido de bundle auto-contido e teste do bundle exato; nenhuma listagem aprovada)*
+- [x] Medir adoção com sinais públicos e voluntários (estrelas, forks, relatos, PRs); não adicionar telemetria à skill. *(baseline 2026-11-16 registrada em `docs/distribution.md`: 1 star, 0 forks, 1 watcher/0 subscribers, 0 issues reais, 1 submission de catálogo aberta; método reproduzível documentado; nenhum dado coletado dentro da skill; atualizar a cada release)*
 
 ## 6. Roadmap: fases em aberto
 
@@ -63,7 +63,7 @@ A matriz atual (`docs/harness-compatibility.md`) reconhece OpenCode como o únic
 
 **Fase 5 — Maturidade contínua.**
 
-- [ ] Revisar issues recorrentes e incorporar melhorias com evidência.
+- [ ] Revisar issues recorrentes e incorporar melhorias com evidência. *(revisão 2026-11-16: nenhuma issue real existe — os 8 itens no endpoint `issues?state=all` são todos PRs, 6 do autor + 2 do dependabot; nada recorrente a incorporar; item permanece aberto até haver issues reais)*
 
 **Fases concluídas (removidas):** 1 — Correções de confiança; 2 — Qualidade técnica; 4 — Experiência e adoção. Entrega e evidências estão no `CHANGELOG.md` e no histórico do git.
 
@@ -91,6 +91,13 @@ O projeto não deve ser considerado completo por quantidade de arquivos ou núme
 - [ ] Suíte comportamental com baseline e relatório reproduzível.
 
 **Definição de completo:** o zm-pro será considerado pronto para uso profissional quando uma pessoa independente conseguir instalá-lo, configurá-lo, utilizá-lo em um projeto real, avaliar seus resultados, atualizá-lo e removê-lo com segurança, seguindo a documentação e sem depender de conhecimento informal do mantenedor.
+
+## 10. Bugs e defeitos encontrados (backlog acionável)
+
+Achados durante a sessão 2026-11-16 (pilot `eval-001`, OpenCode 2.3.0, Windows). Evidência: `docs/evaluation-results/pilot-inkling-eval-001.md` e `.raw.log` local (gitignored).
+
+- [x] **`evaluate-run.mjs` saía com exit 0 mesmo quando o harness falhava.** *(corrigido em 2026-11-16: se `result.error`, `result.signal` ou `status !== 0`, o runner imprime `evaluate-run: <motivo>` e sai com 1, mantendo transcript e relatório no disco; coberto por `tests/evaluate-run.test.mjs` — 5 testes originais do runner (dry-run, usage, argv literal, scaffold, caminho feliz) + 2 novos de caminho de falha (harness inexistente, exit ≠ 0); suite agora registrada em `npm test`)*
+- [x] **Comando documentado do pilot quebra no Windows (`spawnSync opencode ENOENT`).** O shim npm (`opencode.cmd` / `opencode.ps1`) não é resolvível pelo `spawn` do Node sem shell; o exemplo do README falha silenciosamente no Windows (ver item acima). *(parcialmente corrigido em 2026-11-16: workaround documentado em `docs/evaluation-results/README.md` e `EVALUATIONS.md` — argv aponta para `node_modules/@opencode/cli/bin/opencode.exe`, sem shell; o bug do exit 0 permanece no item acima.)*
 
 ---
 

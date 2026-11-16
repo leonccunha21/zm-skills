@@ -12,7 +12,7 @@
     "validate": "node scripts/validate.mjs",
     "audit": "node scripts/validate.mjs --json",
     "audit:fix": "node scripts/validate.mjs --fix",
-    "test": "node --test tests/validate.test.mjs tests/install.test.mjs tests/checksums.test.mjs tests/offline.test.mjs tests/diagnose.test.mjs tests/evaluate.test.mjs tests/metrics.test.mjs tests/coordinate.test.mjs",
+    "test": "node --test tests/validate.test.mjs tests/install.test.mjs tests/checksums.test.mjs tests/offline.test.mjs tests/diagnose.test.mjs tests/evaluate.test.mjs tests/evaluate-run.test.mjs tests/metrics.test.mjs tests/coordinate.test.mjs tests/parity.test.mjs tests/injection-hygiene.test.mjs tests/fixtures-adversarial.test.mjs tests/stack-adapters.test.mjs tests/test-wiring.test.mjs",
     "metrics": "node scripts/metrics.mjs",
     "evaluations:check": "node scripts/evaluate.mjs",
     "diagnose": "node scripts/diagnose.mjs",

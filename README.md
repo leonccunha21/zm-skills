@@ -82,6 +82,8 @@ zm-pro/                        # the skill — copy this folder into your projec
 └── (the repository root also holds: examples/minimal-project — a filled starter to learn from, SECURITY.md, CODE_OF_CONDUCT.md, scripts/validate.mjs, CI)
 ```
 
+**New in 0.10.0 — machine enforcement for consumer projects.** Copy `templates/CI-ENFORCEMENT.yml` and the `Mechanical enforcement` section of `templates/RULES.md` into your project to turn the kit's behavioral rules into hard CI gates (secrets scan, lockfile drift, out-of-scope paths on `fix/*` branches, migration rollback). The kit's rules stay behavioral by default; these make the selected ones mechanical — the difference between "the agent reads the rule" and "the build fails without the evidence".
+
 Design principles:
 
 1. **Reference ≠ dependency ≠ installation** — the kit teaches discipline; it never authorizes adding libraries to your product.
@@ -161,14 +163,14 @@ Or rely on the trigger description — the agent picks the track (kickoff, imple
 **What do the words mean?** [Glossary](docs/glossary.md): skill, router, reference, harness, agent, gate, evidence.
 **Can I fork and adapt it?** Yes — MIT. Keep the license notice; tell your users what you changed.
 **Will it work with my stack?** The rules are stack-agnostic; examples assume TypeScript/Node as a sane baseline but adapt to Python, Go, PHP, etc.
-**Will it work with my harness?** Three documented routes: native (OpenCode — only tested so far), rules file (Claude/Codex/Cursor/Gemini — documented, unverified), inline paste (any chat — always possible, weaker). Untested tiers stay explicitly unverified; see [docs/harness-compatibility.md](docs/harness-compatibility.md) and file a report.
+**Will it work with my harness?** Three documented routes: native (OpenCode — only tested so far; the skill loads on demand), rules file (Claude/Codex/Cursor/Gemini — documented, unverified; the kit loads always-on, not lazily), inline paste (any chat — always possible, weaker). Untested tiers stay explicitly unverified; see [docs/harness-compatibility.md](docs/harness-compatibility.md) and file a report.
 **What are the limits?** No behavioral evaluation is published yet, unverified harnesses stay unverified, and the kit is not a security, privacy or legal audit. The honest status is in [docs/maturity.md](docs/maturity.md).
 **Is there a quick-start example?** Yes — `examples/minimal-project/`: a filled AGENTS.md, a real ADR and an evidence-backed DELIVERY-LOG you can copy and adapt.
 **How do I report a bad rule or a typo?** Open an issue — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Contributing & releases
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Semver; every change via PR with the repo validator green (`npm run validate`) and the unit suite passing (`npm run test` — validator and installer, zero dependencies); history in [CHANGELOG.md](CHANGELOG.md). Skill changes ship as `zm-pro` version bumps. What is published (and what deliberately is not) is in [docs/distribution.md](docs/distribution.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md). Semver; every change via PR with the repo validator green (`npm run validate`) and the unit suite passing (`npm test` — validator, installer, checksums, examples and docs; zero dependencies); history in [CHANGELOG.md](CHANGELOG.md). Skill changes ship as `zm-pro` version bumps. What is published (and what deliberately is not) is in [docs/distribution.md](docs/distribution.md).
 
 ---
 

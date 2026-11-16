@@ -27,7 +27,7 @@ Thanks for helping make this the reference skill for professional project work. 
    npm test
    ```
 
-   The validator checks: frontmatter shape, required files, index coverage, relative links/images/anchors, forbidden project-specific residue and version sync. `npm test` covers the validator and installer behavior. **Both must pass.**
+   The validator checks: frontmatter shape, required files, index coverage, relative links/images/anchors, forbidden project-specific residue and version sync. `npm test` covers the validator, installer, checksums, evaluations, coordination, docs parity and examples — the unit gate; zero dependencies. **Both must pass.**
 
    The same command is the audit: every finding has severity (`error` / `warning` / `suggestion`), `file:line` when it exists, evidence and a suggested fix. `npm run audit` prints the same report as stable JSON; `--fail-on=warning` makes warnings blocking; `node scripts/validate.mjs --fix` previews the mechanical fixes (trailing whitespace, final newline) and writes only with `--fix --yes`. The audit is read-only by default.
 4. Update `CHANGELOG.md` under a new version heading (semver: breaking = MAJOR, new = MINOR, fixes = PATCH).

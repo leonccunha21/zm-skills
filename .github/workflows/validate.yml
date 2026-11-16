@@ -22,12 +22,6 @@ jobs:
         run: npm run validate
       - name: README parity (EN/pt-BR)
         run: node scripts/parity-check.mjs
-      - name: Injection hygiene + adversarial fixtures
-        run: node --test tests/injection-hygiene.test.mjs tests/fixtures-adversarial.test.mjs
-      - name: Stack adapter editorial model
-        run: node --test tests/stack-adapters.test.mjs
-      - name: Evaluation runner scaffold
-        run: node --test tests/evaluate-run.test.mjs
 
   tests:
     strategy:
@@ -43,7 +37,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Print runtime
         run: node --version && npm --version
-      - name: Unit tests (validator + installer + checksums + offline + diagnose + evaluations + parity + fixtures)
+      - name: Unit tests (full suite incl. parity, injection-hygiene, adversarial fixtures, stack adapters)
         run: npm test
 
   examples:

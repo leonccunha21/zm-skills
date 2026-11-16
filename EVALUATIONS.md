@@ -38,7 +38,7 @@ Scenarios live in `tests/evaluations/scenarios/*.json` and are validated by `scr
 
 ## How to run a scenario (manual harness protocol)
 
-Shortcut: `node scripts/evaluate-run.mjs <scenario-id> --command-json '[…"{{prompt}}"]' --model … --harness … --os …` prepares the scratch workspace, executes your harness with the prompt as an argv argument, saves the raw transcript and scaffolds the report — you score it (`docs/evaluation-results/`). Any element equal to `{{prompt}}` is replaced by the full scenario prompt; nothing goes through a shell.
+Shortcut: `node scripts/evaluate-run.mjs <scenario-id> --command-json '[…"{{prompt}}"]' --model … --harness … --os …` prepares the scratch workspace, executes your harness with the prompt as an argv argument, saves the raw transcript and scaffolds the report — you score it (`docs/evaluation-results/`). Any element equal to `{{prompt}}` is replaced by the full scenario prompt; nothing goes through a shell. On Windows with npm shims, pass the direct `.exe` path (see `docs/evaluation-results/README.md`).
 
 Manual equivalent:
 
@@ -63,3 +63,5 @@ A release that changes the router, a reference, or the installer's contract must
 ## Status
 
 Scenarios: 15 defined and schema-checked. **No baseline run has been executed or published yet.** Until one exists, `docs/maturity.md` level 3 stays unmet and no release may claim behavioral superiority.
+
+Pilots so far (none baseline-grade): `pilot-eval-001`, `pilot-eval-012` (author-administered, free model) and `pilot-inkling-eval-001`, `pilot-inkling-r2-eval-001`, `pilot-inkling-r3-eval-001` (agent-administered, free model) — all **inconclusive**, with the 2026-11-16 series deterministic at 3/3: one text turn, zero tool calls, `step_finish: stop`, exit 0 (r3 emitted tool-call-shaped text without calling tools). See `docs/evaluation-results/` and `docs/evaluation-results/README.md` (Windows argv note).
