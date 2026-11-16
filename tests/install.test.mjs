@@ -18,6 +18,16 @@ const runInstall = (args, env = {}, cwd = repoRoot) =>
     env: { ...process.env, ...env },
   })
 
+const filesUnder = (dir) => {
+  const out = []
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const p = join(dir, entry.name)
+    if (entry.isDirectory()) out.push(...filesUnder(p))
+    else out.push(p)
+  }
+  return out
+}
+
 test("instala no projeto e cria .agents/skills/zm-pro", (t) => {
   const project = mkdtempSync(join(tmpdir(), "zm install "))
   t.after(() => rmSync(project, { recursive: true, force: true }))
@@ -90,4 +100,16 @@ test("--dir relativo resolve a partir do diretório de execução", (t) => {
   const result = runInstall(["opencode", "--dir", "."], {}, project)
   assert.equal(result.status, 0, result.stderr)
   assert.ok(existsSync(join(project, ".agents", "skills", "zm-pro", "SKILL.md")))
+})
+
+test("desinstalar é apagar a pasta: nada fora do destino é tocado", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-uninstall-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  assert.equal(runInstall(["opencode", "--dir", project]).status, 0)
+  const installed = filesUnder(project)
+  const dest = join(project, ".agents", "skills", "zm-pro")
+  assert.ok(installed.length > 0)
+  assert.ok(installed.every((p) => p.startsWith(dest)))
+  rmSync(dest, { recursive: true, force: true })
+  assert.deepEqual(filesUnder(project), [])
 })

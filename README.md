@@ -118,6 +118,10 @@ Point the agent instructions at `zm-pro/SKILL.md` (Project Rules / Context files
 
 Re-copy the folder (`cp -r zm-pro <dest>` / `Copy-Item -Recurse -Force`), or pull and re-copy. Diffs stay readable because the kit is plain Markdown.
 
+### Uninstalling
+
+Delete the installed folder (`rm -rf .agents/skills/zm-pro`, or the global path you chose). The installer only copies files, so nothing else is touched. Interrupted install? Remove the partial `zm-pro` folder and run the installer again.
+
 ## Quickstart
 
 > New here? Read [docs/for-humans.md](docs/for-humans.md) — the kit in plain language. Want the full zero-to-first-commit walkthrough? See [docs/primeiro-dia.md](docs/primeiro-dia.md) (pt-BR).

@@ -10,9 +10,14 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 - `package.json` — `npm test` now runs the unit suite; `npm run validate` remains the structural gate.
 - CI — the `validate` workflow runs `npm test` on the same Node/OS matrix.
 
+### Changed
+
+- `scripts/validate.mjs` — validator v2: ignores fenced code, validates relative links, images and heading anchors (unicode and `--` slugs, percent-encoded paths), skips `.git/` and `node_modules/`, enforces frontmatter fields/delimiters/duplicates/limits, makes index coverage an error, syncs versions across `package.json`, `SKILL.md`, `CHANGELOG.md`, README badges and `SECURITY.md`, and supports `--json`.
+- `CONTRIBUTING.md` — the gate now includes `npm test` alongside `npm run validate`.
+
 ### Fixed
 
-- `README.md` / `README.pt-BR.md` — version badge is now dynamic (latest GitHub release) instead of the stale static `0.4.0`; the scripted install is documented as `npm run install-skill -- opencode`, since npm needs the `--` separator to forward the harness.
+- `README.md` / `README.pt-BR.md` — version badge is now dynamic (latest GitHub release) instead of the stale static `0.4.0`; documented uninstall/recovery; scripted install documented as `npm run install-skill -- opencode`.
 - `SECURITY.md` — supported versions updated from `0.4.x` to the current minor, with the update-first policy stated.
 - `scripts/install.mjs` — a missing harness now fails with the documented npm form; `--dir` is documented as the project root, not the final destination.
 

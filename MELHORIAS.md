@@ -41,13 +41,17 @@ Estes itens foram observados nos arquivos consultados durante a inspeção inici
 
 ### P1 — Qualidade da validação e manutenção
 
-- [ ] **Fortalecer o validador de Markdown.** Verificar links relativos, imagens, referências, âncoras internas e caminhos com espaços; ignorar blocos de código e diretórios que não fazem parte do conteúdo publicado, como `.git/` e `node_modules/`.
-- [ ] **Validar frontmatter com regras explícitas.** Cobrir campos obrigatórios, descrição, delimitadores, caracteres especiais e limites do formato Agent Skills. Evitar depender de expressões regulares frágeis para interpretar YAML.
-- [ ] **Validar cobertura do índice.** Garantir que todas as referências e templates publicados estejam indexados e que nenhum caminho apontado pelo router esteja ausente.
-- [ ] **Validar sincronização de versões.** Conferir `package.json`, `SKILL.md`, badges, changelog, release e documentação de instalação.
+- [x] **Fortalecer o validador de Markdown.** Verificar links relativos, imagens, referências, âncoras internas e caminhos com espaços; ignorar blocos de código e diretórios que não fazem parte do conteúdo publicado, como `.git/` e `node_modules/`.
+- [x] **Validar frontmatter com regras explícitas.** Cobrir campos obrigatórios, descrição, delimitadores, caracteres especiais e limites do formato Agent Skills. Evitar depender de expressões regulares frágeis para interpretar YAML.
+- [x] **Validar cobertura do índice.** Garantir que todas as referências e templates publicados estejam indexados e que nenhum caminho apontado pelo router esteja ausente.
+- [x] **Validar sincronização de versões.** Conferir `package.json`, `SKILL.md`, badges, changelog, release e documentação de instalação.
 - [x] **Testar instalador sem sobrescrita acidental.** Coberto por `tests/install.test.mjs`: harness inválido, ausência de harness, destino já existente, `--force`, `--global` (com `XDG_CONFIG_HOME` isolado), `--dir` e caminhos com espaços. Windows local; Linux/macOS cobertos pela matriz de CI.
-- [ ] **Garantir instalação reversível.** Confirmar que instalar e desinstalar não alteram arquivos fora do diretório de destino e não executam código ou chamadas de rede.
+- [x] **Garantir instalação reversível.** Desinstalar = apagar a pasta: teste confirma que todos os arquivos instalados vivem sob o destino e que, após removê-lo, nada resta no projeto.
 - [x] **Revisar a opção `--dir`.** Documentada como raiz do projeto (destino: `<dir>/.agents|.claude/skills/zm-pro`) no cabeçalho de `scripts/install.mjs`; testada com caminho absoluto, relativo (`.` a partir do cwd) e com espaços.
+
+> **Status 2026-11-16 — Fase 2 (parcial).** Validador v2: fences ignorados, âncoras (incluindo acentos e `--`), imagens, caminhos percent-encoded, frontmatter com campos obrigatórios/duplicados/limites, índice obrigatório, versão sincronizada (`package.json` × `SKILL.md` × changelog × badges × `SECURITY.md`) e `--json` estável. `SECURITY.md` e `README.pt-BR.md` agora são arquivos obrigatórios.
+> Evidência: `npm test` → 26/26; `npm run validate` → `ok - zm-pro íntegro`.
+> Não feito ainda: revisão editorial dos 13 guias, templates, workflows (permissões/SHA) e CI real.
 
 ## 3. Arquitetura e conteúdo da skill
 
@@ -93,8 +97,8 @@ A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta
 
 ## 5. Testes automatizados e CI
 
-- [ ] Criar suíte `node:test` para o validador e instalador, sem dependências externas desnecessárias.
-- [ ] Cobrir entradas inválidas e casos extremos, inclusive nomes de arquivos com espaços, CRLF, links quebrados e arquivos ausentes.
+- [x] Criar suíte `node:test` para o validador e instalador, sem dependências externas desnecessárias.
+- [x] Cobrir entradas inválidas e casos extremos, inclusive nomes de arquivos com espaços, CRLF, links quebrados e arquivos ausentes.
 - [ ] Executar CI em Linux, Windows e macOS quando viável, com Node 18, 20 e 22 (reavaliar a matriz conforme suporte oficial e dependências).
 - [ ] Separar jobs: validação de estrutura, testes unitários, verificação de links, checksums e empacotamento.
 - [ ] Adicionar verificação de Markdown e spellcheck com dicionário técnico pt-BR/en-US, sem bloquear falsos positivos sem revisão.
@@ -125,7 +129,7 @@ A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta
 - [ ] Incluir exemplo de projeto pequeno e exemplo de aplicação web com banco de dados, sem credenciais ou dados reais.
 - [ ] Explicar claramente diferença entre repositório, skill, router, referência, template, harness e agente.
 - [ ] Documentar atualização de versão: comparar changelog, substituir pasta, validar e revisar alterações locais.
-- [ ] Documentar desinstalação e recuperação de instalação incompleta.
+- [x] Documentar desinstalação e recuperação de instalação incompleta.
 - [ ] Criar FAQ sobre custos, funcionamento offline, privacidade, compatibilidade, licença e limitações.
 - [ ] Adicionar glossário consistente e links internos para os conceitos.
 - [ ] Evitar promessas como “funciona em qualquer agente” sem teste reproduzível.
@@ -221,8 +225,8 @@ A estrutura é uma proposta, não uma exigência para criar todos os diretórios
 
 ### Fase 2 — Qualidade técnica
 
-- [ ] Criar testes unitários do validador e instalador.
-- [ ] Fortalecer verificação de links, frontmatter e estrutura.
+- [x] Criar testes unitários do validador e instalador.
+- [x] Fortalecer verificação de links, frontmatter e estrutura.
 - [ ] Revisar os 13 guias em busca de conflito, ambiguidade e lacunas.
 - [ ] Padronizar templates e critérios de entrega.
 - [ ] Revisar workflows e permissões.

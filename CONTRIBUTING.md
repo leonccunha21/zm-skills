@@ -20,13 +20,14 @@ Thanks for helping make this the reference skill for professional project work. 
 
 1. Fork or branch `main`.
 2. Edit inside `zm-pro/` (the skill) or repo meta files (README, this file, CI…).
-3. Run the validator:
+3. Run the validator and the unit suite:
 
    ```bash
    npm run validate
+   npm test
    ```
 
-   It checks: frontmatter shape, required files, reference integrity, and forbidden project-specific residue. **It must pass.**
+   The validator checks: frontmatter shape, required files, index coverage, relative links/images/anchors, forbidden project-specific residue and version sync. `npm test` covers the validator and installer behavior. **Both must pass.**
 4. Update `CHANGELOG.md` under a new version heading (semver: breaking = MAJOR, new = MINOR, fixes = PATCH).
 5. Update the README badges/version if you bump versions.
 6. Fill the PR template. A maintainer reviews with the same discipline the kit teaches — because we review with the kit.

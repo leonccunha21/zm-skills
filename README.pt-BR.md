@@ -104,6 +104,14 @@ Copie `zm-pro/` para a pasta de skills do harness (ex.: `~/.claude/skills/zm-pro
 
 Aponte as instruções do agente para `zm-pro/SKILL.md`. O router é autoexplicativo — nenhum truque específico de harness.
 
+### Atualização
+
+Copie a pasta de novo (`cp -r zm-pro <destino>` / `Copy-Item -Recurse -Force`) ou faça pull e copie outra vez. Os diffs continuam legíveis porque o kit é Markdown puro.
+
+### Desinstalação
+
+Apague a pasta instalada (`rm -rf .agents/skills/zm-pro` ou o caminho global escolhido). O instalador só copia arquivos, então nada mais é alterado. Instalação interrompida? Remova a pasta `zm-pro` parcial e rode o instalador de novo.
+
 ## Uso rápido
 
 > Novo aqui? Leia primeiro o [docs/para-leigos.md](docs/para-leigos.md) — o kit em linguagem simples — e depois siga o [docs/primeiro-dia.md](docs/primeiro-dia.md) — do zero ao primeiro commit.
