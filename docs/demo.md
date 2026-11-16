@@ -42,5 +42,4 @@ See `examples/minimal-project/` for a filled example of the repo shape.
 
 ## Provenance
 
-- Pilot: `pilot-zm-pro` (local, 2026-11-16) — `DELIVERY-LOG.md`, `AGENTS.md` (filled), `RULES.md` copied from templates.
-- The pilot is not published; quoting it here with its permission, in anonymized form.
+- Pilot: `pilot-zm-pro` (local, 2026-11-16) — `DELIVERY-LOG.md`, `AGENTS.md` (filled), `RULES.md` copied from templates. Not published; quoted in anonymized form.
