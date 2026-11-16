@@ -4,6 +4,7 @@
 
 [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-green.svg)](LICENSE)
 [![Versão](https://img.shields.io/badge/vers%C3%A3o-0.2.0-blue.svg)](CHANGELOG.md)
+[![validate](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml)
 
 Leitura em inglês (versão canônica): [README.md](README.md).
 
