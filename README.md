@@ -3,7 +3,7 @@
 **A portable, self-contained skill that turns any coding agent into a disciplined project professional** — rules, standards, layout & UI, multi-agent coordination, project memory, privacy (LGPD/GDPR), security, testing, delivery and operations. Built on the open [Agent Skills](https://github.com/agentskills/agentskills) format; works in OpenCode, Claude Code, Codex, Cursor, Gemini CLI and any harness that loads `SKILL.md` packs.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)](CHANGELOG.md)
 [![Release](https://img.shields.io/github/v/release/leonccunha21/zm-skills)](https://github.com/leonccunha21/zm-skills/releases/latest)
 [![validate](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml)
 

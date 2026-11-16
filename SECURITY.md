@@ -4,7 +4,7 @@
 
 | Version | Supported |
 |---|---|
-| latest minor (`0.3.x`) | ✅ |
+| latest minor (`0.4.x`) | ✅ |
 | older | ❌ — update first |
 
 ## Reporting a vulnerability

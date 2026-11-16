@@ -14,6 +14,8 @@ How to write code that survives production. Language-agnostic; examples assume T
 
 React + strict TypeScript + Vite + Tailwind; modest animation; a single icon set. Relational DB with server-side authorization and row level security (Postgres or equivalent — e.g., Neon) via the platform's identity token. Mutations through auditable operations. Schema validation with zod. Two builds when the product ships both cloud and local editions — one green proves nothing about the other.
 
+A legitimate lightweight baseline for small utilities/libraries: plain ESM JavaScript + `node --test` + `node --check` (zero dependencies, no build step; optionally JSDoc + `tsc --noEmit` for light typing). The gates adapt — the discipline doesn't.
+
 ## Required gates before delivering
 
 | Gate | When | Typical command |

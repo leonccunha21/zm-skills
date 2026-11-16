@@ -2,6 +2,17 @@
 
 All notable changes to this project. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [semver](https://semver.org/).
 
+## [0.4.0] — 2026-11-16
+
+Pilot-feedback release: validated by a real end-to-end pilot project (`pilot-zm-pro`) that consumed the skill from scratch — 9/9 tests green, evidence-backed delivery log.
+
+### Changed (additive, minor)
+
+- `zm-pro/.gitattributes` ships inside the skill (`eol=lf` scoped to the skill only) — kills the CRLF warnings when the skill is installed into Windows projects (observed in the pilot)
+- `reference/01-code-rules.md` documents the legitimate zero-dependency baseline (plain ESM JS + `node --test` + `node --check`), observed as sufficient for small utilities
+- Supported-version table in `SECURITY.md` → `0.4.x`
+- Pilot learnings recorded in the pilot repository (`pilot-zm-pro/DELIVERY-LOG.md`)
+
 ## [0.3.0] — 2026-11-16
 
 Feature-complete pass — zm-pro now covers the full lifecycle from "empty repo" to "production + feedback", with a worked example included.
