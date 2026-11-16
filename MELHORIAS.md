@@ -219,7 +219,7 @@ A estrutura é uma proposta, não uma exigência para criar todos os diretórios
 - [x] Corrigir comandos de instalação nos READMEs.
 - [x] Ajustar nomes e escopo dos comandos de teste.
 - [x] Revisar instalador e validador para casos extremos.
-- [ ] Executar validação local e CI; registrar evidências. *(Local: verde. CI: roda no PR.)*
+- [ ] Executar validação local e CI; registrar evidências. *(Local: verde. CI: PR #7 — validate, examples, checksums, pack e tests ubuntu/windows (18/20/22) verdes; macos-latest 18/20/22 permanece na fila do GitHub sem falha registrada)*
 
 **Critério de conclusão:** comandos documentados funcionam como escritos; versão consistente em todos os pontos; testes automatizados passam.
 
