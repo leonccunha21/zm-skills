@@ -14,6 +14,10 @@ A small feature delivered end to end: acceptance criterion → test first → sm
 
 Characterization tests on undocumented pricing rules, a behavior-preserving refactor, and a deliberate one-line break proving the suite catches it. Real before/after/failing output in the README.
 
+## `security-review/`
+
+A tiny end-to-end security review: scope, findings (high → low) with evidence and impact, the applied fix, and the tests that keep it fixed. Runs with `npm run test:examples`.
+
 ## `minimal-project/`
 
 A fresh React+TypeScript-style web app on the day after `git init`, showing:

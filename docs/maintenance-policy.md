@@ -17,6 +17,8 @@
 ## Review cadence
 
 - **Quarterly:** external references, license/maintenance status of cited tools, and legal pointers (LGPD/GDPR sections age badly).
+- **On CVE/disclosure:** unscheduled triage within 72h; release a fix or mitigation note.
+- **On EOL/retirement:** Node majors, harness deprecations, action majors — re-pin, re-test, record in the changelog.
 - **Every release:** version sync (`npm run validate` enforces it), changelog accuracy, checksums, and a re-read of `docs/maturity.md` — a level without evidence gets downgraded, not waived.
 - **After structural changes:** re-evaluate the supported Node line and the harness matrix.
 

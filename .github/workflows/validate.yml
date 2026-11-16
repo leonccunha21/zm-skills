@@ -26,6 +26,10 @@ jobs:
         run: npm test
       - name: Executable example
         run: npm run test:examples
+      - name: README parity (EN/pt-BR)
+        run: node scripts/parity-check.mjs
+      - name: Injection hygiene (kit Markdown)
+        run: node --test tests/injection-hygiene.test.mjs
 
   checksums:
     runs-on: ubuntu-latest

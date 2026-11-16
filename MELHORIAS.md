@@ -102,14 +102,14 @@ A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta
 - [x] Executar CI em Linux, Windows e macOS quando viável, com Node 18, 20 e 22 (reavaliar a matriz conforme suporte oficial e dependências).
 - [ ] Separar jobs: validação de estrutura, testes unitários, verificação de links, checksums e empacotamento.
 - [ ] Adicionar verificação de Markdown e spellcheck com dicionário técnico pt-BR/en-US, sem bloquear falsos positivos sem revisão.
-- [ ] Adicionar verificação de diferenças entre documentação EN e pt-BR nos tópicos que precisam estar equivalentes.
+- [x] Adicionar verificação de diferenças entre documentação EN e pt-BR nos tópicos que precisam estar equivalentes.
 - [x] Fazer CI validar o conteúdo efetivamente distribuído em `zm-pro/`, não apenas o repositório completo.
 - [x] Definir política de falha: qualquer gate obrigatório vermelho bloqueia release.
 - [ ] Gerar relatório de testes com versões de runtime e saída real.
 
 ## 6. Segurança, privacidade e cadeia de fornecimento
 
-- [ ] Revisar todos os arquivos Markdown contra prompt injection, instruções maliciosas copiadas de fontes externas e recomendações inseguras.
+- [x] Revisar todos os arquivos Markdown contra prompt injection, instruções maliciosas copiadas de fontes externas e recomendações inseguras.
 - [x] Tratar conteúdo de issues, PRs, sites e documentos externos como dados não confiáveis, nunca como instruções que substituem as regras do projeto.
 - [x] Revisar permissões mínimas de GitHub Actions e fixar actions por SHA quando adequado.
 - [x] Adicionar verificação de dependências e licença se dependências forem introduzidas; manter baseline sem dependências sempre que possível.
@@ -148,7 +148,7 @@ Avaliar a inclusão dos seguintes materiais, sem inflar o pacote com arquivos re
 - [x] Template de inventário de integrações e fornecedores.
 - [x] Exemplo de feature ponta a ponta, incluindo teste, documentação, changelog e evidência.
 - [x] Exemplo de correção de bug com reprodução, teste de regressão e validação.
-- [ ] Exemplo de revisão de segurança sem expor vulnerabilidades reais ou segredos.
+- [x] Exemplo de revisão de segurança sem expor vulnerabilidades reais ou segredos.
 
 Cada template deve ser genérico, curto, copiável e acompanhado de orientação sobre quando usar. Não editar os templates originais a partir de projetos consumidores.
 
@@ -228,37 +228,37 @@ A estrutura é uma proposta, não uma exigência para criar todos os diretórios
 - [x] Criar testes unitários do validador e instalador.
 - [x] Fortalecer verificação de links, frontmatter e estrutura.
 - [ ] Revisar os 13 guias em busca de conflito, ambiguidade e lacunas.
-- [ ] Padronizar templates e critérios de entrega.
-- [ ] Revisar workflows e permissões.
+- [x] Padronizar templates e critérios de entrega.
+- [x] Revisar workflows e permissões.
 
 **Critério de conclusão:** suíte automatizada cobre caminhos críticos; guias possuem revisão registrada; CI bloqueia regressões conhecidas.
 
 ### Fase 3 — Compatibilidade comprovada
 
 - [ ] Executar matriz de testes nos harnesses prioritários.
-- [ ] Publicar resultados reproduzíveis.
-- [ ] Ajustar instruções específicas de instalação e descoberta.
+- [x] Publicar resultados reproduzíveis.
+- [x] Ajustar instruções específicas de instalação e descoberta.
 - [ ] Adicionar relatos da comunidade com evidências.
 
 **Critério de conclusão:** cada status da matriz corresponde a um teste documentado ou permanece explicitamente como não verificado.
 
 ### Fase 4 — Experiência e adoção
 
-- [ ] Melhorar onboarding e troubleshooting.
-- [ ] Criar exemplos completos e reutilizáveis.
-- [ ] Completar templates de auditoria, testes e operação.
-- [ ] Melhorar contribuição, triagem e releases.
-- [ ] Revisar documentação EN/PT-BR.
+- [x] Melhorar onboarding e troubleshooting.
+- [x] Criar exemplos completos e reutilizáveis.
+- [x] Completar templates de auditoria, testes e operação.
+- [x] Melhorar contribuição, triagem e releases.
+- [x] Revisar documentação EN/PT-BR.
 
 **Critério de conclusão:** uma pessoa nova consegue instalar, executar uma tarefa pequena, validar e remover a skill seguindo apenas a documentação.
 
 ### Fase 5 — Maturidade contínua
 
-- [ ] Revisar trimestralmente referências externas e orientações legais.
-- [ ] Reavaliar versões de Node e harnesses suportados.
+- [x] Revisar trimestralmente referências externas e orientações legais.
+- [x] Reavaliar versões de Node e harnesses suportados.
 - [ ] Revisar issues recorrentes e incorporar melhorias com evidência.
-- [ ] Publicar notas de compatibilidade e limitações a cada release relevante.
-- [ ] Manter roadmap enxuto, sem promessas de datas não confirmadas.
+- [x] Publicar notas de compatibilidade e limitações a cada release relevante.
+- [x] Manter roadmap enxuto, sem promessas de datas não confirmadas.
 
 ## 12. Critérios permanentes de qualidade
 
@@ -400,12 +400,12 @@ Expandir a cobertura técnica com módulos opcionais, carregados sob demanda, ev
 - [x] Criar template de PR com motivação, escopo, arquivos, testes, impacto, documentação e checklist de segurança.
 - [x] Definir responsáveis por aprovar mudanças em segurança, privacidade, instalador, release e conteúdo.
 - [x] Criar política de depreciação de referências, templates, comandos e harnesses.
-- [ ] Exigir justificativa para adicionar dependências, ferramentas ou novas referências.
+- [x] Exigir justificativa para adicionar dependências, ferramentas ou novas referências.
 - [x] Definir versões suportadas, janela de correção, fim de suporte e canal de reporte.
-- [ ] Criar processo para revisar contribuições automatizadas e conteúdo gerado por IA.
+- [x] Criar processo para revisar contribuições automatizadas e conteúdo gerado por IA.
 - [x] Registrar decisões arquiteturais em ADRs curtos, com contexto, alternativas e consequências.
 - [ ] Manter histórico de mudanças incompatíveis e instruções de migração.
-- [ ] Definir calendário de manutenção leve e baseado em risco.
+- [x] Definir calendário de manutenção leve e baseado em risco.
 
 ## 22. Métricas de qualidade e maturidade
 
@@ -443,7 +443,7 @@ Evitar métricas de vaidade. Medir qualidade, confiabilidade e custo com defini�
 Criar gradualmente, quando houver conteúdo e manutenção definidos:
 
 - [ ] EVALUATIONS.md: metodologia, cenários e critérios da suíte de avaliação.
-- [ ] docs/evaluation-results/: relatórios versionados por release e ambiente.
+- [x] docs/evaluation-results/: relatórios versionados por release e ambiente.
 - [x] docs/harness-compatibility.md: matriz real de compatibilidade.
 - [x] docs/architecture.md: arquitetura do kit, fluxo do router e carregamento progressivo.
 - [x] docs/instruction-hierarchy.md: hierarquia, escopo e resolução de conflitos.

@@ -157,7 +157,7 @@ Prompt para uma tarefa real:
 
 Veja [CONTRIBUTING.md](CONTRIBUTING.md) (em inglês). Semver; toda mudança via PR com o validador verde (`npm run validate`) e a suíte de testes passando (`npm run test` - validador e instalador, sem dependências); histórico em [CHANGELOG.md](CHANGELOG.md).
 
-Resumo em português: (1) abra uma issue antes de mudanças grandes; (2) edite `zm-pro/` ou os arquivos do repositório; (3) rode `npm run validate` e `npm test` e cole a saída real; (4) atualize `CHANGELOG.md` (MAJOR quebra, MINOR adiciona, PATCH corrige); (5) preencha o template de PR. O inglês é canônico no kit; pt-BR aparece onde o idioma é o assunto. Distribuição e o que é publicado: [docs/distribution.md](docs/distribution.md).
+Resumo em português: (1) abra uma issue antes de mudanças grandes; (2) edite `zm-pro/` ou os arquivos do repositório; (3) rode `npm run validate` e `npm run test` e cole a saída real; (4) atualize `CHANGELOG.md` (MAJOR quebra, MINOR adiciona, PATCH corrige); (5) preencha o template de PR. O inglês é canônico no kit; pt-BR aparece onde o idioma é o assunto. Distribuição e o que é publicado: [docs/distribution.md](docs/distribution.md).
 
 ---
 
