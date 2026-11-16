@@ -345,21 +345,21 @@ Validar Markdown e instalação não prova que um agente entendeu o router, esco
 
 ## 17. Engenharia de contexto e memória
 
-- [ ] Definir modelo de contexto por tarefa: objetivo, restrições, arquitetura relevante, estado atual, decisões, evidências e pendências.
-- [ ] Separar fatos confirmados, inferências, hipóteses, preferências e decisões aprovadas.
-- [ ] Exigir fonte ou caminho de arquivo para afirmações técnicas relevantes sobre o projeto.
-- [ ] Evitar copiar arquivos extensos para memória quando caminho, resumo e seção de referência forem suficientes.
-- [ ] Definir atualização de memória após mudanças arquiteturais, decisões importantes e conclusão de tarefas longas.
-- [ ] Estabelecer revisão ou expiração de informações temporárias, como versões, endpoints, deploys e prioridades.
-- [ ] Não armazenar segredos, dados pessoais desnecessários, dados de clientes ou conteúdo confidencial em arquivos de memória.
-- [ ] Definir precedência entre documentação atual, código executável, configuração, histórico de commits e memória antiga.
-- [ ] Incluir procedimento para detectar e corrigir memória desatualizada ou contraditória.
-- [ ] Criar exemplos de handoff entre sessões e agentes com estado, arquivos modificados, testes e próximos passos.
+- [x] Definir modelo de contexto por tarefa: objetivo, restrições, arquitetura relevante, estado atual, decisões, evidências e pendências.
+- [x] Separar fatos confirmados, inferências, hipóteses, preferências e decisões aprovadas.
+- [x] Exigir fonte ou caminho de arquivo para afirmações técnicas relevantes sobre o projeto.
+- [x] Evitar copiar arquivos extensos para memória quando caminho, resumo e seção de referência forem suficientes.
+- [x] Definir atualização de memória após mudanças arquiteturais, decisões importantes e conclusão de tarefas longas.
+- [x] Estabelecer revisão ou expiração de informações temporárias, como versões, endpoints, deploys e prioridades.
+- [x] Não armazenar segredos, dados pessoais desnecessários, dados de clientes ou conteúdo confidencial em arquivos de memória.
+- [x] Definir precedência entre documentação atual, código executável, configuração, histórico de commits e memória antiga.
+- [x] Incluir procedimento para detectar e corrigir memória desatualizada ou contraditória.
+- [x] Criar exemplos de handoff entre sessões e agentes com estado, arquivos modificados, testes e próximos passos.
 
 ## 18. Arquitetura de instruções e prevenção de conflitos
 
 - [x] Inventariar instruções do repositório e classificar por escopo: global, projeto, linguagem, framework, tarefa e operação.
-- [ ] Identificar regras duplicadas, contraditórias, vagas, impossíveis de verificar ou dependentes de ferramenta específica.
+- [x] Identificar regras duplicadas, contraditórias, vagas, impossíveis de verificar ou dependentes de ferramenta específica.
 - [x] Definir hierarquia explícita respeitando a hierarquia real do harness e as políticas superiores.
 - [x] Não sugerir que arquivos do zm-pro podem sobrepor políticas do sistema, provedor ou controles do usuário.
 - [x] Definir resolução de conflitos entre regra genérica e convenção existente no projeto consumidor.

@@ -22,7 +22,7 @@ examples/             runnable examples (not shipped to the harness)
 3. The agent opens a reference only when the task reaches it; templates are copied, not preloaded.
 4. Three external references per task, by name and link — the router says so explicitly.
 
-Why: context is a budget. A 14-guide preload would cost attention and money on every task and bury the two files that matter (`RULES.md`, `AGENTS.md`). The router is the map; references are the territory.
+Why: context is a budget. An 18-guide preload would cost attention and money on every task and bury the two files that matter (`RULES.md`, `AGENTS.md`). The router is the map; references are the territory.
 
 ## Trust and precedence
 
