@@ -4,9 +4,14 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+## [0.8.0] — 2026-11-16
+
+The catalog release: the kit now ships its own license and enters the community skill catalogs.
+
 ### Added
 
 - `zm-pro/LICENSE` — the skill folder itself now carries the MIT license (travels with vendored installs; satisfies catalog intake rules such as sickn33's).
+- Community intake: PRs opened against the Agent Skills awesome catalogs — [Prat011/awesome-llm-skills #337](https://github.com/Prat011/awesome-llm-skills/pull/337) and [sickn33/agentic-awesome-skills #2351](https://github.com/sickn33/agentic-awesome-skills/pull/2351) (draft, CI-assisted intake). OpenCode 2.3.0 is the only end-to-end verified harness; see `docs/harness-compatibility.md`.
 
 ## [0.7.0] — 2026-11-16
 
