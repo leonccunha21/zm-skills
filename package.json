@@ -12,8 +12,9 @@
     "validate": "node scripts/validate.mjs",
     "audit": "node scripts/validate.mjs --json",
     "audit:fix": "node scripts/validate.mjs --fix",
-    "test": "node --test tests/validate.test.mjs tests/install.test.mjs tests/checksums.test.mjs tests/offline.test.mjs",
-    "test:examples": "node --test examples/bugfix/src/total.test.mjs",
+    "test": "node --test tests/validate.test.mjs tests/install.test.mjs tests/checksums.test.mjs tests/offline.test.mjs tests/diagnose.test.mjs",
+    "diagnose": "node scripts/diagnose.mjs",
+    "test:examples": "node --test examples/bugfix/src/total.test.mjs examples/feature/src/slug.test.mjs examples/legacy/src/pricing.test.mjs",
     "checksums": "node scripts/checksums.mjs",
     "install-skill": "node scripts/install.mjs"
   },

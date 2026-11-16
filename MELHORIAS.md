@@ -146,7 +146,7 @@ Avaliar a inclusão dos seguintes materiais, sem inflar o pacote com arquivos re
 - [x] Template de release notes e plano de rollback.
 - [x] Template de revisão de acessibilidade.
 - [x] Template de inventário de integrações e fornecedores.
-- [ ] Exemplo de feature ponta a ponta, incluindo teste, documentação, changelog e evidência.
+- [x] Exemplo de feature ponta a ponta, incluindo teste, documentação, changelog e evidência.
 - [x] Exemplo de correção de bug com reprodução, teste de regressão e validação.
 - [ ] Exemplo de revisão de segurança sem expor vulnerabilidades reais ou segredos.
 
@@ -553,24 +553,24 @@ O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de r
 
 ## 33. Qualidade dos exemplos e documentação executável
 
-- [ ] Garantir que exemplos de código sejam completos o suficiente para executar ou sejam claramente identificados como pseudocódigo.
-- [ ] Informar versões, pré-requisitos, comandos, resultado esperado e limitações em cada exemplo executável.
-- [ ] Executar exemplos automaticamente quando viável e detectar snippets desatualizados.
-- [ ] Usar somente dados fictícios, credenciais de exemplo inválidas e serviços locais/simulados.
-- [ ] Evitar comandos destrutivos em exemplos; quando inevitáveis, explicar impacto e ambiente seguro.
-- [ ] Manter exemplos pequenos e independentes, evitando projetos demonstrativos gigantes difíceis de atualizar.
+- [x] Garantir que exemplos de código sejam completos o suficiente para executar ou sejam claramente identificados como pseudocódigo.
+- [x] Informar versões, pré-requisitos, comandos, resultado esperado e limitações em cada exemplo executável.
+- [x] Executar exemplos automaticamente quando viável e detectar snippets desatualizados.
+- [x] Usar somente dados fictícios, credenciais de exemplo inválidas e serviços locais/simulados.
+- [x] Evitar comandos destrutivos em exemplos; quando inevitáveis, explicar impacto e ambiente seguro.
+- [x] Manter exemplos pequenos e independentes, evitando projetos demonstrativos gigantes difíceis de atualizar.
 - [ ] Incluir exemplo de aplicação completa e exemplo de repositório legado para demonstrar descoberta e adaptação.
-- [ ] Criar glossário de termos e convenções consistentes entre português e inglês.
+- [x] Criar glossário de termos e convenções consistentes entre português e inglês.
 
 ## 34. Estratégia de adoção e experiência do desenvolvedor
 
-- [ ] Criar uma demonstração guiada que mostre a skill identificando contexto, escolhendo referências e validando uma pequena mudança.
-- [ ] Oferecer um diagnóstico inicial do projeto consumidor com achados priorizados, sem editar nada automaticamente.
-- [ ] Criar um caminho rápido para usuários experientes e um caminho didático para iniciantes.
-- [ ] Documentar claramente o que o zm-pro faz, o que não faz e o que depende do harness ou das ferramentas conectadas.
-- [ ] Criar exemplos de prompts de uso como ponto de partida, sem exigir frases mágicas.
+- [x] Criar uma demonstração guiada que mostre a skill identificando contexto, escolhendo referências e validando uma pequena mudança.
+- [x] Oferecer um diagnóstico inicial do projeto consumidor com achados priorizados, sem editar nada automaticamente.
+- [x] Criar um caminho rápido para usuários experientes e um caminho didático para iniciantes.
+- [x] Documentar claramente o que o zm-pro faz, o que não faz e o que depende do harness ou das ferramentas conectadas.
+- [x] Criar exemplos de prompts de uso como ponto de partida, sem exigir frases mágicas.
 - [ ] Medir sucesso do onboarding por tarefa concluída e validada, não por quantidade de páginas lidas.
-- [ ] Manter documentação acessível no próprio repositório; um site separado só deve existir se houver benefício claro e manutenção possível.
+- [x] Manter documentação acessível no próprio repositório; um site separado só deve existir se houver benefício claro e manutenção possível.
 
 ## 35. Regras para impedir expansão sem controle
 

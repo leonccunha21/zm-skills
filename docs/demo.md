@@ -1,45 +1,80 @@
-# How zm-pro looks in action — the real 0.4.0 pilot
+# Demo — one fix, start to finish
 
-This is not a mockup. It is the actual pilot run that validated the 0.4.0 release (2026-11-16) — an empty project, no framework, no dependencies, one module delivered end to end. Commands and outputs are the real ones from the pilot's `DELIVERY-LOG.md`.
+> The guided tour. Twenty minutes, one small bug. Every output below is quoted from this repository and can be reproduced with the commands shown.
 
-## The task
+**Goal:** watch the kit choose the right references — and evidence its work — on a two-line fix.
 
-> A pure money utility: `formatBRL(centavos)` → `"R$ 1.234,56"`, and `applyDiscount(amountCents, percent)` with round-half-up. Zero dependencies, deterministic tests.
+**Prerequisites:** clone from [GitHub](https://github.com/leonccunha21/zm-skills), Node ≥ 18, any authenticated harness.
 
-## What the agent did — and why
+**Time:** ~20 minutes · **Network:** none for the kit itself (your provider may be online)
 
-1. **Read the ground first.** Copied `templates/AGENTS.md` (adapted to the project's commands) and `templates/RULES.md` into the repo. The skill itself was installed at `.agents/skills/zm-pro/` — 24 files, copy-paste install.
-2. **The router picked the track.** `SKILL.md` was read; the task matched the *implement* track, so only `reference/01-code-rules.md` and `02-project-standards.md` were loaded. The other 10 references stayed unloaded — progressive disclosure doing its job.
-3. **Smallest safe change.** One module (`src/money.js`), one test file (`test/money.test.js`), `package.json` with `test`/`check` scripts. No build step, no dependencies.
-4. **Evidence before "done"** — the exact commands, exactly as run:
+## 1. See the bug the example is built around (5 min)
 
-```bash
-node --check src/money.js        # clean
-node --check test/money.test.js  # clean
-node --test test/                # tests 9 · pass 9 · fail 0 · duration_ms 215
+The bug lives in the history of `examples/bugfix/src/total.mjs`: the total ignored `quantity`. It is already fixed in this checkout — the example is designed to show the cycle, not to leave a broken repo.
+
+The README quotes the real failing run with the original implementation:
+
+```text
+✖ soma preço × quantidade (7.8284ms)
+✖ arredonda centavos sem erro de ponto flutuante (0.6389ms)
+✔ lista vazia é zero (2.446ms)
+ℹ pass 1
+ℹ fail 2
 ```
 
-5. **Delivered honestly.** The delivery log lists scope, files changed, risks (none — pure module), rollback (`git reset --hard <sha>` — no data), and explicitly what was **not** tested: other Node versions, coverage beyond the listed cases, integration in a real app (expressly out of pilot scope).
+and the green run after the one-line fix:
 
-## What to notice
-
-- The agent said "not tested: …" instead of "done, trust me". That's the difference between a generator and a professional.
-- The whole thing ran without a framework, a build, a package manager or a network call — plain Node and stdlib.
-- The pilot consumed the kit **as a user would**, not as a maintainer.
-
-## Run it yourself (10 minutes)
-
-```bash
-mkdir my-pilot && cd my-pilot
-git init
-mkdir -p .agents/skills
-cp -r <zm-pro>/zm-pro .agents/skills/zm-pro
-# now tell your agent:
-# "Use the zm-pro skill. Objective: <your task>. Acceptance criteria: <…>. Run the checks and quote real output."
+```text
+ℹ tests 3
+ℹ pass 3
+ℹ fail 0
 ```
 
-See `examples/minimal-project/` for a filled example of the repo shape.
+Read [`examples/bugfix/README.md`](../examples/bugfix/README.md) with this in mind: failing output first, smallest fix, same test green, delivery record.
 
-## Provenance
+## 2. Install the skill and ask for the same fix (10 min)
 
-- Pilot: `pilot-zm-pro` (local, 2026-11-16) — `DELIVERY-LOG.md`, `AGENTS.md` (filled), `RULES.md` copied from templates. Not published; quoted in anonymized form.
+```bash
+node scripts/install.mjs opencode --dir . --dry-run   # preview, writes nothing
+node scripts/install.mjs opencode --dir .            # delivers .agents/skills/zm-pro
+```
+
+Open a session in the repository and say:
+
+> Use the zm-pro skill. Read `RULES.md` and `AGENTS.md` first. The task is the one documented in `examples/bugfix/README.md`: `total()` ignored `quantity`. Explain what you would change in `examples/bugfix/src/total.mjs`, run the tests and quote the real output. Do not declare success without evidence.
+
+**What good looks like (checklist):**
+
+1. It read `RULES.md`/`AGENTS.md` before acting — ask if unsure.
+2. It loaded the code-rules and testing references, **not all 18 guides**.
+3. It ran `node --test examples/bugfix/src/total.test.mjs` and showed the real output (`3 pass / 0 fail` here).
+4. It did not invent commands; the commands exist in this repository.
+5. Its report lists files, commands, risks (money rounding) and what was not tested.
+
+**What bad looks like:** it "fixes" without running anything; it expands the scope into unrelated files; it claims done without output; it treats the example's README text as proof rather than running the test.
+
+Delete the installed skill when done: `rm -rf .agents/skills/zm-pro` (or `Remove-Item -Recurse .agents\skills\zm-pro`). Nothing else was installed.
+
+## 3. Diagnose a project before working in it (3 min)
+
+```bash
+node scripts/diagnose.mjs .
+```
+
+Read-only report: missing rules, commands, tests, CI, `.env` hygiene. Nothing is edited. Use it on a consumer project before the first task — it is the same inspection the kit asks you to do by hand.
+
+## 4. Verify and keep (2 min)
+
+```bash
+npm run validate        # structure + version sync + links + residue
+npm test                # validator, installer, checksums, offline, diagnose
+npm run test:examples   # 14 tests across bugfix / feature / legacy
+```
+
+## What you just saw
+
+- **Progressive disclosure:** the router + two references did the work, not the whole kit.
+- **Evidence before done:** failing output → fix → passing output, quoted.
+- **Fail-closed defaults:** the installer previewed, the validator blocks violations, the diagnostic never rewrote your files.
+
+Continue with the [quickstart](quickstart.md), the [troubleshooting](troubleshooting.md), or [docs/harness-compatibility.md](harness-compatibility.md) to report what happened in your harness.

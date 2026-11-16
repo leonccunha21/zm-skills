@@ -24,6 +24,9 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 - `zm-pro/reference/14-agent-operations.md` — agent operating cycle, tool-risk matrix with confirmation rules, untrusted content and instruction hierarchy, stop rules, reporting contract and recovery; indexed in the router and the routing table.
 - `examples/bugfix/` — runnable fix cycle (failing test → one-line fix → green) with the real before/after output; `npm run test:examples` and CI run it.
+- `examples/feature/` — a small feature delivered end to end: acceptance criterion, test first, real output, changelog entry and delivery record.
+- `examples/legacy/` — characterization tests on undocumented rules, a behavior-preserving refactor and a deliberate break proving the suite catches it.
+- `docs/demo.md` — guided 20-minute walkthrough; `scripts/diagnose.mjs` — read-only first-contact diagnostic (`npm run diagnose`, `--json`), covered by tests.
 - `docs/quickstart.md` — five-minute path from clone to one evidenced change.
 - `docs/maturity.md` — honest maturity report: levels 1–2 met, 3–4 not met, 5 partial, with evidence and limits.
 
