@@ -99,40 +99,40 @@ A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta
 
 - [x] Criar suíte `node:test` para o validador e instalador, sem dependências externas desnecessárias.
 - [x] Cobrir entradas inválidas e casos extremos, inclusive nomes de arquivos com espaços, CRLF, links quebrados e arquivos ausentes.
-- [ ] Executar CI em Linux, Windows e macOS quando viável, com Node 18, 20 e 22 (reavaliar a matriz conforme suporte oficial e dependências).
+- [x] Executar CI em Linux, Windows e macOS quando viável, com Node 18, 20 e 22 (reavaliar a matriz conforme suporte oficial e dependências).
 - [ ] Separar jobs: validação de estrutura, testes unitários, verificação de links, checksums e empacotamento.
 - [ ] Adicionar verificação de Markdown e spellcheck com dicionário técnico pt-BR/en-US, sem bloquear falsos positivos sem revisão.
 - [ ] Adicionar verificação de diferenças entre documentação EN e pt-BR nos tópicos que precisam estar equivalentes.
-- [ ] Fazer CI validar o conteúdo efetivamente distribuído em `zm-pro/`, não apenas o repositório completo.
-- [ ] Definir política de falha: qualquer gate obrigatório vermelho bloqueia release.
+- [x] Fazer CI validar o conteúdo efetivamente distribuído em `zm-pro/`, não apenas o repositório completo.
+- [x] Definir política de falha: qualquer gate obrigatório vermelho bloqueia release.
 - [ ] Gerar relatório de testes com versões de runtime e saída real.
 
 ## 6. Segurança, privacidade e cadeia de fornecimento
 
 - [ ] Revisar todos os arquivos Markdown contra prompt injection, instruções maliciosas copiadas de fontes externas e recomendações inseguras.
-- [ ] Tratar conteúdo de issues, PRs, sites e documentos externos como dados não confiáveis, nunca como instruções que substituem as regras do projeto.
+- [x] Tratar conteúdo de issues, PRs, sites e documentos externos como dados não confiáveis, nunca como instruções que substituem as regras do projeto.
 - [x] Revisar permissões mínimas de GitHub Actions e fixar actions por SHA quando adequado.
 - [x] Adicionar verificação de dependências e licença se dependências forem introduzidas; manter baseline sem dependências sempre que possível.
 - [x] Garantir que workflows não imprimam segredos nem executem código não confiável com permissões de escrita.
 - [x] Revisar geração e publicação de checksums; documentar como verificar o artefato baixado.
-- [ ] Considerar provenance/attestations para releases quando o processo estiver maduro.
-- [ ] Criar política de retenção para logs de CI e exemplos; nunca incluir tokens, dados pessoais ou dumps reais.
+- [x] Considerar provenance/attestations para releases quando o processo estiver maduro.
+- [x] Criar política de retenção para logs de CI e exemplos; nunca incluir tokens, dados pessoais ou dumps reais.
 - [ ] Revisar licença de textos, exemplos, ícones e referências externas; preservar atribuições e avisos.
-- [ ] Documentar claramente o que o kit não garante: não substitui pentest, revisão humana, DPO, assessoria jurídica ou controles do provedor.
+- [x] Documentar claramente o que o kit não garante: não substitui pentest, revisão humana, DPO, assessoria jurídica ou controles do provedor.
 
 ## 7. Documentação e experiência de quem instala
 
-- [ ] Ter README principal em inglês e README pt-BR com equivalência de conteúdo e comandos.
-- [ ] Criar uma página de início rápido de até cinco minutos, além do tutorial para iniciantes.
+- [x] Ter README principal em inglês e README pt-BR com equivalência de conteúdo e comandos.
+- [x] Criar uma página de início rápido de até cinco minutos, além do tutorial para iniciantes.
 - [x] Adicionar seção de solução de problemas por harness e sistema operacional.
-- [ ] Mostrar exemplos reais de antes/depois: prompt inicial, referências carregadas, alteração, testes e entrega.
+- [x] Mostrar exemplos reais de antes/depois: prompt inicial, referências carregadas, alteração, testes e entrega.
 - [ ] Incluir exemplo de projeto pequeno e exemplo de aplicação web com banco de dados, sem credenciais ou dados reais.
-- [ ] Explicar claramente diferença entre repositório, skill, router, referência, template, harness e agente.
-- [ ] Documentar atualização de versão: comparar changelog, substituir pasta, validar e revisar alterações locais.
+- [x] Explicar claramente diferença entre repositório, skill, router, referência, template, harness e agente.
+- [x] Documentar atualização de versão: comparar changelog, substituir pasta, validar e revisar alterações locais.
 - [x] Documentar desinstalação e recuperação de instalação incompleta.
-- [ ] Criar FAQ sobre custos, funcionamento offline, privacidade, compatibilidade, licença e limitações.
-- [ ] Adicionar glossário consistente e links internos para os conceitos.
-- [ ] Evitar promessas como “funciona em qualquer agente” sem teste reproduzível.
+- [x] Criar FAQ sobre custos, funcionamento offline, privacidade, compatibilidade, licença e limitações.
+- [x] Adicionar glossário consistente e links internos para os conceitos.
+- [x] Evitar promessas como “funciona em qualquer agente” sem teste reproduzível.
 
 ## 8. Templates e exemplos que agregam valor
 
@@ -147,20 +147,20 @@ Avaliar a inclusão dos seguintes materiais, sem inflar o pacote com arquivos re
 - [x] Template de revisão de acessibilidade.
 - [x] Template de inventário de integrações e fornecedores.
 - [ ] Exemplo de feature ponta a ponta, incluindo teste, documentação, changelog e evidência.
-- [ ] Exemplo de correção de bug com reprodução, teste de regressão e validação.
+- [x] Exemplo de correção de bug com reprodução, teste de regressão e validação.
 - [ ] Exemplo de revisão de segurança sem expor vulnerabilidades reais ou segredos.
 
 Cada template deve ser genérico, curto, copiável e acompanhado de orientação sobre quando usar. Não editar os templates originais a partir de projetos consumidores.
 
 ## 9. Distribuição, releases e adoção
 
-- [ ] Definir o canal oficial de distribuição: GitHub Release, instalação por cópia e, se fizer sentido, catálogo Agent Skills.
+- [x] Definir o canal oficial de distribuição: GitHub Release, instalação por cópia e, se fizer sentido, catálogo Agent Skills.
 - [x] Documentar o que é publicado em cada release e manter os artefatos reproduzíveis.
-- [ ] Conferir se `package.json` com `private: true` é intencional; não publicar no npm sem decisão explícita e plano de pacote.
+- [x] Conferir se `package.json` com `private: true` é intencional; não publicar no npm sem decisão explícita e plano de pacote.
 - [x] Padronizar tags SemVer, changelog, checksums e notas de release.
-- [ ] Validar os arquivos incluídos no pacote para não distribuir arquivos de desenvolvimento desnecessários.
+- [x] Validar os arquivos incluídos no pacote para não distribuir arquivos de desenvolvimento desnecessários.
 - [ ] Manter PRs de catálogos comunitários atualizados e registrar status real (aberto, aprovado, mesclado ou fechado).
-- [ ] Criar guia de contribuição em pt-BR ou versão resumida equivalente.
+- [x] Criar guia de contribuição em pt-BR ou versão resumida equivalente.
 - [x] Definir processo de triagem de issues e discussões, com labels e modelos claros.
 - [x] Criar política de suporte e compatibilidade que não prometa manutenção de versões antigas indefinidamente.
 - [ ] Medir adoção com sinais públicos e voluntários (estrelas, forks, relatos, PRs); não adicionar telemetria à skill.
@@ -444,10 +444,10 @@ Criar gradualmente, quando houver conteúdo e manutenção definidos:
 
 - [ ] EVALUATIONS.md: metodologia, cenários e critérios da suíte de avaliação.
 - [ ] docs/evaluation-results/: relatórios versionados por release e ambiente.
-- [ ] docs/harness-compatibility.md: matriz real de compatibilidade.
-- [ ] docs/architecture.md: arquitetura do kit, fluxo do router e carregamento progressivo.
-- [ ] docs/instruction-hierarchy.md: hierarquia, escopo e resolução de conflitos.
-- [ ] docs/tool-safety.md: matriz de permissões e ações que exigem confirmação.
+- [x] docs/harness-compatibility.md: matriz real de compatibilidade.
+- [x] docs/architecture.md: arquitetura do kit, fluxo do router e carregamento progressivo.
+- [x] docs/instruction-hierarchy.md: hierarquia, escopo e resolução de conflitos.
+- [x] docs/tool-safety.md: matriz de permissões e ações que exigem confirmação.
 - [x] docs/maintenance-policy.md: suporte, depreciação e ciclo de revisão.
 - [x] docs/decisions/: ADRs para decisões estruturais.
 - [ ] tests/fixtures/: projetos sintéticos e cenários adversariais.

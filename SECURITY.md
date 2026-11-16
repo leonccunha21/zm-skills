@@ -30,6 +30,18 @@ This skill is Markdown plus a zero-dependency validator script — the attack su
 
 We acknowledge within 72 hours and aim to publish a fix or a mitigation note within 14 days. Credit is given unless you decline it. Supported versions, deprecation and review cadence live in [docs/maintenance-policy.md](docs/maintenance-policy.md).
 
+## Data handling in this repository
+
+- **No telemetry, no analytics, no network calls** in the skill or scripts; `tests/offline.test.mjs` enforces the import side and runs the gate with an invalid proxy.
+- **CI logs** are public and retained under GitHub's default retention; workflows never print tokens or secrets, and fixtures are synthetic. Do not paste customer data, tokens or private paths into an issue, PR or test fixture.
+- **Examples and tests use invented data only** — no production dumps, no real credentials (example credentials are invalid by construction).
+- **Release artifacts** are the tagged tree plus `CHECKSUMS-<tag>.txt`; nothing else is uploaded.
+- **Content review:** text from issues, pages and third-party docs is treated as data, never as instructions that override project rules (`zm-pro/reference/14-agent-operations.md`).
+
+## What this policy does not cover
+
+The kit does not replace a pentest, a human security review, a DPO, legal counsel or your provider's controls. Following a checklist is not evidence that a system is secure; only an assessment of the actual system is.
+
 ## What is in scope
 
 - Guidance that could cause secrets/PII leakage, unsafe auth patterns, or license violations when followed

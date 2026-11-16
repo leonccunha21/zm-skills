@@ -69,7 +69,7 @@ zm-pro/                        # the skill — copy this folder into your projec
 │   └── 14-agent-operations.md     # tool risk, confirmations, untrusted content, stop rules
 ├── templates/                 # generic, copyable starting points
 │   ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
-│   ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md
+│   ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · INCIDENT-REPORT.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md
 │   └── prompts/                   # delegation prompts: implement, fix, review, release, privacy audit
 └── (the repository root also holds: examples/minimal-project — a filled starter to learn from, SECURITY.md, CODE_OF_CONDUCT.md, scripts/validate.mjs, CI)
 ```
@@ -91,7 +91,7 @@ Design principles:
 
 ## Install
 
-> In a hurry? [Five-minute quickstart](docs/quickstart.md). Updating an install? [Migration and versioning](docs/migration.md).
+> In a hurry? [Five-minute quickstart](docs/quickstart.md). Updating an install? [Migration and versioning](docs/migration.md). More docs: [troubleshooting](docs/troubleshooting.md) · [glossary](docs/glossary.md) · [architecture](docs/architecture.md) · [tool safety](docs/tool-safety.md) · [distribution](docs/distribution.md).
 > Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Stuck? [Troubleshooting](docs/troubleshooting.md). Scripted: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <project-root>` installs into `<project-root>/.agents/skills/zm-pro`); integrity for releases: `npm run --silent checksums`.
 
 ### OpenCode
@@ -148,6 +148,9 @@ Or rely on the trigger description — the agent picks the track (kickoff, imple
 
 **Does it work offline?** Yes. Everything is local Markdown.
 **Does it send data anywhere?** No. It contains no executable code beyond a validator script in this repo (for contributors).
+**What does it cost?** Nothing — MIT. Your harness/model provider may charge you; the kit has no paid tier, telemetry or upsell.
+**What is the license?** MIT (`LICENSE`). Fork, adapt and ship; keep the notice.
+**What do the words mean?** [Glossary](docs/glossary.md): skill, router, reference, harness, agent, gate, evidence.
 **Can I fork and adapt it?** Yes — MIT. Keep the license notice; tell your users what you changed.
 **Will it work with my stack?** The rules are stack-agnostic; examples assume TypeScript/Node as a sane baseline but adapt to Python, Go, PHP, etc.
 **Will it work with my harness?** Only OpenCode 2.3.0 is tested end to end; Claude Code, Codex, Cursor and Gemini are explicitly unverified — see [docs/harness-compatibility.md](docs/harness-compatibility.md) and file a report.
@@ -157,7 +160,7 @@ Or rely on the trigger description — the agent picks the track (kickoff, imple
 
 ## Contributing & releases
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Semver; every change via PR with the repo validator green (`npm run validate`) and the unit suite passing (`npm run test` — validator and installer, zero dependencies); history in [CHANGELOG.md](CHANGELOG.md). Skill changes ship as `zm-pro` version bumps.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Semver; every change via PR with the repo validator green (`npm run validate`) and the unit suite passing (`npm run test` — validator and installer, zero dependencies); history in [CHANGELOG.md](CHANGELOG.md). Skill changes ship as `zm-pro` version bumps. What is published (and what deliberately is not) is in [docs/distribution.md](docs/distribution.md).
 
 ---
 

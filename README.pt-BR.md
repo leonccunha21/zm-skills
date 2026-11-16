@@ -69,7 +69,7 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 │   └── 14-agent-operations.md     # risco de ferramenta, confirmações, conteúdo não confiável, regras de parada
 └── templates/                 # pontos de partida genéricos e copiáveis
     ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
-    ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md
+    ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · INCIDENT-REPORT.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md
     └── prompts/                   # prompts de delegação: implementar, corrigir, revisar, release, auditoria LGPD
 (examples/minimal-project na raiz do repositório: projeto inicial preenchido — AGENTS.md real, ADR real e DELIVERY-LOG com evidência)
 ```
@@ -83,7 +83,7 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 
 ## Instalação
 
-> Com pressa? [Início rápido em cinco minutos](docs/quickstart.md) (em inglês). Atualizando uma instalação? [Migração e versionamento](docs/migration.md).
+> Com pressa? [Início rápido em cinco minutos](docs/quickstart.md) (em inglês). Atualizando uma instalação? [Migração e versionamento](docs/migration.md). Mais docs (em inglês): [solução de problemas](docs/troubleshooting.md) · [glossário](docs/glossary.md) · [arquitetura](docs/architecture.md) · [segurança de ferramentas](docs/tool-safety.md) · [distribuição](docs/distribution.md).
 > Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Travou? [Solução de problemas](docs/troubleshooting.md). Automatizado: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <raiz-do-projeto>` instala em `<raiz-do-projeto>/.agents/skills/zm-pro`); integridade para releases: `npm run --silent checksums`.
 
 ### OpenCode
@@ -136,6 +136,9 @@ Prompt para uma tarefa real:
 
 **Funciona offline?** Sim. Tudo é Markdown local.
 **Envia dados para fora?** Não. O repositório não contém código executável além do validador (só para contribuidores).
+**Quanto custa?** Nada — MIT. Seu harness/provedor de modelo pode cobrar; o kit não tem plano pago, telemetria nem upsell.
+**Qual é a licença?** MIT (`LICENSE`). Faça fork, adapte e distribua; mantenha o aviso.
+**O que significam os termos?** [Glossário](docs/glossary.md) (em inglês): skill, router, referência, harness, agente, gate, evidência.
 **Posso forkar e adaptar?** Sim — MIT. Mantenha o aviso de licença e diga aos usuários o que mudou.
 **Funciona com minha stack?** As regras são agnósticas; os exemplos assumem TypeScript/Node, mas adaptam-se a Python, Go, PHP etc.
 **Funciona com meu harness?** Só o OpenCode 2.3.0 foi testado de ponta a ponta; Claude Code, Codex, Cursor e Gemini estão explicitamente não verificados — veja [docs/harness-compatibility.md](docs/harness-compatibility.md) e envie um relato.
@@ -144,7 +147,9 @@ Prompt para uma tarefa real:
 
 ## Contribuição e releases
 
-Veja [CONTRIBUTING.md](CONTRIBUTING.md) (em inglês). Semver; toda mudança via PR com o validador verde (`npm run validate`) e a suíte de testes passando (`npm run test` — validador e instalador, sem dependências); histórico em [CHANGELOG.md](CHANGELOG.md).
+Veja [CONTRIBUTING.md](CONTRIBUTING.md) (em inglês). Semver; toda mudança via PR com o validador verde (`npm run validate`) e a suíte de testes passando (`npm run test` - validador e instalador, sem dependências); histórico em [CHANGELOG.md](CHANGELOG.md).
+
+Resumo em português: (1) abra uma issue antes de mudanças grandes; (2) edite `zm-pro/` ou os arquivos do repositório; (3) rode `npm run validate` e `npm test` e cole a saída real; (4) atualize `CHANGELOG.md` (MAJOR quebra, MINOR adiciona, PATCH corrige); (5) preencha o template de PR. O inglês é canônico no kit; pt-BR aparece onde o idioma é o assunto. Distribuição e o que é publicado: [docs/distribution.md](docs/distribution.md).
 
 ---
 
