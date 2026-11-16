@@ -18,3 +18,4 @@ node_modules/
 coverage/
 *.log
 dist/
+payload-*.json
