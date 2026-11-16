@@ -28,7 +28,7 @@ This skill is Markdown plus a zero-dependency validator script — the attack su
 2. Use GitHub's **private vulnerability reporting** ("Security" tab → "Report a vulnerability") on `leonccunha21/zm-skills`. If that's unavailable, contact the maintainer through the GitHub profile.
 3. Include: affected file/section, impact, reproduction (a prompt or input that triggers it), and suggested fix if any.
 
-We acknowledge within 72 hours and aim to publish a fix or a mitigation note within 14 days. Credit is given unless you decline it.
+We acknowledge within 72 hours and aim to publish a fix or a mitigation note within 14 days. Credit is given unless you decline it. Supported versions, deprecation and review cadence live in [docs/maintenance-policy.md](docs/maintenance-policy.md).
 
 ## What is in scope
 

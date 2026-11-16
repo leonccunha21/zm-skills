@@ -52,6 +52,8 @@ Thanks for helping make this the reference skill for professional project work. 
 
 Maintainers cut releases: bump `version` in `package.json`, finalize `CHANGELOG.md` (move `[Unreleased]` → `[X.Y.Z] — date`), bump the `SKILL.md` version marker (the validator checks it matches `package.json`), tag `vX.Y.Z`, run `npm run --silent checksums > CHECKSUMS-<tag>.txt` (the `--silent` keeps npm's banner out of the manifest), verify it with `node scripts/checksums.mjs --verify CHECKSUMS-<tag>.txt`, and attach it to the GitHub release with the changelog section. Consumers update with a plain folder copy — no package manager involved.
 
+Decisions that change the kit's contract (validator rules, installer behavior, release flow) are recorded as short ADRs in `docs/decisions/`; support and deprecation promises live in `docs/maintenance-policy.md`.
+
 ## Code of conduct
 
 Be direct and kind. Critique work, not people. Assume good faith; verify claims. Harassment of any kind results in removal from the project.

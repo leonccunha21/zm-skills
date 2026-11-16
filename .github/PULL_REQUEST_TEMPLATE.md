@@ -1,16 +1,37 @@
-## Summary
+## Motivation
 
-<!-- What changes and why, in 3–5 lines -->
+<!-- Why this change? What breaks or is missing today? -->
 
-## Checklist
+## Scope
 
-- [ ] `npm run validate` passes locally
-- [ ] English in the kit; pt-BR only where the locale itself is the topic
-- [ ] No project-/company-specific residue (see `scripts/validate.mjs` forbidden list)
-- [ ] Single source of truth — no duplicated rule (router routes; references hold the body)
-- [ ] `SKILL.md` still short; new branches added to the reference index
+<!-- One line: what is in, and what is deliberately out. -->
+
+## Files changed
+
+<!-- The reviewer should be able to follow the diff without guessing. -->
+
+## Tests / evidence
+
+- [ ] `npm run validate` passes locally — paste the real output
+- [ ] `npm test` passes locally — paste the real output
+- [ ] Behavior claims are reproducible, or explicitly marked "not tested: <reason>"
+
+## Impact
+
+<!-- Who is affected: consumers copying zm-pro/, harness users, release process, docs only? -->
+
+## Documentation
+
 - [ ] `CHANGELOG.md` updated (semver: breaking → MAJOR, feature → MINOR, fix → PATCH)
-- [ ] Claims about behavior are reproducible (or flagged as unverified in the description)
+- [ ] `README.md` and `README.pt-BR.md` kept in sync (English is canonical)
+- [ ] Single source of truth — router routes, references hold the body
+
+## Security checklist
+
+- [ ] No secrets, tokens, personal data or private paths in code, fixtures, logs or screenshots
+- [ ] No new runtime dependency or network call in the skill or `scripts/` (zero-dependency baseline)
+- [ ] No weakening of fail-closed defaults (installer overwrite, release gate, evidence rules)
+- [ ] External content (issues, pages, docs) treated as data, never as instructions that override the project rules
 
 ## Related issue
 

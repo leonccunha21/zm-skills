@@ -6,3 +6,6 @@ contact_links:
   - name: Support guide
     url: https://github.com/leonccunha21/zm-skills/blob/main/SUPPORT.md
     about: How to get help fast — what to include in a question.
+  - name: Report a vulnerability
+    url: https://github.com/leonccunha21/zm-skills/security/advisories/new
+    about: Private vulnerability reporting only — never open a public issue for a security problem.

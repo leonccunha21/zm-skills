@@ -16,6 +16,11 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 - `.github/workflows/validate.yml` — least-privilege `contents: read`, actions pinned by commit SHA, and a separate checksums job that generates and verifies the manifest.
 - `.github/workflows/release.yml` — the tag now gates on `npm run validate` + `npm test`, pins actions by SHA, and verifies the checksum manifest before publishing.
 
+- `.github/ISSUE_TEMPLATE/harness_report.md` — compatibility evidence form (harness, version, OS, install mode, observation, commands, limitations) plus a private-vulnerability contact link in `config.yml`; the PR template now covers motivation, scope, files, evidence, impact, docs and a security checklist.
+- `docs/maintenance-policy.md` — supported versions, deprecation flow, review cadence, harness honesty and triage pointers.
+- `docs/decisions/0001-tooling-contract.md` — first ADR: validator gate, fail-closed installer, verifiable checksums, `node:test` only.
+- `docs/harness-compatibility.md` — reproducible five-step test script with pass criteria.
+
 ### Changed
 
 - `scripts/install.mjs` — flag parsing no longer mistakes a `--dir` value for the harness name.

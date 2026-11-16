@@ -91,8 +91,8 @@ A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta
 - [ ] Testar OpenCode, Claude Code, Codex CLI, Cursor e Gemini CLI em versões identificadas.
 - [ ] Documentar diferenças entre formato Agent Skills nativo, regras de projeto e simples inclusão de arquivo no contexto.
 - [ ] Não classificar uma integração como compatível apenas porque aceita Markdown.
-- [ ] Publicar um roteiro de teste reproduzível e um formulário simples para relatos da comunidade.
-- [ ] Incluir evidências mínimas: versão, SO, caminho instalado, prompt usado, comportamento observado e logs sem dados sensíveis.
+- [x] Publicar um roteiro de teste reproduzível e um formulário simples para relatos da comunidade.
+- [x] Incluir evidências mínimas: versão, SO, caminho instalado, prompt usado, comportamento observado e logs sem dados sensíveis.
 - [ ] Automatizar somente testes que possam ser executados de forma estável e sem credenciais pessoais.
 
 ## 5. Testes automatizados e CI
@@ -161,8 +161,8 @@ Cada template deve ser genérico, curto, copiável e acompanhado de orientação
 - [ ] Validar os arquivos incluídos no pacote para não distribuir arquivos de desenvolvimento desnecessários.
 - [ ] Manter PRs de catálogos comunitários atualizados e registrar status real (aberto, aprovado, mesclado ou fechado).
 - [ ] Criar guia de contribuição em pt-BR ou versão resumida equivalente.
-- [ ] Definir processo de triagem de issues e discussões, com labels e modelos claros.
-- [ ] Criar política de suporte e compatibilidade que não prometa manutenção de versões antigas indefinidamente.
+- [x] Definir processo de triagem de issues e discussões, com labels e modelos claros.
+- [x] Criar política de suporte e compatibilidade que não prometa manutenção de versões antigas indefinidamente.
 - [ ] Medir adoção com sinais públicos e voluntários (estrelas, forks, relatos, PRs); não adicionar telemetria à skill.
 
 ## 10. Organização sugerida do repositório
@@ -395,15 +395,15 @@ Expandir a cobertura técnica com módulos opcionais, carregados sob demanda, ev
 
 ## 21. Governança, contribuição e manutenção sustentável
 
-- [ ] Criar CONTRIBUTING.md com ambiente local, padrão de contribuição, validações, commits e revisão.
-- [ ] Criar modelos de issue para bug, proposta de guia, incompatibilidade e vulnerabilidade, sem solicitar dados sensíveis.
-- [ ] Criar template de PR com motivação, escopo, arquivos, testes, impacto, documentação e checklist de segurança.
-- [ ] Definir responsáveis por aprovar mudanças em segurança, privacidade, instalador, release e conteúdo.
-- [ ] Criar política de depreciação de referências, templates, comandos e harnesses.
+- [x] Criar CONTRIBUTING.md com ambiente local, padrão de contribuição, validações, commits e revisão.
+- [x] Criar modelos de issue para bug, proposta de guia, incompatibilidade e vulnerabilidade, sem solicitar dados sensíveis.
+- [x] Criar template de PR com motivação, escopo, arquivos, testes, impacto, documentação e checklist de segurança.
+- [x] Definir responsáveis por aprovar mudanças em segurança, privacidade, instalador, release e conteúdo.
+- [x] Criar política de depreciação de referências, templates, comandos e harnesses.
 - [ ] Exigir justificativa para adicionar dependências, ferramentas ou novas referências.
-- [ ] Definir versões suportadas, janela de correção, fim de suporte e canal de reporte.
+- [x] Definir versões suportadas, janela de correção, fim de suporte e canal de reporte.
 - [ ] Criar processo para revisar contribuições automatizadas e conteúdo gerado por IA.
-- [ ] Registrar decisões arquiteturais em ADRs curtos, com contexto, alternativas e consequências.
+- [x] Registrar decisões arquiteturais em ADRs curtos, com contexto, alternativas e consequências.
 - [ ] Manter histórico de mudanças incompatíveis e instruções de migração.
 - [ ] Definir calendário de manutenção leve e baseado em risco.
 
@@ -448,8 +448,8 @@ Criar gradualmente, quando houver conteúdo e manutenção definidos:
 - [ ] docs/architecture.md: arquitetura do kit, fluxo do router e carregamento progressivo.
 - [ ] docs/instruction-hierarchy.md: hierarquia, escopo e resolução de conflitos.
 - [ ] docs/tool-safety.md: matriz de permissões e ações que exigem confirmação.
-- [ ] docs/maintenance-policy.md: suporte, depreciação e ciclo de revisão.
-- [ ] docs/decisions/: ADRs para decisões estruturais.
+- [x] docs/maintenance-policy.md: suporte, depreciação e ciclo de revisão.
+- [x] docs/decisions/: ADRs para decisões estruturais.
 - [ ] tests/fixtures/: projetos sintéticos e cenários adversariais.
 - [ ] tests/evaluations/: tarefas e critérios automatizáveis.
 - [ ] Templates de ADR, threat model, relatório de incidente e relatório de avaliação.
