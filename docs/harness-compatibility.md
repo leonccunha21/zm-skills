@@ -36,6 +36,15 @@ Only cells with ✅ carry evidence; every ❓ stays a promise to test, never a c
 
 Rule of thumb: prefer native discovery; use rule files when the harness has no skills mechanism; inline the router only as a last resort — and say which route you used in the harness report.
 
+## Behavioral evaluation pilots (uncontrolled, 2026-11-16)
+
+Two single-run pilots were executed with `scripts/evaluate-run.mjs` on **opencode/inkling-2-small-free** — the weakest configuration available; both were recorded in `docs/evaluation-results/` and neither counts as a baseline:
+
+- `eval-001` (bugfix task) — the agent planned, never invoked a tool, session ended. `pilot-eval-001.md`.
+- `eval-012` (typo trap) — the agent emitted a literal `<tool_call>` tag as text and stopped. `pilot-eval-012.md`.
+
+**What these show:** the evaluation pipeline works (argv delivery, transcript, scaffold); this model cannot drive the tool loop on this harness. **What they do not show:** anything about kit quality — the agent never reached the phase where the kit matters. OpenCode 2.3.0 remains "tested" for installation and skill discovery; agentic task execution on this model is unproven.
+
 ## Reproducible test script
 
 Run this in a scratch project — never in a production repository:
