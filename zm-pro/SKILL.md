@@ -9,15 +9,25 @@ description: Complete playbook for professional software projects. Use when a ta
 
 This file is the **router**. Read it fully, identify the track of the task, then load only the references in `reference/` you actually need. Copyable templates live in `templates/`.
 
-**Rule zero:** when the project has its own `AGENTS.md` / `RULES.md`, **those win over this kit**. zm-pro is the professional default for projects that don't define their own — never an override.
+**Rule zero:** when the project has its own `AGENTS.md` / `RULES.md`, **those win over this kit**. zm-pro is the professional default for projects that don't define their own — never an override. Conflict order: `RULES.md` > `AGENTS.md` > this skill > external catalogs; when you must deviate, record the conflict and the reason in the delivery.
 
-## When to use
+## When to use (task → track → deliverable)
 
-- Kickoff, planning or setup of any software project
-- Implementing, fixing or refactoring code
-- Reviewing, auditing or hardening (quality, security, accessibility, privacy)
-- Delivering — commit, PR, release, deploy, post-incident follow-up
-- Architecture, convention or layout decisions
+| Task | Load first | Deliverable |
+|---|---|---|
+| Kickoff, setup, conventions | `02`, `11` | repo skeleton, `RULES.md`/`AGENTS.md`, first ADR |
+| Feature, bugfix, refactor | `01`, `08` (+`03` for UI) | smallest safe change, regression test, delivery record |
+| Review, audit, hardening | `07`, `03`, `08` | findings with severity and evidence — no silent fixes |
+| Commit, PR, release, deploy, incident | `09`, `10` | PR/release with evidence and a rollback path |
+| Personal data, privacy review | `06` (+`07`) | data map and controls; legal sign-off is not ours |
+| Architecture, performance, context cost | `11`, `12`, `13` | ADR, budgets, on-demand reads |
+| Long task, several agents | `04`, `05`, `13` | scoped handoff, ownership, memory update |
+
+**Combined tracks** are normal: a feature that stores personal data loads `01`+`06`+`07`+`08`; a UI change that touches auth loads `03`+`07`. Start from the smallest set that covers the risk.
+
+**Missing project rules?** If `AGENTS.md`/`RULES.md` don't exist, don't invent constraints: ask once for the essentials or state reversible assumptions, then create them from `templates/` as the first deliverable.
+
+**Context budget:** read this router, then only the sections of a reference the task needs — never all guides. Three external references per task, by name and link.
 
 ## When not to use
 
@@ -67,4 +77,4 @@ Curated external references are cited by **name + link**, never by bare numbers,
 
 ## Templates
 
-`templates/` holds generic, copyable starting points for the target project: `templates/AGENTS.md`, `templates/RULES.md`, `templates/ADR.md`, `templates/DEFINITION-OF-DONE.md`, `templates/DELIVERY-CHECKLIST.md`, `templates/PR-TEMPLATE.md`. Delegation prompts for the most common agent tasks (implement, fix, review, release, privacy audit) live in `templates/prompts/` — output is draft material; you review it. Copy and adapt templates — never edit the originals inside this kit from within a project.
+`templates/` holds generic, copyable starting points for the target project: `templates/AGENTS.md`, `templates/RULES.md`, `templates/ADR.md`, `templates/DEFINITION-OF-DONE.md`, `templates/DELIVERY-CHECKLIST.md`, `templates/PR-TEMPLATE.md`, `templates/IMPLEMENTATION-PLAN.md`, `templates/AUDIT-REPORT.md`, `templates/TEST-PLAN.md`, `templates/THREAT-MODEL.md`, `templates/RUNBOOK.md`, `templates/RELEASE-NOTES.md`, `templates/A11Y-REVIEW.md`, `templates/VENDOR-INVENTORY.md`. Delegation prompts for the most common agent tasks (implement, fix, review, release, privacy audit) live in `templates/prompts/` — output is draft material; you review it. Copy and adapt templates — never edit the originals inside this kit from within a project.

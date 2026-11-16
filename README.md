@@ -67,6 +67,7 @@ zm-pro/                        # the skill — copy this folder into your projec
 │   └── 13-token-economy.md        # context is money: on-demand reads, caching, narrow subagent scopes
 ├── templates/                 # generic, copyable starting points
 │   ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
+│   ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md
 │   └── prompts/                   # delegation prompts: implement, fix, review, release, privacy audit
 └── (the repository root also holds: examples/minimal-project — a filled starter to learn from, SECURITY.md, CODE_OF_CONDUCT.md, scripts/validate.mjs, CI)
 ```
@@ -88,7 +89,7 @@ Design principles:
 
 ## Install
 
-> Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Scripted: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <project-root>` installs into `<project-root>/.agents/skills/zm-pro`); integrity for releases: `npm run --silent checksums`.
+> Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Stuck? [Troubleshooting](docs/troubleshooting.md). Scripted: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <project-root>` installs into `<project-root>/.agents/skills/zm-pro`); integrity for releases: `npm run --silent checksums`.
 
 ### OpenCode
 

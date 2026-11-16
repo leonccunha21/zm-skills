@@ -67,6 +67,7 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 │   └── 13-token-economy.md        # o contexto é dinheiro: leitura sob demanda, cache, subagentes com escopo estreito
 └── templates/                 # pontos de partida genéricos e copiáveis
     ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
+    ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md
     └── prompts/                   # prompts de delegação: implementar, corrigir, revisar, release, auditoria LGPD
 (examples/minimal-project na raiz do repositório: projeto inicial preenchido — AGENTS.md real, ADR real e DELIVERY-LOG com evidência)
 ```
@@ -80,7 +81,7 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 
 ## Instalação
 
-> Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Automatizado: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <raiz-do-projeto>` instala em `<raiz-do-projeto>/.agents/skills/zm-pro`); integridade para releases: `npm run --silent checksums`.
+> Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Travou? [Solução de problemas](docs/troubleshooting.md). Automatizado: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <raiz-do-projeto>` instala em `<raiz-do-projeto>/.agents/skills/zm-pro`); integridade para releases: `npm run --silent checksums`.
 
 ### OpenCode
 

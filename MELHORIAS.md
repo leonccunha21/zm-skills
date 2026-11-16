@@ -57,12 +57,12 @@ Estes itens foram observados nos arquivos consultados durante a inspeção inici
 
 ### Router e carregamento progressivo
 
-- [ ] Manter `zm-pro/SKILL.md` curto, orientado a decisão e sem duplicar o conteúdo dos guias.
-- [ ] Criar uma tabela clara de gatilhos: tarefa → referências obrigatórias → entregável esperado.
-- [ ] Definir combinações de trilhas para tarefas que atravessam áreas (por exemplo, feature com autenticação e dados pessoais).
-- [ ] Incluir uma regra explícita para resolver conflito entre referências: regra do projeto primeiro; depois segurança e privacidade; por fim convenções gerais. Registrar a hierarquia sem criar contradições.
-- [ ] Explicar o que fazer quando `AGENTS.md`, `RULES.md` ou comandos de projeto não existem.
-- [ ] Definir limite de contexto: carregar primeiro o router, depois somente os trechos necessários das referências; evitar leitura integral desnecessária.
+- [x] Manter `zm-pro/SKILL.md` curto, orientado a decisão e sem duplicar o conteúdo dos guias.
+- [x] Criar uma tabela clara de gatilhos: tarefa → referências obrigatórias → entregável esperado.
+- [x] Definir combinações de trilhas para tarefas que atravessam áreas (por exemplo, feature com autenticação e dados pessoais).
+- [x] Incluir uma regra explícita para resolver conflito entre referências: regra do projeto primeiro; depois segurança e privacidade; por fim convenções gerais. Registrar a hierarquia sem criar contradições.
+- [x] Explicar o que fazer quando `AGENTS.md`, `RULES.md` ou comandos de projeto não existem.
+- [x] Definir limite de contexto: carregar primeiro o router, depois somente os trechos necessários das referências; evitar leitura integral desnecessária.
 
 ### Revisão dos 13 guias
 
@@ -124,7 +124,7 @@ A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta
 
 - [ ] Ter README principal em inglês e README pt-BR com equivalência de conteúdo e comandos.
 - [ ] Criar uma página de início rápido de até cinco minutos, além do tutorial para iniciantes.
-- [ ] Adicionar seção de solução de problemas por harness e sistema operacional.
+- [x] Adicionar seção de solução de problemas por harness e sistema operacional.
 - [ ] Mostrar exemplos reais de antes/depois: prompt inicial, referências carregadas, alteração, testes e entrega.
 - [ ] Incluir exemplo de projeto pequeno e exemplo de aplicação web com banco de dados, sem credenciais ou dados reais.
 - [ ] Explicar claramente diferença entre repositório, skill, router, referência, template, harness e agente.
@@ -138,14 +138,14 @@ A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta
 
 Avaliar a inclusão dos seguintes materiais, sem inflar o pacote com arquivos redundantes:
 
-- [ ] Template de plano de implementação com escopo, riscos, dependências e critérios de aceite.
-- [ ] Template de relatório de auditoria técnica com severidade, evidência, impacto e recomendação.
-- [ ] Template de threat model simplificado.
-- [ ] Template de plano de testes baseado em risco.
-- [ ] Template de runbook e checklist de incidente.
-- [ ] Template de release notes e plano de rollback.
-- [ ] Template de revisão de acessibilidade.
-- [ ] Template de inventário de integrações e fornecedores.
+- [x] Template de plano de implementação com escopo, riscos, dependências e critérios de aceite.
+- [x] Template de relatório de auditoria técnica com severidade, evidência, impacto e recomendação.
+- [x] Template de threat model simplificado.
+- [x] Template de plano de testes baseado em risco.
+- [x] Template de runbook e checklist de incidente.
+- [x] Template de release notes e plano de rollback.
+- [x] Template de revisão de acessibilidade.
+- [x] Template de inventário de integrações e fornecedores.
 - [ ] Exemplo de feature ponta a ponta, incluindo teste, documentação, changelog e evidência.
 - [ ] Exemplo de correção de bug com reprodução, teste de regressão e validação.
 - [ ] Exemplo de revisão de segurança sem expor vulnerabilidades reais ou segredos.
