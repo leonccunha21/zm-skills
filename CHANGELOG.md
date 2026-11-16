@@ -22,6 +22,12 @@ The budget update: spend context deliberately, and the kit now explains *how*.
 
 - `zm-pro/reference/13-token-economy.md` — the missing reference: spending context like a budget (reads on demand, caching discipline, narrow subagent scopes, output budgets, model routing).
 - `docs/para-leigos.md` — the kit explained for non-specialists (pt-BR): what it is, the 13 guides in plain language, the templates, the validator, honest limits.
+- `docs/for-humans.md` — the same beginner walkthrough in English.
+- `.github/workflows/release.yml` — pushing a `v*` tag now auto-builds the checksum manifest and creates/updates the GitHub release with the `CHECKSUMS-<tag>.txt` attached (no manual steps).
+
+### Changed
+
+- `package.json` — `"test": "node scripts/validate.mjs"` so contributors get what they expect from `npm test`.
 
 ### Changed
 

@@ -91,7 +91,7 @@ Re-copy the folder (`cp -r zm-pro <dest>` / `Copy-Item -Recurse -Force`), or pul
 
 ## Quickstart
 
-> New here? Read [docs/para-leigos.md](docs/para-leigos.md) first (pt-BR) — the kit in plain language.
+> New here? Read [docs/for-humans.md](docs/for-humans.md) — the kit in plain language.
 
 Give your agent this prompt on a real task:
 

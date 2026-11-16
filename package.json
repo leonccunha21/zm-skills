@@ -10,6 +10,7 @@
   },
   "scripts": {
     "validate": "node scripts/validate.mjs",
+    "test": "node scripts/validate.mjs",
     "checksums": "node scripts/checksums.mjs",
     "install-skill": "node scripts/install.mjs"
   },
