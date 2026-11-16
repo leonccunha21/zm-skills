@@ -1,0 +1,11 @@
+﻿{
+    "query":  "mutation Create($input: CreateDiscussionInput!) { createDiscussion(input: $input) { discussion { id number } } }",
+    "variables":  {
+                      "input":  {
+                                    "title":  "t",
+                                    "body":  "Line one.\n\nLine with **bold** and a link: [README](https://example.com)",
+                                    "categoryId":  "C",
+                                    "repositoryId":  "R"
+                                }
+                  }
+}
