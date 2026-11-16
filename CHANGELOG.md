@@ -6,6 +6,10 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ### Added
 
+- `zm-pro/reference/09-delivery-git.md` — concrete branching & delivery workflows (standard vs hotfix vs release cut), step-by-step rollback procedure, anti-patterns section, and dual checklists (per-PR change checklist + release cut checklist).
+- `zm-pro/reference/10-operations.md` — observability instrumentation procedure (`request_id` propagation, liveness vs readiness probes, redaction filters), incident triage severity classification (P0/P1/P2), anti-patterns section, operational readiness checklist, and routine maintenance checklist.
+- `zm-pro/reference/11-architecture.md` — boundary enforcement & static verification (circular dependency scanning, layer isolation, package export maps), 4-phase contract evolution procedure (additive, dual-write/read, deprecate, decommission), anti-patterns, module design checklist, and architectural change/ADR checklist.
+- `zm-pro/reference/12-performance.md` — scientific 4-step performance investigation & profiling procedure (`EXPLAIN (ANALYZE, BUFFERS)` and traces), memory and streaming discipline (payload streaming, bounded LRU caches, pool sizing), anti-patterns, data layer checklist, and frontend release checklist.
 - `scripts/coordinate.mjs` — `watch [--interval <s>] [--limit <n>]` command: polls the blackboard for new messages in real time and prints them as they arrive (Ctrl+C to stop). Useful when an agent is waiting for a handoff from another agent.
 - `scripts/coordinate.mjs` — `diff [--json] [--stale-minutes <m>]` command: shows only files currently claimed by more than one active session; exits non-zero when any conflict exists (both human and JSON output modes).
 - `scripts/diagnose.mjs` — coordination awareness: reads `.agents/coordination/sessions/` and reports active sessions, stale sessions (>15 min without heartbeat) and file-claim conflicts as `suggestion`/`warning` findings.

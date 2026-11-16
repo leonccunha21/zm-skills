@@ -28,6 +28,23 @@ Split a module when: two **reasons to change** collide inside it, its name needs
 - **Additive-only evolution**; deprecate with a written window; breaking changes = MAJOR version.
 - Write the contract down (schema + example); the schema is the code's documentation of last resort — keep it executable (zod/protobuf/JSON Schema).
 
+## Boundary enforcement and static verification
+
+Do not rely on convention alone to maintain architectural boundaries:
+
+1. **Circular dependency check:** Run a circular reference scan (e.g. `madge --circular` or dependency-cruiser) before merging structural changes. Cycles indicate conflated boundaries.
+2. **Layer isolation:** Configure linter rules or path-mapping restrictions so UI layers cannot import database drivers, ORMs, or platform adapters directly. If domain imports infrastructure, fail the build.
+3. **Internal vs public exposure:** In monorepos or multi-folder projects, use explicit `index.ts` or package export maps (`package.json#exports`) to export only public ports, keeping implementation files unimported by siblings.
+
+## Contract evolution procedure (additive-only rollout)
+
+When evolving a published API, event payload, or database model:
+
+1. **Phase 1 (Additive):** Add new fields as optional/nullable with safe default values. Consumers update safely without coordination.
+2. **Phase 2 (Dual-write / Dual-read):** Producers write both old and new formats; consumers read new format with fallback to old.
+3. **Phase 3 (Deprecate):** Announce deprecation window in CHANGELOG and delivery notes; log warnings on deprecated field access.
+4. **Phase 4 (Decommission):** Remove old fields only after metrics verify zero consumer traffic over the agreed SLA window.
+
 ## Technical debt
 
 Tracked like bugs, not whispered about: an item in the open-items file with owner and trigger ("when we next touch X"). Pay opportunistically in code you already touch. "Later" without a trigger never happens.
@@ -48,11 +65,21 @@ Structural migrations ship in reversible steps: coverage first, route behavior b
 - Domain types imported by DB migrations/queue schemas (leaky coupling)
 - "Rewrite from scratch" as first response to debt — strangler pattern first
 - Architecture by folder copy-paste: deciding module boundaries by aesthetics, not change forces
+- Bypassing the domain layer to write directly to database tables from UI event handlers
+- Cyclic module dependencies resolved with dynamic imports (`require()` or deferred `import()`) to hide architectural tangles
 
 ## Delivery checklist
 
-- [ ] One ADR for the decision; supersedes/status stated; alternatives honestly compared
-- [ ] Consumers can list the contracts they depend on (schema + example)
-- [ ] Dependency direction enforced — no UI → infra import slipped in via a convenience helper
-- [ ] Migration path sketched (strangler/dual-run) before the first structural commit lands
-- [ ] Composition root identified; seams (clock/RNG/network/DB/fs/env) counted and bounded
+### Module design and boundary checklist
+- [ ] Deep module heuristic verified: interface exposes minimal surface while encapsulating complex behavior
+- [ ] Dependency direction strictly respected: UI → Domain → Infrastructure (ports); wiring at composition root only
+- [ ] No circular dependencies introduced across module or folder boundaries
+- [ ] Every external side-effect (clock, network, database, filesystem, environment) isolated behind a testable seam
+- [ ] No generic "util" dumping ground created; functions colocated with their specific domain owner
+
+### Architectural change and ADR delivery checklist
+- [ ] ADR drafted using `templates/ADR.md` for irreversible decisions (alternatives compared, consequences recorded)
+- [ ] Contract changes follow additive-only evolution; executable schema updated and verified with examples
+- [ ] Migration strategy defined (strangler / dual-run / feature switch) before first breaking commit lands
+- [ ] Deprecation schedule and rollback mechanism documented in PR and CHANGELOG
+- [ ] Verification evidence attached showing both new and legacy paths behaving deterministically during transition

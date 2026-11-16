@@ -17,6 +17,37 @@ One **closed objective** per delivery: what changes, acceptance criteria, comman
 
 Required: why (context), what (changes), how to test, risks/rollback, open items, evidence (commands + real output). Reviews answer within an agreed SLA; a PR whose checklist is not filled is not approved.
 
+## Branching and delivery workflows
+
+1. **Standard delivery (feature/refactor/chore):**
+   - Branch off latest `main`: `git checkout -b <type>/<short-topic>`.
+   - Smallest safe change: focus exclusively on the single closed objective.
+   - Stage by pathspec (`git add <files>`), verify `git status`, commit with Conventional Commits message.
+   - Run the gate (`npm run validate` + `npm test` or project equivalents); quote actual output in PR.
+   - Merge via squash or rebase (as declared in project RULES); delete branch after merge.
+
+2. **Hotfix / production patch:**
+   - Branch from the tagged release commit (e.g. `v0.8.1`): `git checkout -b fix/<critical-bug> <tag>`.
+   - Characterize bug first with a reproducing test; apply minimal fix; verify regression test passes.
+   - Tag patch release (`v0.8.2`), deploy via fail-closed pipeline, and cherry-pick/rebase back to `main`.
+
+3. **Release cut:**
+   - Coordinate on blackboard (`scripts/coordinate.mjs`) to ensure all concurrent agent tasks are finished or released.
+   - Update version across all required sources in a single commit (e.g. `package.json`, `SKILL.md`, `CHANGELOG.md`).
+   - Create annotated tag: `git tag -a vX.Y.Z -m "release vX.Y.Z"`.
+
+## Rollback and recovery procedure
+
+Never deploy without an explicit rollback path declared in the PR. When an incident occurs:
+
+1. **Declare trigger:** identify symptom meeting rollback criteria (error rate spike > X%, health check failure, broken critical user journey, corrupted data).
+2. **Select rollback mechanism:**
+   - *Application code regression:* `git revert <sha>` — creates a clean forward revert commit; do not rewrite published history.
+   - *Configuration / feature flag:* toggle flag to off or revert configuration parameter without redeploying binaries.
+   - *Database schema / migration:* run the tested down-migration script before rolling back code, or ensure migration is backward-compatible with the prior code version (two-phase rollout).
+3. **Deploy rollback:** trigger release pipeline with the prior verified artifact or revert commit.
+4. **Post-rollback smoke test:** verify baseline functionality returns within 5 minutes; update delivery log with incident status.
+
 ## Release
 
 1. Semantic tag `vX.Y.Z` + `CHANGELOG.md` in the same commit (Keep a Changelog: Added/Changed/Fixed/Security)
@@ -37,11 +68,29 @@ Write for **users**, not for whoever coded it: what changes in day-to-day use, f
 
 Update the delivery log (date, SHA, evidence, open items) and — for critical flows — announce briefly to the team channel. Critical-flow deliveries get heightened monitoring for N hours (see `10-operations`).
 
+## Anti-patterns
+
+- Multi-concern megacommit ("50 files changed: implement cart + refactor database + fix styling + format all")
+- Blind staging with `git add -A` or `git add .` while other agents or sessions have dirty workspace files
+- Force-pushing to shared branches (`git push --force`) or directly pushing unreviewed commits to `main`
+- Silent breaking changes: renaming APIs, flags, or data contracts without SemVer bump and CHANGELOG warning
+- Releasing a database migration without verifying its rollback script on a staging replica
+- Rubber-stamp approvals ("Looks good to me" without executing tests, inspecting diff, or quoting evidence)
+- "Deploy and pray": closing the session immediately after deploy without conducting a post-deploy smoke test
+
 ## Delivery checklist
 
-- [ ] Bump semver in `package.json` and sync `SKILL.md` marker + `CHANGELOG.md` — in one commit (`npm run validate` enforces sync)
-- [ ] Tests and examples green with output quoted — not remembered
-- [ ] No mixing of unrelated changes in the diff; pathspec commit; diff re-read before merge
-- [ ] Reviewer named; review script (not rubber stamp) or explicit self-approval recorded
-- [ ] Release notes say what action consumers must take, or "no action"
-- [ ] Rollback path stated in the PR, not improvised during the incident
+### Per-PR / Change checklist
+- [ ] Working tree checked with `git status` before writing; no concurrent agent conflicts (`scripts/coordinate.mjs check`)
+- [ ] Single closed objective; changes scoped to the minimal safe diff
+- [ ] Explicit pathspec staging used (`git add <file>`), never blanket `git add -A`
+- [ ] Local gates executed (`npm run validate` + `npm test` or project equivalents) with real output quoted in PR
+- [ ] Diff reviewed locally (`git diff`) before requesting review or creating commit
+- [ ] No secrets, credentials, or cleartext personal data introduced in code, tests, or commit messages
+
+### Release cut checklist
+- [ ] Semver bumped in `package.json` and synchronized with `SKILL.md` marker + `CHANGELOG.md` in one commit
+- [ ] User-facing notes written in `CHANGELOG.md` under the release header; breaking changes highlighted with actions
+- [ ] Release integrity verified (e.g. `npm run checksums` / CI checksum manifest check)
+- [ ] Rollback steps explicitly stated in the release record (mechanism, target commit/tag, trigger threshold)
+- [ ] Post-deploy smoke test executed and verified within 15 minutes of deployment

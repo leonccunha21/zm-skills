@@ -89,7 +89,7 @@ if (process.argv.includes("--json")) {
     differences,
   }, null, 2))
 } else if (differences.length === 0) {
-  console.log("parity-check — all pairs equivalent (structure, commands, links)")
+  console.log("parity-check — all pairs equivalent: READMEs equivalent (structure, commands, links)")
   console.log("  README.md ↔ README.pt-BR.md ✓")
   console.log("  docs/for-humans.md ↔ docs/para-leigos.md ✓")
 } else {

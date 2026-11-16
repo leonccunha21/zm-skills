@@ -640,5 +640,5 @@ Itens identificados na auditoria geral da sessão. Todos são melhorias do que j
 - [ ] `coordinate.mjs` — adicionar `--role coordinator` e regra: somente o coordinator pode fazer `clean` ou reivindicar arquivos de outra sessão em emergência.
 - [ ] `parity-check.mjs` — considerar verificar outros pares que possam ter drift (ex: `docs/quickstart.md` vs seção do README pt-BR).
 - [x] `evaluate.mjs` — subcomando `run <scenario-id>` que gera template de relatório preenchido com os campos do cenário, pronto para o humano completar com evidências reais.
-- [x] **Guias 09–12** — estão mais curtos que a média; adicionar pelo menos 1 checklist de entrega concreto em cada um.
+- [x] **Guias 09–12** — estão mais curtos que a média; adicionar pelo menos 1 checklist de entrega concreto em cada um. *(concluído: 09 ganha fluxos de entrega, rollback e duplo checklist; 10 ganha triagem de incidentes, observabilidade, anti-patterns e checklist de prontidão operacional; 11 ganha verificação estática de limites, evolução de contratos em 4 fases e anti-patterns; 12 ganha procedimento científico de perfilamento em 4 etapas, disciplina de streaming/LRU e anti-patterns)*
 - [ ] `install.mjs` — opção `--with-tools` para copiar `scripts/coordinate.mjs` ao projeto consumidor.

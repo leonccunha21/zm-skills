@@ -37,6 +37,23 @@ Budgets are product decisions, not commandments: a POS on a mid-range Android an
 - Pagination or virtualization for unbounded lists; cap payload sizes with contracts
 - Connection pooling configured (not default); statements prepared; no `SELECT *` in hot paths
 
+## Performance investigation and profiling procedure
+
+Never optimize by intuition. Follow this four-step scientific loop:
+
+1. **Reproduce with synthetic scenario:** Build a repeatable benchmark or test fixture matching production scale (e.g. 50k rows or 20 concurrent requests). Document the exact hardware, environment, and dataset size.
+2. **Profile the hot path:**
+   - *Backend/Database:* Run `EXPLAIN (ANALYZE, BUFFERS)` to spot index misses, sequential scans, or nested loops. Profile CPU with flamegraphs (e.g. `0x`, Node inspector).
+   - *Frontend:* Record a DevTools Performance trace; locate long tasks (> 50ms) and evaluate rendering/layout thrashing.
+3. **Isolate and modify:** Apply the single highest-impact change (add covering index, batch N+1 calls, stream large payloads, or code-split bundle). Avoid bundling multiple speculative tweaks simultaneously.
+4. **Benchmark and verify:** Re-run the exact initial benchmark under identical parameters. If the delta is within noise (< 5%) or creates maintenance friction without measurable win, revert the change.
+
+## Memory and streaming discipline
+
+- **Stream large payloads:** Process file imports, exports, and large query sets via streams or chunked async iterators. Buffering 50MB of CSV in memory exhausts worker heap and triggers OOM crashes.
+- **Bounded caches:** Always use LRU caches with maximum element caps and explicit TTLs. Unbounded Map/Object caches in persistent Node processes leak memory until restart.
+- **Connection pooling:** Size connection pools conservatively (often 10–20 connections per service instance); use pooled proxies (PgBouncer/Supavisor) in serverless environments to prevent database connection exhaustion.
+
 ## Runtime and backend
 
 - No premature memoization; memoize only measured expensive work, with a measured win (and a test, if the memo can go stale)
@@ -57,11 +74,21 @@ Budgets are product decisions, not commandments: a POS on a mid-range Android an
 - Cache without an invalidation story — stale-data bugs are worse than slow ones
 - Rendering cost fixes on server: memoizing values that change anyway
 - "We'll profile later" — later is a deadline-free word; profile is part of done
+- Buffering entire database tables or files into Node memory arrays before filtering
+- Running queries inside UI loops or template mappers without query-count assertions in automated tests
 
 ## Delivery checklist
 
-- [ ] Baseline numbers recorded before the change (LCP/p95/bundle as applicable)
-- [ ] After-change numbers in the delivery record; same scenario, same machine/device class
-- [ ] Budget updated (or newly set) with owner and review date
-- [ ] CI threshold added or tightened where feasible; warning, not decoration
-- [ ] Cost line re-checked for the 3 heaviest operations
+### Data layer and backend performance checklist
+- [ ] Database query count asserted in automated tests for high-frequency or customer-facing endpoints (zero N+1)
+- [ ] `EXPLAIN ANALYZE` executed for all new or modified query shapes; index coverage confirmed
+- [ ] Large result sets paginated, virtualized, or processed via streams instead of whole-table memory buffers
+- [ ] Caches bounded with LRU limits, TTL expiration, and deterministic invalidation on mutation paths
+- [ ] Pool limits, timeouts, and backoff configured for database and third-party API connections
+
+### Frontend and release performance checklist
+- [ ] Baseline vs after-change numbers attached to delivery evidence using identical test scenario and network profile
+- [ ] Route JS bundle size verified against threshold (`bundlesize` or CI limit check; diff vs `main`)
+- [ ] Images formatted as WebP/AVIF with explicit dimensions (`width`/`height`) and appropriate priority (`fetchpriority="high"` for LCP only)
+- [ ] Performance budget updated or validated with named owner and review schedule
+- [ ] Cost and egress implications reviewed for the top-3 highest throughput operations
