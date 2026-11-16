@@ -43,6 +43,8 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 - `scripts/parity-check.mjs` + `tests/parity.test.mjs` — EN/pt-BR README parity (heading structure, fence count, commands, links with an allowlist for badges/language files); CI gates it.
 - `scripts/metrics.mjs` + `tests/metrics.test.mjs` — deterministic repository facts; `docs/metrics.md` defines each metric with method, cadence, owner and status; `docs/critical-rules.md` — critical rules with rationale, scenario and verification; `docs/attribution.md` — licensing/attribution review; `docs/scope-control.md` — rules against kit bloat; `docs/context-cost.md` — per-reference context ledger; `docs/breaking-changes.md` — breaking-change history; `docs/evaluation-results/` — honest landing spot; `docs/reviewing-automated-contributions.md`; `docs/demo.md`, `docs/glossary.md`, `docs/quickstart.md`.
 
+- CI — the `validate` workflow is now five jobs: `validate` (structure + parity + injection hygiene), `tests` (Node 18/20/22 on Ubuntu/Windows/macOS), `examples`, `checksums` (generate + verify), and `pack` (`npm pack --dry-run`). Each prints its runtime.
+
 ### Upgrade
 
 No action required. Existing installs keep working; to pick up this release, run `node scripts/install.mjs <harness> --dry-run`, then `--force` (previous folder kept as `zm-pro.backup-<timestamp>`). Details and the version table: `docs/migration.md`.
