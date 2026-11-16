@@ -50,6 +50,8 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 
 ## Instalação
 
+> Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Automatizado: `node scripts/install.mjs opencode` (= `npm run install-skill`); integridade para releases: `npm run checksums`.
+
 ### OpenCode
 
 **Por projeto (recomendado para começar):**
