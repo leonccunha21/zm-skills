@@ -2,14 +2,14 @@
 
 > This repo follows the evidence rule it teaches: **tested**, or it says so explicitly. Anything marked ❓ is documented but unverified — reports are welcome (open an issue or start a discussion).
 
-| Harness | Version tested | Status | What it means |
-|---|---|---|---|
-| OpenCode | 2.3.0 · Windows 11 | ✅ **Tested end-to-end** | Auto-discovered from `.agents/skills/zm-pro` (project) and `$XDG_CONFIG_HOME/opencode/skills/zm-pro` (global, default `~/.config/opencode/skills/zm-pro`). Used by the 0.4.0 pilot — router picked the right track, 9/9 tests green, zero extra context loaded. |
-| Claude Code | — | ❓ Not verified | Copy `zm-pro/` into `~/.claude/skills/zm-pro` (or reference it from your `CLAUDE.md`/`AGENTS.md`). Works by spec; nobody has reported back yet. |
-| Codex CLI | — | ❓ Not verified | Same delivery shape; treat as a referenced procedure doc until proven. |
-| Cursor | — | ❓ Not verified | No skills directory: point Project Rules at `zm-pro/SKILL.md`, or paste the router as context. |
-| Gemini CLI | — | ❓ Not verified | Same; report what happens. |
-| Any harness implementing the open Agent Skills format | — | 🔬 Expected to work | Frontmatter + body; report failures as issues. |
+| Harness | Version tested | Status | Date of evidence | What it means |
+|---|---|---|---|---|
+| OpenCode | 2.3.0 · Windows 11 | ✅ **Tested end-to-end** | 2026-11-16 (pilot report recorded in this file; not re-executed for this table) | Auto-discovered from `.agents/skills/zm-pro` (project) and `$XDG_CONFIG_HOME/opencode/skills/zm-pro` (global, default `~/.config/opencode/skills/zm-pro`). Used by the 0.4.0 pilot — router picked the right track, 9/9 tests green, zero extra context loaded. |
+| Claude Code | — | ❓ Not verified | — | Copy `zm-pro/` into `~/.claude/skills/zm-pro` (or reference it from your `CLAUDE.md`/`AGENTS.md`). Works by spec; nobody has reported back yet. |
+| Codex CLI | — | ❓ Not verified | — | Same delivery shape; treat as a referenced procedure doc until proven. |
+| Cursor | — | ❓ Not verified | — | No skills directory: point Project Rules at `zm-pro/SKILL.md`, or paste the router as context. |
+| Gemini CLI | — | ❓ Not verified | — | Same; report what happens. |
+| Any harness implementing the open Agent Skills format | — | 🔬 Expected to work | — | Frontmatter + body; report failures as issues. |
 
 ## Reproducible test script
 

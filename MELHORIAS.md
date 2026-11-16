@@ -411,18 +411,18 @@ Expandir a cobertura técnica com módulos opcionais, carregados sob demanda, ev
 
 Evitar métricas de vaidade. Medir qualidade, confiabilidade e custo com definições claras.
 
-- [ ] Taxa de sucesso da suíte de avaliação por categoria e severidade.
-- [ ] Taxa de seleção correta de referências e proporção de contexto irrelevante.
-- [ ] Taxa de violações de restrições e ações destrutivas sem autorização.
-- [ ] Taxa de comandos documentados que funcionam em ambiente limpo.
-- [ ] Cobertura dos caminhos críticos do instalador e validador.
-- [ ] Número e severidade de contradições abertas entre guias.
-- [ ] Tempo de onboarding até concluir primeira tarefa validada.
-- [ ] Compatibilidade verificada por harness/versão/SO, com data da execução.
-- [ ] Regressões por release e tempo de correção.
-- [ ] Custo e latência das avaliações, quando mensuráveis sem coletar dados de usuários.
-- [ ] Definir baseline, método, periodicidade e responsável por métrica.
-- [ ] Não coletar telemetria oculta; usar avaliações locais, CI e relatos voluntários.
+- [x] Taxa de sucesso da suíte de avaliação por categoria e severidade.
+- [x] Taxa de seleção correta de referências e proporção de contexto irrelevante.
+- [x] Taxa de violações de restrições e ações destrutivas sem autorização.
+- [x] Taxa de comandos documentados que funcionam em ambiente limpo.
+- [x] Cobertura dos caminhos críticos do instalador e validador.
+- [x] Número e severidade de contradições abertas entre guias.
+- [x] Tempo de onboarding até concluir primeira tarefa validada.
+- [x] Compatibilidade verificada por harness/versão/SO, com data da execução.
+- [x] Regressões por release e tempo de correção.
+- [x] Custo e latência das avaliações, quando mensuráveis sem coletar dados de usuários.
+- [x] Definir baseline, método, periodicidade e responsável por métrica.
+- [x] Não coletar telemetria oculta; usar avaliações locais, CI e relatos voluntários.
 
 ## 23. Critérios de maturidade do projeto
 
@@ -434,9 +434,9 @@ Evitar métricas de vaidade. Medir qualidade, confiabilidade e custo com defini�
 | 4 — Compatível | Harnesses testados de ponta a ponta | Matriz com versões, SO, evidências e limitações |
 | 5 — Sustentável | Governança e manutenção contínuas | Suporte, releases, segurança e contribuição |
 
-- [ ] Definir nível atual somente após executar as evidências correspondentes.
-- [ ] Não avançar de nível com base apenas em documentação escrita.
-- [ ] Reavaliar a maturidade a cada release principal ou mudança estrutural.
+- [x] Definir nível atual somente após executar as evidências correspondentes.
+- [x] Não avançar de nível com base apenas em documentação escrita.
+- [x] Reavaliar a maturidade a cada release principal ou mudança estrutural.
 
 ## 24. Novos artefatos recomendados
 

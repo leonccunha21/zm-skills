@@ -17,7 +17,7 @@
 ## Review cadence
 
 - **Quarterly:** external references, license/maintenance status of cited tools, and legal pointers (LGPD/GDPR sections age badly).
-- **Every release:** version sync (`npm run validate` enforces it), changelog accuracy, checksums.
+- **Every release:** version sync (`npm run validate` enforces it), changelog accuracy, checksums, and a re-read of `docs/maturity.md` — a level without evidence gets downgraded, not waived.
 - **After structural changes:** re-evaluate the supported Node line and the harness matrix.
 
 ## Harness compatibility
