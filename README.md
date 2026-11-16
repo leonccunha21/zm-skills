@@ -76,7 +76,7 @@ zm-pro/                        # the skill — copy this folder into your projec
 │   ├── 17-working-modes.md        # profiles essential→audit and modes with stop rules
 │   └── 18-stack-adapters.md       # detection-first commands per ecosystem
 ├── templates/                 # generic, copyable starting points
-│   ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
+│   ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md · COORDINATION.md
 │   ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · INCIDENT-REPORT.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md · PROJECT-PROFILE.md · EVALUATION-REPORT.md
 │   └── prompts/                   # delegation prompts: implement, fix, review, release, privacy audit
 └── (the repository root also holds: examples/minimal-project — a filled starter to learn from, SECURITY.md, CODE_OF_CONDUCT.md, scripts/validate.mjs, CI)
@@ -99,7 +99,7 @@ Design principles:
 
 ## Install
 
-> In a hurry? [Five-minute quickstart](docs/quickstart.md) or the guided [demo](docs/demo.md). Updating an install? [Migration and versioning](docs/migration.md). More docs: [troubleshooting](docs/troubleshooting.md) · [glossary](docs/glossary.md) · [architecture](docs/architecture.md) · [tool safety](docs/tool-safety.md) · [distribution](docs/distribution.md).
+> In a hurry? [Five-minute quickstart](docs/quickstart.md) or the guided [demo](docs/demo.md). Updating an install? [Migration and versioning](docs/migration.md). More docs: [troubleshooting](docs/troubleshooting.md) · [glossary](docs/glossary.md) · [architecture](docs/architecture.md) · [tool safety](docs/tool-safety.md) · [distribution](docs/distribution.md) · [metrics](docs/metrics.md) · [evaluations](EVALUATIONS.md).
 > Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Stuck? [Troubleshooting](docs/troubleshooting.md). Scripted: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <project-root>` installs into `<project-root>/.agents/skills/zm-pro`); integrity for releases: `npm run --silent checksums`.
 
 ### OpenCode

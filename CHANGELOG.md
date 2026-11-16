@@ -6,6 +6,8 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ### Added
 
+- `scripts/coordinate.mjs` — cross-agent coordination CLI for multi-platform collaboration (OpenCode, Antigravity, Claude Code, Cursor, Codex, Gemini CLI): session registration and heartbeats, file claiming with collision checks (`check`), shared asynchronous blackboard messaging (`.agents/coordination/`), release and stale cleanup; covered by `tests/coordinate.test.mjs`.
+- `zm-pro/reference/04-multi-agent.md` and `zm-pro/templates/COORDINATION.md` — cross-platform communication protocol, transient blackboard vs. durable workstream partitioning, handoff contract and collision prevention.
 - `tests/` — first real unit suite (`node:test`, zero dependencies): the validator accepts this repo and rejects broken relative links, project residue and router/package version drift; the installer covers project and global installs, existing destination, `--force`, invalid or missing harness, and paths with spaces.
 - `package.json` — `npm test` now runs the unit suite; `npm run validate` remains the structural gate.
 - CI — the `validate` workflow runs `npm test` on the same Node/OS matrix.

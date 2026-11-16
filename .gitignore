@@ -19,3 +19,6 @@ coverage/
 *.log
 dist/
 payload-*.json
+
+# Multi-agent coordination transient runtime state
+.agents/coordination/

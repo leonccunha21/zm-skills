@@ -76,7 +76,7 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 │   ├── 17-working-modes.md        # perfis essencial→auditoria e modos com regras de parada
 │   └── 18-stack-adapters.md       # comandos por ecossistema, detectando antes de assumir
 └── templates/                 # pontos de partida genéricos e copiáveis
-    ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
+    ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md · COORDINATION.md
     ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · INCIDENT-REPORT.md · RELEASE-NOTES.md · PROJECT-PROFILE.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md · EVALUATION-REPORT.md
     └── prompts/                   # prompts de delegação: implementar, corrigir, revisar, release, auditoria LGPD
 (examples/minimal-project na raiz do repositório: projeto inicial preenchido — AGENTS.md real, ADR real e DELIVERY-LOG com evidência)
@@ -91,7 +91,7 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 
 ## Instalação
 
-> Com pressa? [Início rápido em cinco minutos](docs/quickstart.md) (em inglês) ou a [demonstração guiada](docs/demo.md). Atualizando uma instalação? [Migração e versionamento](docs/migration.md). Mais docs (em inglês): [solução de problemas](docs/troubleshooting.md) · [glossário](docs/glossary.md) · [arquitetura](docs/architecture.md) · [segurança de ferramentas](docs/tool-safety.md) · [distribuição](docs/distribution.md).
+> Com pressa? [Início rápido em cinco minutos](docs/quickstart.md) (em inglês) ou a [demonstração guiada](docs/demo.md). Atualizando uma instalação? [Migração e versionamento](docs/migration.md). Mais docs (em inglês): [solução de problemas](docs/troubleshooting.md) · [glossário](docs/glossary.md) · [arquitetura](docs/architecture.md) · [segurança de ferramentas](docs/tool-safety.md) · [distribuição](docs/distribution.md) · [métricas](docs/metrics.md) · [avaliações](EVALUATIONS.md).
 > Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Travou? [Solução de problemas](docs/troubleshooting.md). Automatizado: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <raiz-do-projeto>` instala em `<raiz-do-projeto>/.agents/skills/zm-pro`); integridade para releases: `npm run --silent checksums`.
 
 ### OpenCode
