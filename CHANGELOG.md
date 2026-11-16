@@ -4,9 +4,14 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+## [0.6.1] — 2026-11-16
+
+Docs-only release: presents the kit's content in plain language inside both READMEs.
+
 ### Changed
 
-- `README.md` / `README.pt-BR.md` — both READMEs now carry the "The 13 guides in plain language" table and link the beginner guides (EN: `for-humans.md`, pt-BR: `para-leigos.md`).
+- `README.md` / `README.pt-BR.md` — both now carry the "The 13 guides in plain language" table and link the beginner guides (EN: `for-humans.md`, pt-BR: `para-leigos.md`).
+- `CHANGELOG.md` — deduplicated the `[Unreleased]` / `[0.6.0]` sections.
 
 ## [0.6.0] — 2026-11-16
 
