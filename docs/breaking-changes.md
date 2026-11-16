@@ -4,7 +4,7 @@
 
 ## Current support
 
-Latest minor only (`0.8.x`); older minors unsupported — see `docs/maintenance-policy.md`.
+Latest minor only (`0.9.x`); older minors unsupported — see `docs/maintenance-policy.md`.
 
 ## History
 
