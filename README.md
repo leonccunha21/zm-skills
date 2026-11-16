@@ -146,6 +146,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). Semver; every change via PR with the rep
 
 **Made by [ZM](https://github.com/leonccunha21) and contributors · [MIT](LICENSE)**
 
-If zm-pro saved you a day, a [coffee](https://www.buymeacoffee.com/zmcompanh) keeps the releases coming.
+If zm-pro saved you a day, a [coffee](https://www.buymeacoffee.com/zmcompanh) keeps the releases coming. Questions? [Discussions](https://github.com/leonccunha21/zm-skills/discussions).
 
 </div>

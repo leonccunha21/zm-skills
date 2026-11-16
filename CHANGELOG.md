@@ -4,6 +4,10 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+### Added
+
+- **GitHub Discussions** opened and linked from both README footers — community front door (announcement pinned manually by maintainers).
+
 ## [0.6.1] — 2026-11-16
 
 Docs-only release: presents the kit's content in plain language inside both READMEs.

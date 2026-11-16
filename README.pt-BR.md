@@ -129,6 +129,6 @@ Veja [CONTRIBUTING.md](CONTRIBUTING.md) (em inglês). Semver; toda mudança via 
 
 **Feito por [ZM](https://github.com/leonccunha21) e por quem contribuir · [MIT](LICENSE)**
 
-Se o zm-pro te poupou um dia, um [café](https://www.buymeacoffee.com/zmcompanh) mantém as releases vindo.
+Se o zm-pro te poupou um dia, um [café](https://www.buymeacoffee.com/zmcompanh) mantém as releases vindo. Perguntas? [Discussions](https://github.com/leonccunha21/zm-skills/discussions).
 
 </div>
