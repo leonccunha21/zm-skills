@@ -116,14 +116,42 @@ test("post e read gravam e consultam mensagens no quadro compartilhado", (t) => 
   assert.match(msgs[0].message, /backend API pronto/)
 })
 
-test("clean remove sessões liberadas ou expiradas", (t) => {
+test("clean remove sessões liberadas ou expiradas mediante autorização ou --force", (t) => {
   const dir = makeFixture(t)
   runCoord(dir, ["register", "--id", "temp-agent", "--platform", "claude", "--task", "temp"])
   runCoord(dir, ["release", "--id", "temp-agent"])
 
-  const cleanRes = runCoord(dir, ["clean", "--stale-minutes", "0"])
+  // Invocação sem autorização falha
+  const unauth = runCoord(dir, ["clean", "--stale-minutes", "0"])
+  assert.equal(unauth.status, 1)
+  assert.match(unauth.stderr, /requires coordinator authority/)
+
+  // Invocação com --role coordinator tem sucesso
+  const cleanRes = runCoord(dir, ["clean", "--stale-minutes", "0", "--role", "coordinator"])
   assert.equal(cleanRes.status, 0)
   assert.match(cleanRes.stdout, /cleaned 1 stale\/released session/)
+})
+
+test("claim de arquivo já reclamado exige autorização de coordinator e --force para sobrepor", (t) => {
+  const dir = makeFixture(t)
+  runCoord(dir, ["register", "--id", "worker-1", "--platform", "opencode", "--task", "work", "--files", "src/file.js"])
+  runCoord(dir, ["register", "--id", "worker-2", "--platform", "claude", "--task", "work"])
+
+  // worker-2 tenta reivindicar arquivo que worker-1 já possui: falha
+  const blocked = runCoord(dir, ["claim", "--id", "worker-2", "--files", "src/file.js"])
+  assert.equal(blocked.status, 1)
+  assert.match(blocked.stderr, /COLLISION PREVENTED/)
+
+  // worker-2 passa --force mas não é coordinator: falha
+  const blockedForce = runCoord(dir, ["claim", "--id", "worker-2", "--files", "src/file.js", "--force"])
+  assert.equal(blockedForce.status, 1)
+  assert.match(blockedForce.stderr, /COLLISION PREVENTED/)
+
+  // coordinator registrado com --role coordinator e --force: override tem sucesso
+  runCoord(dir, ["register", "--id", "coord-1", "--platform", "antigravity", "--role", "coordinator", "--task", "supervise"])
+  const okClaim = runCoord(dir, ["claim", "--id", "coord-1", "--files", "src/file.js", "--force"])
+  assert.equal(okClaim.status, 0)
+  assert.match(okClaim.stdout, /ok - claimed for coord-1/)
 })
 
 test("colisão com 3 agentes disputando o mesmo arquivo é detectada em status e diff", (t) => {

@@ -42,7 +42,7 @@ Commands:
   check      Verify if a file path is safe to edit (exit 0) or claimed (exit 1)
              <filepath> [--id <my-id>]
   claim      Claim additional files for an active session
-             --id <id> --files <a,b>
+             --id <id> --files <a,b> [--force]
   release    Release claimed files or finish session
              --id <id> [--files <a,b>]
   post       Send message to blackboard log
@@ -54,8 +54,8 @@ Commands:
              Runs until Ctrl+C. Useful when waiting for another agent's handoff.
   diff       Show only files in conflict (claimed by >1 active session)
              [--json] [--stale-minutes <m>]
-  clean      Purge released or expired stale sessions
-             [--stale-minutes <m>]
+  clean      Purge released or expired stale sessions (requires coordinator or --force)
+             [--by <coordinator-id> | --role coordinator | --force] [--stale-minutes <m>]
 `)
 }
 
@@ -277,6 +277,9 @@ switch (command) {
   case "claim": {
     const id = parseArg("--id")
     const filesArg = parseArg("--files")
+    const isForce = hasFlag("--force")
+    const staleMin = parseInt(parseArg("--stale-minutes", "15"), 10)
+
     if (!id || !filesArg) {
       console.error("coordinate error: --id and --files are required for claim")
       process.exit(1)
@@ -292,6 +295,36 @@ switch (command) {
     const session = JSON.parse(readFileSync(sessionFile, "utf8"))
     const claimed = new Set(session.claimedFiles || [])
     const toAdd = filesArg.split(",").map((s) => normalizePath(s.trim())).filter(Boolean)
+
+    // Check for collisions with other active sessions
+    const allSessions = readAllSessions(staleMin)
+    const isCoordinator = session.role === "coordinator" || parseArg("--role") === "coordinator"
+    const conflicts = []
+
+    for (const f of toAdd) {
+      const activeOwners = allSessions.filter(
+        (s) => s.status === "active" && !s.isStale && s.id !== id && (s.claimedFiles || []).includes(f),
+      )
+      if (activeOwners.length > 0) {
+        conflicts.push({ file: f, owners: activeOwners.map((o) => o.id) })
+      }
+    }
+
+    if (conflicts.length > 0) {
+      if (!isCoordinator || !isForce) {
+        const details = conflicts.map((c) => `"${c.file}" (owned by ${c.owners.join(", ")})`).join("; ")
+        console.error(
+          `COLLISION PREVENTED: cannot claim ${details}. Emergency claim requires --role coordinator and --force.`,
+        )
+        process.exit(1)
+      }
+      appendMessage({
+        from: id,
+        to: "all",
+        type: "emergency-claim",
+        message: `Coordinator ${id} took emergency claim of: ${conflicts.map((c) => c.file).join(", ")}`,
+      })
+    }
 
     for (const f of toAdd) claimed.add(f)
     session.claimedFiles = [...claimed]
@@ -404,7 +437,30 @@ switch (command) {
 
   case "clean": {
     const staleMin = parseInt(parseArg("--stale-minutes", "60"), 10)
+    const roleArg = parseArg("--role")
+    const byId = parseArg("--by")
+    const isForce = hasFlag("--force")
+
     ensureDirs()
+    // Authority check: clean purges sessions and requires coordinator authority or --force
+    let authorized = isForce || roleArg === "coordinator"
+    if (!authorized && byId) {
+      const byFile = join(sessionsDir, `${byId}.json`)
+      if (existsSync(byFile)) {
+        try {
+          const s = JSON.parse(readFileSync(byFile, "utf8"))
+          if (s.role === "coordinator" && s.status === "active") authorized = true
+        } catch {}
+      }
+    }
+
+    if (!authorized) {
+      console.error(
+        "coordinate error: clean requires coordinator authority (--by <coordinator-id>, --role coordinator, or --force) to prevent uncoordinated session purging.",
+      )
+      process.exit(1)
+    }
+
     const now = Date.now()
     const thresholdMs = staleMin * 60 * 1000
     let removed = 0

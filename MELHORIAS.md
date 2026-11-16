@@ -635,10 +635,13 @@ Itens identificados na auditoria geral da sessão. Todos são melhorias do que j
 
 - [x] Runner de avaliação comportamental: prepara workspace sintético a partir do JSON do cenário, executa o harness com o prompt como argumento argv (sem interpolação shell), salva transcrição e gera scaffold de relatório. *(commit `907fde6`)*
 
-### Pendentes desta auditoria
+### Itens concluídos da auditoria de aprimoramentos
 
-- [ ] `coordinate.mjs` — adicionar `--role coordinator` e regra: somente o coordinator pode fazer `clean` ou reivindicar arquivos de outra sessão em emergência.
-- [ ] `parity-check.mjs` — considerar verificar outros pares que possam ter drift (ex: `docs/quickstart.md` vs seção do README pt-BR).
+- [x] `coordinate.mjs` — adicionar `--role coordinator` e regra: somente o coordinator pode fazer `clean` ou reivindicar arquivos de outra sessão em emergência (`--force` + `--role coordinator`).
+- [x] `install.mjs` — opção `--with-tools` para copiar `scripts/coordinate.mjs` para `<projectRoot>/scripts/coordinate.mjs` no projeto consumidor.
 - [x] `evaluate.mjs` — subcomando `run <scenario-id>` que gera template de relatório preenchido com os campos do cenário, pronto para o humano completar com evidências reais.
 - [x] **Guias 09–12** — estão mais curtos que a média; adicionar pelo menos 1 checklist de entrega concreto em cada um. *(concluído: 09 ganha fluxos de entrega, rollback e duplo checklist; 10 ganha triagem de incidentes, observabilidade, anti-patterns e checklist de prontidão operacional; 11 ganha verificação estática de limites, evolução de contratos em 4 fases e anti-patterns; 12 ganha procedimento científico de perfilamento em 4 etapas, disciplina de streaming/LRU e anti-patterns)*
-- [ ] `install.mjs` — opção `--with-tools` para copiar `scripts/coordinate.mjs` ao projeto consumidor.
+
+### Observações futuras (não bloqueadoras)
+
+- [ ] `parity-check.mjs` — considerar verificar outros pares que possam ter drift se novos documentos forem traduzidos (ex: `docs/quickstart.md`).

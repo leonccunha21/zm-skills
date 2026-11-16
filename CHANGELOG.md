@@ -6,6 +6,8 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ### Added
 
+- `scripts/install.mjs` — `--with-tools` flag: optionally copies `scripts/coordinate.mjs` into `<projectRoot>/scripts/coordinate.mjs` for consumer projects; covered by unit tests in `tests/install.test.mjs`.
+- `scripts/coordinate.mjs` — coordinator governance: `clean` requires coordinator authority (`--by <coordinator-id>`, `--role coordinator`, or `--force`) to prevent accidental session purging; `claim` checks for existing claims across active sessions and blocks collisions unless overridden by an active coordinator with `--force` (covered by `tests/coordinate.test.mjs`).
 - `zm-pro/reference/09-delivery-git.md` — concrete branching & delivery workflows (standard vs hotfix vs release cut), step-by-step rollback procedure, anti-patterns section, and dual checklists (per-PR change checklist + release cut checklist).
 - `zm-pro/reference/10-operations.md` — observability instrumentation procedure (`request_id` propagation, liveness vs readiness probes, redaction filters), incident triage severity classification (P0/P1/P2), anti-patterns section, operational readiness checklist, and routine maintenance checklist.
 - `zm-pro/reference/11-architecture.md` — boundary enforcement & static verification (circular dependency scanning, layer isolation, package export maps), 4-phase contract evolution procedure (additive, dual-write/read, deprecate, decommission), anti-patterns, module design checklist, and architectural change/ADR checklist.

@@ -163,6 +163,9 @@ if (existsSync(dest)) {
     console.warn(`warning: downgrade — ${incomingVersion} is older than ${previousVersion}; the backup is the safe way back`)
   }
   if (flag("--dry-run")) {
+    if (flag("--with-tools")) {
+      console.log(`Dry run — would also copy scripts/coordinate.mjs → ${join(projectRoot, "scripts", "coordinate.mjs")}`)
+    }
     console.log("Dry run — nothing written.")
     process.exit(0)
   }
@@ -174,6 +177,9 @@ if (existsSync(dest)) {
   console.log(`Previous install kept at: ${backup}`)
 } else if (flag("--dry-run")) {
   console.log(`Dry run — would install v${incomingVersion ?? "desconhecida"} → ${dest}`)
+  if (flag("--with-tools")) {
+    console.log(`Dry run — would also copy scripts/coordinate.mjs → ${join(projectRoot, "scripts", "coordinate.mjs")}`)
+  }
   process.exit(0)
 }
 
@@ -211,6 +217,18 @@ try {
 }
 
 console.log(`Installed zm-pro v${incomingVersion ?? "?"} → ${dest} (${flag("--global") ? "global" : "project"})`)
+if (flag("--with-tools")) {
+  const coordSrc = join(repoRoot, "scripts", "coordinate.mjs")
+  const targetScripts = join(projectRoot, "scripts")
+  const targetCoord = join(targetScripts, "coordinate.mjs")
+  if (existsSync(targetCoord) && !flag("--force")) {
+    console.log(`Tool coordinate.mjs already exists at ${targetCoord} (kept as-is; use --force to overwrite)`)
+  } else {
+    mkdirSync(targetScripts, { recursive: true })
+    cpSync(coordSrc, targetCoord)
+    console.log(`Installed tool: ${targetCoord}`)
+  }
+}
 if (backup) console.log(`Rollback: delete ${dest} and rename ${backup} back to zm-pro.`)
 console.log("Verify: the harness auto-discovers it; in a session, ask: \"use the zm-pro skill\".")
 console.log("Change your mind: delete the folder (git/zip copy — nothing else is installed).")

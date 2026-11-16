@@ -266,3 +266,22 @@ test("desinstalar é apagar a pasta: nada fora do destino é tocado", (t) => {
   rmSync(dest, { recursive: true, force: true })
   assert.deepEqual(filesUnder(project), [])
 })
+
+test("--with-tools instala scripts/coordinate.mjs no projeto consumidor", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-tools-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  const res = runInstall(["opencode", "--dir", project, "--with-tools"])
+  assert.equal(res.status, 0, res.stderr)
+  assert.ok(existsSync(join(project, ".agents", "skills", "zm-pro", "SKILL.md")))
+  assert.ok(existsSync(join(project, "scripts", "coordinate.mjs")))
+  assert.match(res.stdout, /Installed tool:.*coordinate\.mjs/)
+})
+
+test("--with-tools com --dry-run não cria pastas nem copia scripts", (t) => {
+  const project = mkdtempSync(join(tmpdir(), "zm-tools-dry-"))
+  t.after(() => rmSync(project, { recursive: true, force: true }))
+  const res = runInstall(["opencode", "--dir", project, "--with-tools", "--dry-run"])
+  assert.equal(res.status, 0, res.stderr)
+  assert.match(res.stdout, /Dry run — would also copy scripts\/coordinate\.mjs/)
+  assert.equal(existsSync(join(project, "scripts")), false)
+})
