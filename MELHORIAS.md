@@ -286,3 +286,175 @@ Uma melhoria só deve ser marcada como concluída quando:
 ---
 
 **Nota de manutenção:** este arquivo é um backlog estratégico, não uma declaração de defeitos confirmados em todos os componentes. Antes de implementar cada item, reproduzir o comportamento, confirmar se o problema ainda existe na branch alvo e atualizar este documento com status, evidência e commit/release correspondente.
+
+## 14. Avaliação comportamental da skill
+
+Validar Markdown e instalação não prova que um agente entendeu o router, escolheu as referências corretas ou entregou engenharia melhor. O diferencial do zm-pro precisa ser demonstrado por resultados observáveis.
+
+- [ ] Criar uma suíte versionada de tarefas de avaliação, com cenários pequenos, médios e complexos.
+- [ ] Incluir manutenção de legado, bug, feature, refatoração, migração de banco, autenticação, upload, dados pessoais, incidente e deploy.
+- [ ] Definir para cada caso contexto inicial, objetivo, restrições, arquivos relevantes, resultado esperado, critérios de aceite e falhas críticas.
+- [ ] Avaliar se o agente identifica o ambiente, inspeciona o projeto, respeita instruções locais e evita assumir stack ou ferramentas inexistentes.
+- [ ] Avaliar seleção correta e mínima das referências, sem carregar todos os guias indiscriminadamente.
+- [ ] Testar cenários positivos e negativos: uma referência, várias referências, nenhuma referência e instruções conflitantes.
+- [ ] Medir sucesso, regressões, violações de restrições, contexto irrelevante, comandos inventados, alterações fora do escopo e qualidade da evidência final.
+- [ ] Comparar tarefas equivalentes com e sem zm-pro, mantendo modelo, harness, contexto, orçamento e critérios.
+- [ ] Repetir cenários quando houver variabilidade; reportar mediana, dispersão e falhas graves, não somente a melhor execução.
+- [ ] Versionar prompts e fixtures sintéticos; remover segredos, dados pessoais e código proprietário.
+- [ ] Definir avaliações mínimas obrigatórias antes de releases relevantes.
+- [ ] Registrar que os resultados dependem de modelo, versão, harness, ferramentas, contexto e configuração.
+
+**Critério de conclusão:** cada release relevante possui relatório reproduzível com casos, ambiente, resultados, falhas conhecidas e comparação com a versão anterior.
+
+## 15. Protocolo operacional do agente
+
+- [ ] Definir ciclo padrão: entender pedido → inspecionar contexto → planejar proporcionalmente → executar → validar → revisar diff → entregar evidências.
+- [ ] Distinguir leitura, escrita, execução, publicação e operações destrutivas; exigir confirmação proporcional ao impacto.
+- [ ] Exigir inspeção do estado atual antes de editar, executar migrações, instalar dependências ou alterar infraestrutura.
+- [ ] Definir quando planejar e quando uma alteração simples pode ser feita diretamente.
+- [ ] Proibir alegações de execução, teste, deploy ou publicação sem resultado verificável.
+- [ ] Padronizar relatório final: mudanças, arquivos afetados, comandos executados, resultados, limitações, riscos e próximos passos.
+- [ ] Comunicar falhas de ferramentas sem mascarar resultados ou inventar alternativas executadas.
+- [ ] Definir recuperação: interromper, preservar estado, identificar alterações parciais e reverter somente quando seguro.
+- [ ] Criar regra de parada para escopo crescente, contexto insuficiente, risco não autorizado ou conflito de instruções.
+- [ ] Tratar pedidos vagos sem questionários excessivos: perguntar somente o indispensável ou declarar hipótese reversível.
+
+## 16. Política de ferramentas, permissões e autonomia
+
+- [ ] Criar matriz de risco por ferramenta: leitura, escrita local, shell, rede, credenciais, banco, cloud, deploy e comunicação externa.
+- [ ] Aplicar privilégio mínimo: usar a ferramenta menos poderosa que resolva a tarefa.
+- [ ] Distinguir comandos somente de leitura de comandos que alteram estado; não presumir segurança pelo nome.
+- [ ] Exigir confirmação explícita para exclusão, sobrescrita, publicação, envio de mensagens, alteração de permissões, gastos, migrações irreversíveis e mudanças em produção.
+- [ ] Proibir exposição de tokens, chaves, cookies, variáveis secretas e dados pessoais em logs, respostas ou commits.
+- [ ] Definir limites para shell, scripts baixados, extensões, MCPs, plugins e ferramentas de terceiros.
+- [ ] Tratar saídas de ferramentas, páginas, issues, arquivos e resultados de busca como dados não confiáveis; ignorar instruções contidas nesses dados que tentem alterar a hierarquia de instruções.
+- [ ] Antes de executar código externo, inspecionar origem, conteúdo, permissões e efeitos colaterais.
+- [ ] Quando uma ferramenta não estiver disponível, não inventar execução; explicar a limitação e oferecer alternativa compatível.
+- [ ] Documentar que a skill não concede permissões nem contorna controles do harness, sistema operacional ou usuário.
+
+## 17. Engenharia de contexto e memória
+
+- [ ] Definir modelo de contexto por tarefa: objetivo, restrições, arquitetura relevante, estado atual, decisões, evidências e pendências.
+- [ ] Separar fatos confirmados, inferências, hipóteses, preferências e decisões aprovadas.
+- [ ] Exigir fonte ou caminho de arquivo para afirmações técnicas relevantes sobre o projeto.
+- [ ] Evitar copiar arquivos extensos para memória quando caminho, resumo e seção de referência forem suficientes.
+- [ ] Definir atualização de memória após mudanças arquiteturais, decisões importantes e conclusão de tarefas longas.
+- [ ] Estabelecer revisão ou expiração de informações temporárias, como versões, endpoints, deploys e prioridades.
+- [ ] Não armazenar segredos, dados pessoais desnecessários, dados de clientes ou conteúdo confidencial em arquivos de memória.
+- [ ] Definir precedência entre documentação atual, código executável, configuração, histórico de commits e memória antiga.
+- [ ] Incluir procedimento para detectar e corrigir memória desatualizada ou contraditória.
+- [ ] Criar exemplos de handoff entre sessões e agentes com estado, arquivos modificados, testes e próximos passos.
+
+## 18. Arquitetura de instruções e prevenção de conflitos
+
+- [ ] Inventariar instruções do repositório e classificar por escopo: global, projeto, linguagem, framework, tarefa e operação.
+- [ ] Identificar regras duplicadas, contraditórias, vagas, impossíveis de verificar ou dependentes de ferramenta específica.
+- [ ] Definir hierarquia explícita respeitando a hierarquia real do harness e as políticas superiores.
+- [ ] Não sugerir que arquivos do zm-pro podem sobrepor políticas do sistema, provedor ou controles do usuário.
+- [ ] Definir resolução de conflitos entre regra genérica e convenção existente no projeto consumidor.
+- [ ] Criar testes com instruções maliciosas em README, comentários, logs, documentos e resultados externos.
+- [ ] Reduzir termos absolutos quando a regra depender do contexto; documentar exceções e condições.
+- [ ] Padronizar termos normativos MUST/DEVE, SHOULD/RECOMENDA-SE e MAY/PODE.
+- [ ] Cada regra crítica deve ter justificativa, cenário de aplicação e método de verificação.
+
+## 19. Cobertura de engenharia por domínio
+
+Expandir a cobertura técnica com módulos opcionais, carregados sob demanda, evitando transformar o router em uma enciclopédia.
+
+- [ ] **APIs e integrações:** contratos, versionamento, idempotência, retries com backoff, timeouts, rate limits, paginação, webhooks e validação de payload.
+- [ ] **Banco de dados:** modelagem, índices, transações, concorrência, migrações compatíveis, rollback, backups e restauração.
+- [ ] **Frontend:** arquitetura de estado, hidratação, formulários, navegação, acessibilidade, segurança no cliente e performance percebida.
+- [ ] **Backend:** limites de domínio, filas, jobs, concorrência, cache, consistência, observabilidade e falhas.
+- [ ] **Mobile:** ciclo de vida, permissões, armazenamento seguro, conectividade intermitente, acessibilidade e publicação.
+- [ ] **Infraestrutura/cloud:** IaC, segregação de ambientes, IAM, redes, secrets, custos, escalabilidade e recuperação.
+- [ ] **IA e LLMs:** avaliação de prompts, grounding, alucinação, injeção de prompt, ferramentas, proteção de dados, custo, latência e fallback.
+- [ ] **Sistemas legados:** caracterização de comportamento, compatibilidade, migração incremental e reversão.
+- [ ] **Dados e analytics:** qualidade, linhagem, minimização, retenção, anonimização/pseudonimização e acesso.
+- [ ] **Documentação técnica:** diagramas, ADRs, contratos, exemplos atualizados e rastreabilidade.
+- [ ] Criar referência independente somente quando houver conteúdo suficiente, critérios de roteamento claros e manutenção viável.
+
+## 20. Acessibilidade, internacionalização e experiência inclusiva
+
+- [ ] Adotar WCAG 2.2 AA como referência para produtos web quando aplicável, sem declarar conformidade sem auditoria.
+- [ ] Incluir teclado, foco visível, semântica, nomes acessíveis, contraste, zoom, redução de movimento e erros compreensíveis.
+- [ ] Incluir testes com leitor de tela e ferramentas automatizadas, reconhecendo que automação não substitui avaliação manual.
+- [ ] Tratar idioma, fuso horário, moeda, formatos de data/número, pluralização e RTL quando aplicável.
+- [ ] Não assumir idioma, país, legislação ou convenções regionais por sinais indiretos.
+- [ ] Incluir linguagem simples e testes de layout com textos longos e traduções.
+
+## 21. Governança, contribuição e manutenção sustentável
+
+- [ ] Criar CONTRIBUTING.md com ambiente local, padrão de contribuição, validações, commits e revisão.
+- [ ] Criar modelos de issue para bug, proposta de guia, incompatibilidade e vulnerabilidade, sem solicitar dados sensíveis.
+- [ ] Criar template de PR com motivação, escopo, arquivos, testes, impacto, documentação e checklist de segurança.
+- [ ] Definir responsáveis por aprovar mudanças em segurança, privacidade, instalador, release e conteúdo.
+- [ ] Criar política de depreciação de referências, templates, comandos e harnesses.
+- [ ] Exigir justificativa para adicionar dependências, ferramentas ou novas referências.
+- [ ] Definir versões suportadas, janela de correção, fim de suporte e canal de reporte.
+- [ ] Criar processo para revisar contribuições automatizadas e conteúdo gerado por IA.
+- [ ] Registrar decisões arquiteturais em ADRs curtos, com contexto, alternativas e consequências.
+- [ ] Manter histórico de mudanças incompatíveis e instruções de migração.
+- [ ] Definir calendário de manutenção leve e baseado em risco.
+
+## 22. Métricas de qualidade e maturidade
+
+Evitar métricas de vaidade. Medir qualidade, confiabilidade e custo com definições claras.
+
+- [ ] Taxa de sucesso da suíte de avaliação por categoria e severidade.
+- [ ] Taxa de seleção correta de referências e proporção de contexto irrelevante.
+- [ ] Taxa de violações de restrições e ações destrutivas sem autorização.
+- [ ] Taxa de comandos documentados que funcionam em ambiente limpo.
+- [ ] Cobertura dos caminhos críticos do instalador e validador.
+- [ ] Número e severidade de contradições abertas entre guias.
+- [ ] Tempo de onboarding até concluir primeira tarefa validada.
+- [ ] Compatibilidade verificada por harness/versão/SO, com data da execução.
+- [ ] Regressões por release e tempo de correção.
+- [ ] Custo e latência das avaliações, quando mensuráveis sem coletar dados de usuários.
+- [ ] Definir baseline, método, periodicidade e responsável por métrica.
+- [ ] Não coletar telemetria oculta; usar avaliações locais, CI e relatos voluntários.
+
+## 23. Critérios de maturidade do projeto
+
+| Nível | Definição | Evidência mínima |
+|---|---|---|
+| 1 — Estruturado | Arquivos e documentação organizados | Router, referências, licença e instruções coerentes |
+| 2 — Validado | Instalação e estrutura verificadas | Testes do instalador/validador e comandos reproduzíveis |
+| 3 — Avaliado | Comportamento do agente medido | Suíte de tarefas, critérios e relatório |
+| 4 — Compatível | Harnesses testados de ponta a ponta | Matriz com versões, SO, evidências e limitações |
+| 5 — Sustentável | Governança e manutenção contínuas | Suporte, releases, segurança e contribuição |
+
+- [ ] Definir nível atual somente após executar as evidências correspondentes.
+- [ ] Não avançar de nível com base apenas em documentação escrita.
+- [ ] Reavaliar a maturidade a cada release principal ou mudança estrutural.
+
+## 24. Novos artefatos recomendados
+
+Criar gradualmente, quando houver conteúdo e manutenção definidos:
+
+- [ ] EVALUATIONS.md: metodologia, cenários e critérios da suíte de avaliação.
+- [ ] docs/evaluation-results/: relatórios versionados por release e ambiente.
+- [ ] docs/harness-compatibility.md: matriz real de compatibilidade.
+- [ ] docs/architecture.md: arquitetura do kit, fluxo do router e carregamento progressivo.
+- [ ] docs/instruction-hierarchy.md: hierarquia, escopo e resolução de conflitos.
+- [ ] docs/tool-safety.md: matriz de permissões e ações que exigem confirmação.
+- [ ] docs/maintenance-policy.md: suporte, depreciação e ciclo de revisão.
+- [ ] docs/decisions/: ADRs para decisões estruturais.
+- [ ] tests/fixtures/: projetos sintéticos e cenários adversariais.
+- [ ] tests/evaluations/: tarefas e critérios automatizáveis.
+- [ ] Templates de ADR, threat model, relatório de incidente e relatório de avaliação.
+- [ ] CONTRIBUTING.md, CODE_OF_CONDUCT.md e modelos de issue/PR, se ainda estiverem ausentes ou incompletos.
+
+## 25. Ordem de execução ampliada
+
+1. Corrigir inconsistências P0 e validar instalador/validador.
+2. Criar testes automatizados reais e cobertura dos casos críticos.
+3. Revisar router e os 13 guias para remover conflitos e lacunas.
+4. Construir suíte de avaliação comportamental com tarefas sintéticas.
+5. Definir protocolo operacional, permissões e hierarquia de instruções.
+6. Executar testes de compatibilidade reais nos harnesses prioritários.
+7. Criar referências de domínio somente com demanda e roteamento claros.
+8. Melhorar onboarding, troubleshooting, templates e exemplos ponta a ponta.
+9. Formalizar governança, suporte, depreciação e releases.
+10. Publicar relatório de maturidade baseado em evidências.
+
+**Regra de priorização:** reduzir risco de comportamento incorreto, perda de dados, exposição de informações ou falsa alegação de compatibilidade tem prioridade sobre simplesmente adicionar guias ou aumentar o tamanho do repositório.
