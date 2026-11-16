@@ -13,6 +13,8 @@ Read this in Portuguese: [README.pt-BR.md](README.pt-BR.md).
 
 Agents already write code. What's missing in most projects is the **professional operating system around the code**: gates that actually block, deliveries with evidence, memory that survives the session, privacy by default, and layout that doesn't look templated. zm-pro is that operating system, packaged as an on-demand skill so it costs nothing in context until it's needed.
 
+The longer version — field notes from the real workflow that produced this kit — lives in [docs/why-i-built-zm-pro.md](docs/why-i-built-zm-pro.md).
+
 ## What's inside
 
 ```

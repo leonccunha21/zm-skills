@@ -13,6 +13,8 @@ Leitura em inglês (versão canônica): [README.md](README.md).
 
 Agentes já escrevem código. O que falta na maioria dos projetos é o **sistema operacional profissional em volta do código**: gates que de verdade bloqueiam, entregas com evidência, memória que sobrevive à sessão, privacidade por padrão e layout que não parece template. O zm-pro é esse sistema — empacotado como skill sob demanda, sem custar contexto até ser usada.
 
+A versão estendida — notas de campo do fluxo real que deu origem ao kit — está em [docs/why-i-built-zm-pro.md](docs/why-i-built-zm-pro.md) (em inglês).
+
 ## O que vem dentro
 
 ```
