@@ -6,7 +6,10 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ### Added
 
-- **GitHub Discussions** opened and linked from both README footers — community front door (announcement pinned manually by maintainers).
+- **GitHub Discussions** opened and linked from both README footers — community front door (announcement discussion pinned by maintainers).
+- `docs/primeiro-dia.md` — the full zero-to-first-commit walkthrough for absolute beginners (git/Node/harness setup, honest cost expectations, filling `RULES.md`/`AGENTS.md`, first task, safe rollback, survival glossary, first-session troubleshooting). EN twin: `for-humans.md` links it.
+- "Before you start / Antes de começar" section in both READMEs — Git, Node ≥ 18, authenticated harness, honest budget (the kit is free; providers vary).
+- Glossary of surviving terms in `docs/para-leigos.md` and plain-language pointer from `for-humans.md`.
 
 ## [0.6.1] — 2026-11-16
 

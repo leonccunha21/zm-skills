@@ -71,6 +71,13 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 (examples/minimal-project na raiz do repositório: projeto inicial preenchido — AGENTS.md real, ADR real e DELIVERY-LOG com evidência)
 ```
 
+## Antes de começar
+
+- **Git** — o kit mora dentro do seu projeto (`git --version`).
+- **Node ≥ 18** — o validador e o instalador usam Node (`node --version`). O skill não carrega runtime nenhum.
+- **Um harness de IA autenticado** — OpenCode (tem modelos gratuitos), Claude Code, Cursor e outros; veja [docs/harness-compatibility.md](docs/harness-compatibility.md) para o que foi testado e o que não foi.
+- Custo: **o kit é grátis (MIT), para sempre.** O seu harness/provedor pode custar — os preços mudam o tempo todo; confira o plano atual do provedor que você escolher. Um tier gratuito basta para experimentar.
+
 ## Instalação
 
 > Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Automatizado: `node scripts/install.mjs opencode` (= `npm run install-skill`); integridade para releases: `npm run checksums`.
@@ -99,7 +106,7 @@ Aponte as instruções do agente para `zm-pro/SKILL.md`. O router é autoexplica
 
 ## Uso rápido
 
-> Novo aqui? Leia primeiro o [docs/para-leigos.md](docs/para-leigos.md) — o kit em linguagem simples.
+> Novo aqui? Leia primeiro o [docs/para-leigos.md](docs/para-leigos.md) — o kit em linguagem simples — e depois siga o [docs/primeiro-dia.md](docs/primeiro-dia.md) — do zero ao primeiro commit.
 
 Prompt para uma tarefa real:
 

@@ -79,6 +79,13 @@ Design principles:
 4. **Your project wins** — its `AGENTS.md`/`RULES.md` override this kit; the kit is the default for projects without their own.
 5. **Cost-aware and license-clean** — nothing paid without owner decision; every embedded reference is evaluated, never blindly installed.
 
+## Before you start
+
+- **Git** — the kit lives inside your project (`git --version`).
+- **Node ≥ 18** — the validator and installer use Node (`node --version`). The skill itself ships no runtime.
+- **An AI harness you can authenticate** — OpenCode (free models available), Claude Code, Cursor, and others; see [docs/harness-compatibility.md](docs/harness-compatibility.md) for what is tested and what isn't.
+- Budget: **the kit is free (MIT), forever.** Your harness/provider may cost money — pricing changes constantly, so check the current plan of the provider you pick; a free tier is enough to try the kit.
+
 ## Install
 
 > Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Scripted: `node scripts/install.mjs opencode` (= `npm run install-skill`); integrity for releases: `npm run checksums`.
@@ -113,7 +120,7 @@ Re-copy the folder (`cp -r zm-pro <dest>` / `Copy-Item -Recurse -Force`), or pul
 
 ## Quickstart
 
-> New here? Read [docs/for-humans.md](docs/for-humans.md) — the kit in plain language.
+> New here? Read [docs/for-humans.md](docs/for-humans.md) — the kit in plain language. Want the full zero-to-first-commit walkthrough? See [docs/primeiro-dia.md](docs/primeiro-dia.md) (pt-BR).
 
 Give your agent this prompt on a real task:
 
