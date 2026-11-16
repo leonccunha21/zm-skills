@@ -125,3 +125,48 @@ test("clean remove sessões liberadas ou expiradas", (t) => {
   assert.equal(cleanRes.status, 0)
   assert.match(cleanRes.stdout, /cleaned 1 stale\/released session/)
 })
+
+test("colisão com 3 agentes disputando o mesmo arquivo é detectada em status e diff", (t) => {
+  const dir = makeFixture(t)
+
+  // Três agentes em três plataformas diferentes reivindicam o mesmo arquivo
+  runCoord(dir, ["register", "--id", "agent-alpha", "--platform", "opencode", "--task", "feature A", "--files", "src/shared.js"])
+  runCoord(dir, ["register", "--id", "agent-beta", "--platform", "antigravity", "--task", "feature B", "--files", "src/shared.js,src/other.js"])
+  runCoord(dir, ["register", "--id", "agent-gamma", "--platform", "claude", "--task", "feature C", "--files", "src/shared.js"])
+
+  // status --json deve reportar 1 conflito (src/shared.js com 3 claimants)
+  const statusRes = runCoord(dir, ["status", "--json"])
+  assert.equal(statusRes.status, 0)
+  const report = JSON.parse(statusRes.stdout)
+  assert.equal(report.totalSessions, 3)
+  assert.equal(report.conflicts.length, 1)
+  assert.equal(report.conflicts[0].file, "src/shared.js")
+  assert.equal(report.conflicts[0].claimants.length, 3)
+
+  // diff deve listar o arquivo em conflito e sair com código 1
+  const diffRes = runCoord(dir, ["diff", "--json"])
+  assert.equal(diffRes.status, 1)
+  const diffReport = JSON.parse(diffRes.stdout)
+  assert.equal(diffReport.conflictCount, 1)
+  assert.equal(diffReport.conflicts[0].file, "src/shared.js")
+  assert.equal(diffReport.conflicts[0].claimants.length, 3)
+
+  // check do arquivo conflitado por agente externo deve bloquear
+  const checkRes = runCoord(dir, ["check", "src/shared.js", "--id", "agent-delta"])
+  assert.equal(checkRes.status, 1)
+  assert.match(checkRes.stderr, /COLLISION PREVENTED/)
+
+  // Liberar um dos agentes não resolve o conflito (ainda 2 reivindicam)
+  runCoord(dir, ["release", "--id", "agent-gamma"])
+  const afterRelease = runCoord(dir, ["diff", "--json"])
+  assert.equal(afterRelease.status, 1)
+  const afterReport = JSON.parse(afterRelease.stdout)
+  assert.equal(afterReport.conflicts[0].claimants.length, 2)
+
+  // Liberar o segundo resolve o conflito
+  runCoord(dir, ["release", "--id", "agent-beta"])
+  const resolved = runCoord(dir, ["diff", "--json"])
+  assert.equal(resolved.status, 0)
+  const resolvedReport = JSON.parse(resolved.stdout)
+  assert.equal(resolvedReport.conflictCount, 0)
+})

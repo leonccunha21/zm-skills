@@ -112,6 +112,43 @@ if (has("SECURITY.md")) {
   add("suggestion", "security", "SECURITY.md ausente", "defina como reportar vulnerabilidades")
 }
 
+// --- Active agent sessions ---------------------------------------------------
+const coordDir = join(root, ".agents", "coordination", "sessions")
+if (existsSync(coordDir)) {
+  const now = Date.now()
+  const staleMs = 15 * 60 * 1000
+  let activeSessions = 0
+  let staleSessions = 0
+  const conflicts = new Map()
+
+  for (const entry of readdirSync(coordDir, { withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith(".json")) continue
+    try {
+      const session = JSON.parse(readFileSync(join(coordDir, entry.name), "utf8"))
+      if (session.status !== "active") continue
+      const elapsed = now - Date.parse(session.updatedAt || session.startedAt || 0)
+      if (elapsed > staleMs) { staleSessions++; continue }
+      activeSessions++
+      for (const f of session.claimedFiles || []) {
+        if (!conflicts.has(f)) conflicts.set(f, [])
+        conflicts.get(f).push(session.id)
+      }
+    } catch {}
+  }
+  const conflictFiles = [...conflicts.entries()].filter(([, ids]) => ids.length > 1)
+
+  if (activeSessions > 0) {
+    add("suggestion", "coordination", `${activeSessions} sessão(ões) de agente ativa(s) detectada(s) em .agents/coordination/`, "revise node scripts/coordinate.mjs status antes de editar arquivos")
+  }
+  if (staleSessions > 0) {
+    add("suggestion", "coordination", `${staleSessions} sessão(ões) de agente sem heartbeat há >15 min`, "execute node scripts/coordinate.mjs clean para remover sessões expiradas")
+  }
+  if (conflictFiles.length > 0) {
+    const names = conflictFiles.map(([f, ids]) => `${f} (${ids.join(", ")})`).join("; ")
+    add("warning", "coordination", `conflito de posse detectado: ${names}`, "resolva a posse do arquivo antes de editar para evitar colisões")
+  }
+}
+
 // --- Planned work -----------------------------------------------------------
 const messages = [
   "Diagnóstico somente leitura — nada foi alterado.",

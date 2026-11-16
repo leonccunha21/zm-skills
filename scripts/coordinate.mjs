@@ -16,6 +16,8 @@
 //   node scripts/coordinate.mjs release --id <id> [--files <f1,f2>]
 //   node scripts/coordinate.mjs post --from <id> [--to <target|all>] --msg "<text>" [--type <type>]
 //   node scripts/coordinate.mjs read [--from <id>] [--to <id>] [--limit <n>] [--json]
+//   node scripts/coordinate.mjs watch [--interval <seconds>] [--limit <n>]
+//   node scripts/coordinate.mjs diff [--json] [--stale-minutes <m>]
 //   node scripts/coordinate.mjs clean [--stale-minutes <m>]
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs"
@@ -47,6 +49,11 @@ Commands:
              --from <id> [--to <target|all>] --msg "<text>" [--type <type>]
   read       Read messages from blackboard log
              [--from <id>] [--to <id>] [--limit <n>] [--json]
+  watch      Poll the blackboard and display new messages as they arrive
+             [--interval <seconds>] [--limit <n>]
+             Runs until Ctrl+C. Useful when waiting for another agent's handoff.
+  diff       Show only files in conflict (claimed by >1 active session)
+             [--json] [--stale-minutes <m>]
   clean      Purge released or expired stale sessions
              [--stale-minutes <m>]
 `)
@@ -418,6 +425,97 @@ switch (command) {
       }
     }
     console.log(`ok - cleaned ${removed} stale/released session file(s)`)
+    break
+  }
+
+  case "watch": {
+    // Poll the blackboard for new messages and print them as they arrive.
+    // Useful when an agent is waiting for a handoff from another agent.
+    const intervalSec = parseFloat(parseArg("--interval", "3"))
+    const limit = parseInt(parseArg("--limit", "20"), 10)
+    const intervalMs = Math.max(1000, Math.round(intervalSec * 1000))
+    let seenCount = 0
+
+    const getMessages = () => {
+      ensureDirs()
+      if (!existsSync(messagesFile)) return []
+      const raw = readFileSync(messagesFile, "utf8")
+      const lines = raw.split(/\r?\n/).filter((l) => l.trim().length > 0)
+      const records = []
+      for (const l of lines) {
+        try { records.push(JSON.parse(l)) } catch {}
+      }
+      return records.slice(-limit)
+    }
+
+    // Initial snapshot
+    const initial = getMessages()
+    seenCount = initial.length
+    console.log(`Watching blackboard (interval: ${intervalSec}s, Ctrl+C to stop)`)
+    console.log(`Existing messages: ${seenCount}. Waiting for new ones...\n`)
+
+    // Poll loop
+    const poll = setInterval(() => {
+      const all = getMessages()
+      if (all.length > seenCount) {
+        const newMsgs = all.slice(seenCount)
+        for (const m of newMsgs) {
+          console.log(`[${m.timestamp}] ${m.from} → ${m.to} (${m.type}): ${m.message}`)
+        }
+        seenCount = all.length
+      }
+    }, intervalMs)
+
+    // Keep process alive until SIGINT
+    process.on("SIGINT", () => {
+      clearInterval(poll)
+      console.log("\nwatch stopped.")
+      process.exit(0)
+    })
+    // Also handle SIGTERM
+    process.on("SIGTERM", () => {
+      clearInterval(poll)
+      process.exit(0)
+    })
+    break
+  }
+  case "diff": {
+    // Show only files currently in conflict (claimed by >1 active session).
+    const json = hasFlag("--json")
+    const staleMin = parseInt(parseArg("--stale-minutes", "15"), 10)
+    const sessions = readAllSessions(staleMin)
+
+    const claimMap = new Map()
+    for (const s of sessions) {
+      if (s.status !== "active" || s.isStale) continue
+      for (const f of s.claimedFiles || []) {
+        if (!claimMap.has(f)) claimMap.set(f, [])
+        claimMap.get(f).push({ id: s.id, platform: s.platform, task: s.currentTask })
+      }
+    }
+
+    const conflicts = []
+    for (const [file, claimants] of claimMap.entries()) {
+      if (claimants.length > 1) conflicts.push({ file, claimants })
+    }
+
+    if (json) {
+      console.log(JSON.stringify({ schemaVersion: 1, conflicts, conflictCount: conflicts.length }, null, 2))
+    } else if (conflicts.length === 0) {
+      console.log("diff — no conflicts detected: all claimed files have a single active owner")
+    } else {
+      console.log(`⚠️  ${conflicts.length} conflict(s) detected:\n`)
+      for (const c of conflicts) {
+        console.log(`  File: ${c.file}`)
+        for (const cl of c.claimants) {
+          console.log(`    - ${cl.id} (${cl.platform}): "${cl.task}"`)
+        }
+        console.log("")
+      }
+      console.log("Resolve ownership before editing these files to prevent collisions.")
+    }
+    // Exit 1 when conflicts exist — both JSON and human mode
+    if (conflicts.length > 0) process.exit(1)
     break
   }
 

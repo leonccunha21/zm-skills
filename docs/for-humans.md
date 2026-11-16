@@ -60,6 +60,25 @@ zm-pro is a **code of conduct for agents**: a set of text files your agent reads
 - It doesn't override your team's rules — when they exist, **the team wins**.
 - It is not verified equally everywhere: OpenCode was tested end-to-end; the other harnesses are documented as unverified (see [harness-compatibility.md](harness-compatibility.md)).
 
+## Get started today
+
+Follow [docs/primeiro-dia.md](primeiro-dia.md) — from zero to your first commit in ~20 minutes, with troubleshooting included.
+
+## Survival glossary
+
+| Term | Plain meaning |
+|---|---|
+| Agent | the AI that reads and writes code under your command |
+| Harness | the program the agent lives in (OpenCode, Claude Code, Cursor…) |
+| Skill | a package of instructions the agent reads on demand |
+| Router | the kit's navigation file (`SKILL.md`) |
+| Gate | a check that blocks a bad delivery |
+| Evidence | real command output pasted in — never a promise |
+| ADR | decision record: the why behind each architecture choice |
+| Rollback | undoing a change safely |
+| Commit | a saved point in the project history |
+| Track | the right path for the task (implement, fix, deliver…) |
+
 ## Why trust it
 
 - Born from a commercial codebase in production; validated on a pilot (module delivered, 9/9 tests, evidence quoted).
