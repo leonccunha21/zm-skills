@@ -386,12 +386,12 @@ Expandir a cobertura técnica com módulos opcionais, carregados sob demanda, ev
 
 ## 20. Acessibilidade, internacionalização e experiência inclusiva
 
-- [ ] Adotar WCAG 2.2 AA como referência para produtos web quando aplicável, sem declarar conformidade sem auditoria.
-- [ ] Incluir teclado, foco visível, semântica, nomes acessíveis, contraste, zoom, redução de movimento e erros compreensíveis.
-- [ ] Incluir testes com leitor de tela e ferramentas automatizadas, reconhecendo que automação não substitui avaliação manual.
-- [ ] Tratar idioma, fuso horário, moeda, formatos de data/número, pluralização e RTL quando aplicável.
-- [ ] Não assumir idioma, país, legislação ou convenções regionais por sinais indiretos.
-- [ ] Incluir linguagem simples e testes de layout com textos longos e traduções.
+- [x] Adotar WCAG 2.2 AA como referência para produtos web quando aplicável, sem declarar conformidade sem auditoria.
+- [x] Incluir teclado, foco visível, semântica, nomes acessíveis, contraste, zoom, redução de movimento e erros compreensíveis.
+- [x] Incluir testes com leitor de tela e ferramentas automatizadas, reconhecendo que automação não substitui avaliação manual.
+- [x] Tratar idioma, fuso horário, moeda, formatos de data/número, pluralização e RTL quando aplicável.
+- [x] Não assumir idioma, país, legislação ou convenções regionais por sinais indiretos.
+- [x] Incluir linguagem simples e testes de layout com textos longos e traduções.
 
 ## 21. Governança, contribuição e manutenção sustentável
 
