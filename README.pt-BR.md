@@ -29,7 +29,7 @@ A versão estendida — notas de campo do fluxo real que deu origem ao kit — e
 ```
 zm-pro/                        # a skill — copie esta pasta para seu projeto/harness
 ├── SKILL.md                   # router: quando usar, o ciclo, o índice
-├── reference/                 # 12 guias focados, carregados sob demanda
+├── reference/                 # 13 guias focados, carregados sob demanda
 │   ├── 01-code-rules.md           # princípios, gates, dependências, definição de pronto
 │   ├── 02-project-standards.md    # layout do repo, docs, commits, semver, changelog
 │   ├── 03-layout-ui.md            # defaults PT-BR, mobile-first, toque ≥44px, a11y AA, tokens
@@ -41,7 +41,8 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 │   ├── 09-delivery-git.md         # commits, PR, release, deploy fail-closed, rollback
 │   ├── 10-operations.md           # logs/métricas/alertas, ensaio de restore, runbooks, pós-mortem
 │   ├── 11-architecture.md         # deep modules, direção de dependência, seams, ADRs
-│   └── 12-performance.md          # medir primeiro, budgets de Core Web Vitals, N+1, CI de performance
+│   ├── 12-performance.md          # medir primeiro, budgets de Core Web Vitals, N+1, CI de performance
+│   └── 13-token-economy.md        # o contexto é dinheiro: leitura sob demanda, cache, subagentes com escopo estreito
 └── templates/                 # pontos de partida genéricos e copiáveis
     ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
     └── prompts/                   # prompts de delegação: implementar, corrigir, revisar, release, auditoria LGPD
@@ -75,6 +76,8 @@ Copie `zm-pro/` para a pasta de skills do harness (ex.: `~/.claude/skills/zm-pro
 Aponte as instruções do agente para `zm-pro/SKILL.md`. O router é autoexplicativo — nenhum truque específico de harness.
 
 ## Uso rápido
+
+> Novo aqui? Leia primeiro o [docs/para-leigos.md](docs/para-leigos.md) — o kit em linguagem simples.
 
 Prompt para uma tarefa real:
 

@@ -48,6 +48,7 @@ This file is the **router**. Read it fully, identify the track of the task, then
 | `reference/10-operations.md` | logs, metrics, alerts, backups, runbooks, blameless post-mortems |
 | `reference/11-architecture.md` | module boundaries, deep modules, dependency direction, seams, ADRs |
 | `reference/12-performance.md` | measure-first profiling, Core Web Vitals budgets, N+1, indexes, CI perf gates |
+| `reference/13-token-economy.md` | spending context deliberately: reads on demand, caching, narrow subagent scopes, output caps |
 
 ## Universal rules (apply on every track)
 
