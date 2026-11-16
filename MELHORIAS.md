@@ -86,14 +86,14 @@ Para cada guia, manter a mesma estrutura editorial: propósito, quando aplicar, 
 
 A matriz atual reconhece OpenCode como o único harness testado de ponta a ponta e os demais como não verificados. Preservar essa honestidade.
 
-- [ ] Criar uma matriz de testes por harness, versão, sistema operacional, modo de instalação e resultado.
-- [ ] Validar separadamente descoberta da skill, leitura do router, carregamento de referências, execução de uma tarefa e respeito às regras do projeto.
+- [x] Criar uma matriz de testes por harness, versão, sistema operacional, modo de instalação e resultado.
+- [x] Validar separadamente descoberta da skill, leitura do router, carregamento de referências, execução de uma tarefa e respeito às regras do projeto.
 - [ ] Testar OpenCode, Claude Code, Codex CLI, Cursor e Gemini CLI em versões identificadas.
-- [ ] Documentar diferenças entre formato Agent Skills nativo, regras de projeto e simples inclusão de arquivo no contexto.
-- [ ] Não classificar uma integração como compatível apenas porque aceita Markdown.
+- [x] Documentar diferenças entre formato Agent Skills nativo, regras de projeto e simples inclusão de arquivo no contexto.
+- [x] Não classificar uma integração como compatível apenas porque aceita Markdown.
 - [x] Publicar um roteiro de teste reproduzível e um formulário simples para relatos da comunidade.
 - [x] Incluir evidências mínimas: versão, SO, caminho instalado, prompt usado, comportamento observado e logs sem dados sensíveis.
-- [ ] Automatizar somente testes que possam ser executados de forma estável e sem credenciais pessoais.
+- [x] Automatizar somente testes que possam ser executados de forma estável e sem credenciais pessoais.
 
 ## 5. Testes automatizados e CI
 
@@ -404,7 +404,7 @@ Expandir a cobertura técnica com módulos opcionais, carregados sob demanda, ev
 - [x] Definir versões suportadas, janela de correção, fim de suporte e canal de reporte.
 - [x] Criar processo para revisar contribuições automatizadas e conteúdo gerado por IA.
 - [x] Registrar decisões arquiteturais em ADRs curtos, com contexto, alternativas e consequências.
-- [ ] Manter histórico de mudanças incompatíveis e instruções de migração.
+- [x] Manter histórico de mudanças incompatíveis e instruções de migração.
 - [x] Definir calendário de manutenção leve e baseado em risco.
 
 ## 22. Métricas de qualidade e maturidade
@@ -442,7 +442,7 @@ Evitar métricas de vaidade. Medir qualidade, confiabilidade e custo com defini�
 
 Criar gradualmente, quando houver conteúdo e manutenção definidos:
 
-- [ ] EVALUATIONS.md: metodologia, cenários e critérios da suíte de avaliação.
+- [x] EVALUATIONS.md: metodologia, cenários e critérios da suíte de avaliação.
 - [x] docs/evaluation-results/: relatórios versionados por release e ambiente.
 - [x] docs/harness-compatibility.md: matriz real de compatibilidade.
 - [x] docs/architecture.md: arquitetura do kit, fluxo do router e carregamento progressivo.
@@ -451,9 +451,9 @@ Criar gradualmente, quando houver conteúdo e manutenção definidos:
 - [x] docs/maintenance-policy.md: suporte, depreciação e ciclo de revisão.
 - [x] docs/decisions/: ADRs para decisões estruturais.
 - [ ] tests/fixtures/: projetos sintéticos e cenários adversariais.
-- [ ] tests/evaluations/: tarefas e critérios automatizáveis.
+- [x] tests/evaluations/: tarefas e critérios automatizáveis.
 - [x] Templates de ADR, threat model, relatório de incidente e relatório de avaliação.
-- [ ] CONTRIBUTING.md, CODE_OF_CONDUCT.md e modelos de issue/PR, se ainda estiverem ausentes ou incompletos.
+- [x] CONTRIBUTING.md, CODE_OF_CONDUCT.md e modelos de issue/PR, se ainda estiverem ausentes ou incompletos.
 
 ## 25. Ordem de execução ampliada
 
@@ -569,7 +569,7 @@ O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de r
 - [x] Criar um caminho rápido para usuários experientes e um caminho didático para iniciantes.
 - [x] Documentar claramente o que o zm-pro faz, o que não faz e o que depende do harness ou das ferramentas conectadas.
 - [x] Criar exemplos de prompts de uso como ponto de partida, sem exigir frases mágicas.
-- [ ] Medir sucesso do onboarding por tarefa concluída e validada, não por quantidade de páginas lidas.
+- [x] Medir sucesso do onboarding por tarefa concluída e validada, não por quantidade de páginas lidas.
 - [x] Manter documentação acessível no próprio repositório; um site separado só deve existir se houver benefício claro e manutenção possível.
 
 ## 35. Regras para impedir expansão sem controle

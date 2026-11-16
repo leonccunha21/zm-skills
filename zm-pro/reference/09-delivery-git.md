@@ -21,7 +21,7 @@ Required: why (context), what (changes), how to test, risks/rollback, open items
 
 1. Semantic tag `vX.Y.Z` + `CHANGELOG.md` in the same commit (Keep a Changelog: Added/Changed/Fixed/Security)
 2. Reproducible release build (lockfile, clean install); artifact named with the version
-3. **Fail-closed deploy**: a red gate blocks; emergencies are manual, documented, with a post-mortem the next business day
+3. **Fail-closed deploy**: a red gate blocks; production deploys never bypass review — PR approval with required reviewers, green CI status checks, and a deploy trigger that refuses without both. Emergencies are manual, documented, with a post-mortem the next business day
 4. **Rollback defined before deploy**: previous tag/branch + migration down + trigger criteria (error rate > X%, checkout down, bad data)
 5. **Post-deploy smoke**: login, main operation, sync, licensing — minutes after deploy, in production or homologation
 

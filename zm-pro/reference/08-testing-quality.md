@@ -2,6 +2,26 @@
 
 Tests are the price of changing code with confidence. The goal is not 100% coverage — it's **no critical flow breaking silently**.
 
+## Strategy by risk (not by habit)
+
+| Risk | Evidence required | Cheapest sufficient level |
+|---|---|---|
+| Money / irreversible data | unit + integration + E2E of the journey + rollback drill | highest |
+| Authorization/RLS | unit + cross-account denial test (integration) | high |
+| Data migrations | up/down/empty-db + previous-version-data-readable test | high |
+| Broken contract | contract/consumer-driven test (provider + consumer) | integration |
+| UI regression | component + a11y smoke; visual only where the value is | medium |
+| Flaky/high-cost paths | characterization tests first, then refactor | proportional |
+| Experiments behind flags | the flag's on/off paths both tested | low |
+
+Rule: spend test effort where the failure hurts and is hard to detect. Cheap signals first, deep ones where they pay.
+
+## Contract tests (services/modules with an API)
+
+One side publishes a consumer-driven contract (schema, status codes, error shape); the other verifies against it in CI. No shared database assumptions required. When both sides ship from one repo, a golden consumer fixture is enough.
+
+Synthetic data only — fixtures generated or invented; `examples/legacy` shows the pattern. A migration without a down test is half a migration.
+
 ## The pyramid
 
 1. **Unit** (majority) — pure business rules: calculations, validations, state machines. Fast, no I/O, synthetic data.

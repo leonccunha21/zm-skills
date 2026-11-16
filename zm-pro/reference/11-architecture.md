@@ -36,6 +36,10 @@ Tracked like bugs, not whispered about: an item in the open-items file with owne
 
 IRREVERSIBLE choices go in an ADR (see `templates/ADR.md`) — context, options, decision, consequences, reversal criteria. Default decisions stay inline comments with the reason. Reopening a decision? New ADR supersedes; the old one keeps its status history.
 
+## Migrating structure (strangler, not big bang)
+
+Structural migrations ship in reversible steps: coverage first, route behavior behind a switch, redirect one consumer at a time, compare outputs (dual-run), decommission the old path with its usage at zero. Each step is a release. If the migration touches published contracts, additive-only evolution applies and the changelog states both paths during the window (see `16-domain-playbooks.md` — legacy).
+
 ## Anti-patterns
 
 - God module (does HTTP + SQL + business rules + formatting)

@@ -8,7 +8,9 @@ Performance work is engineering under measurement constraints: profile first, op
 - Establish the baseline **before** changing anything; keep the same scenario before/after. Attach both numbers to the delivery (see the delivery template).
 - Profile to find the hot path; Pareto rules — optimize the 5% that is 95% of the time; leave the rest alone.
 
-## Budgets (examples — tune per product, enforce in CI)
+## Budgets (examples — per product, never universal; tune to your market, device mix and margin, enforce in CI)
+
+Budgets are product decisions, not commandments: a POS on a mid-range Android and a desktop CRM legitimately carry different targets. Set them explicitly, record who set them, and review annually. Track cost as a budget too: infra per active user, bytes egress per task, and vendor fees for the top-3 operations — performance spend you cannot see will meet a bill you cannot refuse.
 
 | Budget | Suggested start | Enforced by |
 |---|---|---|
@@ -18,6 +20,7 @@ Performance work is engineering under measurement constraints: profile first, op
 | Route JS (gzip) | ≤ 170 KB initial | bundlesize/size-limit check |
 | Images per route | format = AVIF/WebP, LCP image ≤ 200 KB | review checklist |
 | p95 API | project SLO (e.g., ≤ 300ms) | APM/metrics alert |
+| Cost | infra + vendor spend per active user ≤ project ceiling | monthly cost review |
 
 ## Frontend loading
 

@@ -16,6 +16,13 @@ Any feature touching **personal data** — directly (name, CPF/CNPJ, email, phon
 - Any new collection, use, sharing or retention
 - Incident, leak, deletion request (DSAR), policy/ROPA/RIPD review
 
+## Operators and international transfers
+
+- Every third party touching personal data is an **operator/processor**: sign a DPA naming purpose, retention, sub-processors, audit rights, breach notification (keys/SLA) and deletion at termination — before production data flows (`templates/VENDOR-INVENTORY.md`).
+- **International transfers:** map origin → destination per field; document the mechanism (LGPD art. 33: adequacy, standard clauses, consent, vital interest, public interest). "It is in the US" is not an analysis; with SaaS LLMs, treat prompts as transfers.
+- **From the start (privacy by design):** minimize at collection, tokenize/pseudonymize at rest and in logs, encrypt transport, segregate tenants, retention clock with automatic erasure (tombstone), and a deletion path that covers backups on a defined schedule.
+- **Retention/deallocation that exists on paper only is a defect:** implement the clock, test it, and record the verification.
+
 ## What to do
 
 1. **Install the companion once per project** (`.agents/skills/lgpd-*` or the harness equivalent); keep it versioned with its license. Never paste copies of it elsewhere — drift makes stale law win.

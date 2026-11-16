@@ -10,6 +10,10 @@ After deploy, software is a living system: either you see it, or it surprises yo
 
 Reference patterns: OpenTelemetry (vendor-neutral traces/metrics/logs), Sentry (errors; free tier), OpenStatus/Checkly (uptime/public status), self-hosted Grafana+Loki. Instrument the money flows first.
 
+## SLO/SLI, when applicable
+
+For customer-facing services: pick a few **SLIs** (availability, p95 latency, error rate, freshness) and set an **SLO** with an error budget. Alert on budget burn rate, not instantly on every blip. Internal tools and cron jobs: one success-rate metric and one last-run timestamp are enough. No SLO without a named owner and a monthly review — an SLO nobody reads is decoration.
+
 ## Backup and continuity
 
 - Automated, encrypted backups (DB + storage); **scheduled restore drills** — a backup never tested is a hypothesis

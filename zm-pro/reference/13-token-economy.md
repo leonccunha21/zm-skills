@@ -41,6 +41,10 @@ Context is money: every file read costs tokens now **and** degrades every decisi
 
 Security and privacy tracks are allowed to read more: a missed auth path costs more than tokens. Evidence rules still apply — read precisely, just more broadly.
 
+## Protecting context from loss (compaction)
+
+When a long session risks being summarized mid-task, do not rely on vibes: write the state to disk before the summary happens. Symptoms of loss: re-asking settled questions, rereading files already read, restating constraints mis-remembered. Protocol: (1) at natural boundaries, write a ≤40-line handoff to `*.local.md` or the coordination doc — objective, state, files, commands with output, open items; (2) pin non-negotiables in the first lines of any fresh session; (3) after compaction, re-read `RULES.md`/`AGENTS.md` and the handoff before acting; (4) verify nothing was dropped by re-checking the active task's constraints. If compaction is imminent, split the task instead of summarizing it.
+
 ## Diagnostics
 
 | Symptom | Likely cause | Fix |

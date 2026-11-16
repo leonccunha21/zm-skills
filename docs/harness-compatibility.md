@@ -2,14 +2,39 @@
 
 > This repo follows the evidence rule it teaches: **tested**, or it says so explicitly. Anything marked ❓ is documented but unverified — reports are welcome (open an issue or start a discussion).
 
-| Harness | Version tested | Status | Date of evidence | What it means |
-|---|---|---|---|---|
-| OpenCode | 2.3.0 · Windows 11 | ✅ **Tested end-to-end** | 2026-11-16 (pilot report recorded in this file; not re-executed for this table) | Auto-discovered from `.agents/skills/zm-pro` (project) and `$XDG_CONFIG_HOME/opencode/skills/zm-pro` (global, default `~/.config/opencode/skills/zm-pro`). Used by the 0.4.0 pilot — router picked the right track, 9/9 tests green, zero extra context loaded. |
-| Claude Code | — | ❓ Not verified | — | Copy `zm-pro/` into `~/.claude/skills/zm-pro` (or reference it from your `CLAUDE.md`/`AGENTS.md`). Works by spec; nobody has reported back yet. |
-| Codex CLI | — | ❓ Not verified | — | Same delivery shape; treat as a referenced procedure doc until proven. |
-| Cursor | — | ❓ Not verified | — | No skills directory: point Project Rules at `zm-pro/SKILL.md`, or paste the router as context. |
-| Gemini CLI | — | ❓ Not verified | — | Same; report what happens. |
-| Any harness implementing the open Agent Skills format | — | 🔬 Expected to work | — | Frontmatter + body; report failures as issues. |
+| Harness | Version tested | Status | Date of evidence | Install mode | What it means |
+|---|---|---|---|---|---|
+| OpenCode | 2.3.0 · Windows 11 | ✅ **Tested end-to-end** | 2026-11-16 (pilot report recorded in this file; not re-executed for this table) | project + global | Auto-discovered from `.agents/skills/zm-pro` (project) and `$XDG_CONFIG_HOME/opencode/skills/zm-pro` (global, default `~/.config/opencode/skills/zm-pro`). Used by the 0.4.0 pilot — router picked the right track, 9/9 tests green, zero extra context loaded. |
+| Claude Code | — | ❓ Not verified | — | — | Copy `zm-pro/` into `~/.claude/skills/zm-pro` (or reference it from your `CLAUDE.md`/`AGENTS.md`). Works by spec; nobody has reported back yet. |
+| Codex CLI | — | ❓ Not verified | — | — | Same delivery shape; treat as a referenced procedure doc until proven. |
+| Cursor | — | ❓ Not verified | — | — | No skills directory: point Project Rules at `zm-pro/SKILL.md`, or paste the router as context. |
+| Gemini CLI | — | ❓ Not verified | — | — | Same; report what happens. |
+| Any harness implementing the open Agent Skills format | — | 🔬 Expected to work | — | — | Frontmatter + body; report failures as issues. |
+
+## What "tested" decomposes into
+
+A harness is a matrix of capabilities, not a yes/no. Status per capability (✅ evidence / ❓ untested):
+
+| Capability | OpenCode 2.3.0 | Claude Code | Codex CLI | Cursor | Gemini CLI |
+|---|---|---|---|---|---|
+| Discovery of the skill folder | ✅ project + global (pilot) | ❓ | ❓ | ❓ rules-only route documented | ❓ |
+| Router read (`SKILL.md` loaded) | ✅ pilot | ❓ | ❓ | ❓ | ❓ |
+| Minimal reference load (no guide preload) | ✅ pilot — 2 references loaded | ❓ | ❓ | ❓ | ❓ |
+| Task execution (evidence before done) | ✅ pilot — 9/9 tests green | ❓ | ❓ | ❓ | ❓ |
+| Respect for project `RULES.md` over kit | ✅ pilot — local rule respected | ❓ | ❓ | ❓ | ❓ |
+| Uninstall = delete the folder | ✅ verified locally (installer tests) | ❓ | ❓ | ❓ | ❓ |
+
+Only cells with ✅ carry evidence; every ❓ stays a promise to test, never a claim.
+
+## Agent Skills format vs project rules vs plain context
+
+| Mechanism | Where it lives | What the harness does | What this kit uses it for |
+|---|---|---|---|
+| **Agent Skills format** (native) | `.agents/skills/<name>/` (project) or global skills dir | Discovers by frontmatter; loads on demand by trigger | Primary, documented route for OpenCode |
+| **Project rules** (harness-specific) | `CLAUDE.md` / Cursor Project Rules / `GEMINI.md` | Always loaded in that harness; higher or equal authority to a skill | Alternative route where no skills dir exists (`codex`/`cursor`/`gemini` instructions printed by the installer) |
+| **Plain file inclusion** | any path added to context | Excerpt loaded verbatim; no discovery | Fallback: paste the router; lowest fidelity, but explicit |
+
+Rule of thumb: prefer native discovery; use rule files when the harness has no skills mechanism; inline the router only as a last resort — and say which route you used in the harness report.
 
 ## Reproducible test script
 
