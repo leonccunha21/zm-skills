@@ -69,7 +69,7 @@ Estes itens foram observados nos arquivos consultados durante a inspeção inici
 - [ ] **01 — Code rules:** diferenciar regra obrigatória, recomendação e exceção; explicitar critérios de mudança mínima, regressão e definição de pronto.
 - [ ] **02 — Project standards:** alinhar estrutura, documentação, versionamento, changelog, convenções de commit e templates.
 - [ ] **03 — Layout UI:** cobrir responsividade, acessibilidade WCAG, teclado, leitores de tela, estados vazios/erro/carregamento, formulários, contraste e testes em viewport real.
-- [ ] **04 — Multi-agent:** definir limites de delegação, propriedade de arquivos, prevenção de alterações concorrentes, validação do trabalho delegado e protocolo de parada.
+- [x] **04 — Multi-agent:** definir limites de delegação, propriedade de arquivos, prevenção de alterações concorrentes, validação do trabalho delegado e protocolo de parada. *(coberto por `zm-pro/reference/04-multi-agent.md`, `scripts/coordinate.mjs`, `tests/coordinate.test.mjs` e `zm-pro/templates/COORDINATION.md`)*
 - [ ] **05 — Project memory:** distinguir fatos confirmados, hipóteses e decisões; incluir origem, data, responsável, validade e procedimento de atualização/remoção.
 - [ ] **06 — LGPD:** revisar referências legais e datas; separar orientação técnica de aconselhamento jurídico; incluir privacidade desde a concepção, retenção, descarte, operadores e transferências internacionais.
 - [ ] **07 — Security:** ampliar ameaças por stack e tipo de aplicação; autenticação, autorização por recurso, sessões, CSRF, XSS, SSRF, upload, dependências, segredos e resposta a incidentes.
@@ -574,30 +574,30 @@ O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de r
 
 ## 35. Regras para impedir expansão sem controle
 
-- [ ] Antes de criar um novo guia, demonstrar que o conteúdo não cabe de forma mais clara em uma referência existente.
-- [ ] Cada guia novo deve ter gatilho de roteamento, responsável pela manutenção, critérios de qualidade e ao menos um cenário de avaliação.
-- [ ] Remover conteúdo duplicado e obsoleto em vez de apenas acrescentar novas seções.
-- [ ] Revisar o custo de contexto de cada referência: tamanho, frequência de carregamento e benefício real.
-- [ ] Manter o núcleo pequeno e estável; funcionalidades experimentais devem ficar isoladas até serem avaliadas.
-- [ ] Marcar recomendações dependentes de stack, fornecedor ou legislação com escopo e data de revisão.
-- [ ] Não adicionar dependências, telemetria, serviços pagos ou integrações que criem custo ou coleta de dados sem decisão explícita.
-- [ ] Exigir uma justificativa de valor, risco e manutenção para toda expansão relevante.
+- [x] Antes de criar um novo guia, demonstrar que o conteúdo não cabe de forma mais clara em uma referência existente.
+- [x] Cada guia novo deve ter gatilho de roteamento, responsável pela manutenção, critérios de qualidade e ao menos um cenário de avaliação.
+- [x] Remover conteúdo duplicado e obsoleto em vez de apenas acrescentar novas seções.
+- [x] Revisar o custo de contexto de cada referência: tamanho, frequência de carregamento e benefício real.
+- [x] Manter o núcleo pequeno e estável; funcionalidades experimentais devem ficar isoladas até serem avaliadas.
+- [x] Marcar recomendações dependentes de stack, fornecedor ou legislação com escopo e data de revisão.
+- [x] Não adicionar dependências, telemetria, serviços pagos ou integrações que criem custo ou coleta de dados sem decisão explícita.
+- [x] Exigir uma justificativa de valor, risco e manutenção para toda expansão relevante.
 
 ## 36. Critérios de aceite para considerar o zm-pro completo
 
 O projeto não deve ser considerado completo por quantidade de arquivos ou número de guias. A conclusão deve depender de evidências.
 
-- [ ] Instalação limpa, atualização e remoção testadas sem sobrescrita silenciosa.
-- [ ] Validador e auditoria com testes automatizados cobrindo os caminhos críticos.
+- [x] Instalação limpa, atualização e remoção testadas sem sobrescrita silenciosa.
+- [x] Validador e auditoria com testes automatizados cobrindo os caminhos críticos.
 - [ ] Router conciso, com roteamento correto e carregamento progressivo demonstrados em avaliações.
-- [ ] Guias revisados quanto a contradições, escopo, segurança e precisão técnica.
+- [x] Guias revisados quanto a contradições, escopo, segurança e precisão técnica.
 - [ ] Suíte comportamental com baseline e relatório reproduzível.
-- [ ] Compatibilidade declarada somente para combinações efetivamente testadas.
-- [ ] Exemplos essenciais executados e atualizados.
-- [ ] Documentação de instalação, configuração, troubleshooting, migração e contribuição coerente com o código.
-- [ ] Política de segurança, privacidade, suporte e releases atualizada.
-- [ ] Processo de manutenção viável, com responsável e critérios de depreciação.
-- [ ] Nenhuma falha crítica conhecida sem plano de correção ou limitação claramente documentada.
-- [ ] Relatório de maturidade publicado com evidências, limitações e riscos remanescentes.
+- [x] Compatibilidade declarada somente para combinações efetivamente testadas.
+- [x] Exemplos essenciais executados e atualizados.
+- [x] Documentação de instalação, configuração, troubleshooting, migração e contribuição coerente com o código.
+- [x] Política de segurança, privacidade, suporte e releases atualizada.
+- [x] Processo de manutenção viável, com responsável e critérios de depreciação.
+- [x] Nenhuma falha crítica conhecida sem plano de correção ou limitação claramente documentada.
+- [x] Relatório de maturidade publicado com evidências, limitações e riscos remanescentes.
 
 **Definição de completo:** o zm-pro será considerado pronto para uso profissional quando uma pessoa independente conseguir instalá-lo, configurá-lo, utilizá-lo em um projeto real, avaliar seus resultados, atualizá-lo e removê-lo com segurança, seguindo a documentação e sem depender de conhecimento informal do mantenedor.

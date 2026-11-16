@@ -1,4 +1,6 @@
-# 06 — Personal data & LGPD
+> Scope: engineering guidance for personal-data work, as of 2026-11-16. LGPD (Lei 13.709/2018) and GDPR positions evolve; figures, art. references and companion-pack availability are examples, verified when written and re-reviewed quarterly (`docs/maintenance-policy.md`). This is not legal advice — DPO/counsel sign off.
+
+# 06 - Personal data & LGPD
 
 The kit does not rewrite privacy law, and this chapter is not legal advice. It tells an agent **when privacy obligations attach**, which engineering controls keep them manageable, and — for Brazil — when to reach for the companion LGPD Skills pack. In the EU/UK, map the same checklist onto GDPR (lawful basis, DPIA, DSAR, retention, transfers, art. 30 records); the engineering steps are identical.
 
