@@ -1,6 +1,8 @@
-# zm-pro — o playbook de projeto profissional para agentes de IA
+<div align="center">
 
-**Uma skill portátil e autocontida que transforma qualquer agente de código em um profissional de projetos disciplinado** — regras, padrões, layout e UI, coordenação multiagente, memória de projeto, privacidade (LGPD/GDPR), segurança, testes, entrega e operação. Baseada no formato aberto [Agent Skills](https://github.com/agentskills/agentskills); funciona no OpenCode, Claude Code, Codex, Cursor, Gemini CLI e qualquer harness que carregue pacotes `SKILL.md`.
+# zm-pro
+
+**o playbook de projeto profissional para agentes de IA**
 
 [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-green.svg)](LICENSE)
 [![Versão](https://img.shields.io/badge/vers%C3%A3o-0.4.0-blue.svg)](CHANGELOG.md)
@@ -8,7 +10,13 @@
 [![validate](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml)
 [![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Compre-me%20um%20caf%C3%A9&emoji=%E2%98%95&slug=zmcompanh&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/zmcompanh)
 
-Leitura em inglês (versão canônica): [README.md](README.md).
+Uma skill portátil e autocontida que transforma qualquer agente de código em um profissional de projetos disciplinado — regras, padrões, layout e UI, coordenação multiagente, memória de projeto, privacidade (LGPD/GDPR), segurança, testes, entrega e operação. Baseada no formato aberto [Agent Skills](https://github.com/agentskills/agentskills); funciona no OpenCode, Claude Code, Codex, Cursor, Gemini CLI e qualquer harness que carregue pacotes `SKILL.md`.
+
+**[Instalação](#instalação) · [O que vem dentro](#o-que-vem-dentro) · [Uso rápido](#uso-rápido) · [FAQ](#faq) · [Contribuição](#contribuição-e-releases) · [English](README.md)**
+
+</div>
+
+---
 
 ## Por que existe
 
@@ -88,6 +96,12 @@ Prompt para uma tarefa real:
 
 Veja [CONTRIBUTING.md](CONTRIBUTING.md) (em inglês). Semver; toda mudança via PR com o validador verde (`npm run validate`); histórico em [CHANGELOG.md](CHANGELOG.md).
 
-## Licença
+---
 
-MIT — veja [LICENSE](LICENSE). Feito por ZM e por quem contribuir.
+<div align="center">
+
+**Feito por [ZM](https://github.com/leonccunha21) e por quem contribuir · [MIT](LICENSE)**
+
+Se o zm-pro te poupou um dia, um [café](https://www.buymeacoffee.com/zmcompanh) mantém as releases vindo.
+
+</div>

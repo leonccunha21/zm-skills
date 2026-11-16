@@ -1,6 +1,8 @@
-# zm-pro — the professional project playbook for AI agents
+<div align="center">
 
-**A portable, self-contained skill that turns any coding agent into a disciplined project professional** — rules, standards, layout & UI, multi-agent coordination, project memory, privacy (LGPD/GDPR), security, testing, delivery and operations. Built on the open [Agent Skills](https://github.com/agentskills/agentskills) format; works in OpenCode, Claude Code, Codex, Cursor, Gemini CLI and any harness that loads `SKILL.md` packs.
+# zm-pro
+
+**the professional project playbook for AI agents**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)](CHANGELOG.md)
@@ -8,7 +10,13 @@
 [![validate](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml)
 [![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Compre-me%20um%20caf%C3%A9&emoji=%E2%98%95&slug=zmcompanh&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/zmcompanh)
 
-Read this in Portuguese: [README.pt-BR.md](README.pt-BR.md).
+A portable, self-contained skill that turns any coding agent into a disciplined project professional — rules, standards, layout & UI, multi-agent coordination, project memory, privacy (LGPD/GDPR), security, testing, delivery and operations. Built on the open [Agent Skills](https://github.com/agentskills/agentskills) format; works in OpenCode, Claude Code, Codex, Cursor, Gemini CLI and any harness that loads `SKILL.md` packs.
+
+**[Install](#install) · [What's inside](#whats-inside) · [Quickstart](#quickstart) · [FAQ](#faq) · [Contributing](#contributing--releases) · [Português](README.pt-BR.md)**
+
+</div>
+
+---
 
 ## Why
 
@@ -105,6 +113,12 @@ Or rely on the trigger description — the agent picks the track (kickoff, imple
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Semver; every change via PR with the repo validator green (`npm run validate`); history in [CHANGELOG.md](CHANGELOG.md). Skill changes ship as `zm-pro` version bumps.
 
-## License
+---
 
-MIT — see [LICENSE](LICENSE). Made by ZM and contributors.
+<div align="center">
+
+**Made by [ZM](https://github.com/leonccunha21) and contributors · [MIT](LICENSE)**
+
+If zm-pro saved you a day, a [coffee](https://www.buymeacoffee.com/zmcompanh) keeps the releases coming.
+
+</div>
