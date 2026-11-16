@@ -33,6 +33,24 @@ Maps the *code* — what calls what — so agents navigate without rereading eve
 
 Before adopting any of them: license, local/offline operation, what data leaves the machine (never customer data, tokens or production dumps without explicit, anonymized, written approval), and cost-zero or approved budget. They are **references and optional tooling — never required dependencies**, and never destinations for real data.
 
+## Memory models (how the agent should store things)
+
+Project memory has three layers (above). Inside those layers, keep three **kinds** of memory straight — confusing them is why agents re-ask settled questions or drown in stale notes:
+
+| Model | What it holds | Lives in | Written when | Read when |
+|---|---|---|---|---|
+| **Procedural** | How we do things here: commands, gates, conventions, pitfalls | `RULES.md`, `AGENTS.md`, `SKILL.md`, runbooks | A delivery lands or a convention changes | Every task, at kickoff |
+| **Semantic** | Facts of the project: decisions, ADRs, entity names, integrations, boundaries | `docs/adr/`, registries, READMEs | A fact was discovered or changed | Before deciding anything that depends on it |
+| **Episodic** | What happened, when: deliveries, incidents, handoffs | delivery logs, coordination docs | After each delivery/incident | Before repeating similar work |
+
+Working rules:
+
+1. **Write at the source of the fact.** One copy; everything else points. Copies drift.
+2. **Episodic memory decays.** Prune, or mark `superseded` as its contents stop being true. Recurring lessons **graduate** to procedural or semantic form — that is how the project learns.
+3. **Semantic memory wins conflicts.** When code and doc diverge, the ADR is reopened by writing a new one, never by silent override.
+4. **Procedural memory is re-read, not recalled.** Rules are consulted at kickoff; they don't live in the agent's context by habit.
+5. **Model discipline saves tokens.** An agent that knows "this is episodic → check the log, this is procedural → read RULES.md" loads the right file and 100 fewer it didn't need (see `13-token-economy.md`).
+
 ## Memory hygiene
 
 1. **One source of truth per fact.** Copies point at it; they never duplicate. Duplication drifts; drift confuses agents; confusion destroys trust in the record.

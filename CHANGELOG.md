@@ -4,6 +4,16 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+### Added
+
+- `zm-pro/reference/13-token-economy.md` — the missing reference: spending context like a budget (reads on demand, caching discipline, narrow subagent scopes, output caps, model routing).
+- `docs/para-leigos.md` — the kit explained for non-specialists (pt-BR): what it is, the 13 guides in plain language, the templates, the validator, honest limits.
+
+### Changed
+
+- `zm-pro/reference/05-project-memory.md` — new section: memory models for agents (procedural / semantic / episodic) with write/read/prune rules per model.
+- `zm-pro/SKILL.md` + `README.md` / `README.pt-BR.md` — the reference index and trees now list 13 guides (13-token-economy); both READMEs link the beginner guide.
+
 ## [0.5.0] — 2026-11-16
 
 The repository now obeys the rules it ships: dogfooded agent protocol, evidence-based compatibility matrix, one-command installs, and zero-gaps documentation.

@@ -29,7 +29,7 @@ The longer version — field notes from the real workflow that produced this kit
 ```
 zm-pro/                        # the skill — copy this folder into your project/harness
 ├── SKILL.md                   # router: when to use, the cycle, the index
-├── reference/                 # 12 focused guides, loaded on demand
+├── reference/                 # 13 focused guides, loaded on demand
 │   ├── 01-code-rules.md           # principles, gates, dependencies, definition of done
 │   ├── 02-project-standards.md    # repo layout, docs, commits, semver, changelog
 │   ├── 03-layout-ui.md            # pt-BR defaults, mobile-first, touch ≥44px, a11y AA, tokens
@@ -41,7 +41,8 @@ zm-pro/                        # the skill — copy this folder into your projec
 │   ├── 09-delivery-git.md         # commits, PR, release, fail-closed deploy, rollback
 │   ├── 10-operations.md           # logs/metrics/alerts, backup drills, runbooks, post-mortems
 │   ├── 11-architecture.md         # deep modules, dependency direction, seams, ADRs
-│   └── 12-performance.md          # measure-first, CWV budgets, N+1, indexes, CI perf gates
+│   ├── 12-performance.md          # measure-first, CWV budgets, N+1, indexes, CI perf gates
+│   └── 13-token-economy.md        # context is money: on-demand reads, caching, narrow subagent scopes
 ├── templates/                 # generic, copyable starting points
 │   ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
 │   └── prompts/                   # delegation prompts: implement, fix, review, release, privacy audit
@@ -89,6 +90,8 @@ Point the agent instructions at `zm-pro/SKILL.md` (Project Rules / Context files
 Re-copy the folder (`cp -r zm-pro <dest>` / `Copy-Item -Recurse -Force`), or pull and re-copy. Diffs stay readable because the kit is plain Markdown.
 
 ## Quickstart
+
+> New here? Read [docs/para-leigos.md](docs/para-leigos.md) first (pt-BR) — the kit in plain language.
 
 Give your agent this prompt on a real task:
 
