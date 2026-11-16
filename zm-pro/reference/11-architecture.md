@@ -48,3 +48,11 @@ Structural migrations ship in reversible steps: coverage first, route behavior b
 - Domain types imported by DB migrations/queue schemas (leaky coupling)
 - "Rewrite from scratch" as first response to debt — strangler pattern first
 - Architecture by folder copy-paste: deciding module boundaries by aesthetics, not change forces
+
+## Delivery checklist
+
+- [ ] One ADR for the decision; supersedes/status stated; alternatives honestly compared
+- [ ] Consumers can list the contracts they depend on (schema + example)
+- [ ] Dependency direction enforced — no UI → infra import slipped in via a convenience helper
+- [ ] Migration path sketched (strangler/dual-run) before the first structural commit lands
+- [ ] Composition root identified; seams (clock/RNG/network/DB/fs/env) counted and bounded

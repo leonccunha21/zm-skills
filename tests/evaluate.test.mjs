@@ -94,3 +94,13 @@ test("--json é determinístico e declara que não é resultado comportamental",
   assert.equal(report.behavioralResult, false)
   assert.equal(report.counts.valid, 1)
 })
+
+test("subcomando run gera template pré-preenchido sem executar", () => {
+  const result = spawnSync(process.execPath, [evalScript, "run", "eval-001"], { cwd: repoRoot, encoding: "utf8" })
+  assert.equal(result.status, 0)
+  assert.match(result.stdout, /Cart total ignores/)
+  assert.match(result.stdout, /Scoring/)
+  assert.match(result.stdout, /preencher/)
+  const missing = spawnSync(process.execPath, [evalScript, "run", "eval-999"], { cwd: repoRoot, encoding: "utf8" })
+  assert.equal(missing.status, 1)
+})

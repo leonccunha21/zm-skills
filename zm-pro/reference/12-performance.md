@@ -57,3 +57,11 @@ Budgets are product decisions, not commandments: a POS on a mid-range Android an
 - Cache without an invalidation story — stale-data bugs are worse than slow ones
 - Rendering cost fixes on server: memoizing values that change anyway
 - "We'll profile later" — later is a deadline-free word; profile is part of done
+
+## Delivery checklist
+
+- [ ] Baseline numbers recorded before the change (LCP/p95/bundle as applicable)
+- [ ] After-change numbers in the delivery record; same scenario, same machine/device class
+- [ ] Budget updated (or newly set) with owner and review date
+- [ ] CI threshold added or tightened where feasible; warning, not decoration
+- [ ] Cost line re-checked for the 3 heaviest operations

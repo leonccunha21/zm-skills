@@ -38,3 +38,11 @@ Review monthly: consumption vs. free-tier quotas, storage growth (logs/backups),
 ## When personal data is in the room
 
 Production logs never hold personal data in cleartext. Data access is audited. Any incident involving personal data escalates through `06-data-privacy-lgpd.md` (DPO + notification) **before** product decisions.
+
+## Operations checklist
+
+- [ ] SLO/error budget defined for customer-facing services, or explicitly "not applicable" with reason
+- [ ] Alerts actionable: threshold, owner, silence review this cycle
+- [ ] Restore drill executed on schedule; result recorded (date, duration, verify query)
+- [ ] Runbook current with the on-call rotation; last edit shown
+- [ ] Personal-data paths logged pseudonymously; audit reviewed this cycle

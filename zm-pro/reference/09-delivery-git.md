@@ -36,3 +36,12 @@ Write for **users**, not for whoever coded it: what changes in day-to-day use, f
 ## After delivery
 
 Update the delivery log (date, SHA, evidence, open items) and — for critical flows — announce briefly to the team channel. Critical-flow deliveries get heightened monitoring for N hours (see `10-operations`).
+
+## Delivery checklist
+
+- [ ] Bump semver in `package.json` and sync `SKILL.md` marker + `CHANGELOG.md` — in one commit (`npm run validate` enforces sync)
+- [ ] Tests and examples green with output quoted — not remembered
+- [ ] No mixing of unrelated changes in the diff; pathspec commit; diff re-read before merge
+- [ ] Reviewer named; review script (not rubber stamp) or explicit self-approval recorded
+- [ ] Release notes say what action consumers must take, or "no action"
+- [ ] Rollback path stated in the PR, not improvised during the incident

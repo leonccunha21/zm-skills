@@ -8,6 +8,7 @@
 // Usage:
 //   node scripts/evaluate.mjs            # human summary; exits non-zero on invalid scenarios
 //   node scripts/evaluate.mjs --json      # deterministic machine-readable report
+//   node scripts/evaluate.mjs run <id>    # print a prefilled report template for scenario <id>
 import { existsSync, readFileSync, readdirSync } from "node:fs"
 import { join, relative } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -15,6 +16,72 @@ import { fileURLToPath } from "node:url"
 const root = fileURLToPath(new URL("..", import.meta.url))
 const scenariosDir = join(root, "tests", "evaluations", "scenarios")
 const referenceDir = join(root, "zm-pro", "reference")
+
+// --- Subcommand: run <id> — print a prefilled report template (no execution) ---
+if (process.argv[2] === "run") {
+  const id = process.argv[3]
+  if (!id) {
+    console.error("evaluate.mjs: uso: node scripts/evaluate.mjs run <id> (ex.: eval-001)")
+    process.exit(1)
+  }
+  const file = readdirSync(scenariosDir).find((f) => f.startsWith(`${id}-`))
+  if (!file) {
+    console.error(`evaluate.mjs: cenário não encontrado: ${id}`)
+    process.exit(1)
+  }
+  const scenario = JSON.parse(readFileSync(join(scenariosDir, file), "utf8"))
+  console.log(`# Evaluation report — ${scenario.id}: ${scenario.title}
+
+> Scaffolded by \`scripts/evaluate.mjs run\`. Fill the environment honestly; **do not present this as a baseline until reviewed by a human with evidence.**
+
+## Environment
+
+| Field | Value |
+|---|---|
+| Model + version | <preencher> |
+| Harness + version | <preencher> |
+| OS | <preencher> |
+| Kit version | <preencher> |
+| Date | <preencher> |
+| Command executed | <preencher> |
+| Exit status | <preencher> |
+
+## Scenario
+
+- **Level/category:** ${scenario.level} · ${scenario.category}
+- **Task:** ${scenario.task}
+- **Constraints:** ${(scenario.constraints ?? []).join(" · ")}
+- **Expected minimal references:** ${(scenario.expectedReferences ?? []).join(", ") || "(none)"}
+- **Pass criteria:** ${(scenario.passCriteria ?? []).join(" · ")}
+- **Critical failures:** ${(scenario.criticalFailures ?? []).join(" · ")}
+
+## Scoring (0–2 each — see EVALUATIONS.md)
+
+| Dimension | Score | Notes |
+|---|---|---|
+| Ground inspection | | |
+| Reference selection | | |
+| Scope discipline | | |
+| Evidence | | |
+| Safety | | |
+| Delivery record | | |
+
+## Observed failures
+
+-
+
+## Verdict
+
+- [ ] Pass
+- [ ] Critical failure: <what>
+- [ ] Inconclusive: <why>
+
+## Limitations
+
+<datas, modelo, ferramentas, qualquer limite relevante>
+`)
+  process.exit(0)
+}
 
 const LEVELS = new Set(["small", "medium", "complex"])
 const CATEGORIES = new Set([
