@@ -6,7 +6,16 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ### Added
 
-- `scripts/coordinate.mjs` — cross-agent coordination CLI for multi-platform collaboration (OpenCode, Antigravity, Claude Code, Cursor, Codex, Gemini CLI): session registration and heartbeats, file claiming with collision checks (`check`), shared asynchronous blackboard messaging (`.agents/coordination/`), release and stale cleanup; covered by `tests/coordinate.test.mjs`.
+- `scripts/coordinate.mjs` — `watch [--interval <s>] [--limit <n>]` command: polls the blackboard for new messages in real time and prints them as they arrive (Ctrl+C to stop). Useful when an agent is waiting for a handoff from another agent.
+- `scripts/coordinate.mjs` — `diff [--json] [--stale-minutes <m>]` command: shows only files currently claimed by more than one active session; exits non-zero when any conflict exists (both human and JSON output modes).
+- `scripts/diagnose.mjs` — coordination awareness: reads `.agents/coordination/sessions/` and reports active sessions, stale sessions (>15 min without heartbeat) and file-claim conflicts as `suggestion`/`warning` findings.
+- `scripts/metrics.mjs` — coordination metrics: `activeSessions`, `staleSessions`, `conflicts`, `blackboardMessages`; shown in human output and in `--json` under `facts.coordination`.
+- `scripts/parity-check.mjs` — extended from README-only to two pairs: `README.md ↔ README.pt-BR.md` and `docs/for-humans.md ↔ docs/para-leigos.md`; `--json` output gains a `pairs` array with per-pair diff list.
+- `docs/for-humans.md` — added `## Get started today` and `## Survival glossary` sections to match `docs/para-leigos.md` structure.
+- `tests/coordinate.test.mjs` — 7th test: 3-agent collision scenario exercising `status`, `diff`, `check`, partial release and full conflict resolution.
+- `scripts/evaluate-run.mjs` — behavioral evaluation runner: prepares scratch workspace from a scenario JSON, executes the harness with the prompt as an argv argument (no shell interpolation), saves a raw transcript and scaffolds the report under `docs/evaluation-results/`.
+- `tests/evaluate-run.test.mjs` — 5 tests for the evaluation runner (dry-run, prompt-as-arg, transcript save, scaffold output, placeholder substitution).
+
 - `zm-pro/reference/04-multi-agent.md` and `zm-pro/templates/COORDINATION.md` — cross-platform communication protocol, transient blackboard vs. durable workstream partitioning, handoff contract and collision prevention.
 - `tests/` — first real unit suite (`node:test`, zero dependencies): the validator accepts this repo and rejects broken relative links, project residue and router/package version drift; the installer covers project and global installs, existing destination, `--force`, invalid or missing harness, and paths with spaces.
 - `package.json` — `npm test` now runs the unit suite; `npm run validate` remains the structural gate.
@@ -46,6 +55,8 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 - CI — the `validate` workflow is now five jobs: `validate` (structure + parity + injection hygiene + adapter editorial model), `tests` (Node 18/20/22 on Ubuntu/Windows/macOS), `examples`, `checksums` (generate + verify), and `pack` (`npm pack --dry-run`). Each prints its runtime.
 - `tests/stack-adapters.test.mjs` — editorial-model guard for the stack adapters: every ecosystem present, detection-first required, commands conditional, monorepo handling; runs in CI.
 - `tests/install.test.mjs` — synthetic upgrade test: an install whose `SKILL.md` marker says `zm-pro v0.6.0` upgrades to the current tree with a deep file-by-file comparison against the source.
+- `scripts/evaluate-run.mjs` — behavioral evaluation runner: scratch copy of the repo, harness invoked via argv (`{{prompt}}` token, no shell), raw transcript + report scaffold; `--dry-run` preview; covered by `tests/evaluate-run.test.mjs`.
+- `docs/evaluation-results/pilot-eval-001.md` / `pilot-eval-012.md` — two single-run, author-administered pilots on `opencode/inkling-2-small-free`, explicitly **not** a baseline; both recorded as inconclusive with transcripts.
 
 ### Upgrade
 

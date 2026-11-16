@@ -601,3 +601,44 @@ O projeto não deve ser considerado completo por quantidade de arquivos ou núme
 - [x] Relatório de maturidade publicado com evidências, limitações e riscos remanescentes.
 
 **Definição de completo:** o zm-pro será considerado pronto para uso profissional quando uma pessoa independente conseguir instalá-lo, configurá-lo, utilizá-lo em um projeto real, avaliar seus resultados, atualizá-lo e removê-lo com segurança, seguindo a documentação e sem depender de conhecimento informal do mantenedor.
+
+
+---
+
+## 37. Aprimoramentos de ferramentas existentes (2026-11-16)
+
+Itens identificados na auditoria geral da sessão. Todos são melhorias do que já existe, não adições novas.
+
+### coordinate.mjs
+
+- [x] Adicionar comando `watch [--interval <s>] [--limit <n>]` que faz polling do blackboard e exibe novas mensagens em tempo real (Ctrl+C para parar). Útil quando um agente aguarda handoff de outro. *(commit `198bf8c`)*
+- [x] Adicionar comando `diff [--json] [--stale-minutes <m>]` que lista apenas arquivos em conflito (reclamados por >1 sessão ativa); sai com código 1 quando há conflitos — tanto no modo human quanto no modo JSON. *(commit `198bf8c`)*
+- [x] Adicionar teste de colisão com 3 agentes disputando o mesmo arquivo em `tests/coordinate.test.mjs` — exercita `status`, `diff`, `check`, release parcial e resolução completa. *(commit `198bf8c`)*
+
+### diagnose.mjs
+
+- [x] Ao rodar em um projeto, reportar se há sessões de agentes ativas (`.agents/coordination/`), sessões obsoletas (>15 min sem heartbeat) e conflitos de posse de arquivo detectados. *(commit `198bf8c`)*
+
+### metrics.mjs
+
+- [x] Incluir métricas de coordenação: `activeSessions`, `staleSessions`, `conflicts`, `blackboardMessages`. Exibidas na saída humana e disponíveis em `--json` sob `facts.coordination`. *(commit `198bf8c`)*
+
+### parity-check.mjs
+
+- [x] Estender para verificar paridade entre `docs/for-humans.md` e `docs/para-leigos.md` (além dos READMEs). Saída `--json` ganha array `pairs` com diffs por par. *(commit `198bf8c`)*
+
+### docs/for-humans.md
+
+- [x] Adicionar `## Get started today` e `## Survival glossary` para alinhar estrutura com `docs/para-leigos.md`. Parity check agora passa para ambos os pares. *(commit `198bf8c`)*
+
+### evaluate-run.mjs (OpenCode)
+
+- [x] Runner de avaliação comportamental: prepara workspace sintético a partir do JSON do cenário, executa o harness com o prompt como argumento argv (sem interpolação shell), salva transcrição e gera scaffold de relatório. *(commit `907fde6`)*
+
+### Pendentes desta auditoria
+
+- [ ] `coordinate.mjs` — adicionar `--role coordinator` e regra: somente o coordinator pode fazer `clean` ou reivindicar arquivos de outra sessão em emergência.
+- [ ] `parity-check.mjs` — considerar verificar outros pares que possam ter drift (ex: `docs/quickstart.md` vs seção do README pt-BR).
+- [ ] `evaluate.mjs` — subcomando `run <scenario-id>` que gera template de relatório preenchido com os campos do cenário, pronto para o humano completar com evidências reais.
+- [ ] **Guias 09–12** — estão mais curtos que a média; adicionar pelo menos 1 checklist de entrega concreto em cada um.
+- [ ] `install.mjs` — opção `--with-tools` para copiar `scripts/coordinate.mjs` ao projeto consumidor.
