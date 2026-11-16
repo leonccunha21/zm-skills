@@ -10,6 +10,7 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 - `package.json` — `npm test` now runs the unit suite; `npm run validate` remains the structural gate.
 - CI — the `validate` workflow runs `npm test` on the same Node/OS matrix.
 - `scripts/install.mjs` — safe upgrades: `--dry-run` prints the installed and incoming versions plus the file plan (changed/new/local-only) and writes nothing; `--force` keeps the previous folder as `zm-pro.backup-<timestamp>` with rollback instructions; the copy goes through a temp folder and a rename, so a failed run never leaves a half-written install presented as done; downgrades are detected and warned.
+- `scripts/validate.mjs` — the audit command (`npm run validate`, `npm run audit` for JSON). Read-only by default; every finding carries severity (`error`/`warning`/`suggestion`), file:line when available, evidence and a suggested fix; `--fail-on=warning` tightens the gate; `--fix` previews mechanical fixes (trailing whitespace, final newline) and `--fix --yes` applies only those. Output is deterministic for the same input.
 - `tests/` — installer suite covers dry-run, backup preservation of local files, version detection (upgrade and downgrade) and flag order.
 
 - `scripts/checksums.mjs` — `--verify <manifest>` mode: checks every SHA-256, flags missing/extra files under `zm-pro/`, rejects paths outside the repository, and exits non-zero on any problem; documented in `SECURITY.md` (how to verify a downloaded release).

@@ -10,6 +10,8 @@
   },
   "scripts": {
     "validate": "node scripts/validate.mjs",
+    "audit": "node scripts/validate.mjs --json",
+    "audit:fix": "node scripts/validate.mjs --fix",
     "test": "node --test tests/validate.test.mjs tests/install.test.mjs tests/checksums.test.mjs tests/offline.test.mjs",
     "test:examples": "node --test examples/bugfix/src/total.test.mjs",
     "checksums": "node scripts/checksums.mjs",

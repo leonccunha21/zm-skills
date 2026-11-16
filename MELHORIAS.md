@@ -507,14 +507,14 @@ O zm-pro deve funcionar bem em projetos diferentes sem impor o mesmo nível de r
 
 ## 29. Auditoria de qualidade do próprio zm-pro
 
-- [ ] Criar um comando de auditoria que verifique estrutura, metadados, links, referências, templates, versões e consistência documental.
-- [ ] Produzir saída legível por humanos e, opcionalmente, JSON estável para integração com outras ferramentas.
-- [ ] Atribuir severidade, arquivo, linha ou seção, evidência, explicação e correção sugerida a cada achado.
-- [ ] Diferenciar erro bloqueador, aviso e sugestão; permitir configuração de regras sem esconder falhas críticas.
-- [ ] Garantir que a auditoria seja somente leitura por padrão.
-- [ ] Oferecer modo de correção automática apenas para mudanças mecânicas, com preview/diff e consentimento explícito.
-- [ ] Testar o auditor contra fixtures válidas, inválidas, incompletas e adversariais.
-- [ ] Garantir saída determinística para as mesmas entradas e versão.
+- [x] Criar um comando de auditoria que verifique estrutura, metadados, links, referências, templates, versões e consistência documental.
+- [x] Produzir saída legível por humanos e, opcionalmente, JSON estável para integração com outras ferramentas.
+- [x] Atribuir severidade, arquivo, linha ou seção, evidência, explicação e correção sugerida a cada achado.
+- [x] Diferenciar erro bloqueador, aviso e sugestão; permitir configuração de regras sem esconder falhas críticas.
+- [x] Garantir que a auditoria seja somente leitura por padrão.
+- [x] Oferecer modo de correção automática apenas para mudanças mecânicas, com preview/diff e consentimento explícito.
+- [x] Testar o auditor contra fixtures válidas, inválidas, incompletas e adversariais.
+- [x] Garantir saída determinística para as mesmas entradas e versão.
 
 ## 30. Migração, atualização e compatibilidade entre versões
 

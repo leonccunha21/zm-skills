@@ -18,6 +18,8 @@
 | Action | Command |
 |---|---|
 | Validate (the gate) | `npm run validate` |
+| Audit as JSON | `npm run audit` |
+| Mechanical fixes (preview) | `npm run audit:fix` (apply with `-- --yes`) |
 | Install the skill into a harness | `node scripts/install.mjs opencode` (see `README.md#install`) |
 | Release integrity | `npm run --silent checksums > CHECKSUMS-<tag>.txt` + `--verify` |
 | Node required | >= 18 |

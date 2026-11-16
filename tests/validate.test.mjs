@@ -3,7 +3,7 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
 import { spawnSync } from "node:child_process"
-import { copyFileSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import { copyFileSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -185,4 +185,91 @@ test("rejeita frontmatter sem delimitador de fechamento", (t) => {
   const result = runValidator(dir)
   assert.equal(result.status, 1)
   assert.match(result.stderr, /frontmatter não encontrado/)
+})
+
+test("--json carrega severidade, arquivo e linha em cada achado", (t) => {
+  const dir = withRepo(t, {
+    files: { "README.md": "# Fixture\n\n[quebrado](docs/nope.md)\n" },
+  })
+  const result = runValidator(dir, ["--json"])
+  assert.equal(result.status, 1)
+  const report = JSON.parse(result.stdout)
+  assert.equal(report.schemaVersion, 1)
+  const finding = report.findings.find((f) => f.message.includes("link quebrado"))
+  assert.ok(finding, "achado de link quebrado ausente")
+  assert.equal(finding.severity, "error")
+  assert.equal(finding.file, "README.md")
+  assert.equal(finding.line, 3)
+  assert.match(finding.suggestion, /corrija o caminho/)
+  assert.ok(report.counts.error >= 1)
+})
+
+test("saída determinística para a mesma entrada", (t) => {
+  const dir = withRepo(t, {
+    files: { "README.md": "# Fixture\n\n[quebrado](docs/nope.md)\n" },
+  })
+  const first = runValidator(dir, ["--json"])
+  const second = runValidator(dir, ["--json"])
+  assert.equal(first.stdout, second.stdout)
+  assert.equal(first.status, second.status)
+})
+
+test("auditoria é somente leitura por padrão", (t) => {
+  const dir = withRepo(t, {
+    files: { "README.md": "# Fixture  \n\n[quebrado](docs/nope.md)   \n" },
+  })
+  const before = readFileSync(join(dir, "README.md"), "utf8")
+  const result = runValidator(dir, ["--json"])
+  assert.equal(result.status, 1)
+  assert.equal(readFileSync(join(dir, "README.md"), "utf8"), before)
+})
+
+test("--fix sem --yes mostra a prévia e não escreve", (t) => {
+  const dir = withRepo(t, {
+    files: { "README.md": "# Fixture  \n\nsem newline final" },
+  })
+  const before = readFileSync(join(dir, "README.md"), "utf8")
+  const result = runValidator(dir, ["--fix"])
+  assert.equal(result.status, 0, result.stderr)
+  assert.match(result.stdout, /prévia de 1 arquivo/)
+  assert.match(result.stdout, /nada foi escrito/)
+  assert.equal(readFileSync(join(dir, "README.md"), "utf8"), before)
+})
+
+test("--fix --yes corrige só o que é mecânico e é idempotente", (t) => {
+  const dir = withRepo(t, {
+    files: { "README.md": "# Fixture  \n\nsem newline final" },
+  })
+  const fixed = runValidator(dir, ["--fix", "--yes"])
+  assert.equal(fixed.status, 0, fixed.stderr)
+  assert.equal(readFileSync(join(dir, "README.md"), "utf8"), "# Fixture\n\nsem newline final\n")
+  const again = runValidator(dir, ["--fix", "--yes"])
+  assert.match(again.stdout, /nada a corrigir/)
+  assert.equal(readFileSync(join(dir, "README.md"), "utf8"), "# Fixture\n\nsem newline final\n")
+})
+
+test("--fail-on=warning bloqueia avisos sem esconder erros", (t) => {
+  const dir = withRepo(t, {})
+  const normal = runValidator(dir)
+  assert.equal(normal.status, 0, normal.stderr)
+  const strict = runValidator(dir, ["--fail-on=warning"])
+  assert.equal(strict.status, 1)
+  assert.match(strict.stdout, /aviso/)
+  const invalid = runValidator(dir, ["--fail-on=banana"])
+  assert.equal(invalid.status, 1)
+  assert.match(invalid.stderr, /--fail-on precisa de/)
+})
+
+test("fixtures adversariais falham sem quebrar a auditoria", (t) => {
+  const dir = withRepo(t, {
+    files: {
+      "README.md": "# Fixture\n\n[js](javascript:alert(1))\n[fora](../../../etc/passwd)\n",
+    },
+  })
+  const result = runValidator(dir, ["--json"])
+  assert.equal(result.status, 1)
+  const report = JSON.parse(result.stdout)
+  assert.ok(report.findings.some((f) => /esquema executável/.test(f.message)))
+  assert.ok(report.findings.some((f) => /link quebrado/.test(f.message)))
+  assert.ok(report.findings.every((f) => ["error", "warning", "suggestion"].includes(f.severity)))
 })
