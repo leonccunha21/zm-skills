@@ -3,7 +3,7 @@
 // Copies this repository's `zm-pro/` skill into a harness skills directory.
 //
 // Usage:
-//   node scripts/install.mjs <harness> [--global] [--force] [--dry-run] [--dir <path>]
+//   node scripts/install.mjs <harness> [--global] [--force] [--dry-run] [--dir <path>] [--with-tools]
 //   npm run install-skill -- <harness> [flags]     (npm needs the `--` separator)
 //
 //   --dir <path> is the project root, not the final destination:
@@ -11,6 +11,7 @@
 //   <path>/.claude/skills/zm-pro (claude). Default: the current directory.
 //   --dry-run prints the upgrade plan (existing → incoming, files that change) and writes nothing.
 //   --force updates an existing install; the previous folder is kept as `zm-pro.backup-<timestamp>`.
+//   --with-tools also copies scripts/coordinate.mjs to <projectRoot>/scripts/coordinate.mjs.
 //
 // Harnesses:
 //   opencode  → project: <cwd>/.agents/skills/zm-pro  ·  global: $XDG_CONFIG_HOME/opencode/skills/zm-pro
@@ -176,12 +177,34 @@ if (existsSync(dest)) {
   process.exit(0)
 }
 
+const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms)
+
 mkdirSync(baseDir, { recursive: true })
 cleanStaleTemps()
 const tmp = `${dest}.tmp-${stamp}`
 try {
   cpSync(src, tmp, { recursive: true })
-  renameSync(tmp, dest)
+  // Windows occasionally refuses an immediate rename after a recursive copy
+  // (AV/indexer still holding handles); retry, then fall back to copy+delete.
+  let placed = false
+  let lastError
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    try {
+      renameSync(tmp, dest)
+      placed = true
+      break
+    } catch (err) {
+      lastError = err
+      if (err.code !== "ENOENT" && err.code !== "EPERM" && err.code !== "EACCES" && err.code !== "EBUSY") throw err
+      sleep(25 * (attempt + 1))
+    }
+  }
+  if (!placed) {
+    if (lastError?.code === "ENOENT") {
+      cpSync(tmp, dest, { recursive: true })
+      rmSync(tmp, { recursive: true, force: true })
+    } else throw lastError
+  }
 } catch (err) {
   rmSync(tmp, { recursive: true, force: true })
   fail(`install failed: ${err.message}${backup ? `\n  previous install kept at: ${backup}` : ""}`)
