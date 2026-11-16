@@ -6,7 +6,7 @@
 |---|---|---|---|
 | 1 — Structured | files and docs organized | **met** | router + 18 references + templates; `npm run validate` green |
 | 2 — Validated | install and structure verified | **met** | `tests/install.test.mjs` (12 cases), `tests/validate.test.mjs` (15), `tests/checksums.test.mjs` (8); installer dry-run/backup/atomic copy |
-| 3 — Evaluated | agent behavior measured | **not met** | no behavioral suite or baseline report yet (`MELHORIAS.md` §14) |
+| 3 — Evaluated | agent behavior measured | **not met** | no behavioral suite or baseline report yet (`MELHORIAS.md` §7) |
 | 4 — Compatible | harnesses tested end to end | **not met** | OpenCode 2.3.0 is the only tested harness; Claude/Codex/Cursor/Gemini are explicitly unverified |
 | 5 — Sustainable | governance and maintenance | **partial** | `docs/maintenance-policy.md`, ADR, issue/PR templates, CI gate; no long-term track record |
 

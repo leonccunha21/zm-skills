@@ -4,15 +4,27 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+### Upgrade
+
+Nothing yet — 0.10.0 just shipped; see below.
+
+## [0.10.0] - 2026-11-16
+
 ### Added
 
 - `templates/RULES.md` — new section "Mechanical enforcement": concrete ways to turn marked rules into CI gates (secrets scan, scope-limited branches, migration up/down verification, evidence checkbox, lockfile-drift check), and the explicit distinction between mechanically enforced vs. behavioral rules.
 - `templates/CI-ENFORCEMENT.yml` — copyable consumer-side workflow embodying that section: fails the PR on secrets, lockfile drift, out-of-scope paths on `fix/` branches, and leaves the migration-rollback job ready to adapt.
 - `docs/harness-compatibility.md` — matrix now includes an "On-demand loading (lazy references)" row: native skills mechanism only for OpenCode; other harnesses load always-on via rules file.
 
+### Changed
+
+- `MELHORIAS.md` — completed items removed; the file now lists only pending work (compatibility matrix testing, community reports, spellcheck dictionary, catalog PRs, adoption signals, recurring-issues review, behavioral evaluation gaps, restricted-environment permissions testing, acceptance criteria). Evidence from completed phases remains in git history and this changelog. Sections renumbered; `docs/maturity.md` reference updated to `MELHORIAS.md` §7.
+
+- `SKILL.md` — router header now says `zm-pro v0.10.0`.
+
 ### Upgrade
 
-Nothing yet — 0.9.0 just shipped; see below.
+Nothing required. New files (`CI-ENFORCEMENT.yml`, `RULES.md` section) land only for consumers that copy templates — existing installs keep working with the old templates.
 
 ## [0.9.0] - 2026-11-16
 
