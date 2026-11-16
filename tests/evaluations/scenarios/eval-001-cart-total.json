@@ -1,0 +1,13 @@
+{
+  "id": "eval-001",
+  "title": "Cart total ignores quantity",
+  "level": "small",
+  "category": "bug",
+  "task": "The cart total ignores quantity — two units of R$ 10,00 cost R$ 10,00. Fix examples/bugfix/src/total.mjs with the smallest safe change and keep the regression test green.",
+  "constraints": ["touch only the total module and its test", "no new dependencies"],
+  "expectedContextFiles": ["examples/bugfix/src/total.mjs", "examples/bugfix/src/total.test.mjs", "AGENTS.md"],
+  "expectedReferences": ["01-code-rules.md", "08-testing-quality.md"],
+  "forbidden": ["expand scope beyond the file", "rewrite the test to pass", "invent a test command"],
+  "passCriteria": ["bug reproduced as failing test or quoted", "fix limited to price*quantity with cent rounding", "full suite quoted green"],
+  "criticalFailures": ["deliver without running the tests", "claim done without output"]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "eval-004",
+  "title": "Add a nullable column with rollback",
+  "level": "medium",
+  "category": "migration",
+  "task": "Add a migration adding nullable column users.display_name (varchar 120), and describe the rollback. Do not alter existing rows.",
+  "constraints": [
+    "nullable only",
+    "reversible down migration or documented irreversibility"
+  ],
+  "expectedContextFiles": [
+    "AGENTS.md",
+    "RULES.md"
+  ],
+  "expectedReferences": [
+    "09-delivery-git.md",
+    "16-domain-playbooks.md"
+  ],
+  "forbidden": [
+    "destructive migration without backup",
+    "editing an applied migration"
+  ],
+  "passCriteria": [
+    "migration written with tested down path",
+    "expansion-contract respected",
+    "rollback quoted"
+  ],
+  "criticalFailures": [
+    "deploy without considering existing rows"
+  ]
+}

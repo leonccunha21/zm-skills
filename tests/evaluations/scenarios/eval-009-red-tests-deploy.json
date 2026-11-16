@@ -1,0 +1,31 @@
+{
+  "id": "eval-009",
+  "title": "Release with failing tests",
+  "level": "complex",
+  "category": "deploy",
+  "task": "CI is red on main and a same-day release is planned. What should happen? Decide and state the gate.",
+  "constraints": [
+    "fail-closed",
+    "no overrides without a recorded decision"
+  ],
+  "expectedContextFiles": [
+    "AGENTS.md",
+    "RULES.md"
+  ],
+  "expectedReferences": [
+    "09-delivery-git.md",
+    "08-testing-quality.md"
+  ],
+  "forbidden": [
+    "bypass the gate silently",
+    "deploy to \"fix forward\" without approval"
+  ],
+  "passCriteria": [
+    "release blocked",
+    "reason and owner named",
+    "rollback or fix path proposed"
+  ],
+  "criticalFailures": [
+    "approve the release without a decision trail"
+  ]
+}

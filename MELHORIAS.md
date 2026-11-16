@@ -302,18 +302,18 @@ Uma melhoria só deve ser marcada como concluída quando:
 
 Validar Markdown e instalação não prova que um agente entendeu o router, escolheu as referências corretas ou entregou engenharia melhor. O diferencial do zm-pro precisa ser demonstrado por resultados observáveis.
 
-- [ ] Criar uma suíte versionada de tarefas de avaliação, com cenários pequenos, médios e complexos.
-- [ ] Incluir manutenção de legado, bug, feature, refatoração, migração de banco, autenticação, upload, dados pessoais, incidente e deploy.
-- [ ] Definir para cada caso contexto inicial, objetivo, restrições, arquivos relevantes, resultado esperado, critérios de aceite e falhas críticas.
+- [x] Criar uma suíte versionada de tarefas de avaliação, com cenários pequenos, médios e complexos.
+- [x] Incluir manutenção de legado, bug, feature, refatoração, migração de banco, autenticação, upload, dados pessoais, incidente e deploy.
+- [x] Definir para cada caso contexto inicial, objetivo, restrições, arquivos relevantes, resultado esperado, critérios de aceite e falhas críticas.
 - [ ] Avaliar se o agente identifica o ambiente, inspeciona o projeto, respeita instruções locais e evita assumir stack ou ferramentas inexistentes.
 - [ ] Avaliar seleção correta e mínima das referências, sem carregar todos os guias indiscriminadamente.
-- [ ] Testar cenários positivos e negativos: uma referência, várias referências, nenhuma referência e instruções conflitantes.
+- [x] Testar cenários positivos e negativos: uma referência, várias referências, nenhuma referência e instruções conflitantes.
 - [ ] Medir sucesso, regressões, violações de restrições, contexto irrelevante, comandos inventados, alterações fora do escopo e qualidade da evidência final.
 - [ ] Comparar tarefas equivalentes com e sem zm-pro, mantendo modelo, harness, contexto, orçamento e critérios.
 - [ ] Repetir cenários quando houver variabilidade; reportar mediana, dispersão e falhas graves, não somente a melhor execução.
-- [ ] Versionar prompts e fixtures sintéticos; remover segredos, dados pessoais e código proprietário.
-- [ ] Definir avaliações mínimas obrigatórias antes de releases relevantes.
-- [ ] Registrar que os resultados dependem de modelo, versão, harness, ferramentas, contexto e configuração.
+- [x] Versionar prompts e fixtures sintéticos; remover segredos, dados pessoais e código proprietário.
+- [x] Definir avaliações mínimas obrigatórias antes de releases relevantes.
+- [x] Registrar que os resultados dependem de modelo, versão, harness, ferramentas, contexto e configuração.
 
 **Critério de conclusão:** cada release relevante possui relatório reproduzível com casos, ambiente, resultados, falhas conhecidas e comparação com a versão anterior.
 
@@ -452,7 +452,7 @@ Criar gradualmente, quando houver conteúdo e manutenção definidos:
 - [x] docs/decisions/: ADRs para decisões estruturais.
 - [ ] tests/fixtures/: projetos sintéticos e cenários adversariais.
 - [ ] tests/evaluations/: tarefas e critérios automatizáveis.
-- [ ] Templates de ADR, threat model, relatório de incidente e relatório de avaliação.
+- [x] Templates de ADR, threat model, relatório de incidente e relatório de avaliação.
 - [ ] CONTRIBUTING.md, CODE_OF_CONDUCT.md e modelos de issue/PR, se ainda estiverem ausentes ou incompletos.
 
 ## 25. Ordem de execução ampliada

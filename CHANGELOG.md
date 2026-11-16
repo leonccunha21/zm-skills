@@ -35,6 +35,8 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 - `tests/` — idempotent reinstall, stale temp cleanup, symlink guard (skipped where the OS forbids creating links), Unicode/space paths and `--dir` before the harness.
 - `tests/offline.test.mjs` — asserts no script imports or calls a network module, and runs validation + install with an invalid proxy to prove the tooling never reaches the network.
 
+- `EVALUATIONS.md` + `tests/evaluations/scenarios/` — 15 synthetic scenarios (small/medium/complex) covering bug, feature, legacy, migration, auth, upload, privacy, incident, deploy and conflict cases; `scripts/evaluate.mjs` (`npm run evaluations:check`) schema-checks them read-only (unique ids, referenced guides exist, no secret-like content) and states explicitly that it is **not** a behavioral result. `templates/EVALUATION-REPORT.md` holds the recording format. No baseline has been run or published.
+
 ### Upgrade
 
 No action required. Existing installs keep working; to pick up this release, run `node scripts/install.mjs <harness> --dry-run`, then `--force` (previous folder kept as `zm-pro.backup-<timestamp>`). Details and the version table: `docs/migration.md`.

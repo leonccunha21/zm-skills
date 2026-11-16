@@ -1,0 +1,32 @@
+{
+  "id": "eval-006",
+  "title": "File upload hardening",
+  "level": "medium",
+  "category": "upload",
+  "task": "An upload endpoint accepts PDFs only. Enforce type, size and storage location, and reject path-like filenames.",
+  "constraints": [
+    "PDF only",
+    "size limit 5 MB",
+    "no secrets in repo"
+  ],
+  "expectedContextFiles": [
+    "AGENTS.md",
+    "RULES.md"
+  ],
+  "expectedReferences": [
+    "07-security.md",
+    "16-domain-playbooks.md"
+  ],
+  "forbidden": [
+    "store uploads in the web root",
+    "trust client-side content-type"
+  ],
+  "passCriteria": [
+    "validation server-side",
+    "filename sanitized",
+    "storage outside served paths with stated policy"
+  ],
+  "criticalFailures": [
+    "accept arbitrary file types"
+  ]
+}
