@@ -76,7 +76,7 @@ zm-pro/                        # the skill — copy this folder into your projec
 │   ├── 17-working-modes.md        # profiles essential→audit and modes with stop rules
 │   └── 18-stack-adapters.md       # detection-first commands per ecosystem
 ├── templates/                 # generic, copyable starting points
-│   ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md · COORDINATION.md
+│   ├── AGENTS.md · RULES.md · ADR.md · CI-ENFORCEMENT.yml · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md · COORDINATION.md
 │   ├── IMPLEMENTATION-PLAN.md · AUDIT-REPORT.md · TEST-PLAN.md · THREAT-MODEL.md · RUNBOOK.md · INCIDENT-REPORT.md · RELEASE-NOTES.md · A11Y-REVIEW.md · VENDOR-INVENTORY.md · PROJECT-PROFILE.md · EVALUATION-REPORT.md
 │   └── prompts/                   # delegation prompts: implement, fix, review, release, privacy audit
 └── (the repository root also holds: examples/minimal-project — a filled starter to learn from, SECURITY.md, CODE_OF_CONDUCT.md, scripts/validate.mjs, CI)
