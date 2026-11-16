@@ -19,7 +19,7 @@
 //   codex | cursor | gemini  → no copy; prints the manual route (paths are not standardized)
 //
 // Exit codes: 0 = installed or instructions printed · 1 = error (with message on stderr)
-import { existsSync, mkdirSync, cpSync, rmSync, readFileSync, readdirSync, renameSync, statSync } from "node:fs"
+import { existsSync, mkdirSync, rmSync, readFileSync, readdirSync, copyFileSync, statSync, renameSync } from "node:fs"
 import { join, resolve, relative } from "node:path"
 import { fileURLToPath } from "node:url"
 import { homedir } from "node:os"
@@ -109,6 +109,19 @@ const filesUnder = (dir, base = dir, acc = []) => {
   return acc
 }
 
+const copyTree = (src, dst) => {
+  // fs.cpSync mis-encodes unicode paths on Windows Node 22 (UTF-8 bytes read as CP1252);
+  // copying manually avoids the platform bug and keeps behavior deterministic.
+  mkdirSync(dst, { recursive: true })
+  for (const entry of readdirSync(src, { withFileTypes: true })) {
+    const s = join(src, entry.name)
+    const d = join(dst, entry.name)
+    if (entry.isDirectory()) copyTree(s, d)
+    else if (entry.isFile()) copyFileSync(s, d)
+    else if (entry.isSymbolicLink()) fail(`source contains a symbolic link: ${s}\n  resolve or remove it manually; nothing was installed`)
+  }
+}
+
 // A run killed mid-copy leaves `zm-pro.tmp-<stamp>`. Only folders old enough to
 // not belong to a concurrent install are removed; the tmp folder of this run never is.
 const STALE_MS = 60 * 60 * 1000
@@ -189,7 +202,7 @@ mkdirSync(baseDir, { recursive: true })
 cleanStaleTemps()
 const tmp = `${dest}.tmp-${stamp}`
 try {
-  cpSync(src, tmp, { recursive: true })
+  copyTree(src, tmp)
   // Windows occasionally refuses an immediate rename after a recursive copy
   // (AV/indexer still holding handles); retry, then fall back to copy+delete.
   let placed = false
@@ -202,12 +215,17 @@ try {
     } catch (err) {
       lastError = err
       if (err.code !== "ENOENT" && err.code !== "EPERM" && err.code !== "EACCES" && err.code !== "EBUSY") throw err
+      // Some Windows runners report ENOENT yet complete the rename; a dest that exists means we are done.
+      if (existsSync(join(dest, "SKILL.md"))) {
+        placed = true
+        break
+      }
       sleep(25 * (attempt + 1))
     }
   }
   if (!placed) {
     if (lastError?.code === "ENOENT") {
-      cpSync(tmp, dest, { recursive: true })
+      copyTree(tmp, dest)
       rmSync(tmp, { recursive: true, force: true })
     } else throw lastError
   }
@@ -225,7 +243,7 @@ if (flag("--with-tools")) {
     console.log(`Tool coordinate.mjs already exists at ${targetCoord} (kept as-is; use --force to overwrite)`)
   } else {
     mkdirSync(targetScripts, { recursive: true })
-    cpSync(coordSrc, targetCoord)
+    copyFileSync(coordSrc, targetCoord)
     console.log(`Installed tool: ${targetCoord}`)
   }
 }
