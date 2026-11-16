@@ -33,11 +33,37 @@ There is **no prebuilt bundle** and nothing is compiled: the published artifact 
 
 ## Community catalogs
 
-There is no approved listing in a third-party catalog today. If one is opened, its status is recorded here with a date and a link — never claimed as "available" before it is merged.
+There is no approved listing in a third-party catalog today. Statuses are recorded here with a date and a link — never claimed as "available" before it is merged. Last verified: 2026-11-16 (unauthenticated GitHub API read).
 
 | Catalog | Status | Date | Link |
 |---|---|---|---|
-| — | none opened | — | — |
+| Prat011/awesome-llm-skills | open (ready for review) | 2026-11-16 | [#337](https://github.com/Prat011/awesome-llm-skills/pull/337) |
+| sickn33/agentic-awesome-skills | closed, not merged — maintainer asked for a self-contained submission (SKILL.md plus the referenced Markdown guides with their license) and a test of the exact submitted bundle | 2026-11-16 | [#2351](https://github.com/sickn33/agentic-awesome-skills/pull/2351) |
+
+## Adoption signals (public, voluntary)
+
+No telemetry is added to the skill, ever. Adoption is measured only from public, voluntary signals, dated at each reading. Refresh at each release (or monthly) and keep one dated row per reading — never claim adoption without the date and the numbers.
+
+**How to measure (reproducible, unauthenticated GitHub API):**
+
+```bash
+curl -s https://api.github.com/repos/leonccunha21/zm-skills \
+  | jq '{stars:.stargazers_count, forks:.forks_count, subscribers:.subscribers_count, open_issues:.open_issues_count}'
+curl -s "https://api.github.com/repos/leonccunha21/zm-skills/issues?state=all&per_page=100" \
+  | jq '[.[] | {n:.number, is_pr:(.pull_request!=null), state:.state}]'
+```
+
+| Signal | 2026-11-16 |
+|---|---|
+| Stars | 1 |
+| Forks | 0 |
+| Watchers / subscribers | 1 / 0 |
+| Open issues | 0 |
+| Real issues (all time) | 0 — every item in `issues?state=all` is a PR (6 owner PRs + 2 dependabot: #1, #2) |
+| Catalog submissions | 1 open (#337), 1 closed not merged (#2351, see above) |
+| Repository created | 2026-11-16 |
+
+Reading: the project is ~1 day old; the signals above are a **baseline**, not traction. Growth or stagnation can only be claimed from future readings.
 
 ## Versioning and support
 

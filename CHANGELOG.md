@@ -4,6 +4,15 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+### Changed
+
+- `docs/distribution.md` — community catalog statuses recorded with date and link (verified 2026-11-16, unauthenticated GitHub API read): Prat011/awesome-llm-skills #337 open; sickn33/agentic-awesome-skills #2351 closed without merge, with the maintainer's request for a self-contained bundle (router plus referenced guides with their license) and a test of the exact submitted bundle. No catalog listing exists today. `docs/roadmap.md` points to `distribution.md` for submission statuses; `MELHORIAS.md` item checked off.
+- `docs/distribution.md` — adoption-signals baseline (2026-11-16): reproducible unauthenticated-API method plus dated numbers (1 star, 0 forks, 1 watcher / 0 subscribers, 0 issues real, ~1-day-old repository). Marked as baseline, not traction; no telemetry is added to the skill; refresh at each release. Issues review (2026-11-16): no real issues exist — all `issues?state=all` items are PRs; MELHORIAS item remains open until real issues land.
+- `docs/evaluation-results/pilot-inkling-eval-001.md` — new pilot (OpenCode 2.3.0, free-tier model, Windows, scratch copy of the repo): harness exited 0 after a single text turn with zero tool calls; verdict inconclusive; transcript saved locally (gitignored `*.log`, same as other pilots); not a baseline and it must not be read as one. `EVALUATIONS.md` status lists the three pilots; `docs/evaluation-results/README.md` and `EVALUATIONS.md` document the Windows argv pitfall (`spawnSync opencode ENOENT` on npm shims — call the direct `.exe`).
+- `MELHORIAS.md` — new section "Bugs e defeitos encontrados": `evaluate-run.mjs` exits 0 even when the harness fails to spawn or exits non-zero (silent green for an unattended caller — no `fail()`, `result.status` not propagated); the Windows argv pitfall is marked partially addressed via the documented workaround.
+- `scripts/evaluate-run.mjs` — no longer exits 0 silently on harness failure: if `result.error`, `result.signal` or a non-zero `result.status` is present, the runner prints `evaluate-run: <reason>` and exits 1, keeping transcript and report on disk. `tests/evaluate-run.test.mjs` (5 committed tests) gains two failure-path cases (harness missing, harness exit ≠ 0) and is now registered in `npm test`.
+- All committed test files are now registered in `npm test` (`parity`, `injection-hygiene`, `fixtures-adversarial`, `stack-adapters`, `evaluate-run` were not) — one source of truth for the unit gate instead of local/CI drift. `.github/workflows/validate.yml` loses the three duplicate one-off test steps; the matrix job name reflects the full suite. New `tests/test-wiring.test.mjs` guards the invariant (every `tests/*.test.mjs` is in the test script; no stale entries). Full suite: 101 tests, 100 pass, 1 skip (Windows symlink).
+
 ### Upgrade
 
 Nothing yet — 0.10.0 just shipped; see below.

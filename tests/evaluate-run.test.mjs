@@ -16,6 +16,14 @@ const outDir = join(repoRoot, "docs", "evaluation-results")
 const countArtifacts = () =>
   readdirSync(outDir).filter((f) => /-eval-\d{3}\.(raw\.log|md)$/.test(f)).length
 
+const cleanupLabel = (t, label) => {
+  t.after(() => {
+    for (const f of readdirSync(outDir)) {
+      if (f.startsWith(label)) rmSync(join(outDir, f), { force: true })
+    }
+  })
+}
+
 test("--dry-run não executa nem escreve", () => {
   const before = countArtifacts()
   const result = run(["eval-001", "--command-json", "[\"node\",\"-e\",\"process.exit(0)\"]", "--dry-run"])
@@ -47,11 +55,7 @@ test("prompt viaja como argumento, sem shell (zero interpretação)", (t) => {
   t.after(() => rmSync(tmp, { recursive: true, force: true }))
   const proof = join(tmp, "argv.json")
   const argv = JSON.stringify(["node", "-e", `require('fs').writeFileSync(${JSON.stringify(proof)}, JSON.stringify(process.argv.slice(1)))`, "{{prompt}}"])
-  t.after(() => {
-    for (const f of readdirSync(outDir)) {
-      if (f.startsWith(label)) rmSync(join(outDir, f), { force: true })
-    }
-  })
+  cleanupLabel(t, label)
   const result = run(["eval-001", "--command-json", argv, "--label", label])
   assert.equal(result.status, 0, result.stderr)
   const got = JSON.parse(readFileSync(proof, "utf8"))
@@ -62,11 +66,7 @@ test("prompt viaja como argumento, sem shell (zero interpretação)", (t) => {
 test("executa e gera transcript + scaffold que não se vende como baseline", (t) => {
   const label = `test-${Date.now()}`
   const before = countArtifacts()
-  t.after(() => {
-    for (const f of readdirSync(outDir)) {
-      if (f.startsWith(label)) rmSync(join(outDir, f), { force: true })
-    }
-  })
+  cleanupLabel(t, label)
   const result = run(["eval-001", "--command-json", "[\"node\",\"-e\",\"console.log('eval-stub-ok')\"]", "--label", label, "--model", "test-model", "--harness", "test harness 1.0"])
   assert.equal(result.status, 0, result.stderr)
   const files = readdirSync(outDir)
@@ -77,4 +77,26 @@ test("executa e gera transcript + scaffold que não se vende como baseline", (t)
   assert.match(report, /Not a baseline/)
   assert.match(report, /test-model/)
   assert.equal(countArtifacts(), before + 2)
+})
+
+test("harness inexistente sai com código 1 e mantém transcript para diagnóstico", (t) => {
+  const label = `test-${Date.now()}`
+  cleanupLabel(t, label)
+  const result = run(["eval-001", "--command-json", JSON.stringify(["zm-notareal-binary-9f8e7d6c5b4a31"]), "--label", label])
+  assert.equal(result.status, 1)
+  assert.match(result.stderr, /falha ao iniciar o harness/)
+  const transcript = readFileSync(join(outDir, `${label}-eval-001.raw.log`), "utf8")
+  assert.match(transcript, /error: Error/)
+  const report = readFileSync(join(outDir, `${label}-eval-001.md`), "utf8")
+  assert.ok(report.length > 0, "relatório scaffold deve existir para diagnóstico")
+})
+
+test("harness com exit ≠ 0 sai com código 1 e o transcript registra o código", (t) => {
+  const label = `test-${Date.now()}`
+  cleanupLabel(t, label)
+  const result = run(["eval-001", "--command-json", JSON.stringify([process.execPath, "-e", "process.exit(3)"]), "--label", label])
+  assert.equal(result.status, 1)
+  assert.match(result.stderr, /harness saiu com código 3/)
+  const transcript = readFileSync(join(outDir, `${label}-eval-001.raw.log`), "utf8")
+  assert.match(transcript, /exit: 3/)
 })

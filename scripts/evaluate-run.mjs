@@ -190,6 +190,18 @@ writeFileSync(reportFile, report)
 if (!keep) rmSync(scratch, { recursive: true, force: true })
 else console.log(`Scratch preservado: ${scratch}`)
 
+const harnessFailed = Boolean(result.error) || Boolean(result.signal) || result.status !== 0
+if (harnessFailed) {
+  const why = result.error
+    ? `falha ao iniciar o harness: ${result.error.message ?? result.error}`
+    : result.signal
+      ? `harness morto por sinal ${result.signal}`
+      : `harness saiu com código ${result.status}`
+  console.error(`evaluate-run: ${why} — transcript e relatório mantidos em ${relative(repoRoot, outDir)}`)
+  console.error("rode novamente com --keep para preservar o scratch")
+  process.exit(1)
+}
+
 console.log(`Transcrição bruta: ${relative(repoRoot, transcriptFile)}`)
 console.log(`Relatório (preencher e revisar): ${relative(repoRoot, reportFile)}`)
 console.log("Nada aqui é um baseline: revise o transcript, pontue as 6 dimensões, repita ≥3 vezes e só então atualize docs/maturity.md.")
