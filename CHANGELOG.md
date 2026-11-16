@@ -4,6 +4,10 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+### Fixed
+
+- Branch protection for `main`: required status checks now reference real CI jobs (`validate`, `tests (ubuntu-latest, 22)`, `tests (windows-latest, 18)`, `tests (macos-latest, 22)`) — the previous contexts `validate (18|20|22)` never existed in any workflow, which made the gate unreachable and every merge effectively unguarded. Codified as ADR `docs/decisions/0002-required-status-checks.md`. PR #11 merged under the new gate.
+
 ### Changed
 
 - `docs/distribution.md` — community catalog statuses recorded with date and link (verified 2026-11-16, unauthenticated GitHub API read): Prat011/awesome-llm-skills #337 open; sickn33/agentic-awesome-skills #2351 closed without merge, with the maintainer's request for a self-contained bundle (router plus referenced guides with their license) and a test of the exact submitted bundle. No catalog listing exists today. `docs/roadmap.md` points to `distribution.md` for submission statuses; `MELHORIAS.md` item checked off.
