@@ -4,6 +4,11 @@
 //
 // Usage:
 //   node scripts/install.mjs <harness> [--global] [--force] [--dir <path>]
+//   npm run install-skill -- <harness> [flags]     (npm needs the `--` separator)
+//
+//   --dir <path> is the project root, not the final destination:
+//   the skill lands in <path>/.agents/skills/zm-pro (opencode) or
+//   <path>/.claude/skills/zm-pro (claude). Default: the current directory.
 //
 // Harnesses:
 //   opencode  → project: <cwd>/.agents/skills/zm-pro  ·  global: $XDG_CONFIG_HOME/opencode/skills/zm-pro
@@ -33,8 +38,11 @@ const fail = (msg) => {
   process.exit(1)
 }
 
-if (!harness || !["opencode", "claude", "codex", "cursor", "gemini"].includes(harness)) {
-  fail(`unknown harness "${harness ?? ""}". Expected: opencode | claude | codex | cursor | gemini`)
+if (!harness) {
+  fail("harness required. Usage: node scripts/install.mjs <opencode|claude|codex|cursor|gemini> (via npm: npm run install-skill -- opencode)")
+}
+if (!["opencode", "claude", "codex", "cursor", "gemini"].includes(harness)) {
+  fail(`unknown harness "${harness}". Expected: opencode | claude | codex | cursor | gemini`)
 }
 
 if (!existsSync(srcSkill)) fail(`source not found: ${srcSkill} — run from the repository checkout`)

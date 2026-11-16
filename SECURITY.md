@@ -4,8 +4,10 @@
 
 | Version | Supported |
 |---|---|
-| latest minor (`0.4.x`) | ✅ |
-| older | ❌ — update first |
+| latest minor (`0.8.x`) | ✅ |
+| older minors (`0.1.x`–`0.7.x`) | ❌ — update first |
+
+Only the latest minor receives fixes. Updating is a folder copy (see the README); the current version is the latest entry in `CHANGELOG.md`.
 
 ## Reporting a vulnerability
 

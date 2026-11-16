@@ -4,6 +4,18 @@ All notable changes to this project. Format based on [Keep a Changelog](https://
 
 ## [Unreleased]
 
+### Added
+
+- `tests/` — first real unit suite (`node:test`, zero dependencies): the validator accepts this repo and rejects broken relative links, project residue and router/package version drift; the installer covers project and global installs, existing destination, `--force`, invalid or missing harness, and paths with spaces.
+- `package.json` — `npm test` now runs the unit suite; `npm run validate` remains the structural gate.
+- CI — the `validate` workflow runs `npm test` on the same Node/OS matrix.
+
+### Fixed
+
+- `README.md` / `README.pt-BR.md` — version badge is now dynamic (latest GitHub release) instead of the stale static `0.4.0`; the scripted install is documented as `npm run install-skill -- opencode`, since npm needs the `--` separator to forward the harness.
+- `SECURITY.md` — supported versions updated from `0.4.x` to the current minor, with the update-first policy stated.
+- `scripts/install.mjs` — a missing harness now fails with the documented npm form; `--dir` is documented as the project root, not the final destination.
+
 ## [0.8.1] — 2026-11-16
 
 Patch release: roadmap documentation catches up with shipped versions.

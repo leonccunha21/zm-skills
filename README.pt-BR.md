@@ -5,7 +5,7 @@
 **o playbook de projeto profissional para agentes de IA**
 
 [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-green.svg)](LICENSE)
-[![Versão](https://img.shields.io/badge/vers%C3%A3o-0.4.0-blue.svg)](CHANGELOG.md)
+[![Versão](https://img.shields.io/github/v/release/leonccunha21/zm-skills?label=vers%C3%A3o)](CHANGELOG.md)
 [![Release](https://img.shields.io/github/v/release/leonccunha21/zm-skills)](https://github.com/leonccunha21/zm-skills/releases/latest)
 [![validate](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml)
 [![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Compre-me%20um%20caf%C3%A9&emoji=%E2%98%95&slug=zmcompanh&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/zmcompanh)
@@ -80,7 +80,7 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 
 ## Instalação
 
-> Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Automatizado: `node scripts/install.mjs opencode` (= `npm run install-skill`); integridade para releases: `npm run checksums`.
+> Evidência por harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Automatizado: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <raiz-do-projeto>` instala em `<raiz-do-projeto>/.agents/skills/zm-pro`); integridade para releases: `npm run checksums`.
 
 ### OpenCode
 
@@ -128,7 +128,7 @@ Prompt para uma tarefa real:
 
 ## Contribuição e releases
 
-Veja [CONTRIBUTING.md](CONTRIBUTING.md) (em inglês). Semver; toda mudança via PR com o validador verde (`npm run validate`); histórico em [CHANGELOG.md](CHANGELOG.md).
+Veja [CONTRIBUTING.md](CONTRIBUTING.md) (em inglês). Semver; toda mudança via PR com o validador verde (`npm run validate`) e a suíte de testes passando (`npm run test` — validador e instalador, sem dependências); histórico em [CHANGELOG.md](CHANGELOG.md).
 
 ---
 

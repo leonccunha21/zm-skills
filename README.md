@@ -5,7 +5,7 @@
 **the professional project playbook for AI agents**
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/github/v/release/leonccunha21/zm-skills?label=version)](CHANGELOG.md)
 [![Release](https://img.shields.io/github/v/release/leonccunha21/zm-skills)](https://github.com/leonccunha21/zm-skills/releases/latest)
 [![validate](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml)
 [![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Compre-me%20um%20caf%C3%A9&emoji=%E2%98%95&slug=zmcompanh&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff)](https://www.buymeacoffee.com/zmcompanh)
@@ -88,7 +88,7 @@ Design principles:
 
 ## Install
 
-> Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Scripted: `node scripts/install.mjs opencode` (= `npm run install-skill`); integrity for releases: `npm run checksums`.
+> Evidence per harness — [docs/harness-compatibility.md](docs/harness-compatibility.md). Scripted: `node scripts/install.mjs opencode` (via npm: `npm run install-skill -- opencode`; `--dir <project-root>` installs into `<project-root>/.agents/skills/zm-pro`); integrity for releases: `npm run checksums`.
 
 ### OpenCode
 
@@ -145,7 +145,7 @@ Or rely on the trigger description — the agent picks the track (kickoff, imple
 
 ## Contributing & releases
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Semver; every change via PR with the repo validator green (`npm run validate`); history in [CHANGELOG.md](CHANGELOG.md). Skill changes ship as `zm-pro` version bumps.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Semver; every change via PR with the repo validator green (`npm run validate`) and the unit suite passing (`npm run test` — validator and installer, zero dependencies); history in [CHANGELOG.md](CHANGELOG.md). Skill changes ship as `zm-pro` version bumps.
 
 ---
 

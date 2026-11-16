@@ -26,11 +26,18 @@ Estes itens foram observados nos arquivos consultados durante a inspeção inici
 
 ### P0 — Corrigir inconsistências que afetam a confiança e o uso
 
-- [ ] **Atualizar badges de versão nos READMEs.** Os arquivos `README.md` e `README.pt-BR.md` exibem badge estático 0.4.0, enquanto `package.json`, `zm-pro/SKILL.md` e o changelog indicam 0.8.1. Preferir badge dinâmico baseado na última release ou manter uma única fonte de versão.
-- [ ] **Atualizar a política de segurança.** `SECURITY.md` declara suporte a 0.4.x, embora a versão atual indicada seja 0.8.1. Definir política de versões suportadas coerente com SemVer e releases reais.
-- [ ] **Corrigir instrução de instalação npm.** O README sugere que `npm run install-skill` equivale à instalação OpenCode, mas o script exige um argumento de harness. O script npm atual não fornece esse argumento. Documentar o comando correto (`npm run install-skill -- opencode`, se validado) ou ajustar o script para fornecer um padrão explícito.
-- [ ] **Alinhar documentação e comportamento do instalador.** Confirmar que os exemplos de instalação para OpenCode e Claude Code correspondem aos diretórios realmente usados pelo script e aos diretórios reconhecidos por cada versão do harness.
-- [ ] **Distinguir testes de validação estrutural.** Atualmente `npm test` executa o validador do repositório; isso não equivale a uma suíte de testes unitários do instalador e do validador. Criar testes automatizados reais e deixar os nomes dos comandos inequívocos.
+- [x] **Atualizar badges de versão nos READMEs.** Os arquivos `README.md` e `README.pt-BR.md` exibem badge estático 0.4.0, enquanto `package.json`, `zm-pro/SKILL.md` e o changelog indicam 0.8.1. Preferir badge dinâmico baseado na última release ou manter uma única fonte de versão.
+- [x] **Atualizar a política de segurança.** `SECURITY.md` declara suporte a 0.4.x, embora a versão atual indicada seja 0.8.1. Definir política de versões suportadas coerente com SemVer e releases reais.
+- [x] **Corrigir instrução de instalação npm.** O README sugere que `npm run install-skill` equivale à instalação OpenCode, mas o script exige um argumento de harness. O script npm atual não fornece esse argumento. Documentar o comando correto (`npm run install-skill -- opencode`, se validado) ou ajustar o script para fornecer um padrão explícito.
+- [x] **Alinhar documentação e comportamento do instalador.** Confirmar que os exemplos de instalação para OpenCode e Claude Code correspondem aos diretórios realmente usados pelo script e aos diretórios reconhecidos por cada versão do harness.
+- [x] **Distinguir testes de validação estrutural.** Atualmente `npm test` executa o validador do repositório; isso não equivale a uma suíte de testes unitários do instalador e do validador. Criar testes automatizados reais e deixar os nomes dos comandos inequívocos.
+
+> **Status 2026-11-16** — os cinco itens P0 foram implementados na branch `chore/p0-trust-fixes`.
+> Evidência: `npm run validate` → `ok - zm-pro íntegro` (49 arquivos); `npm test` → 15/15 testes passando;
+> `npm run install-skill -- opencode --dir <tmp>` → pasta instalada com `SKILL.md` presente.
+> Badge dinâmico: `img.shields.io/github/v/release/...` nos dois READMEs. `SECURITY.md`: `0.8.x` suportado.
+> Scripted install: `npm run install-skill -- opencode` (separador `--`). `--dir` documentado como raiz do projeto.
+> Não testado: descoberta real nos harnesses além do OpenCode 2.3.0 (permanece como declarado em `docs/harness-compatibility.md`).
 
 ### P1 — Qualidade da validação e manutenção
 
@@ -38,9 +45,9 @@ Estes itens foram observados nos arquivos consultados durante a inspeção inici
 - [ ] **Validar frontmatter com regras explícitas.** Cobrir campos obrigatórios, descrição, delimitadores, caracteres especiais e limites do formato Agent Skills. Evitar depender de expressões regulares frágeis para interpretar YAML.
 - [ ] **Validar cobertura do índice.** Garantir que todas as referências e templates publicados estejam indexados e que nenhum caminho apontado pelo router esteja ausente.
 - [ ] **Validar sincronização de versões.** Conferir `package.json`, `SKILL.md`, badges, changelog, release e documentação de instalação.
-- [ ] **Testar instalador sem sobrescrita acidental.** Cobrir harness inválido, diretório inexistente, destino já existente, `--force`, `--global`, `--dir`, caminhos com espaços e execução em Windows/Linux/macOS.
+- [x] **Testar instalador sem sobrescrita acidental.** Coberto por `tests/install.test.mjs`: harness inválido, ausência de harness, destino já existente, `--force`, `--global` (com `XDG_CONFIG_HOME` isolado), `--dir` e caminhos com espaços. Windows local; Linux/macOS cobertos pela matriz de CI.
 - [ ] **Garantir instalação reversível.** Confirmar que instalar e desinstalar não alteram arquivos fora do diretório de destino e não executam código ou chamadas de rede.
-- [ ] **Revisar a opção `--dir`.** Documentar se ela representa a raiz do projeto ou o diretório final de instalação; testar caminhos absolutos e relativos.
+- [x] **Revisar a opção `--dir`.** Documentada como raiz do projeto (destino: `<dir>/.agents|.claude/skills/zm-pro`) no cabeçalho de `scripts/install.mjs`; testada com caminho absoluto, relativo (`.` a partir do cwd) e com espaços.
 
 ## 3. Arquitetura e conteúdo da skill
 
@@ -204,11 +211,11 @@ A estrutura é uma proposta, não uma exigência para criar todos os diretórios
 
 ### Fase 1 — Correções de confiança (prioridade máxima)
 
-- [ ] Corrigir badges e política de versões suportadas.
-- [ ] Corrigir comandos de instalação nos READMEs.
-- [ ] Ajustar nomes e escopo dos comandos de teste.
-- [ ] Revisar instalador e validador para casos extremos.
-- [ ] Executar validação local e CI; registrar evidências.
+- [x] Corrigir badges e política de versões suportadas.
+- [x] Corrigir comandos de instalação nos READMEs.
+- [x] Ajustar nomes e escopo dos comandos de teste.
+- [x] Revisar instalador e validador para casos extremos.
+- [ ] Executar validação local e CI; registrar evidências. *(Local: verde. CI: roda no PR.)*
 
 **Critério de conclusão:** comandos documentados funcionam como escritos; versão consistente em todos os pontos; testes automatizados passam.
 
