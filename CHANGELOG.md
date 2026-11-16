@@ -2,6 +2,23 @@
 
 All notable changes to this project. Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [semver](https://semver.org/).
 
+## [0.3.0] — 2026-11-16
+
+Feature-complete pass — zm-pro now covers the full lifecycle from "empty repo" to "production + feedback", with a worked example included.
+
+### Added
+
+- `reference/11-architecture.md` — deep modules, dependency direction, seams, splitting heuristics, ADR discipline, contract versioning, tech-debt handling, anti-patterns
+- `reference/12-performance.md` — measure-first profiling, Core Web Vitals budgets (LCP/INP/CLS), bundle budgets, N+1, indexes, caching with invalidation, CI perf gates, anti-patterns
+- `templates/prompts/` — copyable delegation prompts: `implement-feature.md`, `fix-bug.md`, `review-pr.md`, `release-day.md`, `privacy-audit.md`
+- `examples/minimal-project/` — a filled starter: AGENTS.md with real commands, a real ADR, and a DELIVERY-LOG with evidence-backed entries
+- `SECURITY.md` (private vulnerability reporting, supported versions), `CODE_OF_CONDUCT.md`, link- and repo-shape checks in `scripts/validate.mjs`
+- CI now validates on Node 18, 20 and 22
+
+### Changed
+
+- `SKILL.md` router index extended (12 references + prompts noted); description unchanged
+
 ## [0.2.0] — 2026-11-15
 
 Public-readiness release: the kit is now fully English, generic and self-validating, ready to be consumed by any project and published as its own public repository.

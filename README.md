@@ -3,7 +3,7 @@
 **A portable, self-contained skill that turns any coding agent into a disciplined project professional** — rules, standards, layout & UI, multi-agent coordination, project memory, privacy (LGPD/GDPR), security, testing, delivery and operations. Built on the open [Agent Skills](https://github.com/agentskills/agentskills) format; works in OpenCode, Claude Code, Codex, Cursor, Gemini CLI and any harness that loads `SKILL.md` packs.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.2.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.3.0-blue.svg)](CHANGELOG.md)
 [![validate](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml)
 
 Read this in Portuguese: [README.pt-BR.md](README.pt-BR.md).
@@ -17,7 +17,7 @@ Agents already write code. What's missing in most projects is the **professional
 ```
 zm-pro/                        # the skill — copy this folder into your project/harness
 ├── SKILL.md                   # router: when to use, the cycle, the index
-├── reference/                 # 10 focused guides, loaded on demand
+├── reference/                 # 12 focused guides, loaded on demand
 │   ├── 01-code-rules.md           # principles, gates, dependencies, definition of done
 │   ├── 02-project-standards.md    # repo layout, docs, commits, semver, changelog
 │   ├── 03-layout-ui.md            # pt-BR defaults, mobile-first, touch ≥44px, a11y AA, tokens
@@ -27,14 +27,13 @@ zm-pro/                        # the skill — copy this folder into your projec
 │   ├── 07-security.md             # secrets, OWASP essentials, auth/RLS, backups, incidents
 │   ├── 08-testing-quality.md      # pyramid, MSW/emulators/Playwright, regression, gates
 │   ├── 09-delivery-git.md         # commits, PR, release, fail-closed deploy, rollback
-│   └── 10-operations.md           # logs/metrics/alerts, backup drills, runbooks, post-mortems
-└── templates/                 # generic, copyable starting points
-    ├── AGENTS.md                  # agent protocol template
-    ├── RULES.md                   # architecture/security invariants
-    ├── ADR.md                     # architecture decision record
-    ├── DEFINITION-OF-DONE.md
-    ├── DELIVERY-CHECKLIST.md
-    └── PR-TEMPLATE.md
+│   ├── 10-operations.md           # logs/metrics/alerts, backup drills, runbooks, post-mortems
+│   ├── 11-architecture.md         # deep modules, dependency direction, seams, ADRs
+│   └── 12-performance.md          # measure-first, CWV budgets, N+1, indexes, CI perf gates
+├── templates/                 # generic, copyable starting points
+│   ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
+│   └── prompts/                   # delegation prompts: implement, fix, review, release, privacy audit
+└── (the repository root also holds: examples/minimal-project — a filled starter to learn from, SECURITY.md, CODE_OF_CONDUCT.md, scripts/validate.mjs, CI)
 ```
 
 Design principles:
@@ -95,6 +94,7 @@ Or rely on the trigger description — the agent picks the track (kickoff, imple
 **Does it send data anywhere?** No. It contains no executable code beyond a validator script in this repo (for contributors).
 **Can I fork and adapt it?** Yes — MIT. Keep the license notice; tell your users what you changed.
 **Will it work with my stack?** The rules are stack-agnostic; examples assume TypeScript/Node as a sane baseline but adapt to Python, Go, PHP, etc.
+**Is there a quick-start example?** Yes — `examples/minimal-project/`: a filled AGENTS.md, a real ADR and an evidence-backed DELIVERY-LOG you can copy and adapt.
 **How do I report a bad rule or a typo?** Open an issue — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Contributing & releases

@@ -44,6 +44,8 @@ This file is the **router**. Read it fully, identify the track of the task, then
 | `reference/08-testing-quality.md` | unit/integration/e2e tests, a11y, performance, coverage |
 | `reference/09-delivery-git.md` | commits, branches, PRs, release, rollback |
 | `reference/10-operations.md` | logs, metrics, alerts, backups, runbooks, blameless post-mortems |
+| `reference/11-architecture.md` | module boundaries, deep modules, dependency direction, seams, ADRs |
+| `reference/12-performance.md` | measure-first profiling, Core Web Vitals budgets, N+1, indexes, CI perf gates |
 
 ## Universal rules (apply on every track)
 
@@ -62,4 +64,4 @@ Curated external references are cited by **name + link**, never by bare numbers,
 
 ## Templates
 
-`templates/` holds generic, copyable starting points for the target project: `templates/AGENTS.md`, `templates/RULES.md`, `templates/ADR.md`, `templates/DEFINITION-OF-DONE.md`, `templates/DELIVERY-CHECKLIST.md`, `templates/PR-TEMPLATE.md`. Copy and adapt them — never edit the originals inside this kit from within a project.
+`templates/` holds generic, copyable starting points for the target project: `templates/AGENTS.md`, `templates/RULES.md`, `templates/ADR.md`, `templates/DEFINITION-OF-DONE.md`, `templates/DELIVERY-CHECKLIST.md`, `templates/PR-TEMPLATE.md`. Delegation prompts for the most common agent tasks (implement, fix, review, release, privacy audit) live in `templates/prompts/` — output is draft material; you review it. Copy and adapt templates — never edit the originals inside this kit from within a project.

@@ -3,7 +3,7 @@
 **Uma skill portátil e autocontida que transforma qualquer agente de código em um profissional de projetos disciplinado** — regras, padrões, layout e UI, coordenação multiagente, memória de projeto, privacidade (LGPD/GDPR), segurança, testes, entrega e operação. Baseada no formato aberto [Agent Skills](https://github.com/agentskills/agentskills); funciona no OpenCode, Claude Code, Codex, Cursor, Gemini CLI e qualquer harness que carregue pacotes `SKILL.md`.
 
 [![Licença: MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-green.svg)](LICENSE)
-[![Versão](https://img.shields.io/badge/vers%C3%A3o-0.2.0-blue.svg)](CHANGELOG.md)
+[![Versão](https://img.shields.io/badge/vers%C3%A3o-0.3.0-blue.svg)](CHANGELOG.md)
 [![validate](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml/badge.svg?branch=main)](https://github.com/leonccunha21/zm-skills/actions/workflows/validate.yml)
 
 Leitura em inglês (versão canônica): [README.md](README.md).
@@ -17,7 +17,7 @@ Agentes já escrevem código. O que falta na maioria dos projetos é o **sistema
 ```
 zm-pro/                        # a skill — copie esta pasta para seu projeto/harness
 ├── SKILL.md                   # router: quando usar, o ciclo, o índice
-├── reference/                 # 10 guias focados, carregados sob demanda
+├── reference/                 # 12 guias focados, carregados sob demanda
 │   ├── 01-code-rules.md           # princípios, gates, dependências, definição de pronto
 │   ├── 02-project-standards.md    # layout do repo, docs, commits, semver, changelog
 │   ├── 03-layout-ui.md            # defaults PT-BR, mobile-first, toque ≥44px, a11y AA, tokens
@@ -27,10 +27,13 @@ zm-pro/                        # a skill — copie esta pasta para seu projeto/h
 │   ├── 07-security.md             # segredos, OWASP essencial, auth/RLS, backup, incidente
 │   ├── 08-testing-quality.md      # pirâmide, MSW/emuladores/Playwright, regressão, gates
 │   ├── 09-delivery-git.md         # commits, PR, release, deploy fail-closed, rollback
-│   └── 10-operations.md           # logs/métricas/alertas, ensaio de restore, runbooks, pós-mortem
+│   ├── 10-operations.md           # logs/métricas/alertas, ensaio de restore, runbooks, pós-mortem
+│   ├── 11-architecture.md         # deep modules, direção de dependência, seams, ADRs
+│   └── 12-performance.md          # medir primeiro, budgets de Core Web Vitals, N+1, CI de performance
 └── templates/                 # pontos de partida genéricos e copiáveis
-    ├── AGENTS.md · RULES.md · ADR.md
-    ├── DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
+    ├── AGENTS.md · RULES.md · ADR.md · DEFINITION-OF-DONE.md · DELIVERY-CHECKLIST.md · PR-TEMPLATE.md
+    └── prompts/                   # prompts de delegação: implementar, corrigir, revisar, release, auditoria LGPD
+(examples/minimal-project na raiz do repositório: projeto inicial preenchido — AGENTS.md real, ADR real e DELIVERY-LOG com evidência)
 ```
 
 ## Instalação
@@ -75,6 +78,7 @@ Prompt para uma tarefa real:
 **Envia dados para fora?** Não. O repositório não contém código executável além do validador (só para contribuidores).
 **Posso forkar e adaptar?** Sim — MIT. Mantenha o aviso de licença e diga aos usuários o que mudou.
 **Funciona com minha stack?** As regras são agnósticas; os exemplos assumem TypeScript/Node, mas adaptam-se a Python, Go, PHP etc.
+**Tem um exemplo de início rápido?** Sim — `examples/minimal-project/`: AGENTS.md preenchido, um ADR real e um DELIVERY-LOG com evidências para copiar e adaptar.
 
 ## Contribuição e releases
 

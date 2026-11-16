@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-// Zero-dependency validator for the zm-pro skill pack.
+// Zero-dependency validator for the zm-pro skill pack and repository.
 // Run: npm run validate   (or: node scripts/validate.mjs)
-// Exits non-zero on failure. Checks structure, index integrity and residue.
+// Exits non-zero on failure. Checks: structure, index integrity,
+// relative-link resolution across all Markdown files, and project-specific residue.
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
-import { join, relative } from "node:path"
+import { join, relative, dirname, isAbsolute, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
 const root = fileURLToPath(new URL("..", import.meta.url))
@@ -12,12 +13,28 @@ const skillMd = join(skillDir, "SKILL.md")
 
 const errors = []
 const warnings = []
-
-const fail = (msg) => errors.push(msg)
-const warn = (msg) => warnings.push(msg)
+const fail = (m) => errors.push(m)
+const warn = (m) => warnings.push(m)
 const rel = (p) => relative(root, p).replaceAll("\\", "/")
 
-// --- 1. Skill entry file and frontmatter ---------------------------------
+const walk = (dir, acc = []) => {
+  if (!existsSync(dir)) return acc
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    const p = join(dir, e.name)
+    if (e.isDirectory()) walk(p, acc)
+    else acc.push(p)
+  }
+  return acc
+}
+const allMd = walk(root).filter((f) => f.endsWith(".md") && !rel(f).startsWith("node_modules/"))
+const skillMdFiles = allMd.filter((f) => f.startsWith(skillDir))
+
+// --- 1. Repository shape ---------------------------------------------------
+for (const required of ["LICENSE", "README.md", "CHANGELOG.md", "CONTRIBUTING.md"]) {
+  if (!existsSync(join(root, required))) fail(`repo: ${required} ausente`)
+}
+
+// --- 2. Skill entry file and frontmatter ------------------------------------
 if (!existsSync(skillMd)) {
   fail("zm-pro/SKILL.md ausente")
 } else {
@@ -32,14 +49,14 @@ if (!existsSync(skillMd)) {
     if (!desc || desc[1].trim().length < 40) {
       fail("SKILL.md: `description` ausente ou curta demais (< 40 chars)")
     } else if (desc[1].length > 1024) {
-      warn(`SKILL.md: description com ${desc[1].length} chars — considere encurtar (< 1024)`)
+      warn(`SKILL.md: description com ${desc[1].length} chars — encurte (< 1024)`)
     }
   }
   const lines = body.split("\n").length
   if (lines > 120) warn(`SKILL.md com ${lines} linhas — o router deve ficar curto (< 120)`)
 }
 
-// --- 2. Referenced files exist; index covers reality ----------------------
+// --- 3. Referenced files exist; index covers reality -------------------------
 if (existsSync(skillMd)) {
   const body = readFileSync(skillMd, "utf8")
   const refDir = join(skillDir, "reference")
@@ -62,37 +79,41 @@ if (existsSync(skillMd)) {
   }
 }
 
-// --- 3. No project-specific residue anywhere in the skill ------------------
+// --- 4. Relative links resolve ----------------------------------------------
+const LINK_RE = /\[[^\]]*\]\(([^)\s]+)\)/g
+for (const f of allMd) {
+  const text = readFileSync(f, "utf8")
+  for (const m of text.matchAll(LINK_RE)) {
+    let target = m[1]
+    if (/^(https?:|mailto:|tel:|#)/i.test(target)) continue
+    target = target.split("#")[0].split("?")[0]
+    if (!target) continue // pure anchor
+    const resolved = isAbsolute(target) ? join(root, target) : resolve(dirname(f), target)
+    if (!existsSync(resolved)) fail(`${rel(f)}: link quebrado → ${target}`)
+  }
+}
+
+// --- 5. No project-specific residue in the skill -----------------------------
 const FORBIDDEN = [
   "mei-pro-web", "zm-gestao", "salão pro", "salao pro", "pendencias_zm",
   "build:cloud", "build:local", "agentes:check", "repositorios github",
   "melhorias", "zm-skills", "sisgestão", "zm gestao", "nzm-",
 ]
-const mdFiles = []
-const walk = (dir) => {
-  for (const e of readdirSync(dir, { withFileTypes: true })) {
-    const p = join(dir, e.name)
-    if (e.isDirectory()) walk(p)
-    else if (e.name.endsWith(".md")) mdFiles.push(p)
-  }
-}
-if (existsSync(skillDir)) walk(skillDir)
-for (const f of mdFiles) {
+for (const f of skillMdFiles) {
   const text = readFileSync(f, "utf8").toLowerCase()
   for (const token of FORBIDDEN) {
-    if (text.includes(token)) fail(`${rel(f)}: resíduo específico de projeto encontrado: "${token}"`)
+    if (text.includes(token)) fail(`${rel(f)}: resíduo específico de projeto: "${token}"`)
   }
 }
 
-// --- 4. Basic file sanity ---------------------------------------------------
-for (const f of [skillMd, ...mdFiles]) {
-  if (!existsSync(f)) continue
+// --- 6. Basic sanity -----------------------------------------------------------
+for (const f of allMd) {
   const text = readFileSync(f, "utf8")
   if (text.trim().length < 200) warn(`${rel(f)} muito curto (< 200 chars)`)
 }
 
-// --- Report -----------------------------------------------------------------
-console.log(`zm-pro validator — ${mdFiles.length} arquivos verificados`)
+// --- Report ---------------------------------------------------------------------
+console.log(`zm-pro validator — ${allMd.length} arquivos verificados`)
 for (const w of warnings) console.log(`aviso - ${w}`)
 for (const e of errors) console.error(`ERRO  - ${e}`)
 if (errors.length === 0) {
