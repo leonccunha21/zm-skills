@@ -29,12 +29,13 @@ Only cells with ✅ carry evidence; every ❓ stays a promise to test, never a c
 
 ## Behavioral evaluation pilots (uncontrolled, 2026-11-16)
 
-Two single-run pilots were executed with `scripts/evaluate-run.mjs` on **opencode/inkling-2-small-free** — the weakest configuration available; both were recorded in `docs/evaluation-results/` and neither counts as a baseline:
+Single-run pilots were executed with `scripts/evaluate-run.mjs` on **opencode/inkling-2-small-free** — the weakest configuration available; all were recorded in `docs/evaluation-results/` and none counts as a baseline:
 
 - `eval-001` (bugfix task) — the agent planned, never invoked a tool, session ended. `pilot-eval-001.md`.
 - `eval-012` (typo trap) — the agent emitted a literal `<tool_call>` tag as text and stopped. `pilot-eval-012.md`.
+- `eval-001` again, three more times with the fixed runner command (`pilot-inkling-eval-001.md`, `pilot-inkling-r2-eval-001.md`, `pilot-inkling-r3-eval-001.md`) — **identical outcome in 3/3 runs**: one text turn (r3 emitted `<read_file>` / `<run_command>` as literal text instead of tool calls), then `step_finish` with `reason: "stop"`, zero tool execution, exit 0. Deterministic early-stop, not an occasional failure. `pilot-inkling-r3-eval-001.md` documents the pseudo-tool-call-in-text failure mode most clearly.
 
-**What these show:** the evaluation pipeline works (argv delivery, transcript, scaffold); this model cannot drive the tool loop on this harness. **What they do not show:** anything about kit quality — the agent never reached the phase where the kit matters. OpenCode 2.3.0 remains "tested" for installation and skill discovery; agentic task execution on this model is unproven.
+**What these show:** the evaluation pipeline works (argv delivery, transcript, scaffold); this model cannot drive the tool loop on this harness — consistently. **What they do not show:** anything about kit quality — the agent never reached the phase where the kit matters. OpenCode 2.3.0 remains "tested" for installation and skill discovery; agentic task execution on this model is unproven.
 
 ## Reproducible test script
 
